@@ -1,0 +1,18 @@
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  /scratch/basecamp/sources/poky/meta \
+  /scratch/basecamp/sources/poky/meta-poky \
+  /scratch/basecamp/sources/meta-xilinx/meta-xilinx-core \
+  /scratch/basecamp/sources/meta-openembedded/meta-oe \
+  /scratch/basecamp/sources/meta-xilinx/meta-xilinx-bsp \
+  /scratch/basecamp/sources/meta-xilinx/meta-xilinx-standalone \
+  /scratch/basecamp/sources/meta-xilinx-tools \
+  /scratch/basecamp/sources/meta-xilinx-internal \
+  /scratch/basecamp/sources/meta-basecamp \
+  "
