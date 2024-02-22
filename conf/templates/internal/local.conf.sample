@@ -91,7 +91,7 @@ MACHINE ??= "qemux86-64"
 # Ultimately when creating custom policy, people will likely end up subclassing 
 # these defaults.
 #
-DISTRO ?= "poky-altcfg"
+DISTRO ?= "basecamp"
 # As an example of a subclass there is a "bleeding" edge policy configuration
 # where many versions are set to the absolute latest code from the upstream 
 # source control systems. This is just mentioned here as an example, its not
@@ -290,10 +290,8 @@ SOURCE_MIRROR_URL = "file:///proj/yocto/2024.1/stable/daily-downloads_2024"
 
 require conf/distro/include/xilinx-mirrors.conf
 
+WKS_FILES = "basecamp-default.wks"
+
 #### Disable Busybox
 
 SKIP_RECIPE[busybox] = "Busybox disabled"
-
-VIRTUAL-RUNTIME_base-utils = "coreutils"
-VIRTUAL-RUNTIME_base-utils-hwclock = "util-linux-hwclock"
-VIRTUAL-RUNTIME_base-utils-syslog = ""

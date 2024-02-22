@@ -1,2 +1,5 @@
-part  /boot  --source rootfs --change-directory=boot  --fixed-size=512M  --fstype=vfat  --use-label  --label boot  --active  --align 4
-part  /      --source rootfs --exclude-path=boot/                        --fstype=ext4  --use-label  --label root            --align 4
+part  /boot  --source rootfs --change-directory=boot  --fixed-size=1G  --fstype=vfat  --use-label  --label boot  --active  --align 4
+part  /      --source rootfs --exclude-path=boot/     --fixed-size=8G  --fstype=ext4  --use-label  --label root            --align 4
+#part  /      --source rootfs --fixed-size=1G    --fstype=ext4  --use-label  --label xen             --align 4
+#part  /      --source rootfs --fixed-size=8G    --fstype=ext4  --use-label  --label ubuntu           --align 4
+#part  /opt   --source rootfs --fixed-size=12G    --fstype=ext4  --use-label  --label opt             --align 4
