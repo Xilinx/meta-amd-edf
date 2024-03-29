@@ -223,6 +223,11 @@ BB_DISKMON_DIRS ??= "\
 #file://.* https://someserver.tld/share/sstate/PATH;downloadfilename=PATH \
 #file://.* file:///some/local/dir/sstate/PATH"
 
+# Uncomment below lines to provide path for custom xsct trim
+#
+EXTERNAL_XSCT_TARBALL = "/proj/yocto/xsct-trim/${XILINX_XSCT_VERSION}_xsct_daily_latest"
+VALIDATE_XSCT_CHECKSUM = '0'
+
 #
 # Yocto Project SState Mirror
 #
@@ -236,6 +241,10 @@ BB_DISKMON_DIRS ??= "\
 #
 #BB_HASHSERVE_UPSTREAM = "hashserv.yocto.io:8687"
 #SSTATE_MIRRORS ?= "file://.* http://sstate.yoctoproject.org/all/PATH;downloadfilename=PATH"
+
+#
+# Use optional internal AMD Xilinx gitenterprise support
+include conf/distro/include/xilinx-mirrors.conf
 
 #
 # Qemu configuration
@@ -264,6 +273,31 @@ PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
 #
 #BB_HASHSERVE = "auto"
 #BB_SIGNATURE_HANDLER = "OEEquivHash"
+# No shared hash equivalencey server, so default to Basic hash
+BB_HASHSERVE = ""
+BB_SIGNATURE_HANDLER = "OEBasicHash"
+
+# The network based PR service host and port
+# Uncomment the following lines to enable PRservice.
+# Set PRSERV_HOST to 'localhost:0' to automatically
+# start local PRService.
+# Set to other values to use remote PRService.
+PRSERV_HOST = "localhost:0"
+
+# This is a list of packages that may require a commercial license to ship
+# product. It is your responsibility to read, understand and meet the
+# licensing terms for all software used, however these are highlighted as
+# they may have additional implications for commercial use.  To enable them,
+# un-comment the below as appropriate.
+LICENSE_FLAGS_ACCEPTED = " \
+        commercial_${MLPREFIX}ffmpeg \
+        commercial_${MLPREFIX}x264 \
+        commercial_${MLPREFIX}gstreamer1.0-omx \
+        commercial_${MLPREFIX}libomxil \
+        commercial_${MLPREFIX}sox \
+        commercial_${MLPREFIX}faac \
+        commercial_${MLPREFIX}faad2 \
+        xilinx "
 
 #
 # Memory Resident Bitbake
@@ -282,16 +316,15 @@ CONF_VERSION = "2"
 
 ################################################################################
 
-EXTERNAL_XSCT_TARBALL = "/proj/yocto/xsct-trim/${XILINX_XSCT_VERSION}_xsct_daily_latest"
-VALIDATE_XSCT_CHECKSUM = '0'
-
 INHERIT += "own-mirrors"
 SOURCE_MIRROR_URL = "file:///proj/yocto/2024.1/stable/daily-downloads_2024"
 
-require conf/distro/include/xilinx-mirrors.conf
-
+# By default wic is not enable in IMAGE_FSTYPES so enable WIC image type support.
+IMAGE_FSTYPES += "wic wic.gz wic.bmap"
 WKS_FILES = "basecamp-default.wks"
 
 #### Disable Busybox
-
 SKIP_RECIPE[busybox] = "Busybox disabled"
+
+# splash feature is not used for AMD adaptive socs, hence remove it.
+IMAGE_FEATURES:remove = "splash"
