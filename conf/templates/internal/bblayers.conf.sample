@@ -6,13 +6,20 @@ BBPATH = "${TOPDIR}"
 BBFILES ?= ""
 
 BBLAYERS ?= " \
-  /scratch/basecamp/sources/poky/meta \
-  /scratch/basecamp/sources/poky/meta-poky \
-  /scratch/basecamp/sources/meta-xilinx/meta-xilinx-core \
-  /scratch/basecamp/sources/meta-openembedded/meta-oe \
-  /scratch/basecamp/sources/meta-xilinx/meta-xilinx-bsp \
-  /scratch/basecamp/sources/meta-xilinx/meta-xilinx-standalone \
-  /scratch/basecamp/sources/meta-xilinx-tools \
-  /scratch/basecamp/sources/meta-xilinx-internal \
-  /scratch/basecamp/sources/meta-basecamp \
-  "
+  ##OEROOT##/meta \
+  ##OEROOT##/meta-poky \
+  ##OEROOT##/../meta-openembedded/meta-oe \
+  ##OEROOT##/../meta-openembedded/meta-python \
+  ##OEROOT##/../meta-openembedded/meta-filesystems \
+  ##OEROOT##/../meta-openembedded/meta-networking \
+  ##OEROOT##/../meta-virtualization \
+  ##OEROOT##/../meta-security \
+  ##OEROOT##/../meta-security/meta-tpm \
+  ##OEROOT##/../meta-xilinx/meta-xilinx-core \
+  ##OEROOT##/../meta-xilinx/meta-xilinx-standalone \
+  ##OEROOT##/../meta-xilinx/meta-xilinx-standalone-experimental \
+  ##OEROOT##/../meta-xilinx/meta-microblaze \
+  ##OEROOT##/../meta-xilinx-internal \
+  ##OEROOT##/../meta-openamp \
+  ##OEROOT##/../meta-basecamp \
+"
