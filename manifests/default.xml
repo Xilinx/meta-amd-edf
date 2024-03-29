@@ -5,10 +5,11 @@
 
   <project remote="xilinx"    revision="2024.1"      name="poky"                     path="sources/poky"/>
   <project remote="xilinx"    revision="2024.1"      name="meta-xilinx"              path="sources/meta-xilinx"	sync-s="true"/>
-  <project remote="xilinx"    revision="2024.1"      name="meta-xilinx-tools"        path="sources/meta-xilinx-tools"/>
-  <project remote="xilinx"    revision="2024.1"      name="meta-xilinx-internal"     path="sources/meta-xilinx-internal"/>
+  <project remote="xilinx"    revision="2024.1"      name="meta-xilinx-internal"     path="sources/meta-xilinx-internal" sync-s="true"/>
   <project remote="xilinx"    revision="2024.1"      name="meta-basecamp"            path="sources/meta-basecamp"/>
   <project remote="xilinx"    revision="2024.1"      name="meta-virtualization"      path="sources/meta-virtualization"/>
   <project remote="xilinx"    revision="2024.1"      name="meta-openembedded"        path="sources/meta-openembedded"/>
-  <!-- <project remote="xilinx"    revision="2024.1"      name="meta-openamp"             path="sources/meta-openamp"/> -->
+  <project remote="xilinx"    revision="2024.1"      name="meta-mingw"               path="sources/meta-mingw"/>
+  <project remote="xilinx"    revision="2024.1"      name="meta-security"            path="sources/meta-security"/>
+  <project remote="xilinx"    revision="2024.1"      name="meta-openamp"             path="sources/meta-openamp"/>
 </manifest>
