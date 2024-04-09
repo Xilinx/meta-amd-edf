@@ -3,8 +3,7 @@
 @@PRE_BOOTENV@@
 
 setenv sdbootdev @@SDBOOTDEV@@
-#setenv bootargs $bootargs root=/dev/mmcblk${sdbootdev}p2 rw rootwait console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8
-setenv bootargs $bootargs root=/dev/mmcblk0p2 rw rootwait console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8
+setenv bootargs $bootargs root=/dev/mmcblk${sdbootdev}p2 rw rootwait console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8
 fatload mmc $sdbootdev @@DEVICETREE_ADDRESS@@ @@DEVICE_TREE_NAME@@
 fatload mmc $sdbootdev:$partid @@KERNEL_LOAD_ADDRESS@@ @@KERNEL_IMAGETYPE@@
 @@KERNEL_BOOTCMD@@ @@KERNEL_LOAD_ADDRESS@@ - @@DEVICETREE_ADDRESS@@
