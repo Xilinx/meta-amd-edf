@@ -319,14 +319,5 @@ CONF_VERSION = "2"
 INHERIT += "own-mirrors"
 SOURCE_MIRROR_URL = "file:///proj/yocto/2024.1/stable/daily-downloads_2024"
 
-# By default wic is not enable in IMAGE_FSTYPES so enable WIC image type support.
-IMAGE_FSTYPES += "wic wic.xz wic.bmap"
-#WKS_FILES = "basecamp-default.wks"
-
-IMAGE_BOOT_FILES:remove = "boot.bin"
-
 #### Disable Busybox
 SKIP_RECIPE[busybox] = "Busybox disabled"
-
-# splash feature is not used for AMD adaptive socs, hence remove it.
-IMAGE_FEATURES:remove = "splash"
