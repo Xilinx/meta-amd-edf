@@ -22,4 +22,4 @@ XLNX_VERSAL_VEK280_REVB_INSTALL = "\
     vek280-sdt-seg-cfg \
     "
 
-IMAGE_INSTALL:append:xlnx-versal-vek280-revb = " ${XLNX_VERSAL_VEK280_REVB_INSTALL}"
+IMAGE_INSTALL:append:xlnx-versal-vek280-revb-ospi = " ${XLNX_VERSAL_VEK280_REVB_INSTALL}"
