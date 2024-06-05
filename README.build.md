@@ -6,7 +6,7 @@ layers.
 The following instructions require OE-Core meta and BitBake. Poky provides these
 components, however they can be acquired separately.
 
-> **Pre-requisites:** See [Preparing Build Host](https://docs.yoctoproject.org/4.1.4/singleindex.html#preparing-the-build-host) documentation.
+> **Pre-requisites:** See [Preparing Build Host](https://docs.yoctoproject.org/5.0.1/singleindex.html#preparing-the-build-host) documentation.
 
 1. Install Repo tool.
 
@@ -62,7 +62,7 @@ $ repo start <branch_name> --all
 
 5. Initialize a build environment using the `oe-init-build-env` script. 
 ```
-$ export TEMPLATECONF=./<absolute-path-to-layer>/meta-basecamp/conf/templates/internal
+$ export TEMPLATECONF=./<absolute-path-to-layer>/meta-basecamp/conf/templates/default
 $ source ./<path-to-layer>/poky/oe-init-build-env
 ```
 
