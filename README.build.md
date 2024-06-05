@@ -72,7 +72,7 @@ $ source ./<path-to-layer>/poky/oe-init-build-env
 7. Set hardware `MACHINE` configuration variable in build/conf/local.conf
    file for a specific target which can boot and run the in the board or QEMU.
 ```
-MACHINE="xlnx-versal-vek280-revb"
+MACHINE="xlnx-versal-vek280-revb-ospi"
 ```
 
 * For list of available target machines see meta-adaptive-socs/meta-amd-<eval-board>/conf/machine/*.conf file.
@@ -102,7 +102,12 @@ $ sudo ./<path-to-layer>/poky/scripts/runqemu-gen-tapdevs $(id -u $USER) $(id -g
 $ bitbake core-image-full-cmdline
 ```
 
-12. Once complete the images for the target machine will be available in the output
+12. Build OSPI bin file for QEMU boot.
+```
+$ bitbake ospi
+```
+
+13. Once complete the images for the target machine will be available in the output
    directory `${TMPDIR}/deploy/images/${MACHINE}/`.
 
-13. Follow [Booting Instructions](https://github.com/Xilinx/meta-xilinx/blob/master/README.booting.md)
+14. Follow [Booting Instructions](https://github.com/Xilinx/meta-xilinx/blob/master/README.booting.md)
