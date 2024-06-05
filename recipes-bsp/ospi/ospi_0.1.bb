@@ -14,6 +14,12 @@ BOOTBIN_OFFSET ?= "0x0"
 UBOOT_ENV_OFFSET ?= "0x7_F40_000"
 OSPI_SIZE ?= "0x10_000_000"
 
+# By default IMAGE_NAME_SUFFIX=".rootfs" set in image-artifact-name.bbclass, Due
+# to this IMAGE_NAME will have .rootfs(ospi-xlnx-versal-vek280-revb-ospi.rootfs-20240605023046)
+# suffix. OSPI bin file is not part of rootfs, hence set this to null to remove
+# .rootfs extension.
+IMAGE_NAME_SUFFIX=""
+
 do_compile[depends] += "virtual/boot-bin:do_deploy virtual/bootloader:do_deploy"
 
 python do_compile() {
