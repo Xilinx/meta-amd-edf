@@ -19,7 +19,7 @@ CORE_IMAGE_EXTRA_INSTALL:append = "\
 
 # Install xlnx-versal-vek280-revb packages
 XLNX_VERSAL_VEK280_REVB_INSTALL = "\
-    vek280-sdt-seg-cfg \
+    vek280-pl-bram-uart-fw \
     "
 
 IMAGE_INSTALL:append:xlnx-versal-vek280-revb-ospi = " ${XLNX_VERSAL_VEK280_REVB_INSTALL}"
