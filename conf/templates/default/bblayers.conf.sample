@@ -22,5 +22,6 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-xilinx-internal \
   ##OEROOT##/../meta-openamp \
   ##OEROOT##/../meta-basecamp \
+  ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-core \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-vek280-versal-sdt \
 "
