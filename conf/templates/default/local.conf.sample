@@ -322,7 +322,11 @@ CONF_VERSION = "2"
 ################################################################################
 
 INHERIT += "own-mirrors"
-SOURCE_MIRROR_URL = "file:///proj/yocto/2024.1/stable/daily-downloads_2024"
+SOURCE_MIRROR_URL = "file:///proj/yocto/basecamp/2024.2/Yocto_basecamp_2024.2_latest"
 
 #### Disable Busybox
 SKIP_RECIPE[busybox] = "Busybox disabled"
+
+SSTATE_MIRRORS = "\
+file://.* file:///proj/yocto/basecamp/2024.2/Yocto_basecamp_2024.2_latest/sstate-cache/PATH \n \
+"
