@@ -322,7 +322,7 @@ CONF_VERSION = "2"
 ################################################################################
 
 INHERIT += "own-mirrors"
-SOURCE_MIRROR_URL = "file:///proj/yocto/basecamp/2024.2/Yocto_basecamp_2024.2_latest"
+SOURCE_MIRROR_URL = "file:///proj/yocto/basecamp/2024.2/Yocto_basecamp_2024.2_latest/downloads"
 
 #### Disable Busybox
 SKIP_RECIPE[busybox] = "Busybox disabled"
