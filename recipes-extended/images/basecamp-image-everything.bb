@@ -22,7 +22,40 @@ VITISAI_DEPENDENCIES = "opencv googletest protobuf-c boost json-c libunwind"
 # FIXME removed: hellopm, pm-notebooks, xrt (requires ocl-icd)
 #${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)}
 IMAGE_INSTALL:append = " \
+    packagegroup-base \
     packagegroup-core-boot \
+    packagegroup-opencv \
+    libdrm \
+    libdrm-tests \
+    tcpdump \
+    wireshark \
+    packagegroup-networking-stack \
+    python3-pip\
+    python3-multiprocessing \
+    python3-numpy \
+    python3-shell \
+    python3-threading \
+    python3-threading \
+    python3-pyserial \
+    python3-h5py \
+    util-linux \
+    cpufrequtils \
+    usbutils \
+    i2c-tools \
+    smartmontools \
+    e2fsprogs \
+    v4l-utils \
+    lmsensors-sensors \
+    lmsensors-libsensors \
+    lmsensors-sensorsdetect \
+    packagegroup-xilinx-benchmarks \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization vmsep', 'packagegroup-container', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp', '', d)} \
+    packagegroup-xilinx-audio \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'packagegroup-core-weston', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
     tcf-agent \
     mtd-utils \
     bridge-utils \
@@ -52,35 +85,17 @@ IMAGE_INSTALL:append = " \
     kernel-devsrc \
     kernel-module-hdmi \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
+    packagegroup-xilinx-gstreamer \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-matchbox', '', d)} \
     "
 
-#FIXME some of the following packagegroups will need to be readded when available:
-#petalinux-base 
-#petalinux-opencv 
-#petalinux-display-debug 
-#petalinux-networking-debug 
-#petalinux-networking-stack 
-#petalinux-python-modules 
-#petalinux-utils 
-#petalinux-v4lutils 
-#petalinux-lmsensors 
-#petalinux-benchmarks 
-#petalinux-jupyter 
-#${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'petalinux-self-hosted', '', d)} 
-#${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'petalinux-x11', '', d)} 
-#${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'petalinux-matchbox', '', d)} 
-#petalinux-qt 
-#petalinux-qt-extended 
-#${@bb.utils.contains('DISTRO_FEATURES', 'virtualization vmsep', 'petalinux-ocicontainers', '', d)} 
-##${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'petalinux-openamp', '', d)}
-#petalinux-gstreamer 
-#petalinux-audio 
-#petalinux-mraa 
-#${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'petalinux-multimedia', '', d)} 
-#${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'petalinux-weston', '', d)} 
-#${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'petalinux-xen', '', d)} 
-#aws-greengrass-v2 
-#petalinux-ros 
+#FIXME - These need to be enabled once available
+#packagegroup-xilinx-qt
+#packagegroup-xilinx-qt-extended
+#packagegroup-jupyter
+#packagegroup-xilinx-ros
+#${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
+#aws-greengrass-v2
 
 IMAGE_LINGUAS = " "
 

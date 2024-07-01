@@ -330,3 +330,10 @@ SKIP_RECIPE[busybox] = "Busybox disabled"
 SSTATE_MIRRORS = "\
 file://.* file:///proj/yocto/basecamp/2024.2/Yocto_basecamp_2024.2_latest/sstate-cache/PATH \n \
 "
+
+#### Temporarily disable recipes that have missing dependencies
+BBMASK += " \
+    gstreamer-vdu-notebooks \
+    gstreamer-vcu-notebooks \
+    packagegroup-xilinx-ros \
+"

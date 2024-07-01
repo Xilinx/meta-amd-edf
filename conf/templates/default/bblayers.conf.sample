@@ -12,12 +12,15 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-openembedded/meta-python \
   ##OEROOT##/../meta-openembedded/meta-filesystems \
   ##OEROOT##/../meta-openembedded/meta-networking \
+  ##OEROOT##/../meta-openembedded/meta-multimedia \
   ##OEROOT##/../meta-virtualization \
   ##OEROOT##/../meta-security \
   ##OEROOT##/../meta-security/meta-tpm \
   ##OEROOT##/../meta-xilinx/meta-xilinx-core \
   ##OEROOT##/../meta-xilinx/meta-xilinx-standalone \
   ##OEROOT##/../meta-xilinx/meta-xilinx-standalone-sdt \
+  ##OEROOT##/../meta-xilinx/meta-xilinx-multimedia \
+  ##OEROOT##/../meta-xilinx/meta-xilinx-demos \
   ##OEROOT##/../meta-xilinx/meta-microblaze \
   ##OEROOT##/../meta-xilinx-internal \
   ##OEROOT##/../meta-openamp \
