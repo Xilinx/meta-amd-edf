@@ -8,14 +8,14 @@ DEPENDS = "virtual/boot-bin virtual/bootloader"
 inherit deploy image-artifact-names
 
 COMPATIBLE_MACHINE = "^$"
-COMPATIBLE_MACHINE:xlnx-versal-vek280-revb-ospi = "${MACHINE}"
+COMPATIBLE_MACHINE:versal-vek280-sdt-seg-ospi = "${MACHINE}"
 
 BOOTBIN_OFFSET ?= "0x0"
 UBOOT_ENV_OFFSET ?= "0x7_F40_000"
 OSPI_SIZE ?= "0x10_000_000"
 
 # By default IMAGE_NAME_SUFFIX=".rootfs" set in image-artifact-name.bbclass, Due
-# to this IMAGE_NAME will have .rootfs(ospi-xlnx-versal-vek280-revb-ospi.rootfs-20240605023046)
+# to this IMAGE_NAME will have .rootfs(ospi-versal-vek280-sdt-seg-ospi.rootfs-20240710010213)
 # suffix. OSPI bin file is not part of rootfs, hence set this to null to remove
 # .rootfs extension.
 IMAGE_NAME_SUFFIX=""

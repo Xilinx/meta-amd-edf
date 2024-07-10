@@ -72,7 +72,7 @@ $ source ./<path-to-layer>/poky/oe-init-build-env
 7. Set hardware `MACHINE` configuration variable in build/conf/local.conf
    file for a specific target which can boot and run the in the board or QEMU.
 ```
-MACHINE="xlnx-versal-vek280-revb-ospi"
+MACHINE="versal-vek280-sdt-seg-ospi"
 ```
 
 * For list of available target machines see meta-adaptive-socs/meta-amd-<eval-board>/conf/machine/*.conf file.

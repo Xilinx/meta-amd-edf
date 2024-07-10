@@ -16,10 +16,3 @@ IMAGE_FEATURES:remove = "splash"
 CORE_IMAGE_EXTRA_INSTALL:append = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', ' dfx-mgr', '', d)} \
     "
-
-# Install xlnx-versal-vek280-revb packages
-XLNX_VERSAL_VEK280_REVB_INSTALL = "\
-    vek280-pl-bram-uart-fw \
-    "
-
-IMAGE_INSTALL:append:xlnx-versal-vek280-revb-ospi = " ${XLNX_VERSAL_VEK280_REVB_INSTALL}"

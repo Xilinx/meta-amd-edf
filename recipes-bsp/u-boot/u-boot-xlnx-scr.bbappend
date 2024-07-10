@@ -1,7 +1,7 @@
-FILESEXTRAPATHS:prepend:xlnx-versal-vek280-revb-ospi := "${THISDIR}/u-boot-xlnx-scr:"
-SRC_URI:append:xlnx-versal-vek280-revb-ospi = " file://boot.cmd.sd.basecamp"
+FILESEXTRAPATHS:prepend:versal-vek280-sdt-seg-ospi := "${THISDIR}/u-boot-xlnx-scr:"
+SRC_URI:append:versal-vek280-sdt-seg-ospi = " file://boot.cmd.sd.basecamp"
 
 SDBOOTDEV = "0"
 
-BOOTMODE:xlnx-versal-vek280-revb-ospi = "sd"
-BOOTFILE_EXT:xlnx-versal-vek280-revb-ospi = ".basecamp"
+BOOTMODE:versal-vek280-sdt-seg-ospi = "sd"
+BOOTFILE_EXT:versal-vek280-sdt-seg-ospi = ".basecamp"
