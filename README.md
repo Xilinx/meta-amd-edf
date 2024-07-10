@@ -74,6 +74,6 @@ This layer depends on:
 
 	URI:
         https://gitenterprise.xilinx.com/Yocto/meta-amd-adaptive-socs (development and amd xilinx release)
-	layers: meta-amd-adaptive-socs-core, meta-amd-vek280-versal-sdt
+	layers: meta-amd-adaptive-socs-core, meta-amd-adaptive-socs-bsp
 	branch: scarthgap or amd xilinx release version (e.g. rel-v2024.2)
 ---
