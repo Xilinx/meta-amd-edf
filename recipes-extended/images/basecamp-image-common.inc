@@ -15,4 +15,15 @@ IMAGE_FEATURES:remove = "splash"
 # Use CORE_IMAGE_EXTRA_INSTALL variable from core-image.bbclass
 CORE_IMAGE_EXTRA_INSTALL:append = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', ' dfx-mgr', '', d)} \
+    libgpiod \
+    libgpiod-tools \
+    devmem2 \
+    tree \
     "
+
+# Install versal-vek280-sdt-seg fw recipes.
+VERSAL_VEK280_SDT_SEG_INSTALL = "\
+    vek280-pl-bram-uart-gpio-fw \
+    "
+
+IMAGE_INSTALL:append:versal-vek280-sdt-seg-ospi = " ${VERSAL_VEK280_SDT_SEG_INSTALL}"
