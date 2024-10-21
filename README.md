@@ -1,6 +1,7 @@
 # meta-basecamp ⛺
 
-This layer enables Basecamp development metadata for poky, oe, meta-xilinx and other layers. 🏔
+This layer enables Basecamp development metadata for poky, oe, meta-xilinx and
+other layers. 🏔
 
 ## Maintainers, Mailing list, Patches
 
@@ -13,10 +14,10 @@ with ['meta-basecamp'] in the subject:
 When sending patches, please make sure the email subject line includes
 `[meta-basecamp][<BRANCH_NAME>][PATCH]` and cc'ing the maintainers.
 
-For more details follow the OE community patch submission guidelines, as described in:
+For more details follow the Yocto Project community patch submission guidelines,
+as described in:
 
-https://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+https://docs.yoctoproject.org/dev/contributor-guide/submit-changes.html#
 
 `git send-email --to meta-xilinx@lists.yoctoproject.org *.patch`
 
@@ -29,15 +30,14 @@ https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
 `git format-patch -s --subject-prefix="meta-basecamp][<BRANCH_NAME>][PATCH" -1`
 
 **Example:**
-`git format-patch -s --subject-prefix="meta-basecamp][langdale][PATCH" -1`
+`git format-patch -s --subject-prefix="meta-basecamp][scarthgap][PATCH" -1`
 
 **Maintainers:**
 
 	Mark Hatle <mark.hatle@amd.com>
 	John Toomey <john.toomey@amd.com>
 	Sandeep Gundlupet Raju <sandeep.gundlupet-raju@amd.com>
-    Trevor Woerner <trevor.woerner@amd.com>
----
+	Trevor Woerner <trevor.woerner@amd.com>
 
 ## Dependencies
 
@@ -53,10 +53,10 @@ This layer depends on:
 
 	URI:
         https://git.yoctoproject.org/meta-xilinx (official version)
-        https://github.com/Xilinx/meta-xilinx (development and amd xilinx release)
+        https://github.com/Xilinx/meta-xilinx (development and AMD release)
 	layers: meta-xilinx-core, meta-xilinx-standalone, meta-xilinx-standalone-sdt,
 	        meta-microblaze.
-	branch: scarthgap or amd xilinx release version (e.g. rel-v2024.2)
+	branch: scarthgap or AMD release version (e.g. rel-v2024.2)
 
 	URI: https://git.yoctoproject.org/meta-security
 	layers: meta-tpm
@@ -64,16 +64,19 @@ This layer depends on:
 
 	URI:
         https://git.yoctoproject.org/meta-virtualization (official version)
-        https://github.com/Xilinx/meta-virtualization (development and amd xilinx release)
-	branch: scarthgap or amd xilinx release version (e.g. rel-v2024.2)
+        https://github.com/Xilinx/meta-virtualization (development and AMD release)
+	branch: scarthgap or AMD release version (e.g. rel-v2024.2)
 
 	URI:
         https://github.com/OpenAMP/meta-openamp (official version)
-        https://github.com/Xilinx/meta-openamp (development and amd xilinx release)
-	branch: scarthgap or amd xilinx release version (e.g. rel-v2024.2)
+        https://github.com/Xilinx/meta-openamp (development and AMD release)
+	branch: scarthgap or AMD release version (e.g. rel-v2024.2)
 
 	URI:
-        https://gitenterprise.xilinx.com/Yocto/meta-amd-adaptive-socs (development and amd xilinx release)
+        https://gitenterprise.xilinx.com/Yocto/meta-amd-adaptive-socs (development and AMD release)
 	layers: meta-amd-adaptive-socs-core, meta-amd-adaptive-socs-bsp
-	branch: scarthgap or amd xilinx release version (e.g. rel-v2024.2)
----
+	branch: scarthgap or AMD release version (e.g. rel-v2024.2)
+
+	URI: https://git.yoctoproject.org/meta-arm
+	layers: meta-arm, meta-arm-toolchain
+	branch: scarthgap
