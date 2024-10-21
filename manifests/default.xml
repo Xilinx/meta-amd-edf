@@ -13,4 +13,5 @@
   <project remote="xilinx"    revision="2024.2"      name="meta-security"            path="sources/meta-security"/>
   <project remote="xilinx"    revision="2024.2"      name="meta-openamp"             path="sources/meta-openamp"/>
   <project remote="xilinx"    revision="2024.2"      name="meta-amd-adaptive-socs"   path="sources/meta-amd-adaptive-socs"/>
+  <project remote="xilinx"    revision="2024.2"      name="meta-arm"                 path="sources/meta-arm"/>
 </manifest>
