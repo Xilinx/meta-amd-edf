@@ -27,4 +27,6 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-basecamp \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-core \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp \
+  ##OEROOT##/../meta-arm/meta-arm \
+  ##OEROOT##/../meta-arm/meta-arm-toolchain \
 "
