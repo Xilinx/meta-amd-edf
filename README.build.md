@@ -60,7 +60,12 @@ $ repo sync
 $ repo start <branch_name> --all
 ```
 
-5. Initialize a build environment using the `oe-init-build-env` script. 
+5. Initialize a build environment by sourcing the `basecamp-init-build-env` script.
+```
+$ source basecamp-init-build-env
+```
+> **Note:** This expects you are using the repo configuration from earlier steps.
+> This script is simply automating the Yocto Project workflow steps.
 ```
 $ export TEMPLATECONF=./<absolute-path-to-layer>/meta-basecamp/conf/templates/default
 $ source ./<path-to-layer>/poky/oe-init-build-env
