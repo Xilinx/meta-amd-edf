@@ -1,0 +1,20 @@
+if [ -n "$BASH_SOURCE" ]; then
+	export ROOT=$(readlink -f $(dirname "$BASH_SOURCE"))
+elif [ -n "$ZSH_NAME" ]; then
+	export ROOT=$(readlink -f $(dirname "$0"))
+else
+	export ROOT=$(readlink -f ${PWD})
+fi
+
+export TEMPLATECONF=$ROOT/sources/meta-basecamp/conf/templates/default
+
+# Internal development gen-machine-conf path
+if [ -d $ROOT/sources/meta-xilinx-internal/meta-xilinx-core/gen-machine-conf ]; then
+	export PATH=$PATH:$ROOT/sources/meta-xilinx-internal/meta-xilinx-core/gen-machine-conf
+fi
+# Public release gen-machine-conf path
+if [ -d $ROOT/sources/meta-xilinx/meta-xilinx-core/gen-machine-conf ]; then
+        export PATH=$PATH:$ROOT/sources/meta-xilinx/meta-xilinx-core/gen-machine-conf
+fi
+
+source $ROOT/sources/poky/oe-init-build-env "$@"
