@@ -321,6 +321,13 @@ CONF_VERSION = "2"
 
 ################################################################################
 
+#
+# Additional SDK tools features
+#
+# Additional nativesdk recipes to build SDK and use qemu-system-*, lopper, bootgen
+# and other tools running on SDKMACHINE.
+SDK_CLASSES += "amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools"
+
 INHERIT += "own-mirrors"
 SOURCE_MIRROR_URL = "file:///proj/yocto/basecamp/2024.2/Yocto_basecamp_2024.2_latest/downloads"
 
