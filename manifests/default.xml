@@ -8,6 +8,7 @@
   <project remote="xilinx"    revision="2024.2"      name="meta-xilinx-internal"     path="sources/meta-xilinx-internal" sync-s="true"/>
   <project remote="xilinx"    revision="2024.2"      name="meta-basecamp"            path="sources/meta-basecamp">
     <copyfile src="scripts/basecamp-init-build-env" dest="basecamp-init-build-env"/>
+  </project>
   <project remote="xilinx"    revision="2024.2"      name="meta-virtualization"      path="sources/meta-virtualization"/>
   <project remote="xilinx"    revision="2024.2"      name="meta-openembedded"        path="sources/meta-openembedded"/>
   <project remote="xilinx"    revision="2024.2"      name="meta-mingw"               path="sources/meta-mingw"/>
