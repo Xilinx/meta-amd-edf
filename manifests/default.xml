@@ -3,17 +3,17 @@
   <remote name="xilinx"  fetch="https://gitenterprise.xilinx.com/Yocto"/>
   <default sync-j="4"/>
 
-  <project remote="xilinx"    revision="2024.2"      name="poky"                     path="sources/poky"/>
-  <project remote="xilinx"    revision="2024.2"      name="meta-xilinx"              path="sources/meta-xilinx"	sync-s="true"/>
-  <project remote="xilinx"    revision="2024.2"      name="meta-xilinx-internal"     path="sources/meta-xilinx-internal" sync-s="true"/>
-  <project remote="xilinx"    revision="2024.2"      name="meta-basecamp"            path="sources/meta-basecamp">
+  <project remote="xilinx"    revision="2025.1"      name="poky"                     path="sources/poky"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-xilinx"              path="sources/meta-xilinx"	sync-s="true"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-xilinx-internal"     path="sources/meta-xilinx-internal" sync-s="true"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-basecamp"            path="sources/meta-basecamp">
     <copyfile src="scripts/basecamp-init-build-env" dest="basecamp-init-build-env"/>
   </project>
-  <project remote="xilinx"    revision="2024.2"      name="meta-virtualization"      path="sources/meta-virtualization"/>
-  <project remote="xilinx"    revision="2024.2"      name="meta-openembedded"        path="sources/meta-openembedded"/>
-  <project remote="xilinx"    revision="2024.2"      name="meta-mingw"               path="sources/meta-mingw"/>
-  <project remote="xilinx"    revision="2024.2"      name="meta-security"            path="sources/meta-security"/>
-  <project remote="xilinx"    revision="2024.2"      name="meta-openamp"             path="sources/meta-openamp"/>
-  <project remote="xilinx"    revision="2024.2"      name="meta-amd-adaptive-socs"   path="sources/meta-amd-adaptive-socs"/>
-  <project remote="xilinx"    revision="2024.2"      name="meta-arm"                 path="sources/meta-arm"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-virtualization"      path="sources/meta-virtualization"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-openembedded"        path="sources/meta-openembedded"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-mingw"               path="sources/meta-mingw"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-security"            path="sources/meta-security"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-openamp"             path="sources/meta-openamp"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-amd-adaptive-socs"   path="sources/meta-amd-adaptive-socs"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-arm"                 path="sources/meta-arm"/>
 </manifest>
