@@ -12,6 +12,8 @@ SKIP_RECIPE[busybox] = "Busybox disabled"
 # splash feature is not used for AMD adaptive socs, hence remove it.
 IMAGE_FEATURES:remove = "splash"
 
+## FIXME add CONTAINER_PROFILE
+
 # Use CORE_IMAGE_EXTRA_INSTALL variable from core-image.bbclass
 CORE_IMAGE_EXTRA_INSTALL:append = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', ' dfx-mgr', '', d)} \
@@ -19,6 +21,12 @@ CORE_IMAGE_EXTRA_INSTALL:append = "\
     libgpiod-tools \
     devmem2 \
     tree \
+    kernel-modules \
+    mtd-utils \
+    container-host-config \
+    docker-moby-contrib \
+    packagegroup-docker \
+    packagegroup-oci \
     "
 
 # Install versal-vek280-sdt-seg fw recipes.
