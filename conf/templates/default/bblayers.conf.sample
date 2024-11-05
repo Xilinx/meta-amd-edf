@@ -29,4 +29,8 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp \
   ##OEROOT##/../meta-arm/meta-arm \
   ##OEROOT##/../meta-arm/meta-arm-toolchain \
+  ##OEROOT##/../meta-jupyter \
+  ##OEROOT##/../meta-ros/meta-ros-common \
+  ##OEROOT##/../meta-ros/meta-ros2 \
+  ##OEROOT##/../meta-ros/meta-ros2-jazzy \
 "
