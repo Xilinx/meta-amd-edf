@@ -19,8 +19,6 @@ IMAGE_FEATURES = " \
 
 VITISAI_DEPENDENCIES = "opencv googletest protobuf-c boost json-c libunwind"
 
-# FIXME removed: hellopm, pm-notebooks, xrt (requires ocl-icd)
-#${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)}
 IMAGE_INSTALL:append = " \
     packagegroup-base \
     packagegroup-core-boot \
@@ -87,15 +85,14 @@ IMAGE_INSTALL:append = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     packagegroup-xilinx-gstreamer \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-matchbox', '', d)} \
+    xrt \
+    lopper \
+    packagegroup-xilinx-jupyter \
+    pm-notebooks \
+    packagegroup-xilinx-ros \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     "
-
-#FIXME - These need to be enabled once available
-#packagegroup-xilinx-qt
-#packagegroup-xilinx-qt-extended
-#packagegroup-jupyter
-#packagegroup-xilinx-ros
-#${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
-#aws-greengrass-v2
 
 IMAGE_LINGUAS = " "
 
