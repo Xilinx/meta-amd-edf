@@ -27,6 +27,7 @@ CORE_IMAGE_EXTRA_INSTALL:append = "\
     docker-moby-contrib \
     packagegroup-docker \
     packagegroup-oci \
+    vim \
     "
 
 # Install versal-vek280-sdt-seg fw recipes.
