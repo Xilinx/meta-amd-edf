@@ -30,9 +30,9 @@ CORE_IMAGE_EXTRA_INSTALL:append = "\
     vim \
     "
 
-# Install versal-vek280-sdt-seg fw recipes.
-VERSAL_VEK280_SDT_SEG_INSTALL = "\
+# Install versal-common fw recipes.
+VERSAL_COMMON_INSTALL = "\
     vek280-pl-bram-uart-gpio-fw \
     "
 
-IMAGE_INSTALL:append:versal-vek280-sdt-seg-ospi = " ${VERSAL_VEK280_SDT_SEG_INSTALL}"
+IMAGE_INSTALL:append:versal-common = " ${VERSAL_COMMON_INSTALL}"
