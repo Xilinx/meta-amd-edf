@@ -21,6 +21,7 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-xilinx/meta-xilinx-standalone-sdt \
   ##OEROOT##/../meta-xilinx/meta-xilinx-multimedia \
   ##OEROOT##/../meta-xilinx/meta-xilinx-demos \
+  ##OEROOT@@/../meta-xilinx/meta-xilinx-virtualization \
   ##OEROOT##/../meta-xilinx/meta-microblaze \
   ##OEROOT##/../meta-xilinx-internal \
   ##OEROOT##/../meta-openamp \
