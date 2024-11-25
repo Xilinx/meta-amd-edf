@@ -34,5 +34,11 @@ CORE_IMAGE_EXTRA_INSTALL:append = "\
 VERSAL_COMMON_INSTALL = "\
     vek280-pl-bram-uart-gpio-fw \
     "
+# Install versal2-common fw recipes.
+VERSAL2_COMMON_INSTALL = "\
+    isp-firmware \
+    kernel-module-isp \
+    "
 
 IMAGE_INSTALL:append:versal-common = " ${VERSAL_COMMON_INSTALL}"
+IMAGE_INSTALL:append:versal2-common = " ${VERSAL2_COMMON_INSTALL}"
