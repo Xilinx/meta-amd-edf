@@ -92,6 +92,7 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     packagegroup-xilinx-ros \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
+    valgrind \
     "
 
 IMAGE_INSTALL = " ${BASECAMP_IMAGE_FULL_INSTALL}"
