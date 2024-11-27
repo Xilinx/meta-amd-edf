@@ -28,6 +28,7 @@ CORE_IMAGE_EXTRA_INSTALL:append = "\
     packagegroup-docker \
     packagegroup-oci \
     vim \
+    xrt \
     "
 
 # Install versal-common fw recipes.
