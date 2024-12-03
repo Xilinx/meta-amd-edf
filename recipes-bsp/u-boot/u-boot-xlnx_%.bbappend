@@ -1,3 +1,7 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+
+SRC_URI:append = " file://basecamp-env-offset.cfg"
+
 # Generate U-Boot environment binary image
 
 DEPENDS += "u-boot-tools-xlnx-native"
