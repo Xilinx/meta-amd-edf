@@ -1,21 +1,14 @@
-DESCRIPTION = "An image containing the set of packages for basecamp distro."
+DESCRIPTION = "Common packages for the Basecamp distro and images"
 LICENSE = "MIT"
 
 # By default wic is not enable in IMAGE_FSTYPES so enable WIC image type support.
 IMAGE_FSTYPES += "wic wic.xz wic.bmap"
 
-IMAGE_BOOT_FILES:remove = "boot.bin"
-
 #### Disable Busybox
 SKIP_RECIPE[busybox] = "Busybox disabled"
 
-# splash feature is not used for AMD adaptive socs, hence remove it.
-IMAGE_FEATURES:remove = "splash"
-
-## FIXME add CONTAINER_PROFILE
-
 # Use CORE_IMAGE_EXTRA_INSTALL variable from core-image.bbclass
-CORE_IMAGE_EXTRA_INSTALL:append = "\
+BASECAMP_IMAGE_COMMON_INSTALL = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', ' dfx-mgr', '', d)} \
     libgpiod \
     libgpiod-tools \
@@ -29,6 +22,7 @@ CORE_IMAGE_EXTRA_INSTALL:append = "\
     packagegroup-oci \
     vim \
     xrt \
+    fwupd \
     "
 
 # Install versal-common fw recipes.
@@ -41,5 +35,5 @@ VERSAL2_COMMON_INSTALL = "\
     kernel-module-isp \
     "
 
-IMAGE_INSTALL:append:versal-common = " ${VERSAL_COMMON_INSTALL}"
-IMAGE_INSTALL:append:versal2-common = " ${VERSAL2_COMMON_INSTALL}"
+BASECAMP_IMAGE_COMMON_INSTALL:append:versal-common = " ${VERSAL_COMMON_INSTALL}"
+BASECAMP_IMAGE_COMMON_INSTALL:append:versal2-common = " ${VERSAL2_COMMON_INSTALL}"

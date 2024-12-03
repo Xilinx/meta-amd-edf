@@ -19,7 +19,7 @@ IMAGE_FEATURES = " \
 
 VITISAI_DEPENDENCIES = "opencv googletest protobuf-c boost json-c libunwind"
 
-IMAGE_INSTALL:append = " \
+BASECAMP_IMAGE_FULL_INSTALL = " \
     packagegroup-base \
     packagegroup-core-boot \
     packagegroup-opencv \
@@ -94,6 +94,8 @@ IMAGE_INSTALL:append = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     "
 
+IMAGE_INSTALL = " ${BASECAMP_IMAGE_COMMON_INSTALL} ${BASECAMP_IMAGE_FULL_INSTALL}"
+
 IMAGE_LINGUAS = " "
 
 IMAGE_FSTYPES:remove = "cpio.gz cpio cpio.bz2"
@@ -109,3 +111,15 @@ DEPENDS:append = " \
     unfs3-native \
     libeigen \
 "
+
+SUPPORTED_MACHINES = "versal-common"
+
+python() {
+    machine = d.getVar("MACHINE")
+    supported = d.getVar("SUPPORTED_MACHINES").split()
+
+    if machine not in supported:
+        bb.warn("This image is not supported on %s, only machine(s) %s are supported." % (machine, supported))
+}
+
+
