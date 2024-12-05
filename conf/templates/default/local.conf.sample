@@ -329,8 +329,8 @@ CONF_VERSION = "2"
 SDK_CLASSES += "amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools"
 
 INHERIT += "own-mirrors"
-SOURCE_MIRROR_URL = "file:///proj/yocto/basecamp/2025.1/distro_artifacts/Yocto_basecamp_2025.1_latest/downloads"
+SOURCE_MIRROR_URL = "file:///proj/yocto/basecamp/2025.1/Yocto_basecamp_2025.1_latest/downloads"
 
 SSTATE_MIRRORS = "\
-file://.* file:///proj/yocto/basecamp/2025.1/distro_artifacts/Yocto_basecamp_2025.1_latest/sstate-cache/PATH \n \
+file://.* file:///proj/yocto/basecamp/2025.1/Yocto_basecamp_2025.1_latest/sstate-cache/PATH \n \
 "
