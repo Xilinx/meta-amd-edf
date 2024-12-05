@@ -1,10 +1,10 @@
 SUMMARY = "OSPI image for Basecamp"
-DESCRIPTION = "OSPI image for Basecamp - 2GB part"
+DESCRIPTION = "OSPI image for Basecamp with image selector, image recovery, capsule metadata and boot.bin"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 INHIBIT_DEFAULT_DEPS = "1"
-DEPENDS = "virtual/boot-bin capsule-mdata"
+DEPENDS = "virtual/boot-bin capsule-mdata virtual/imgsel"
 
 inherit deploy image-artifact-names
 IMAGE_NAME_SUFFIX = ""
@@ -30,10 +30,27 @@ IMAGE_B_OFFSET ?= "0x87C_0000"
 USER_SCRATCHPAD_OFFSET ?= "0xF9E_000"
 OSPI_SIZE ?= "0x1000_0000"
 
+# FIXME this should point to the file in DEPLOY_DIR_IMAGE
+IMGRCVRY_BIN_FILE ?= ""
+
 do_compile[depends] += " \
     virtual/boot-bin:do_deploy \
     capsule-mdata:do_deploy \
+    virtual/imgsel:do_deploy \
     "
+
+def check_imgrcvry_available(d):
+    if not d.getVar('IMGRCVRY_BIN_FILE') or not os.path.exists(d.getVar('IMGRCVRY_BIN_FILE')):
+        # Don't cache this, as the items on disk can change!
+        d.setVar('BB_DONT_CACHE', '1')
+
+        raise bb.parse.SkipRecipe("The expected Image Recovery file is not available: %s\n" \
+            "Set IMGRCVRY_BIN_FILE to the path with a precompiled tiny initramfs binary.\n" \
+            "See meta-xilinx/meta-xilinx-imgrcvry/README.md for build instructions." % d.getVar("IMGRCVRY_BIN_FILE"))
+
+python() {
+    check_imgrcvry_available(d)
+}
 
 python do_compile() {
 
@@ -56,13 +73,11 @@ python do_compile() {
 
     # Image selector
 
-    #TODO 
-
     try:
-        with open("/path/to/imgsel.bin", "rb") as f:
+        with open(d.getVar("DEPLOY_DIR_IMAGE")+"/image-selector-"+d.getVar("MACHINE")+".bin", "rb") as f:
             imgsel_data = f.read(-1)
     except OSError as err:
-        bb.fatal("Unable to open capsule imgsel file: " + str(err))
+        bb.fatal("Unable to open image selector file: " + str(err))
 
     ospi_data.seek(image_selector_offset)
     ospi_data.write(imgsel_data)
@@ -71,7 +86,14 @@ python do_compile() {
 
     # Image recovery
 
-    #TODO
+    try:
+        with open(d.getVar("IMGRCVRY_BIN_FILE"), "rb") as f:
+            imgrcvry_data = f.read(-1)
+    except OSError as err:
+        bb.fatal("Unable to open image recovery file: " + str(err))
+
+    ospi_data.seek(image_recovery_offset)
+    ospi_data.write(imgrcvry_data)
 
     # System ready IR - Capsule Metadata
 
