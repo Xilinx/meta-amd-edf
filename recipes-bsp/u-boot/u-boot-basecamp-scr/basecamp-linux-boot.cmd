@@ -1,11 +1,11 @@
 # for u-boot
 devtype=mmc
 devnum=0
-bootpartnum=1
+bootpartnum=2
 
 # for linux
 kernelname=Image
-rootpartnum=2
+rootpartnum=3
 rootdev=mmcblk${devnum}p${rootpartnum}
 
 # RAM locations
