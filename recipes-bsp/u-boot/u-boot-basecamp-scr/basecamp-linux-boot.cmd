@@ -1,0 +1,27 @@
+# for u-boot
+devtype=mmc
+devnum=0
+bootpartnum=1
+
+# for linux
+kernelname=Image
+rootpartnum=2
+rootdev=mmcblk${devnum}p${rootpartnum}
+
+# RAM locations
+ramaddr_kernel=0x00200000
+ramaddr_dtb=0x00001000
+
+echo "Checking for kernel:${kernelname}"
+if test -e ${devtype} ${devnum}:${bootpartnum} ${kernelname}; then
+	echo "Loading ${kernelname} at ${ramaddr_kernel}"
+	fatload ${devtype} ${devnum}:${bootpartnum} ${ramaddr_kernel} ${kernelname};
+else
+	echo "kernel image ${kernelname} not found on ${devtype} ${devnum}:${bootpartnum}"
+	exit
+fi
+
+fdt addr ${ramaddr_dtb}
+fdt get value bootargs /chosen bootargs
+setenv bootargs $bootargs  root=/dev/${rootdev} ro rootwait
+booti ${ramaddr_kernel} - ${ramaddr_dtb}
