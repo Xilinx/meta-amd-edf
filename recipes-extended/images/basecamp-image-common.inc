@@ -20,6 +20,7 @@ BASECAMP_IMAGE_COMMON_INSTALL = "\
     docker-moby-contrib \
     packagegroup-docker \
     packagegroup-oci \
+    packagegroup-openamp \
     vim \
     xrt \
     fwupd \
