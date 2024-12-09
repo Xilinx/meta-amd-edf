@@ -15,7 +15,7 @@ ramaddr_dtb=0x00001000
 echo "Checking for kernel:${kernelname}"
 if test -e ${devtype} ${devnum}:${bootpartnum} ${kernelname}; then
 	echo "Loading ${kernelname} at ${ramaddr_kernel}"
-	fatload ${devtype} ${devnum}:${bootpartnum} ${ramaddr_kernel} ${kernelname};
+	ext4load ${devtype} ${devnum}:${bootpartnum} ${ramaddr_kernel} ${kernelname};
 else
 	echo "kernel image ${kernelname} not found on ${devtype} ${devnum}:${bootpartnum}"
 	exit
