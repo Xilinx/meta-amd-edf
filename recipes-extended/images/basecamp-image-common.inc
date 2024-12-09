@@ -26,10 +26,6 @@ BASECAMP_IMAGE_COMMON_INSTALL = "\
     fwupd \
     "
 
-# Install versal-common fw recipes.
-VERSAL_COMMON_INSTALL = "\
-    vek280-pl-bram-uart-gpio-fw \
-    "
 # Install versal2-common fw recipes.
 VERSAL2_COMMON_INSTALL = "\
     isp-firmware \
