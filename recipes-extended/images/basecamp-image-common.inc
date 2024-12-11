@@ -8,7 +8,7 @@ IMAGE_FSTYPES += "wic wic.xz wic.bmap"
 SKIP_RECIPE[busybox] = "Busybox disabled"
 
 # Use CORE_IMAGE_EXTRA_INSTALL variable from core-image.bbclass
-BASECAMP_IMAGE_COMMON_INSTALL = "\
+VERSAL_COMMON_INSTALL = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', ' dfx-mgr', '', d)} \
     libgpiod \
     libgpiod-tools \
