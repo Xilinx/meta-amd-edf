@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 INHIBIT_DEFAULT_DEPS = "1"
-DEPENDS = "virtual/boot-bin capsule-mdata virtual/imgsel"
+DEPENDS = "virtual/boot-bin capsule-mdata virtual/imgsel imgrcvry-deploy"
 
 inherit deploy image-artifact-names
 IMAGE_NAME_SUFFIX = ""
@@ -31,26 +31,14 @@ USER_SCRATCHPAD_OFFSET ?= "0xF9E_000"
 OSPI_SIZE ?= "0x1000_0000"
 
 # FIXME this should point to the file in DEPLOY_DIR_IMAGE
-IMGRCVRY_BIN_FILE ?= ""
+IMGRCVRY_BIN_FILE ?= "${DEPLOY_DIR_IMAGE}/image-recovery.bin"
 
 do_compile[depends] += " \
     virtual/boot-bin:do_deploy \
     capsule-mdata:do_deploy \
     virtual/imgsel:do_deploy \
+    imgrcvry-deploy:do_deploy \
     "
-
-def check_imgrcvry_available(d):
-    if not d.getVar('IMGRCVRY_BIN_FILE') or not os.path.exists(d.getVar('IMGRCVRY_BIN_FILE')):
-        # Don't cache this, as the items on disk can change!
-        d.setVar('BB_DONT_CACHE', '1')
-
-        raise bb.parse.SkipRecipe("The expected Image Recovery file is not available: %s\n" \
-            "Set IMGRCVRY_BIN_FILE to the path with a precompiled tiny initramfs binary.\n" \
-            "See meta-xilinx/meta-xilinx-imgrcvry/README.md for build instructions." % d.getVar("IMGRCVRY_BIN_FILE"))
-
-python() {
-    check_imgrcvry_available(d)
-}
 
 python do_compile() {
 
