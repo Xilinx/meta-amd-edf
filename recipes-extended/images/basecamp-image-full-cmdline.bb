@@ -7,7 +7,7 @@ IMAGE_FEATURES += "ssh-server-openssh package-management"
 IMAGE_INSTALL = "\
     packagegroup-core-boot \
     packagegroup-core-full-cmdline \
-    ${BASECAMP_IMAGE_COMMON_INSTALL} \
+    ${BASECAMP_IMAGE_FULL_INSTALL} \
     "
 
 inherit core-image

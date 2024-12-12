@@ -7,7 +7,7 @@ IMAGE_FSTYPES += "wic wic.xz wic.bmap"
 #### Disable Busybox
 SKIP_RECIPE[busybox] = "Busybox disabled"
 
-# Use CORE_IMAGE_EXTRA_INSTALL variable from core-image.bbclass
+# Minimal set packages for Basecamp images
 BASECAMP_IMAGE_COMMON_INSTALL = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', ' dfx-mgr', '', d)} \
     libgpiod \
@@ -16,6 +16,12 @@ BASECAMP_IMAGE_COMMON_INSTALL = "\
     tree \
     kernel-modules \
     mtd-utils \
+    fwupd \
+    "
+
+# Full set of packages for Basecamp images
+BASECAMP_IMAGE_FULL_INSTALL = " \
+    ${BASECAMP_IMAGE_COMMON_INSTALL} \
     container-host-config \
     docker-moby-contrib \
     packagegroup-docker \
@@ -23,7 +29,6 @@ BASECAMP_IMAGE_COMMON_INSTALL = "\
     packagegroup-openamp \
     vim \
     xrt \
-    fwupd \
     "
 
 # Install versal-common fw recipes.
