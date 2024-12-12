@@ -1,0 +1,3 @@
+COMPATIBLE_MACHINE:versal = "${MACHINE}"
+
+BOOTBIN_VER_MAX_LEN:versal ?= "50"
