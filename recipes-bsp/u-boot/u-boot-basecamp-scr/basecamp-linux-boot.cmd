@@ -23,5 +23,5 @@ fi
 
 fdt addr ${ramaddr_dtb}
 fdt get value bootargs /chosen bootargs
-setenv bootargs $bootargs  root=/dev/${rootdev} ro rootwait
+setenv bootargs $bootargs  root=/dev/${rootdev} ro rootwait uio_pdrv_genirq.of_id=generic-uio
 booti ${ramaddr_kernel} - ${ramaddr_dtb}
