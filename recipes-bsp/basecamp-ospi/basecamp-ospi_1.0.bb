@@ -46,7 +46,7 @@ python do_compile() {
 
     image_selector_offset = int(d.getVar("IMAGE_SELECTOR_OFFSET") or '0', 0)
     image_selector_backup_offset = int(d.getVar("IMAGE_SELECTOR_BACKUP_OFFSET") or '0', 0)
-    image_recovery_offset = int(d.getVar("IMAGE_RECOVERY_OFFESET") or '0', 0)
+    image_recovery_offset = int(d.getVar("IMAGE_RECOVERY_OFFSET") or '0', 0)
     image_recovery_meta_offset = int(d.getVar("IMAGE_RECOVERY_META_OFFSET") or '0', 0)
     capsule_metadata_offset = int(d.getVar("CAPSULE_METADATA_OFFSET") or '0', 0)
     capsule_metadata_backup_offset = int(d.getVar("CAPSULE_METADATA_OFFSET") or '0', 0)
