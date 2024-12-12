@@ -19,7 +19,7 @@ IMAGE_FEATURES = " \
 
 VITISAI_DEPENDENCIES = "opencv googletest protobuf-c boost json-c libunwind"
 
-BASECAMP_IMAGE_FULL_INSTALL = " \
+BASECAMP_IMAGE_FULL_INSTALL += " \
     packagegroup-base \
     packagegroup-core-boot \
     packagegroup-opencv \
@@ -94,7 +94,7 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     "
 
-IMAGE_INSTALL = " ${BASECAMP_IMAGE_COMMON_INSTALL} ${BASECAMP_IMAGE_FULL_INSTALL}"
+IMAGE_INSTALL = " ${BASECAMP_IMAGE_FULL_INSTALL}"
 
 IMAGE_LINGUAS = " "
 
