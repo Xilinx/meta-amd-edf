@@ -15,6 +15,15 @@ inherit image
 # By default wic is not enable in IMAGE_FSTYPES so enable WIC image type support.
 IMAGE_FSTYPES = "wic wic.xz wic.bmap wic.qemu-sd"
 
+# Reset the IMGCLASSES
+IMGCLASSES  = "rootfs_${IMAGE_PKGTYPE} image_types ${IMAGE_CLASSES}"
+IMGCLASSES += "image_types_wic"
+
+# Clear everything else
+#TOOLCHAIN_TARGET_TASK = ""
+#TOOLCHAIN_TARGET_TASK_ATTEMPTONLY = ""
+#POPULATE_SDK_POST_TARGET_COMMAND = ""
+
 BC_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/basecamp-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
 BC_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-basecamp-image-full-cmdline"
 BC_XEN_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/basecamp-xen-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
