@@ -24,10 +24,18 @@ IMGCLASSES += "image_types_wic"
 #TOOLCHAIN_TARGET_TASK_ATTEMPTONLY = ""
 #POPULATE_SDK_POST_TARGET_COMMAND = ""
 
+# For the fstab we can't use SRC_URI or WORKDIR, because do_fetch is disabled in an image recipe
+# and there is no way to re-enable it
 BC_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/basecamp-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
 BC_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-basecamp-image-full-cmdline"
+BC_IMAGE_ROOTFS_FSTAB = "${LAYERBASE_basecamp}/files/basecamp-disk-image/basecamp-image-full-cmdline-fstab"
+BC_IMAGE_ROOTFS_FSTAB[vardepsexclude] = "LAYERBASE_basecamp"
+
 BC_XEN_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/basecamp-xen-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
 BC_XEN_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-basecamp-xen-image-full-cmdline"
+BC_XEN_IMAGE_ROOTFS_FSTAB = "${LAYERBASE_basecamp}/files/basecamp-disk-image/basecamp-xen-image-full-cmdline-fstab"
+BC_XEN_IMAGE_ROOTFS_FSTAB[vardepsexclude] = "LAYERBASE_basecamp"
+
 BC_XEN_GUEST_ROOTFS = "${DEPLOY_DIR_IMAGE}/core-image-minimal${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.cpio.gz"
 
 WICVARS:append = "\
@@ -65,12 +73,20 @@ fakeroot do_rootfs() {
      mkdir -p ${BC_IMAGE_ROOTFS_DIR}
      cd ${BC_IMAGE_ROOTFS_DIR}
      tar xvpfSz ${BC_IMAGE_ROOTFS}
+
+     if [ -f ${BC_IMAGE_ROOTFS_FSTAB} ]; then
+        install -m 0644 ${BC_IMAGE_ROOTFS_FSTAB} etc/fstab
+     fi
     )
 
     (
      mkdir -p ${BC_XEN_IMAGE_ROOTFS_DIR}
      cd ${BC_XEN_IMAGE_ROOTFS_DIR}
      tar xvpfSz ${BC_XEN_IMAGE_ROOTFS}
+
+     if [ -f ${BC_XEN_IMAGE_ROOTFS_FSTAB} ]; then
+        install -m 0644 ${BC_XEN_IMAGE_ROOTFS_FSTAB} etc/fstab
+     fi
     )
 
     # Copy xen kernel images to /boot directory
