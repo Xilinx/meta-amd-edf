@@ -91,14 +91,14 @@ fakeroot do_rootfs() {
 
     # Copy xen kernel images to /boot directory
     if [ -f ${BC_XEN_IMAGE_ROOTFS_DIR}/boot/xen ]; then
-        install -D -m 0644 ${BC_XEN_IMAGE_ROOTFS_DIR}/boot/xen* ${BC_IMAGE_ROOTFS_DIR}/boot/
+        (cd ${BC_XEN_IMAGE_ROOTFS_DIR}/boot && find xen* -print0 | cpio --verbose --null -pdlu ${BC_IMAGE_ROOTFS_DIR}/boot/)
     else
         bbfatal "Copying Xen files failed from location: ${BC_XEN_IMAGE_ROOTFS_DIR}boot/"
     fi
 
     # Copy xen images to /root directory or xen partition
     if [ -f ${BC_XEN_GUEST_ROOTFS} ]; then
-        cp -r ${BC_XEN_GUEST_ROOTFS} ${BC_XEN_IMAGE_ROOTFS_DIR}/root/rootfs.cpio.gz
+        install -v -m 0644 ${BC_XEN_GUEST_ROOTFS} ${BC_XEN_IMAGE_ROOTFS_DIR}/root/rootfs.cpio.gz
     else
         bbfatal "Copying minimal rootfs for xen guest failed"
     fi
