@@ -26,13 +26,13 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     docker-moby-contrib \
     packagegroup-docker \
     packagegroup-oci \
-    packagegroup-openamp \
     vim \
     xrt \
     "
 
 # Install versal-common fw recipes.
 VERSAL_COMMON_INSTALL = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' packagegroup-openamp', '', d)} \
     "
 
 # Install versal2-common fw recipes.
