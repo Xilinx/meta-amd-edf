@@ -50,7 +50,6 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization vmsep', 'packagegroup-container', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp', '', d)} \
     packagegroup-xilinx-audio \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'packagegroup-core-weston', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
