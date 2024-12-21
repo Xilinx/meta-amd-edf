@@ -52,7 +52,7 @@ DEPENDS += " \
 
 WKS_FILES = "basecamp-disk-multi-rootfs.wks"
 
-SUPPORTED_MACHINES = "versal-common"
+SUPPORTED_MACHINES = "versal-common versal2-common"
 
 python() {
     machine = d.getVar("MACHINE")
