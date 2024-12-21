@@ -81,18 +81,23 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     kernel-devsrc \
     kernel-module-hdmi \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     packagegroup-xilinx-gstreamer \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-matchbox', '', d)} \
     xrt \
     lopper \
     packagegroup-xilinx-jupyter \
-    pm-notebooks \
     packagegroup-xilinx-ros \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     valgrind \
     "
+
+VERSAL_COMMON_INSTALL += " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
+    pm-notebooks \
+    "
+
+BASECAMP_IMAGE_COMMON_INSTALL:append:versal-common = " ${VERSAL_COMMON_INSTALL}"
 
 IMAGE_INSTALL = " ${BASECAMP_IMAGE_FULL_INSTALL}"
 
