@@ -80,7 +80,6 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     wolfssl \
     ${VITISAI_DEPENDENCIES} \
     kernel-devsrc \
-    kernel-module-hdmi \
     packagegroup-xilinx-gstreamer \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-matchbox', '', d)} \
     xrt \
@@ -95,6 +94,7 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
 VERSAL_COMMON_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     pm-notebooks \
+    kernel-module-hdmi \
     "
 
 BASECAMP_IMAGE_COMMON_INSTALL:append:versal-common = " ${VERSAL_COMMON_INSTALL}"
