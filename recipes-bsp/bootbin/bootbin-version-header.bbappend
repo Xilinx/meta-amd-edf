@@ -3,7 +3,7 @@ COMPATIBLE_MACHINE:versal = "${MACHINE}"
 COMPATIBLE_MACHINE:versal2 = "${MACHINE}"
 
 BOOTBIN_VER_MAX_LEN:versal ?= "50"
-BOOTBIN_VER_MAX_LEN:versal2 ?= "50"
+BOOTBIN_VER_MAX_LEN:versal2 ?= "60"
 
 BASECAMP_BOOTBIN_VER ?= "1"
 BASECAMP_BOOTBIN_VER_FILE ?= "bootbin-version-header.bin"
