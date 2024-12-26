@@ -18,8 +18,13 @@ IMAGE_TYPE_GUID_0 ?= "e86660de-5602-ad4f-8238-e406e274c4cf"
 IMG_0_GUID_0 ?= "48054af6-ce2c-11ed-8f66-7bc4531cfe6b"
 IMG_0_GUID_1 ?= "4b819c3e-ce2c-11ed-bec8-23de4c6d2cf2"
 
+do_configure() {
+    echo -e -n $'\x04' > ${WORKDIR}/${PN}-vendor.txt
+    dd if=/dev/zero of=${WORKDIR}/${PN}-vendor.txt seek=1 bs=1 count=3
+}
+
 do_compile() {
-    mkfwumdata -a 0 -b 2 -i 1 -v 2 ${LOC_GUID},${IMAGE_TYPE_GUID_0},${IMG_0_GUID_0},${IMG_0_GUID_1} ${PN}.bin
+    mkfwumdata -a 0 -b 2 -i 1 -v 2 ${LOC_GUID},${IMAGE_TYPE_GUID_0},${IMG_0_GUID_0},${IMG_0_GUID_1} ${PN}.bin -V ${WORKDIR}/${PN}-vendor.txt
 }
 
 do_deploy() {
