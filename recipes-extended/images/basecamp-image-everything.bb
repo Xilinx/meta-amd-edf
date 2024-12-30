@@ -95,6 +95,10 @@ VERSAL_COMMON_INSTALL += " \
     kernel-module-dp \
     "
 
+VERSAL2_COMMON_INSTALL += " \
+    kernel-module-hdmi21 \
+    "
+
 IMAGE_INSTALL = " ${BASECAMP_IMAGE_FULL_INSTALL}"
 
 IMAGE_LINGUAS = " "
