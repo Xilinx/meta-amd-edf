@@ -30,9 +30,14 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     xrt \
     "
 
+# Things to install for OpenAMP.
+OPENAMP_COMMON_INSTALL = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' packagegroup-openamp', '', d)} \
+    "
+
 # Install versal-common fw recipes.
 VERSAL_COMMON_INSTALL = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' packagegroup-openamp', '', d)} \
+    ${OPENAMP_COMMON_INSTALL} \
     "
 
 # Install versal2-common fw recipes.
