@@ -17,7 +17,7 @@ IMAGE_FSTYPES = "wic wic.xz wic.bmap wic.qemu-sd"
 
 # Reset the IMGCLASSES
 IMGCLASSES  = "rootfs_${IMAGE_PKGTYPE} image_types ${IMAGE_CLASSES}"
-IMGCLASSES += "image_types_wic"
+IMGCLASSES += "image_types_wic image-types-xilinx-qemu"
 
 # Clear everything else
 #TOOLCHAIN_TARGET_TASK = ""
