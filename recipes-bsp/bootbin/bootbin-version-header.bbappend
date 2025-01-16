@@ -1,10 +1,14 @@
+COMPATIBLE_MACHINE:zynqmp = "${MACHINE}"
 COMPATIBLE_MACHINE:versal = "${MACHINE}"
 
 BOOTBIN_VER_MAX_LEN:versal ?= "50"
 
-
 BASECAMP_BOOTBIN_VER ?= "1"
 BASECAMP_BOOTBIN_VER_FILE ?= "bootbin-version-header.bin"
+
+python do_configure:prepend:basecamp() {
+    version = d.getVar("BASECAMP_BOOTBIN_VER")
+}
 
 python do_configure:append:basecamp() {
     basecamp_version = d.getVar('BASECAMP_BOOTBIN_VER')
