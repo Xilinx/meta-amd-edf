@@ -117,7 +117,12 @@ DEPENDS:append = " \
     libeigen \
 "
 
-SUPPORTED_MACHINES = "versal-common versal2-common"
+SUPPORTED_MACHINES = " \
+    zynqmp-common \
+    zynqmp-mali-common \
+    versal-common \
+    versal2-common \
+"
 
 python() {
     machine = d.getVar("MACHINE")
