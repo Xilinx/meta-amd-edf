@@ -35,4 +35,5 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-ros/meta-ros-common \
   ##OEROOT##/../meta-ros/meta-ros2 \
   ##OEROOT##/../meta-ros/meta-ros2-jazzy \
+  ##OEROOT##/../meta-qt5 \
 "
