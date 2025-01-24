@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 INHIBIT_DEFAULT_DEPS = "1"
-DEPENDS = "virtual/boot-bin capsule-mdata virtual/imgsel imgrcvry-deploy"
+DEPENDS = "virtual/boot-bin capsule-mdata virtual/imgsel virtual/imgrcry"
 
 inherit deploy image-artifact-names
 IMAGE_NAME_SUFFIX = ""
@@ -30,8 +30,9 @@ IMAGE_B_OFFSET ?= "0x87C_0000"
 USER_SCRATCHPAD_OFFSET ?= "0xF9E_000"
 OSPI_SIZE ?= "0x1000_0000"
 
-# FIXME this should point to the file in DEPLOY_DIR_IMAGE
-IMGRCVRY_BIN_FILE ?= "${DEPLOY_DIR_IMAGE}/image-recovery.bin"
+# The file comes from the imgrcvry deployment recipe with a specific name
+IMGRCRY_IMAGE_NAME ??= "image-recovery-${MACHINE}"
+IMGRCVRY_BIN_FILE = "${DEPLOY_DIR_IMAGE}/${IMGRCRY_IMAGE_NAME}.bin"
 
 do_compile[depends] += " \
     virtual/boot-bin:do_deploy \
