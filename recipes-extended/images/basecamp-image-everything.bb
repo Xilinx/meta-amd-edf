@@ -89,6 +89,7 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     valgrind \
+    packagegroup-xilinx-qt \
     "
 
 VERSAL_COMMON_INSTALL += " \
