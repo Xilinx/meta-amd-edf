@@ -1,5 +1,5 @@
 # Include FreeRTOS MC app for specific machine only.
-include ${@'versal-vek280-sdt-seg-ospi-freertos.inc' if d.getVar('MACHINE') == 'versal-vek280-sdt-seg-ospi' else ''}
+include ${@'versal-vek280-sdt-seg-ospi-freertos.inc' if ((d.getVar('MACHINE') == 'versal-vek280-sdt-seg-ospi') and (d.getVar('BB_CURRENT_MC') != 'xilinx-image-recovery')) else ''}
 
 BOOTBIN_DEPENDS ?= ""
 BOOTBIN_DEPENDS:basecamp ?= "bootbin-version-header:do_deploy"
