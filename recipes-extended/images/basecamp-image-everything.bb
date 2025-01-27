@@ -94,8 +94,9 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
 VERSAL_COMMON_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     pm-notebooks \
-    kernel-module-hdmi \
     "
+
+#    kernel-module-hdmi
 
 BASECAMP_IMAGE_COMMON_INSTALL:append:versal-common = " ${VERSAL_COMMON_INSTALL}"
 
