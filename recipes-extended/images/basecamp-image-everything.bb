@@ -90,6 +90,7 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     valgrind \
     packagegroup-xilinx-qt \
+    packagegroup-vitis-aiml \
     "
 
 VERSAL_COMMON_INSTALL += " \
