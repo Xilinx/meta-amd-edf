@@ -38,7 +38,6 @@ do_compile[depends] += " \
     virtual/boot-bin:do_deploy \
     capsule-mdata:do_deploy \
     virtual/imgsel:do_deploy \
-    imgrcvry-deploy:do_deploy \
     "
 
 python do_compile() {
