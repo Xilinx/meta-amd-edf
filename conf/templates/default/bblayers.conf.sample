@@ -26,6 +26,7 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-xilinx-internal \
   ##OEROOT##/../meta-openamp \
   ##OEROOT##/../meta-basecamp \
+  ##OEROOT##/../meta-kria \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-core \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp \
   ##OEROOT##/../meta-xilinx/meta-xilinx-imgrcvry \
