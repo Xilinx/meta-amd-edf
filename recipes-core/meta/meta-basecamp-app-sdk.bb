@@ -20,4 +20,5 @@ TOOLCHAIN_TARGET_TASK:append = " \
 # i.e. these tools are built to run on the build host
 TOOLCHAIN_HOST_TASK:append = " \
 	nativesdk-packagegroup-vitis-aiml \
+	nativesdk-packagegroup-basecamp-tools \
 	"
