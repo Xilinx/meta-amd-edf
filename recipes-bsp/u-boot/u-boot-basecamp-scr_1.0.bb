@@ -18,17 +18,32 @@ SRC_URI = " \
 
 include basecamp-xen-boot-env.inc
 
+DEVICETREE_LOAD_ADDRESS_DEFAULT ??= ""
+DEVICETREE_LOAD_ADDRESS_DEFAULT:zynqmp ??= "0x100000"
+DEVICETREE_LOAD_ADDRESS_DEFAULT:versal ??= "0x1000"
+DEVICETREE_LOAD_ADDRESS ??= "${DEVICETREE_LOAD_ADDRESS_DEFAULT}"
+
+KERNEL_LOAD_ADDRESS_DEFAULT ??= ""
+KERNEL_LOAD_ADDRESS_DEFAULT:zynqmp ??= "0x200000"
+KERNEL_LOAD_ADDRESS_DEFAULT:versal ??= "0x200000"
+KERNEL_LOAD_ADDRESS ??= "${KERNEL_LOAD_ADDRESS_DEFAULT}"
+
 do_compile() {
+    sed -e 's/@@KERNEL_LOAD_ADDRESS@@/${KERNEL_LOAD_ADDRESS}/' \
+        -e 's/@@DEVICETREE_LOAD_ADDRESS@@/${DEVICETREE_LOAD_ADDRESS}/' \
+        "${WORKDIR}/basecamp-linux-boot.cmd" > "${WORKDIR}/linux-boot.cmd"
+
     sed -e 's/@@KERNEL_IMAGETYPE@@/${KERNEL_IMAGETYPE}/' \
         -e 's/@@XEN_IMAGETYPE@@/${XEN_IMAGETYPE}/' \
         -e 's/@@RAMDISK_IMAGETYPE@@/${RAMDISK_IMAGETYPE}/' \
         -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
         -e 's/@@DOM0_MEM@@/${DOM0_MEM}/' \
         -e 's/@@DOM0_MAX_VCPUS@@/${DOM0_MAX_VCPUS}/' \
-        -e 's/@@KERNEL_LOAD_ADDRESS@@/${KERNEL_LOAD_ADDRESS}/' \
         -e 's/@@XEN_LOAD_ADDRESS@@/${XEN_LOAD_ADDRESS}/' \
-        -e 's/@@DEVICETREE_LOAD_ADDRESS@@/${DEVICETREE_LOAD_ADDRESS}/' \
         -e 's/@@RAMDISK_LOAD_ADDRESS@@/${RAMDISK_LOAD_ADDRESS}/' \
+        -e 's:@@XEN_KERNEL_LOAD_ADDRESS@@:${XEN_KERNEL_LOAD_ADDRESS}:' \
+        -e 's:@@XEN_DEVICETREE_LOAD_ADDRESS@@:${XEN_DEVICETREE_LOAD_ADDRESS}:' \
+        -e 's:@@XEN_RAMDISK_LOAD_ADDRESS@@:${XEN_RAMDISK_LOAD_ADDRESS}:' \
         -e 's:@@XEN_CMDLINE_APPEND@@:${XEN_CMDLINE_APPEND}:' \
         -e 's:@@XEN_SERIAL_CONSOLES@@:${XEN_SERIAL_CONSOLES}:' \
         -e 's/@@BOOTPARTNUM@@/${BOOTPARTNUM}/' \
@@ -38,7 +53,7 @@ do_compile() {
         -e 's/@@SDBOOTDEV@@/${SDBOOTDEV}/' \
         "${WORKDIR}/basecamp-xen-boot.cmd" > "${WORKDIR}/xen-boot.cmd"
 
-	mkimage -A arm -T script -C none -n "Boot script" -d "${WORKDIR}/basecamp-linux-boot.cmd" boot.scr
+	mkimage -A arm -T script -C none -n "Boot script" -d "${WORKDIR}/linux-boot.cmd" boot.scr
 	mkimage -A arm -T script -C none -n "Xen Boot script" -d "${WORKDIR}/xen-boot.cmd" xen_boot.scr
 }
 

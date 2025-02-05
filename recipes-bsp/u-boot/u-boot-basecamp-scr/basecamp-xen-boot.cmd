@@ -20,15 +20,15 @@ fi
 
 echo "Checking for Image:${kernel_name}"
 if test -e ${devtype} ${devnum}:${bootpart} ${kernel_name}; then
-	echo "Loading ${kernel_name} at @@KERNEL_LOAD_ADDRESS@@";
-	ext4load ${devtype} ${devnum}:${bootpart} @@KERNEL_LOAD_ADDRESS@@ ${kernel_name};
+	echo "Loading ${kernel_name} at @@XEN_KERNEL_LOAD_ADDRESS@@";
+	ext4load ${devtype} ${devnum}:${bootpart} @@XEN_KERNEL_LOAD_ADDRESS@@ ${kernel_name};
 	setenv kernel_size 0x$filesize;
 fi
 
 echo "Checking for ramdisk:${rootfs_name}"
 if test -e ${devtype} ${devnum}:${bootpart} ${rootfs_name} && test "${skip_ramdisk}" != "yes"; then
-	echo "Loading ${rootfs_name} at @@RAMDISK_LOAD_ADDRESS@@";
-	ext4load ${devtype} ${devnum}:${bootpart} @@RAMDISK_LOAD_ADDRESS@@ ${rootfs_name};
+	echo "Loading ${rootfs_name} at @@XEN_RAMDISK_LOAD_ADDRESS@@";
+	ext4load ${devtype} ${devnum}:${bootpart} @@XEN_RAMDISK_LOAD_ADDRESS@@ ${rootfs_name};
 	setenv ramdisk_size 0x$filesize;
 fi
 
@@ -44,7 +44,7 @@ fdt set /chosen xen,xen-bootargs \"${xen_bootargs}\"
 if test -n ${ramdisk_size}; then
 	fdt mknod /chosen dom0-ramdisk
 	fdt set /chosen/dom0-ramdisk compatible  "xen,linux-initrd" "xen,multiboot-module" "multiboot,module"
-	fdt set /chosen/dom0-ramdisk reg <0x0 @@RAMDISK_LOAD_ADDRESS@@ 0x0 ${ramdisk_size}>
+	fdt set /chosen/dom0-ramdisk reg <0x0 @@XEN_RAMDISK_LOAD_ADDRESS@@ 0x0 ${ramdisk_size}>
 	setenv rootfs_param @@KERNEL_ROOT_RAMDISK@@
 else
     setenv rootfs_param @@KERNEL_ROOT_SD@@
@@ -52,7 +52,7 @@ fi
 
 fdt mknod /chosen dom0
 fdt set /chosen/dom0 compatible  "xen,linux-zimage" "xen,multiboot-module" "multiboot,module"
-fdt set /chosen/dom0 reg <0x0 @@KERNEL_LOAD_ADDRESS@@ 0x0 ${kernel_size}>
+fdt set /chosen/dom0 reg <0x0 @@XEN_KERNEL_LOAD_ADDRESS@@ 0x0 ${kernel_size}>
 setenv dom0_bootargs "console=hvc0 earlycon=xen earlyprintk=xen clk_ignore_unused ${rootfs_param}"
 fdt set /chosen xen,dom0-bootargs \"${dom0_bootargs}\"
 

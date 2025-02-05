@@ -9,8 +9,8 @@ rootpartnum=3
 rootdev=mmcblk${devnum}p${rootpartnum}
 
 # RAM locations
-ramaddr_kernel=0x00200000
-ramaddr_dtb=0x00001000
+ramaddr_kernel=@@KERNEL_LOAD_ADDRESS@@
+ramaddr_dtb=@@DEVICETREE_LOAD_ADDRESS@@
 
 echo "Checking for kernel:${kernelname}"
 if test -e ${devtype} ${devnum}:${bootpartnum} ${kernelname}; then

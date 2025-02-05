@@ -5,10 +5,10 @@ SRC_URI += "file://basecamp-xen-boot.cmd"
 inherit xen-launch-config
 
 # Image Load Address for Xen Dom0 boot
-KERNEL_LOAD_ADDRESS ??= "0xE00000"
+XEN_KERNEL_LOAD_ADDRESS ??= "0xE00000"
 XEN_LOAD_ADDRESS ??= "0xBA00000"
-DEVICETREE_LOAD_ADDRESS ??= "0xC000000"
-RAMDISK_LOAD_ADDRESS ??= "0x2600000"
+XEN_DEVICETREE_LOAD_ADDRESS ??= "0xC000000"
+XEN_RAMDISK_LOAD_ADDRESS ??= "0x2600000"
 
 # If dom0-ramdisk is used for Xen boot then set RAMDISK image to cpio.gz
 KERNEL_IMAGETYPE ?= "Image"
