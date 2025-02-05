@@ -334,3 +334,12 @@ SOURCE_MIRROR_URL = "file:///proj/yocto/basecamp/2025.1/Yocto_basecamp_2025.1_la
 SSTATE_MIRRORS = "\
 file://.* file:///proj/yocto/basecamp/2025.1/Yocto_basecamp_2025.1_latest/sstate-cache/PATH \n \
 "
+
+#
+# Enable the image recovery multiconfig and configure it
+BBMULTICONFIG += "xilinx-image-recovery"
+
+IMGRCRY_DEPENDS = ""
+IMGRCRY_MCDEPENDS = "mc::xilinx-image-recovery:image-recovery-tiny-initramfs:do_image_complete"
+IMGRCRY_DEPLOY_DIR = "${TMPDIR}-${MACHINE}-xilinx-image-recovery/deploy/images/${MACHINE}"
+IMGRCRY_IMAGE_NAME = "image-recovery-tiny-initramfs-${MACHINE}.imgrcry"
