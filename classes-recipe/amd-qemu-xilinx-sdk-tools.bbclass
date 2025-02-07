@@ -9,8 +9,11 @@
 
 TOOLCHAIN_HOST_TASK += "\
     nativesdk-qemu \
-    nativesdk-bootgen \
     nativesdk-qemu-xilinx \
     nativesdk-qemu-xilinx-common \
     nativesdk-qemu-xilinx-multiarch-helper \
+    nativesdk-qemu-helper \
+    nativesdk-bootgen \
+    nativesdk-qemu-devicetrees \
+    nativesdk-qemuboot-tool \
 "
