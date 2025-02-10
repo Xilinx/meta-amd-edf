@@ -4,6 +4,8 @@ LICENSE = "MIT"
 PR = "r0"
 
 COMPATIBLE_MACHINE = "^$"
+COMPATIBLE_MACHINE:zynqmp-common = "${MACHINE}"
+COMPATIBLE_MACHINE:zynqmp-mali-common = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-common = "${MACHINE}"
 COMPATIBLE_MACHINE:versal2-common = "${MACHINE}"
 
