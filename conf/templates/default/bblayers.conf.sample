@@ -24,6 +24,7 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-xilinx/meta-xilinx-virtualization \
   ##OEROOT##/../meta-xilinx/meta-xilinx-mali400 \
   ##OEROOT##/../meta-xilinx/meta-microblaze \
+  ##OEROOT##/../meta-xilinx-tsn \
   ##OEROOT##/../meta-xilinx-internal \
   ##OEROOT##/../meta-openamp \
   ##OEROOT##/../meta-basecamp \
