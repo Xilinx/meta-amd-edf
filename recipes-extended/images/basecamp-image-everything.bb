@@ -23,8 +23,6 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     packagegroup-base \
     packagegroup-core-boot \
     packagegroup-opencv \
-    libdrm \
-    libdrm-tests \
     tcpdump \
     wireshark \
     packagegroup-networking-stack \
@@ -39,39 +37,27 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     util-linux \
     cpufrequtils \
     usbutils \
-    i2c-tools \
     smartmontools \
     e2fsprogs \
-    v4l-utils \
-    lmsensors-sensors \
-    lmsensors-libsensors \
-    lmsensors-sensorsdetect \
+    packagegroup-lmsensors \
     packagegroup-xilinx-benchmarks \
+    packagegroup-self-hosted \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization vmsep', 'packagegroup-container', '', d)} \
-    packagegroup-xilinx-audio \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'packagegroup-core-weston', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
-    tcf-agent \
-    mtd-utils \
     bridge-utils \
-    can-utils \
-    pciutils \
-    kernel-modules \
     nfs-utils \
     nfs-utils-client \
-    linux-xlnx-udev-rules \
     ${CORE_IMAGE_EXTRA_INSTALL} \
     fpga-manager-script \
-    htop \
-    iperf3 \
     meson \
     u-boot-tools \
+    u-boot-tools-xlnx \
     ${@'libdfx' if 'xilinx-tools' in d.getVar('BBFILE_COLLECTIONS').split() else ''} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization vmsep', ' docker-compose', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization vmsep', ' packagegroup-container docker-compose', '', d)} \
     ltp \
-    tree \
     ttf-bitstream-vera \
     packagegroup-core-full-cmdline \
     python3-pybind11 \
@@ -80,27 +66,31 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     wolfssl \
     ${VITISAI_DEPENDENCIES} \
     kernel-devsrc \
-    packagegroup-xilinx-gstreamer \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-matchbox', '', d)} \
-    xrt \
     lopper \
     packagegroup-xilinx-jupyter \
     packagegroup-xilinx-ros \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
+    packagegroup-tsn \
     valgrind \
     packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
+    kernel-module-hdmi21 \
+    kernel-module-dp \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
+    "
+#    kernel-module-hdmi
+
+ZYNQMP_COMMON_INSTALL += " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
+    "
+
+ZYNQMP_MALI_COMMON_INSTALL += " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
     "
 
 VERSAL_COMMON_INSTALL += " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     pm-notebooks \
     "
-
-#    kernel-module-hdmi
-
-BASECAMP_IMAGE_COMMON_INSTALL:append:versal-common = " ${VERSAL_COMMON_INSTALL}"
 
 IMAGE_INSTALL = " ${BASECAMP_IMAGE_FULL_INSTALL}"
 

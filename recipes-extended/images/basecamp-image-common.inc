@@ -13,15 +13,23 @@ BASECAMP_IMAGE_COMMON_INSTALL = "\
     libgpiod \
     libgpiod-tools \
     devmem2 \
-    tree \
     kernel-modules \
     mtd-utils \
     fwupd \
+    i2c-tools \
+    pciutils \
+    net-tools \
     "
 
 # Full set of packages for Basecamp images
 BASECAMP_IMAGE_FULL_INSTALL = " \
-    ${AARCH64_COMMON_INSTALL} \
+    tree \
+    libdrm \
+    libdrm-tests \
+    packagegroup-xilinx-audio \
+    packagegroup-xilinx-gstreamer \
+    v4l-utils \
+    yavta \
     ${BASECAMP_IMAGE_COMMON_INSTALL} \
     can-utils \
     container-host-config \
@@ -36,24 +44,10 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     packagegroup-oci \
     systemtap \
     tcf-agent \
-    u-boot-tools-xlnx \
     vim \
     xrt \
     zip \
     "
-
-OPENAMP_COMMON_INSTALL = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' packagegroup-openamp', '', d)} \
-    "
-
-AARCH64_COMMON_INSTALL = "\
-    libdrm \
-    libdrm-tests \
-    packagegroup-xilinx-audio \
-    packagegroup-xilinx-gstreamer \
-    v4l-utils \
-    yavta \
-"
 
 ZYNQMP_COMMON_INSTALL = "\
     "
@@ -66,7 +60,6 @@ ZYNQMP_MALI_COMMON_INSTALL = "\
 # packagegroup-xilinx-x11
 
 VERSAL_COMMON_INSTALL = "\
-    ${OPENAMP_COMMON_INSTALL} \
     "
 
 VERSAL2_COMMON_INSTALL = "\
