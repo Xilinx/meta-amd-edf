@@ -37,13 +37,20 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     dosfstools \
     dtc \
     e2fsprogs-mke2fs \
+    ethtool \
     htop \
+    inetutils-ping \
+    inetutils-tftp \
     iperf3 \
     linux-xlnx-udev-rules \
+    linuxptp \
+    net-tools \
     packagegroup-docker \
     packagegroup-oci \
+    phytool \
     systemtap \
     tcf-agent \
+    util-linux-taskset \
     vim \
     xrt \
     zip \
