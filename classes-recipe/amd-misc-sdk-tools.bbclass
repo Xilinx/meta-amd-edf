@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2024, Advanced Micro Devices, Inc.  All rights reserved.
+# Copyright (C) 2024-2025, Advanced Micro Devices, Inc.  All rights reserved.
 #
 # SPDX-License-Identifier: MIT
 #
@@ -11,4 +11,5 @@ TOOLCHAIN_HOST_TASK += "\
     nativesdk-python3-sqlite3 \
     nativesdk-python3-pyyaml \
     nativesdk-lopper \
+    nativesdk-packagegroup-basecamp-tools \
 "
