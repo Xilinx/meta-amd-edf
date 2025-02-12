@@ -68,6 +68,7 @@ VERSAL_COMMON_INSTALL = "\
 VERSAL2_COMMON_INSTALL = "\
     isp-firmware \
     kernel-module-isp \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'optee', ' optee-client', '', d)} \
     "
 
 BASECAMP_IMAGE_COMMON_INSTALL:append:zynqmp-common = " ${ZYNQMP_COMMON_INSTALL}"
