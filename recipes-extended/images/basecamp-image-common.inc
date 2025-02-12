@@ -50,6 +50,7 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     phytool \
     systemtap \
     tcf-agent \
+    ufs-utils \
     util-linux-taskset \
     vim \
     xrt \
