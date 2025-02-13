@@ -97,6 +97,7 @@ VERSAL_COMMON_INSTALL += " \
 
 VERSAL2_COMMON_INSTALL += " \
     kernel-module-hdmi21 \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'optee', ' optee-os optee-examples optee-test', '', d)} \
     "
 
 IMAGE_INSTALL = " ${BASECAMP_IMAGE_FULL_INSTALL}"
