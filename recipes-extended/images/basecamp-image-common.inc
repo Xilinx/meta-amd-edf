@@ -38,6 +38,7 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     dtc \
     e2fsprogs-mke2fs \
     ethtool \
+    hexedit \
     htop \
     inetutils-ping \
     inetutils-tftp \
