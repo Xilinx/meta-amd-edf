@@ -74,24 +74,26 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
     kernel-module-hdmi21 \
-    kernel-module-dp \
     "
 #    kernel-module-hdmi
 
 ZYNQMP_COMMON_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
+    kernel-module-dp \
     "
 
 ZYNQMP_MALI_COMMON_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
+    kernel-module-dp \
     "
 
 VERSAL_COMMON_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     pm-notebooks \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
+    kernel-module-dp \
     "
 
 IMAGE_INSTALL = " ${BASECAMP_IMAGE_FULL_INSTALL}"
