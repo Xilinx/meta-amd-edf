@@ -1,1 +1,9 @@
 COMPATIBLE_MACHINE:versal = "${MACHINE}"
+
+BOOTFW_VERSION_STRING ?= "basecamp-${MACHINE}-bootfw-v${BASECAMP_VERSION}"
+
+python do_configure() {
+    version_string = d.getVar('BOOTFW_VERSION_STRING')
+    with open(d.expand("${B}/${BOOTBIN_VER_FILE}"), "w") as f:
+        f.write(version_string)
+}
