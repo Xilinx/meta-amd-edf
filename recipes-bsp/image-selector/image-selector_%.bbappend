@@ -9,3 +9,4 @@ do_configure:append () {
 }
 
 IMGSEL_BIF_OPTIONAL_DATA:versal ?= "${IMGSEL_VERSION_FILE},id=0x21;"
+IMGSEL_BIF_OPTIONAL_DATA:versal2 ?= "${IMGSEL_VERSION_FILE},id=0x21;"
