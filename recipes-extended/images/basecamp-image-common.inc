@@ -19,6 +19,7 @@ BASECAMP_IMAGE_COMMON_INSTALL = "\
     i2c-tools \
     pciutils \
     net-tools \
+    bmaptool \
     "
 
 # Full set of packages for Basecamp images
