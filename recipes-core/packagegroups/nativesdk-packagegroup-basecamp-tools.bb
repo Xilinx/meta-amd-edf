@@ -16,7 +16,7 @@ BASECAMP_NATIVESDK_PACKAGES = " \
 	mtools \
 	parted \
 	util-linux \
-	wim \
+	wic \
 	"
 
 RDEPENDS:${PN} = "${BASECAMP_NATIVESDK_PACKAGES}"
