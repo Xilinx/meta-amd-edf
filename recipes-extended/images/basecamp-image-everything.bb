@@ -36,7 +36,6 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     python3-h5py \
     util-linux \
     cpufrequtils \
-    usbutils \
     smartmontools \
     e2fsprogs \
     packagegroup-lmsensors \

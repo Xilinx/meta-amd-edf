@@ -20,6 +20,7 @@ BASECAMP_IMAGE_COMMON_INSTALL = "\
     pciutils \
     net-tools \
     bmaptool \
+    usbutils \
     "
 
 # Full set of packages for Basecamp images
