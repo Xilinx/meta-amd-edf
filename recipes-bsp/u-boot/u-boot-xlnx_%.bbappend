@@ -1,10 +1,24 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend:zynqmp := "${THISDIR}/zynqmp:"
+FILESEXTRAPATHS:prepend:versal := "${THISDIR}/versal:"
 
-SRC_URI:append = " file://basecamp-env-offset.cfg"
+SRC_URI:append:zynqmp = " file://basecamp-env.cfg file://xilinx_basecamp.h"
+SRC_URI:append:versal = " file://basecamp-env.cfg file://xilinx_basecamp.h"
 
 # Generate U-Boot environment binary image
 
 DEPENDS += "u-boot-tools-xlnx-native"
+
+do_unpack:append:zynqmp() {
+    bb.build.exec_func('do_sys_config', d)
+}
+
+do_unpack:append:versal() {
+    bb.build.exec_func('do_sys_config', d)
+}
+
+do_sys_config() {
+    cp ${WORKDIR}/xilinx_basecamp.h ${S}/include/configs/xilinx_basecamp.h
+}
 
 do_compile:append() {
     if [ -n "${UBOOT_INITIAL_ENV}" ]; then
