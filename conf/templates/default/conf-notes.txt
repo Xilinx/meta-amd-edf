@@ -4,15 +4,20 @@
 # 
 ################################################################################
 
-You can now run 'bitbake <target>'
+The following images can be built using the common machines - zynqmp-common,
+zynqmp-mali-common and versal-common:
 
-Common targets are:
-    core-image-minimal
-    core-image-full-cmdline
+    - basecamp-minimal-disk-image
+    - meta-basecamp-app-sdk
+    - container-app-hello-world
+    - container-devtools-basecamp
 
-You can also run generated qemu images with a command like 'runqemu qemux86-64'.
+Example:    MACHINE=versal-common bitbake basecamp-minimal-disk-image
 
-Other commonly useful commands are:
- - 'devtool' and 'recipetool' handle common recipe tasks
- - 'bitbake-layers' handles common layer tasks
- - 'oe-pkgdata-util' handles common target package tasks
+A boot.bin (xilinx-bootbin) can also be generated for the following platforms:
+
+    - zcu104 - zynqmp-zcu104-sdt-full
+    - zcu111 - zynqmp-zcu111-sdt-full
+    - vek280 - versal-vek280-sdt-seg-ospi
+
+Example:    MACHINE=zynqmp-zcu104-sdt-full bitbake xilinx-bootbin
