@@ -18,7 +18,6 @@ BASECAMP_IMAGE_COMMON_INSTALL = "\
     fwupd \
     i2c-tools \
     pciutils \
-    net-tools \
     bmaptool \
     usbutils \
     "
@@ -38,12 +37,9 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     docker-moby-contrib \
     dosfstools \
     dtc \
-    e2fsprogs-mke2fs \
     ethtool \
     hexedit \
     htop \
-    inetutils-ping \
-    inetutils-tftp \
     iperf3 \
     linux-xlnx-udev-rules \
     linuxptp \
@@ -57,7 +53,6 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     util-linux-taskset \
     vim \
     xrt \
-    zip \
     "
 
 ZYNQMP_COMMON_INSTALL = "\
@@ -66,9 +61,6 @@ ZYNQMP_COMMON_INSTALL = "\
 ZYNQMP_MALI_COMMON_INSTALL = "\
     libmali-xlnx \
     "
-# FIXME Temporarily remove x11 and matchbox
-# packagegroup-xilinx-matchbox
-# packagegroup-xilinx-x11
 
 VERSAL_COMMON_INSTALL = "\
     "
