@@ -56,6 +56,7 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     "
 
 ZYNQMP_COMMON_INSTALL = "\
+    zcu111-pl-bram-gpio-fw \
     "
 
 ZYNQMP_MALI_COMMON_INSTALL = "\
