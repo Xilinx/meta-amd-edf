@@ -54,7 +54,6 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     nfs-utils \
     nfs-utils-client \
     ${CORE_IMAGE_EXTRA_INSTALL} \
-    fpga-manager-script \
     meson \
     u-boot-tools \
     u-boot-tools-xlnx \

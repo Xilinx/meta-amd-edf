@@ -20,6 +20,7 @@ BASECAMP_IMAGE_COMMON_INSTALL = "\
     pciutils \
     bmaptool \
     usbutils \
+    fpga-manager-script \
     "
 
 # Full set of packages for Basecamp images
