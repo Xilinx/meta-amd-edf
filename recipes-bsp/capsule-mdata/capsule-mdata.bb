@@ -11,6 +11,7 @@ IMAGE_NAME_SUFFIX = ""
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:versal-vek280-sdt-seg-ospi = "${MACHINE}"
 COMPATIBLE_MACHINE:versal2-vek385-sdt-seg = "${MACHINE}"
+COMPATIBLE_MACHINE:zynqmp-k24-sc-sdt-base = "${MACHINE}"
 
 INHIBIT_DEFAULT_DEPS = "1"
 
