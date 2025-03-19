@@ -60,7 +60,7 @@ ZYNQMP_COMMON_INSTALL = "\
     "
 
 ZYNQMP_MALI_COMMON_INSTALL = "\
-    libmali-xlnx \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     "
 
 VERSAL_COMMON_INSTALL = "\
@@ -69,6 +69,7 @@ VERSAL_COMMON_INSTALL = "\
 VERSAL2_COMMON_INSTALL = "\
     isp-firmware \
     kernel-module-isp \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'optee', ' optee-client', '', d)} \
     "
 
