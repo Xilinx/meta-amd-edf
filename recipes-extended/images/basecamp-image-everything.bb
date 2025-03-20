@@ -72,6 +72,7 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     valgrind \
     packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
+    memtester \
     kernel-module-hdmi21 \
     "
 #    kernel-module-hdmi
