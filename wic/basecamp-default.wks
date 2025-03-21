@@ -14,6 +14,6 @@ part  /boot      --source rootfs  --change-directory=boot  --fixed-size=512M  --
 part  /          --source rootfs  --exclude-path=boot/     --fixed-size=7G    --align 4  --fstype=ext4  --use-label  --label root     --part-name root
 part xen                                                   --fixed-size=5G    --align 4  --fstype=ext4  --use-label  --label xen      --part-name xen
 part ubuntu                                                --fixed-size=12G   --align 4  --fstype=ext4  --use-label  --label ubuntu   --part-name ubuntu
-part storage                                               --fixed-size=4G    --align 4  --fstype=ext4  --use-label  --label storage  --part-name storage
+part storage                                               --fixed-size=4G    --align 4  --fstype=vfat  --use-label  --label storage  --part-name storage
 
 bootloader --ptable gpt
