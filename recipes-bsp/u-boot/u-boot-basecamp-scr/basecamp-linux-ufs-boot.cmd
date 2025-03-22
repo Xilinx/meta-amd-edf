@@ -3,22 +3,25 @@
 # mkimage -c none -A arm -T script -d basecamp-linux-boot.cmd basecamp_linux_ufs_boot.scr
 #
 ################
-kernel_name=@@KERNEL_IMAGETYPE@@
+setenv kernel_name Image
+setenv bootpartnum 2
+setenv rootpartnum 3
 
+# UFS Boot
 setenv devtype scsi
-setenv devnum @@SCSI_BOOTDEV@@
-setenv bootpartnum @@SCSI_BOOTPARTNUM@@
+setenv devnum 0
 
 echo "Checking for kernel:${kernel_name}"
 if test -e ${devtype} ${devnum}:${bootpartnum} ${kernel_name}; then
-	echo "Loading ${kernel_name} at @@KERNEL_LOAD_ADDRESS@@"
-	ext4load ${devtype} ${devnum}:${bootpartnum} @@KERNEL_LOAD_ADDRESS@@ ${kernel_name};
+	echo "Loading ${kernel_name} at ${kernel_addr_r}"
+	ext4load ${devtype} ${devnum}:${bootpartnum} ${kernel_addr_r} ${kernel_name};
 else
 	echo "kernel image ${kernel_name} not found on ${devtype} ${devnum}:${bootpartnum}"
 	exit
 fi
 
+part uuid ${devtype} ${devnum}:${rootpartnum} distro_rootpart_uuid;
 fdt addr $fdtcontroladdr
 fdt get value bootargs /chosen bootargs
-setenv bootargs $bootargs @@KERNEL_ROOT_SCSI@@
-booti @@KERNEL_LOAD_ADDRESS@@ - $fdtcontroladdr
+setenv bootargs $bootargs root=PARTUUID=${distro_rootpart_uuid} rw rootwait;
+booti ${kernel_addr_r} - $fdtcontroladdr
