@@ -15,9 +15,13 @@ inherit image
 # By default wic is not enable in IMAGE_FSTYPES so enable WIC image type support.
 IMAGE_FSTYPES = "wic wic.xz wic.bmap wic.qemu-sd"
 
+IMAGE_FSTYPES:append:versal2 = " wic.ufs wic.ufs.xz wic.ufs.bmap"
+
 # Reset the IMGCLASSES
 IMGCLASSES  = "rootfs_${IMAGE_PKGTYPE} image_types ${IMAGE_CLASSES}"
 IMGCLASSES += "image_types_wic image-types-xilinx-qemu"
+
+IMGCLASSES:append:versal2 = " image_types_ufs"
 
 # Clear everything else
 #TOOLCHAIN_TARGET_TASK = ""
@@ -39,6 +43,12 @@ BC_XEN_IMAGE_ROOTFS_FSTAB[vardepsexclude] = "LAYERBASE_basecamp"
 BC_XEN_GUEST_ROOTFS = "${DEPLOY_DIR_IMAGE}/core-image-minimal${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.cpio.gz"
 
 WICVARS:append = "\
+    WORKDIR \
+    BC_IMAGE_ROOTFS_DIR \
+    BC_XEN_IMAGE_ROOTFS_DIR \
+    "
+
+WICUFSVARS:append = "\
     WORKDIR \
     BC_IMAGE_ROOTFS_DIR \
     BC_XEN_IMAGE_ROOTFS_DIR \
