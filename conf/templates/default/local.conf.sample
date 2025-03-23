@@ -224,11 +224,6 @@ BB_DISKMON_DIRS ??= "\
 #file://.* https://someserver.tld/share/sstate/PATH;downloadfilename=PATH \
 #file://.* file:///some/local/dir/sstate/PATH"
 
-# Uncomment below lines to provide path for custom xsct trim
-#
-EXTERNAL_XSCT_TARBALL = "/proj/yocto/xsct-trim/${XILINX_XSCT_VERSION}_xsct_daily_latest"
-VALIDATE_XSCT_CHECKSUM = '0'
-
 #
 # Yocto Project SState Mirror
 #
