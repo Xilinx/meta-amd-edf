@@ -7,7 +7,7 @@
 # recipes for SDK(populate_sdk task) generation. User can generate the sdk script
 # and install it to use runqemu, qemu-system-* binaries to boot qemu images.
 
-TOOLCHAIN_HOST_TASK += "\
+BASECAMP_QEMU_HOST_TASK = "\
     nativesdk-qemu \
     nativesdk-qemu-xilinx \
     nativesdk-qemu-xilinx-common \
@@ -17,3 +17,7 @@ TOOLCHAIN_HOST_TASK += "\
     nativesdk-qemu-devicetrees \
     nativesdk-qemuboot-tool \
 "
+
+BASECAMP_QEMU_HOST_TASK:sdkmingw32 = ""
+
+TOOLCHAIN_HOST_TASK += "${BASECAMP_QEMU_HOST_TASK}"
