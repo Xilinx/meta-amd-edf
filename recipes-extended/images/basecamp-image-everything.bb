@@ -4,6 +4,10 @@ LICENSE = "MIT"
 inherit core-image
 require basecamp-image-common.inc
 
+# We don't actually need to produce a specific image, we just want to run
+# through all of the dependencies.
+IMAGE_FSTYPES = ""
+
 IMAGE_FEATURES = " \
     ssh-server-openssh \
     hwcodecs \
@@ -104,8 +108,6 @@ VERSAL2_COMMON_INSTALL += " \
 IMAGE_INSTALL = " ${BASECAMP_IMAGE_FULL_INSTALL}"
 
 IMAGE_LINGUAS = " "
-
-IMAGE_FSTYPES:remove = "cpio.gz cpio cpio.bz2"
 
 SDK_RDEPENDS:append:task-populate-sdk-ext = " nativesdk-packagegroup-sdk-host packagegroup-cross-canadian-${MACHINE}"
 
