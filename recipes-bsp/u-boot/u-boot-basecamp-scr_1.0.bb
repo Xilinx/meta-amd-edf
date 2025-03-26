@@ -13,7 +13,7 @@ COMPATIBLE_MACHINE:versal = "versal"
 COMPATIBLE_MACHINE:versal2 = "versal2"
 
 SRC_URI = " \
-    file://basecamp-linux-boot.cmd \
+    file://basecamp-linux-mmc-boot.cmd \
     "
 
 SRC_URI:append:versal2 = " \
@@ -22,23 +22,9 @@ SRC_URI:append:versal2 = " \
 
 include basecamp-xen-boot-env.inc
 
-DEVICETREE_LOAD_ADDRESS_DEFAULT ??= ""
-DEVICETREE_LOAD_ADDRESS_DEFAULT:zynqmp ??= "0x100000"
-DEVICETREE_LOAD_ADDRESS_DEFAULT:versal ??= "0x1000"
-DEVICETREE_LOAD_ADDRESS_DEFAULT:versal2 ??= "0x1000"
-DEVICETREE_LOAD_ADDRESS ??= "${DEVICETREE_LOAD_ADDRESS_DEFAULT}"
-
-KERNEL_LOAD_ADDRESS_DEFAULT ??= ""
-KERNEL_LOAD_ADDRESS_DEFAULT:zynqmp ??= "0x200000"
-KERNEL_LOAD_ADDRESS_DEFAULT:versal ??= "0x200000"
-KERNEL_LOAD_ADDRESS_DEFAULT:versal2 ??= "0x200000"
-KERNEL_LOAD_ADDRESS ??= "${KERNEL_LOAD_ADDRESS_DEFAULT}"
-
 do_compile() {
-    # For basecamp-linux-boot.cmd
-    sed -e 's/@@KERNEL_LOAD_ADDRESS@@/${KERNEL_LOAD_ADDRESS}/' \
-        -e 's/@@DEVICETREE_LOAD_ADDRESS@@/${DEVICETREE_LOAD_ADDRESS}/' \
-        "${WORKDIR}/basecamp-linux-boot.cmd" > "${WORKDIR}/linux-boot.cmd"
+
+	mkimage -A arm -T script -C none -n "Linux Boot script" -d "${WORKDIR}/basecamp-linux-mmc-boot.cmd" boot.scr
 
     # For basecamp-xen-boot.cmd
     sed -e 's/@@KERNEL_IMAGETYPE@@/${KERNEL_IMAGETYPE}/' \
@@ -61,9 +47,7 @@ do_compile() {
         -e 's/@@SDBOOTDEV@@/${SDBOOTDEV}/' \
         "${WORKDIR}/basecamp-xen-boot.cmd" > "${WORKDIR}/xen-boot.cmd"
 
-	mkimage -A arm -T script -C none -n "Linux Boot script" -d "${WORKDIR}/linux-boot.cmd" boot.scr
 	mkimage -A arm -T script -C none -n "Xen Boot script" -d "${WORKDIR}/xen-boot.cmd" xen_boot.scr
-
 }
 
 do_compile:append:versal2() {

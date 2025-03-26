@@ -1,6 +1,6 @@
 # This is a boot script for U-Boot with Linux env for UFS boot mode.
 # Generate basecamp_linux_ufs_boot.scr:
-# mkimage -c none -A arm -T script -d basecamp-linux-boot.cmd basecamp_linux_ufs_boot.scr
+# mkimage -c none -A arm -T script -d basecamp-linux-ufs-boot.cmd basecamp_linux_ufs_boot.scr
 #
 ################
 setenv kernel_name Image
