@@ -61,15 +61,18 @@ ZYNQMP_COMMON_INSTALL = "\
     "
 
 ZYNQMP_MALI_COMMON_INSTALL = "\
+    vcu-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     "
 
 VERSAL_COMMON_INSTALL = "\
+    vdu-ctrlsw \
     "
 
 VERSAL2_COMMON_INSTALL = "\
     isp-firmware \
     kernel-module-isp \
+    vcu2-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'optee', ' optee-client', '', d)} \
     "
