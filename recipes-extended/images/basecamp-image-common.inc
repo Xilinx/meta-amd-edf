@@ -48,6 +48,7 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     packagegroup-docker \
     packagegroup-oci \
     phytool \
+    python3-gpiod \
     systemtap \
     tcf-agent \
     ufs-utils \
