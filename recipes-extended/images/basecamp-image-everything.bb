@@ -81,7 +81,6 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
 #    kernel-module-hdmi
 
 ZYNQMP_COMMON_INSTALL += " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
     "
