@@ -12,6 +12,7 @@ BASECAMP_NATIVESDK_PACKAGES = " \
 	dosfstools \
 	e2fsprogs \
 	e2fsprogs-resize2fs \
+        flashstrip \
 	gptfdisk \
 	mtools \
 	parted \
