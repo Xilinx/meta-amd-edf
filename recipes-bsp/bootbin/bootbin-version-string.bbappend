@@ -1,7 +1,7 @@
 COMPATIBLE_MACHINE:versal = "${MACHINE}"
 COMPATIBLE_MACHINE:versal2 = "${MACHINE}"
 
-BOOTFW_VERSION_STRING ?= "basecamp-${MACHINE}-bootfw-v${BASECAMP_VERSION}"
+BOOTFW_VERSION_STRING ?= "basecamp-${MACHINE}-bootfw-v${DISTRO_VERSION}"
 
 python do_configure() {
     version_string = d.getVar('BOOTFW_VERSION_STRING')
