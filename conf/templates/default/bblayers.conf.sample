@@ -26,7 +26,6 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-xilinx/meta-xilinx-gpu-malig78ae \
   ##OEROOT##/../meta-xilinx/meta-microblaze \
   ##OEROOT##/../meta-xilinx-tsn \
-  ##OEROOT##/../meta-xilinx-internal \
   ##OEROOT##/../meta-openamp \
   ##OEROOT##/../meta-basecamp \
   ##OEROOT##/../meta-kria \
