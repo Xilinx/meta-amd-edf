@@ -243,9 +243,6 @@ BB_DISKMON_DIRS ??= "\
 #
 ###SSTATE_MIRRORS ?= "file://.* http://sstate.yoctoproject.org/all/PATH;downloadfilename=PATH"
 
-# Use optional internal AMD Xilinx gitenterprise support
-include conf/distro/include/xilinx-mirrors.conf
-
 #
 # Qemu configuration
 #
@@ -323,11 +320,12 @@ CONF_VERSION = "2"
 # and other tools running on SDKMACHINE.
 SDK_CLASSES += "amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools"
 
+# Source and Sstate mirror settings
 INHERIT += "own-mirrors"
-SOURCE_MIRROR_URL = "file:///proj/yocto/basecamp/interim/telluride/stable/Yocto_telluride_2025.1_latest/downloads"
+SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/basecamp/rel-${@(d.getVar('XILINX_RELEASE_VERSION') or '').split('.')[0]}/downloads"
 
-SSTATE_MIRRORS = "\
-file://.* file:///proj/yocto/basecamp/interim/telluride/stable/Yocto_telluride_2025.1_latest/sstate-cache/PATH \n \
+SSTATE_MIRRORS = " \
+file://.* https://petalinux.xilinx.com/sswreleases/basecamp/rel-${@(d.getVar('XILINX_RELEASE_VERSION') or '').split('.')[0]}/aarch64/sstate-cache/PATH;downloadfilename=PATH \n \
 "
 
 #
