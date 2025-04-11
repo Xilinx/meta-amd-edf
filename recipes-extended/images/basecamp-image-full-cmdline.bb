@@ -13,10 +13,11 @@ IMAGE_INSTALL = "\
 inherit core-image
 
 SUPPORTED_MACHINES = " \
-    zynqmp-common \
-    zynqmp-mali-common \
-    versal-common \
-    versal2-common \
+    amd-cortexa53-common \
+    amd-cortexa53-mali-common \
+    amd-cortexa72-common \
+    amd-cortexa78-common \
+    amd-cortexa78-mali-common \
     "
 
 python() {

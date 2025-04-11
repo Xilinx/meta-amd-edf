@@ -4,10 +4,11 @@ LICENSE = "MIT"
 PR = "r0"
 
 COMPATIBLE_MACHINE = "^$"
-COMPATIBLE_MACHINE:zynqmp-common = "${MACHINE}"
-COMPATIBLE_MACHINE:zynqmp-mali-common = "${MACHINE}"
-COMPATIBLE_MACHINE:versal-common = "${MACHINE}"
-COMPATIBLE_MACHINE:versal2-common = "${MACHINE}"
+COMPATIBLE_MACHINE:amd-cortexa53-common = "${MACHINE}"
+COMPATIBLE_MACHINE:amd-cortexa53-mali-common = "${MACHINE}"
+COMPATIBLE_MACHINE:amd-cortexa72-common = "${MACHINE}"
+COMPATIBLE_MACHINE:amd-cortexa78-common = "${MACHINE}"
+COMPATIBLE_MACHINE:amd-cortexa78-mali-common = "${MACHINE}"
 COMPATIBLE_MACHINE:kria-zynqmp-generic = "${MACHINE}"
 
 inherit populate_sdk amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools

@@ -58,21 +58,23 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     packagegroup-openamp \
     "
 
-ZYNQMP_COMMON_INSTALL = "\
+AMD_CORTEXA53_COMMON_INSTALL = "\
     zcu111-pl-bram-gpio-fw \
     "
 
-ZYNQMP_MALI_COMMON_INSTALL = "\
+AMD_CORTEXA53_MALI_COMMON_INSTALL = "\
     vcu-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     "
 
-VERSAL_COMMON_INSTALL = "\
+AMD_CORTEXA72_COMMON_INSTALL = "\
     vdu-ctrlsw \
     vek280-pl-bram-uart-gpio-fw \
     "
 
-VERSAL2_COMMON_INSTALL = "\
+AMD_CORTEXA78_COMMON_INSTALL = ""
+
+AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     isp-firmware \
     kernel-module-isp \
     vcu2-ctrlsw \
@@ -80,7 +82,8 @@ VERSAL2_COMMON_INSTALL = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'optee', ' optee-client', '', d)} \
     "
 
-BASECAMP_IMAGE_COMMON_INSTALL:append:zynqmp-common = " ${ZYNQMP_COMMON_INSTALL}"
-BASECAMP_IMAGE_COMMON_INSTALL:append:zynqmp-mali-common = " ${ZYNQMP_MALI_COMMON_INSTALL}"
-BASECAMP_IMAGE_COMMON_INSTALL:append:versal-common = " ${VERSAL_COMMON_INSTALL}"
-BASECAMP_IMAGE_COMMON_INSTALL:append:versal2-common = " ${VERSAL2_COMMON_INSTALL}"
+BASECAMP_IMAGE_COMMON_INSTALL:append:amd-cortexa53-common = " ${AMD_CORTEXA53_COMMON_INSTALL}"
+BASECAMP_IMAGE_COMMON_INSTALL:append:amd-cortexa53-mali-common = " ${AMD_CORTEXA53_MALI_COMMON_INSTALL}"
+BASECAMP_IMAGE_COMMON_INSTALL:append:amd-cortexa72-common = " ${AMD_CORTEXA72_COMMON_INSTALL}"
+BASECAMP_IMAGE_COMMON_INSTALL:append:amd-cortexa78-common = " ${AMD_CORTEXA78_COMMON_INSTALL}"
+BASECAMP_IMAGE_COMMON_INSTALL:append:amd-cortexa78-mali-common = " ${AMD_CORTEXA78_MALI_COMMON_INSTALL}"

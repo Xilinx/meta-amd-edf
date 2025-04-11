@@ -13,7 +13,13 @@ IMAGE_INSTALL = "\
 
 inherit core-image
 
-SUPPORTED_MACHINES = "versal-common versal2-common"
+SUPPORTED_MACHINES = " \
+    amd-cortexa53-common \
+    amd-cortexa53-mali-common \
+    amd-cortexa72-common \
+    amd-cortexa78-common \
+    amd-cortexa78-mali-common \
+    "
 
 python() {
     machine = d.getVar("MACHINE") 

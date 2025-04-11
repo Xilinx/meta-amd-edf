@@ -78,14 +78,14 @@ BASECAMP_IMAGE_FULL_INSTALL += " \
     memtester \
     "
 
-ZYNQMP_COMMON_INSTALL += " \
+AMD_CORTEXA53_COMMON_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
     "
 
-ZYNQMP_MALI_COMMON_INSTALL += " \
+AMD_CORTEXA53_MALI_COMMON_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
@@ -93,7 +93,7 @@ ZYNQMP_MALI_COMMON_INSTALL += " \
     kernel-module-hdmi21 \
     "
 
-VERSAL_COMMON_INSTALL += " \
+AMD_CORTEXA72_COMMON_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     pm-notebooks \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
@@ -102,7 +102,9 @@ VERSAL_COMMON_INSTALL += " \
     kernel-module-hdmi21 \
     "
 
-VERSAL2_COMMON_INSTALL += " \
+AMD_CORTEXA78_COMMON_INSTALL += ""
+
+AMD_CORTEXA78_MALI_COMMON_INSTALL += " \
     kernel-module-hdmi21 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'optee', ' optee-os optee-examples optee-test', '', d)} \
     "
@@ -124,10 +126,11 @@ DEPENDS:append = " \
 "
 
 SUPPORTED_MACHINES = " \
-    zynqmp-common \
-    zynqmp-mali-common \
-    versal-common \
-    versal2-common \
+    amd-cortexa53-common \
+    amd-cortexa53-mali-common \
+    amd-cortexa72-common \
+    amd-cortexa78-common \
+    amd-cortexa78-mali-common \
 "
 
 python() {
