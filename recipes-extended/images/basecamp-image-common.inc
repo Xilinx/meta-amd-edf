@@ -68,6 +68,7 @@ ZYNQMP_MALI_COMMON_INSTALL = "\
 
 VERSAL_COMMON_INSTALL = "\
     vdu-ctrlsw \
+    vek280-pl-bram-uart-gpio-fw \
     "
 
 VERSAL2_COMMON_INSTALL = "\
