@@ -15,13 +15,13 @@ inherit image
 # By default wic is not enable in IMAGE_FSTYPES so enable WIC image type support.
 IMAGE_FSTYPES = "wic wic.xz wic.bmap wic.qemu-sd"
 
-IMAGE_FSTYPES:append:versal2 = " wic.ufs wic.ufs.xz wic.ufs.bmap"
+IMAGE_FSTYPES:append:versal-2ve-2vm = " wic.ufs wic.ufs.xz wic.ufs.bmap"
 
 # Reset the IMGCLASSES
 IMGCLASSES  = "rootfs_${IMAGE_PKGTYPE} image_types ${IMAGE_CLASSES}"
 IMGCLASSES += "image_types_wic image-types-xilinx-qemu"
 
-IMGCLASSES:append:versal2 = " image_types_ufs"
+IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 
 # Clear everything else
 #TOOLCHAIN_TARGET_TASK = ""

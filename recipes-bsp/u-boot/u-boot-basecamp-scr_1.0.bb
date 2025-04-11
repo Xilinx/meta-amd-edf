@@ -10,13 +10,13 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE ?= "^$"
 COMPATIBLE_MACHINE:zynqmp = "zynqmp"
 COMPATIBLE_MACHINE:versal = "versal"
-COMPATIBLE_MACHINE:versal2 = "versal2"
+COMPATIBLE_MACHINE:versal-2ve-2vm = "versal-2ve-2vm"
 
 SRC_URI = " \
     file://basecamp-linux-mmc-boot.cmd \
     "
 
-SRC_URI:append:versal2 = " \
+SRC_URI:append:versal-2ve-2vm = " \
     file://basecamp-linux-ufs-boot.cmd \
     "
 
@@ -50,7 +50,7 @@ do_compile() {
 	mkimage -A arm -T script -C none -n "Xen Boot script" -d "${WORKDIR}/xen-boot.cmd" xen_boot.scr
 }
 
-do_compile:append:versal2() {
+do_compile:append:versal-2ve-2vm() {
     mkimage -A arm -T script -C none -n "Linux UFS Boot script" -d "${WORKDIR}/basecamp-linux-ufs-boot.cmd" boot_ufs.scr
 }
 
@@ -60,7 +60,7 @@ do_install() {
 	install -m 0644 xen_boot.scr ${D}/boot
 }
 
-do_install:append:versal2() {
+do_install:append:versal-2ve-2vm() {
 	install -m 0644 boot_ufs.scr ${D}/boot
 }
 
@@ -72,7 +72,7 @@ do_deploy() {
 	install -m 0644 xen_boot.scr ${DEPLOYDIR}
 }
 
-do_deploy:append:versal2() {
+do_deploy:append:versal-2ve-2vm() {
     install -m 0644 boot_ufs.scr ${DEPLOYDIR}
 }
 
