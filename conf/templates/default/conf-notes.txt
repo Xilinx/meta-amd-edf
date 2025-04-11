@@ -4,15 +4,20 @@
 # 
 ################################################################################
 
-The following images can be built using the common machines - zynqmp-common,
-zynqmp-mali-common and versal-common:
+The following common machines:
+    - amd-cortexa53-common
+    - amd-cortexa53-mali-common
+    - amd-cortexa72-common
+    - amd-cortexa78-common
+    - amd-cortexa78-mali-common
 
+Can build the following images:
     - basecamp-minimal-disk-image
     - meta-basecamp-app-sdk
     - container-app-hello-world
     - container-devtools-basecamp
 
-Example:    MACHINE=versal-common bitbake basecamp-minimal-disk-image
+Example:    MACHINE=amd-cortexa72-common bitbake basecamp-minimal-disk-image
 
 A boot.bin (xilinx-bootbin) can also be generated for the following platforms:
 
