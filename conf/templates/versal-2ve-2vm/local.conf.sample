@@ -337,7 +337,7 @@ IMGRCRY_MCDEPENDS = "mc::xilinx-image-recovery:image-recovery-tiny-initramfs:do_
 IMGRCRY_DEPLOY_DIR = "${TMPDIR}-${MACHINE}-xilinx-image-recovery/deploy/images/${MACHINE}"
 IMGRCRY_IMAGE_NAME = "image-recovery-tiny-initramfs-${MACHINE}.imgrcry"
 
-# Temporary workaround to add bootgen for telluride
+# Temporary workaround to add bootgen for versal_2ve_2vm
 BRANCH:pn-bootgen = "xlnx_int_versal_2ve_2vm"
 SRCREV:pn-bootgen = "758ffa4c3213a42cdc8e6e6686106e124e6b4c66"
 
