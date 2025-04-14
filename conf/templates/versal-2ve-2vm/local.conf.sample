@@ -328,6 +328,9 @@ SSTATE_MIRRORS = " \
 file://.* https://petalinux.xilinx.com/sswreleases/basecamp/rel-${@(d.getVar('XILINX_RELEASE_VERSION') or '').split('.')[0]}/aarch64/sstate-cache/PATH;downloadfilename=PATH \n \
 "
 
+# For EA, need to enable the xilinx-mirrors.bbclass for sstate matching
+INHERIT += "xilinx-mirrors"
+
 #
 # Enable the image recovery multiconfig and configure it
 BBMULTICONFIG += "xilinx-image-recovery"
