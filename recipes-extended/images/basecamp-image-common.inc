@@ -55,6 +55,7 @@ BASECAMP_IMAGE_FULL_INSTALL = " \
     util-linux-taskset \
     vim \
     xrt \
+    packagegroup-openamp \
     "
 
 ZYNQMP_COMMON_INSTALL = "\
