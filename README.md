@@ -1,18 +1,18 @@
-# meta-basecamp ⛺
+# meta-amd-edf ⛺
 
-This layer enables Basecamp development metadata for poky, oe, meta-xilinx and
-other layers. 🏔
+This layer enables AMD Embedded Development Framework metadata for poky, oe, 
+meta-xilinx andother layers. 🏔
 
 ## Maintainers, Mailing list, Patches
 
 Please send any patches, pull requests, comments or questions for this layer to
 the [meta-xilinx mailing list](https://lists.yoctoproject.org/g/meta-xilinx)
-with ['meta-basecamp'] in the subject:
+with ['meta-amd-edf'] in the subject:
 
 	meta-xilinx@lists.yoctoproject.org
 
 When sending patches, please make sure the email subject line includes
-`[meta-basecamp][<BRANCH_NAME>][PATCH]` and cc'ing the maintainers.
+`[meta-amd-edf][<BRANCH_NAME>][PATCH]` and cc'ing the maintainers.
 
 For more details follow the Yocto Project community patch submission guidelines,
 as described in:
@@ -27,10 +27,10 @@ https://docs.yoctoproject.org/dev/contributor-guide/submit-changes.html#
 > body as appropriate.
 
 **Syntax:**
-`git format-patch -s --subject-prefix="meta-basecamp][<BRANCH_NAME>][PATCH" -1`
+`git format-patch -s --subject-prefix="meta-amd-edf][<BRANCH_NAME>][PATCH" -1`
 
 **Example:**
-`git format-patch -s --subject-prefix="meta-basecamp][scarthgap][PATCH" -1`
+`git format-patch -s --subject-prefix="meta-amd-edf][scarthgap][PATCH" -1`
 
 **Maintainers:**
 

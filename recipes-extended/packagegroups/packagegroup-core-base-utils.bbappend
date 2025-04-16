@@ -1,1 +1,1 @@
-RDEPENDS:${PN}:remove:basecamp = "dhcpcd"
+RDEPENDS:${PN}:remove:amd-edf = "dhcpcd"

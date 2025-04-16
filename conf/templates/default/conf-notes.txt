@@ -1,6 +1,6 @@
 ################################################################################
 # 
-#  Basecamp configuration 
+#  AMD Embedded Development Framework configuration 
 # 
 ################################################################################
 
@@ -12,12 +12,12 @@ The following common machines:
     - amd-cortexa78-mali-common
 
 Can build the following images:
-    - basecamp-minimal-disk-image
-    - meta-basecamp-app-sdk
+    - edf-minimal-disk-image
+    - meta-edf-app-sdk
     - container-app-hello-world
-    - container-devtools-basecamp
+    - container-devtools-edf
 
-Example:    MACHINE=amd-cortexa72-common bitbake basecamp-minimal-disk-image
+Example:    MACHINE=amd-cortexa72-common bitbake edf-minimal-disk-image
 
 A boot.bin (xilinx-bootbin) can also be generated for the following platforms:
 

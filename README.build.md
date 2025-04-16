@@ -1,6 +1,6 @@
 # Build Instructions
 
-This section describes how to get your build host ready to work with meta-basecamp
+This section describes how to get your build host ready to work with meta-amd-edf
 layers.
 
 The following instructions require OE-Core meta and BitBake. Poky provides these
@@ -40,7 +40,7 @@ components, however they can be acquired separately.
 
     * Clone the Yocto meta layer source using yocto manifest as show below.
     ```
-    $ repo init -u https://gitenterprise.xilinx.com/Yocto/meta-basecamp.git -b <release_version> -m manifests/default.xml
+    $ repo init -u https://gitenterprise.xilinx.com/Yocto/meta-amd-edf.git -b <release_version> -m manifests/default.xml
     ```
     A successful initialization will end with a message stating that Repo is
     initialized in your working directory. Your directory should now contain a
@@ -60,19 +60,19 @@ $ repo sync
 $ repo start <branch_name> --all
 ```
 
-5. Initialize a build environment by sourcing the `basecamp-init-build-env` script.
+5. Initialize a build environment by sourcing the `edf-init-build-env` script.
 ```
-$ source basecamp-init-build-env
+$ source edf-init-build-env
 ```
 > **Note:** This expects you are using the repo configuration from earlier steps.
 > This script is simply automating the Yocto Project workflow steps.
 ```
-$ export TEMPLATECONF=./<absolute-path-to-layer>/meta-basecamp/conf/templates/default
+$ export TEMPLATECONF=./<absolute-path-to-layer>/meta-amd-edf/conf/templates/default
 $ source ./<path-to-layer>/poky/oe-init-build-env
 ```
 
 6. Once environment is initialized `bblayers.conf` add `local.conf` are set from
-   meta-basecamp internal templates.
+   meta-amd-edf templates.
 
 7. Set hardware `MACHINE` configuration variable in build/conf/local.conf
    file for a specific target which can boot and run the in the board or QEMU.

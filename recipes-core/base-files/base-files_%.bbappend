@@ -1,3 +1,3 @@
-BASECAMP_INC = ""
-BASECAMP_INC:basecamp = "base-files-basecamp.inc"
-require ${BASECAMP_INC}
+AMD-EDF_INC = ""
+AMD-EDF_INC:amd-edf = "base-files-edf.inc"
+require ${AMD-EDF_INC}

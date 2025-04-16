@@ -5,8 +5,8 @@
 
   <project remote="xilinx"    revision="2025.1"      name="poky"                     path="sources/poky"/>
   <project remote="xilinx"    revision="2025.1"      name="meta-xilinx"              path="sources/meta-xilinx"	sync-s="true"/>
-  <project remote="xilinx"    revision="2025.1"      name="meta-basecamp"            path="sources/meta-basecamp">
-    <copyfile src="scripts/basecamp-init-build-env" dest="basecamp-init-build-env"/>
+  <project remote="xilinx"    revision="2025.1"      name="meta-amd-edf"             path="sources/meta-amd-edf">
+    <copyfile src="scripts/edf-init-build-env" dest="edf-init-build-env"/>
   </project>
   <project remote="xilinx"    revision="2025.1"      name="meta-virtualization"      path="sources/meta-virtualization"/>
   <project remote="xilinx"    revision="2025.1"      name="meta-openembedded"        path="sources/meta-openembedded"/>

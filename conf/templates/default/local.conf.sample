@@ -87,7 +87,7 @@ MACHINE ??= "zynqmp-zcu104-sdt-full"
 # Ultimately when creating custom policy, people will likely end up subclassing 
 # these defaults.
 #
-DISTRO ?= "basecamp"
+DISTRO ?= "amd-edf"
 # As an example of a subclass there is a "bleeding" edge policy configuration
 # where many versions are set to the absolute latest code from the upstream 
 # source control systems. This is just mentioned here as an example, its not
@@ -318,10 +318,10 @@ SDK_CLASSES += "amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools"
 
 # Source and Sstate mirror settings
 INHERIT += "own-mirrors"
-SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/basecamp/rel-${@(d.getVar('XILINX_RELEASE_VERSION') or '').split('.')[0]}/downloads"
+SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/amd-edf/rel-${@(d.getVar('XILINX_RELEASE_VERSION') or '').split('.')[0]}/downloads"
 
 SSTATE_MIRRORS = " \
-file://.* https://petalinux.xilinx.com/sswreleases/basecamp/rel-${@(d.getVar('XILINX_RELEASE_VERSION') or '').split('.')[0]}/aarch64/sstate-cache/PATH;downloadfilename=PATH \n \
+file://.* https://petalinux.xilinx.com/sswreleases/amd-edf/rel-${@(d.getVar('XILINX_RELEASE_VERSION') or '').split('.')[0]}/aarch64/sstate-cache/PATH;downloadfilename=PATH \n \
 "
 
 # For EA, need to enable the xilinx-mirrors.bbclass for sstate matching

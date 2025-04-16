@@ -1,5 +1,5 @@
 IMGSEL_VERSION ?= "${DISTRO_VERSION}"
-IMGSEL_VERSION_STRING ?= "basecamp-${MACHINE}-imgsel-v${IMGSEL_VERSION}"
+IMGSEL_VERSION_STRING ?= "amd-edf-${MACHINE}-imgsel-v${IMGSEL_VERSION}"
 IMGSEL_VERSION_FILE ?= "${WORKDIR}/${PN}-version.txt"
 
 do_configure:append () {

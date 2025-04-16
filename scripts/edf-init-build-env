@@ -1,0 +1,24 @@
+if [ -n "$BASH_SOURCE" ]; then
+	ROOT=$(readlink -f $(dirname "$BASH_SOURCE"))
+elif [ -n "$ZSH_NAME" ]; then
+	ROOT=$(readlink -f $(dirname "$0"))
+else
+	ROOT=$(readlink -f ${PWD})
+fi
+
+# Set default template if one is not already in the env or passed
+if [ -z ${TEMPLATECONF} ]; then
+    TEMPLATECONF=$ROOT/sources/meta-amd-edf/conf/templates/default
+fi
+
+# Internal development gen-machine-conf path
+if [ -d $ROOT/sources/meta-xilinx-internal/meta-xilinx-core/gen-machine-conf ]; then
+	PATH=$PATH:$ROOT/sources/meta-xilinx-internal/meta-xilinx-core/gen-machine-conf
+fi
+
+# Public release gen-machine-conf path
+if [ -d $ROOT/sources/meta-xilinx/meta-xilinx-core/gen-machine-conf ]; then
+    PATH=$PATH:$ROOT/sources/meta-xilinx/meta-xilinx-core/gen-machine-conf
+fi
+
+source $ROOT/sources/poky/oe-init-build-env "$@"

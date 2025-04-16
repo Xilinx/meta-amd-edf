@@ -27,7 +27,7 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-xilinx/meta-microblaze \
   ##OEROOT##/../meta-xilinx-tsn \
   ##OEROOT##/../meta-openamp \
-  ##OEROOT##/../meta-basecamp \
+  ##OEROOT##/../meta-amd-edf \
   ##OEROOT##/../meta-kria \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-core \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp \
