@@ -10,6 +10,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE ?= "^$"
 COMPATIBLE_MACHINE:zynqmp = "zynqmp"
 COMPATIBLE_MACHINE:versal = "versal"
+COMPATIBLE_MACHINE:versal-net = "versal-net"
 COMPATIBLE_MACHINE:versal-2ve-2vm = "versal-2ve-2vm"
 
 SRC_URI = " \
