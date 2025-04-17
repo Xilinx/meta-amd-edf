@@ -29,7 +29,7 @@
 # The following are some predefined boards that can be built:
 # MACHINE = "zynqmp-zcu104-sdt-full"
 # MACHINE = "zynqmp-zcu111-sdt-full"
-# MACHINE = "versal-vek280-sdt-seg-ospi"
+# MACHINE = "versal-vek280-sdt-seg"
 #
 # This sets the default machine if no other machine is selected:
 MACHINE ??= "zynqmp-zcu104-sdt-full"
