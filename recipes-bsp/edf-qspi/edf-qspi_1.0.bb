@@ -18,3 +18,5 @@ USER_SCRATCHPAD_OFFSET ?= "0x360_000"
 SPI_SIZE ?= "0x400_0000"
 
 inherit amd-edf-spi-image
+
+COMPATIBLE_MACHINE = "^$"
