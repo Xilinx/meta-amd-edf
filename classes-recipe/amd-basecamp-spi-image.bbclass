@@ -5,7 +5,7 @@
 #
 
 INHIBIT_DEFAULT_DEPS = "1"
-DEPENDS = "virtual/boot-bin capsule-mdata virtual/imgsel virtual/imgrcry"
+DEPENDS = "virtual/boot-bin capsule-mdata virtual/imgsel virtual/imgrcry xz-native"
 
 inherit deploy image-artifact-names
 IMAGE_NAME_SUFFIX = ""
@@ -25,6 +25,10 @@ IMAGE_A_OFFSET ?= "0x158_0000"
 IMAGE_B_OFFSET ?= "0x87C_0000"
 USER_SCRATCHPAD_OFFSET ?= "0xF9E_000"
 SPI_SIZE ?= "0x1000_0000"
+
+# Default xz settings for compressed OSPI
+OSPI_XZ_COMPRESSION_LEVEL ?= "-6"
+OSPI_XZ_INTEGRITY_CHECK ?= "crc32"
 
 # The file comes from the imgrcvry deployment recipe with a specific name
 IMGRCRY_IMAGE_NAME ??= "image-recovery-${MACHINE}"
@@ -128,9 +132,15 @@ python do_compile() {
 
 }
 
+do_compress () {
+    xz -f -k -c ${OSPI_XZ_COMPRESSION_LEVEL} ${XZ_DEFAULTS} --check=${OSPI_XZ_INTEGRITY_CHECK} ${B}/${IMAGE_NAME}.bin > ${B}/${IMAGE_NAME}.bin.xz
+}
+
+addtask compress after do_compile
+
 do_deploy () {
     install -Dm 644 ${B}/${IMAGE_NAME}.bin ${DEPLOYDIR}/${IMAGE_NAME}.bin
     ln -s ${IMAGE_NAME}.bin ${DEPLOYDIR}/${IMAGE_LINK_NAME}.bin
 }
 
-addtask deploy after do_compile
+addtask deploy after do_compress
