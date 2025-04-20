@@ -16,3 +16,5 @@ OPENAMP_COMMON_INSTALL = ""
 IMGCLASSES += "image-types-xilinx-qemu"
 
 WKS_FILES = "edf-disk-single-rootfs.wks"
+
+do_rootfs[prefuncs] += "edf_check_rootfs"

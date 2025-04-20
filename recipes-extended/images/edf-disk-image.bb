@@ -62,28 +62,13 @@ DEPENDS += " \
 
 WKS_FILES = "edf-disk-multi-rootfs.wks"
 
-SUPPORTED_MACHINES = " \
-    amd-cortexa53-common \
-    amd-cortexa53-mali-common \
-    amd-cortexa72-common \
-    amd-cortexa78-common \
-    amd-cortexa78-mali-common \
-"
-
-python() {
-    machine = d.getVar("MACHINE")
-    supported = d.getVar("SUPPORTED_MACHINES").split()
-
-    if machine not in supported:
-        bb.warn("This image is not supported on %s, only machine(s) %s are supported." % (machine, supported))
-}
-
 do_rootfs[depends] += " \
     core-image-minimal:do_build \
     edf-image-full-cmdline:do_build \
     edf-xen-image-full-cmdline:do_build \
     "
 
+do_rootfs[prefuncs] += "edf_check_rootfs"
 fakeroot do_rootfs() {
     (
      mkdir -p ${BC_IMAGE_ROOTFS_DIR}
