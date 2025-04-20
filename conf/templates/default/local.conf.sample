@@ -335,3 +335,11 @@ IMGRCRY_DEPENDS = ""
 IMGRCRY_MCDEPENDS = "mc::xilinx-image-recovery:image-recovery-tiny-initramfs:do_image_complete"
 IMGRCRY_DEPLOY_DIR = "${TMPDIR}-${MACHINE}-xilinx-image-recovery/deploy/images/${MACHINE}"
 IMGRCRY_IMAGE_NAME = "image-recovery-tiny-initramfs-${MACHINE}.imgrcry"
+
+# Skip warning messages
+SKIP_META_XILINX_STANDALONE_SANITY_CHECK = "1"
+SKIP_META_XILINX_STANDALONE_SDT_SANITY_CHECK = "1"
+SKIP_META_VIRT_SANITY_CHECK = "1"
+SKIP_META_TPM_SANITY_CHECK = "1"
+SKIP_META_XILINX_MALI400_SANITY_CHECK = "1"
+SKIP_META_XILINX_MALIG78AE_SANITY_CHECK = "1"
