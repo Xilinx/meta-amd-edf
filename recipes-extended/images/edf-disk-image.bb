@@ -8,6 +8,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 INHIBIT_DEFAULT_DEPS = "1"
 
+# Clear IMAGE_FEATURES, as they are implemented by the individual partition
+# images and may require the core-image or other image classes
+IMAGE_FEATURES = ""
+
 # Note this recipe is NOT compatible with populate_sdk!  For an SDK, use one of the regulr image recipes.
 
 inherit image
