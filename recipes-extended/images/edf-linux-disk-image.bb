@@ -1,4 +1,4 @@
-DESCRIPTION = "Minimal AMD Embedded Development Framework disk image containing only edf-image-full-cmdline"
+DESCRIPTION = "AMD Embedded Development Framework Linux disk image containing only edf-image-full-cmdline"
 LICENSE ?= "MIT"
 PACKAGES = ""
 

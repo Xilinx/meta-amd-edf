@@ -5,8 +5,8 @@ addhandler edf_check_image_event
 edf_check_image_event[eventmask] = "bb.event.DepTreeGenerated"
 
 AMD-EDF_WARN_IMAGES = "\
-	edf-disk-image \
-	edf-minimal-disk-image \
+	edf-platform-disk-image \
+	edf-linux-disk-image \
 	edf-image-everything \
 	edf-image-full-cmdline \
 	edf-xen-image-full-cmdline \

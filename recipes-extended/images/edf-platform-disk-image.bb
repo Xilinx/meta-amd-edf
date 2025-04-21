@@ -1,4 +1,4 @@
-DESCRIPTION = "Target Disk image for compositing AMD Embedded Development Framework target images rootfs and other binaries to a single wic image"
+DESCRIPTION = "AMD Embedded Development Framework Platform image compositing multiple rootfs and other binaries to a single wic image"
 LICENSE ?= "MIT"
 PACKAGES = ""
 
