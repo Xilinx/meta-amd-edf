@@ -12,12 +12,12 @@ The following common machines:
     - amd-cortexa78-mali-common
 
 Can build the following images:
-    - edf-minimal-disk-image
+    - edf-linux-disk-image
     - meta-edf-app-sdk
     - container-app-hello-world
     - container-devtools-edf
 
-Example:    MACHINE=amd-cortexa72-common bitbake edf-minimal-disk-image
+Example:    MACHINE=amd-cortexa72-common bitbake edf-linux-disk-image
 
 A boot.bin (xilinx-bootbin) can also be generated for the following platforms:
 
