@@ -1,7 +1,7 @@
 # meta-amd-edf ⛺
 
-This layer enables AMD Embedded Development Framework metadata for poky, oe, 
-meta-xilinx andother layers. 🏔
+This layer enables AMD Embedded Development Framework (EDF) metadata for poky, 
+oe, meta-xilinx andother layers. 🏔
 
 ## Maintainers, Mailing list, Patches
 
