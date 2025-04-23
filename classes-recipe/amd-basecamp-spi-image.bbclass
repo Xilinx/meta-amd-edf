@@ -141,6 +141,8 @@ addtask compress after do_compile
 do_deploy () {
     install -Dm 644 ${B}/${IMAGE_NAME}.bin ${DEPLOYDIR}/${IMAGE_NAME}.bin
     ln -s ${IMAGE_NAME}.bin ${DEPLOYDIR}/${IMAGE_LINK_NAME}.bin
+    install -Dm 644 ${B}/${IMAGE_NAME}.bin.xz ${DEPLOYDIR}/${IMAGE_NAME}.bin.xz
+    ln -s ${IMAGE_NAME}.bin.xz ${DEPLOYDIR}/${IMAGE_LINK_NAME}.bin.xz
 }
 
 addtask deploy after do_compress
