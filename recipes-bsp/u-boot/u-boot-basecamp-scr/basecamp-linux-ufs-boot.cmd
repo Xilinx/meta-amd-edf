@@ -24,4 +24,4 @@ part uuid ${devtype} ${devnum}:${rootpartnum} distro_rootpart_uuid;
 fdt addr $fdtcontroladdr
 fdt get value bootargs /chosen bootargs
 setenv bootargs $bootargs root=PARTUUID=${distro_rootpart_uuid} rw rootwait;
-booti ${kernel_addr_r} - $fdtcontroladdr
+bootefi ${kernel_addr_r} - $fdtcontroladdr
