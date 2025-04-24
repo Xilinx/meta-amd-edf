@@ -9,16 +9,13 @@ inherit deploy image-artifact-names
 IMAGE_NAME_SUFFIX = ""
 
 COMPATIBLE_MACHINE = "^$"
-COMPATIBLE_MACHINE:versal-vek280-sdt-seg-ospi = "${MACHINE}"
-COMPATIBLE_MACHINE:versal2-vek385-sdt-seg = "${MACHINE}"
-COMPATIBLE_MACHINE:zynqmp-k24-sc-sdt-base = "${MACHINE}"
 
 INHIBIT_DEFAULT_DEPS = "1"
 
 LOC_GUID ?= "588aced7-2cce-ed11-81cd-d324e93ac223"
 IMAGE_TYPE_GUID_0 ?= "e86660de-5602-ad4f-8238-e406e274c4cf"
-IMG_0_GUID_0 ?= "48054af6-ce2c-11ed-8f66-7bc4531cfe6b"
-IMG_0_GUID_1 ?= "4b819c3e-ce2c-11ed-bec8-23de4c6d2cf2"
+IMG_0_GUID_0 ?= "0b931b7e-b2f6-11ef-8565-eb65d140066b"
+IMG_0_GUID_1 ?= "1243d800-b2f6-11ef-8f4f-8bddc3aa326d"
 
 do_configure() {
     echo -e -n $'\x04' > ${WORKDIR}/${PN}-vendor.txt
