@@ -318,10 +318,10 @@ SDK_CLASSES += "amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools"
 
 # Source and Sstate mirror settings
 INHERIT += "own-mirrors"
-SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/amd-edf/rel-${@(d.getVar('XILINX_RELEASE_VERSION') or '').split('.')[0]}/downloads"
+SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/downloads"
 
 SSTATE_MIRRORS = " \
-file://.* https://petalinux.xilinx.com/sswreleases/amd-edf/rel-${@(d.getVar('XILINX_RELEASE_VERSION') or '').split('.')[0]}/aarch64/sstate-cache/PATH;downloadfilename=PATH \n \
+file://.* https://petalinux.xilinx.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/aarch64/sstate-cache/PATH;downloadfilename=PATH \n \
 "
 
 #
