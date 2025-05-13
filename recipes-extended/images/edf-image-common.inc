@@ -79,7 +79,7 @@ AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     kernel-module-isp \
     vcu2-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'optee', ' optee-client', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-client', '', d)} \
     "
 
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa53-common = " ${AMD_CORTEXA53_COMMON_INSTALL}"

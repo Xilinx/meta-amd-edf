@@ -106,7 +106,7 @@ AMD_CORTEXA78_COMMON_INSTALL += ""
 
 AMD_CORTEXA78_MALI_COMMON_INSTALL += " \
     kernel-module-hdmi21 \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'optee', ' optee-os optee-examples optee-test', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-os optee-examples optee-test', '', d)} \
     "
 
 IMAGE_INSTALL = " ${AMD-EDF_IMAGE_FULL_INSTALL}"
