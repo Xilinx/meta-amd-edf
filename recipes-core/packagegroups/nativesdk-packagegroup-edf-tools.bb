@@ -9,14 +9,7 @@ PACKAGEGROUP_DISABLE_COMPLEMENTARY = "1"
 
 AMD-EDF_NATIVESDK_PACKAGES = " \
 	bmaptool \
-	dosfstools \
-	e2fsprogs \
-	e2fsprogs-resize2fs \
         flashstrip \
-	gptfdisk \
-	mtools \
-	parted \
-	util-linux \
 	wic \
 	"
 
