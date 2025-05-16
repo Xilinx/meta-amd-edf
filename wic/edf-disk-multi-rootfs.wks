@@ -15,9 +15,9 @@
 #         32GB cards and decrease flshing time
 
 part  /boot/efi                                                                                     --fixed-size=512M  --align 4  --fstype=vfat  --use-label  --label efi      --part-name efi
-part  /boot      --source rootfs  --change-directory=boot  --rootfs-dir=${BC_IMAGE_ROOTFS_DIR}      --fixed-size=512M  --align 4  --fstype=ext4  --use-label  --label boot     --part-name boot     --active
-part  /          --source rootfs  --exclude-path=boot/     --rootfs-dir=${BC_IMAGE_ROOTFS_DIR}      --fixed-size=7G    --align 4  --fstype=ext4  --use-label  --label root     --part-name root
-part xen         --source rootfs  --exclude-path=boot/     --rootfs-dir=${BC_XEN_IMAGE_ROOTFS_DIR}  --fixed-size=5G    --align 4  --fstype=ext4  --use-label  --label xen      --part-name xen
+part  /boot      --source rootfs  --change-directory=boot  --rootfs-dir=${EDF_IMAGE_ROOTFS_DIR}      --fixed-size=512M  --align 4  --fstype=ext4  --use-label  --label boot     --part-name boot     --active
+part  /          --source rootfs  --exclude-path=boot/     --rootfs-dir=${EDF_IMAGE_ROOTFS_DIR}      --fixed-size=7G    --align 4  --fstype=ext4  --use-label  --label root     --part-name root
+part xen         --source rootfs  --exclude-path=boot/     --rootfs-dir=${EDF_XEN_IMAGE_ROOTFS_DIR}  --fixed-size=5G    --align 4  --fstype=ext4  --use-label  --label xen      --part-name xen
 part ubuntu                                                                                         --fixed-size=12M   --align 4  --fstype=ext4  --use-label  --label ubuntu   --part-name ubuntu
 part storage                                                                                        --fixed-size=1G    --align 4  --fstype=vfat  --use-label  --label storage  --part-name storage
 
