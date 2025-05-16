@@ -21,6 +21,9 @@ SRC_URI:append:versal-2ve-2vm = " \
     file://edf-linux-ufs-boot.cmd \
     "
 
+# Add Xen EDF variables as addendum.
+EDF_XEN_SCRIPT_SED_ADDENDUM = ""
+
 include edf-xen-boot-env.inc
 
 do_compile() {
@@ -28,24 +31,7 @@ do_compile() {
 	mkimage -A arm -T script -C none -n "Linux Boot script" -d "${WORKDIR}/edf-linux-mmc-boot.cmd" boot.scr
 
     # For edf-xen-boot.cmd
-    sed -e 's/@@KERNEL_IMAGETYPE@@/${KERNEL_IMAGETYPE}/' \
-        -e 's/@@XEN_IMAGETYPE@@/${XEN_IMAGETYPE}/' \
-        -e 's/@@RAMDISK_IMAGETYPE@@/${RAMDISK_IMAGETYPE}/' \
-        -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
-        -e 's/@@DOM0_MEM@@/${DOM0_MEM}/' \
-        -e 's/@@DOM0_MAX_VCPUS@@/${DOM0_MAX_VCPUS}/' \
-        -e 's/@@XEN_LOAD_ADDRESS@@/${XEN_LOAD_ADDRESS}/' \
-        -e 's/@@RAMDISK_LOAD_ADDRESS@@/${RAMDISK_LOAD_ADDRESS}/' \
-        -e 's:@@XEN_KERNEL_LOAD_ADDRESS@@:${XEN_KERNEL_LOAD_ADDRESS}:' \
-        -e 's:@@XEN_DEVICETREE_LOAD_ADDRESS@@:${XEN_DEVICETREE_LOAD_ADDRESS}:' \
-        -e 's:@@XEN_RAMDISK_LOAD_ADDRESS@@:${XEN_RAMDISK_LOAD_ADDRESS}:' \
-        -e 's:@@XEN_CMDLINE_APPEND@@:${XEN_CMDLINE_APPEND}:' \
-        -e 's:@@XEN_SERIAL_CONSOLES@@:${XEN_SERIAL_CONSOLES}:' \
-        -e 's/@@BOOTPARTNUM@@/${BOOTPARTNUM}/' \
-        -e 's/@@ROOTPARTNUM@@/${ROOTPARTNUM}/' \
-        -e 's:@@KERNEL_ROOT_SD@@:${KERNEL_ROOT_SD}:' \
-        -e 's:@@KERNEL_ROOT_RAMDISK@@:${KERNEL_ROOT_RAMDISK}:' \
-        -e 's/@@SDBOOTDEV@@/${SDBOOTDEV}/' \
+    sed ${EDF_XEN_SCRIPT_SED_ADDENDUM} \
         "${WORKDIR}/edf-xen-boot.cmd" > "${WORKDIR}/xen-boot.cmd"
 
 	mkimage -A arm -T script -C none -n "Xen Boot script" -d "${WORKDIR}/xen-boot.cmd" xen_boot.scr

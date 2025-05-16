@@ -13,7 +13,7 @@ XEN_RAMDISK_LOAD_ADDRESS ??= "0x2600000"
 # If dom0-ramdisk is used for Xen boot then set RAMDISK image to cpio.gz
 KERNEL_IMAGETYPE ?= "Image"
 XEN_IMAGETYPE ?= "xen"
-RAMDISK_IMAGETYPE ?= "rootfs.cpio.gz"
+RAMDISK_IMAGETYPE ?= "edf-xen-image-full-cmdline-${MACHINE}.rootfs.cpio.gz"
 
 # Set SDBOOTDEV
 SDBOOTDEV ?= "0"
@@ -47,3 +47,26 @@ XEN_CMDLINE_APPEND ?= ""
 # Specify the max number of vcpus for dom0
 # Example usage: DOM0_MAX_VCPUS = "2" or DOM0_MAX_VCPUS = "2-4"
 DOM0_MAX_VCPUS ?= "1"
+
+# Add Xen EDF variables as addendum.
+EDF_XEN_SCRIPT_SED_ADDENDUM +=   "-e 's/@@KERNEL_IMAGETYPE@@/${KERNEL_IMAGETYPE}/' \
+        -e 's/@@XEN_IMAGETYPE@@/${XEN_IMAGETYPE}/' \
+        -e 's/@@RAMDISK_IMAGETYPE@@/${RAMDISK_IMAGETYPE}/' \
+        -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
+        -e 's/@@DOM0_MEM@@/${DOM0_MEM}/' \
+        -e 's/@@DOM0_MAX_VCPUS@@/${DOM0_MAX_VCPUS}/' \
+        -e 's/@@XEN_LOAD_ADDRESS@@/${XEN_LOAD_ADDRESS}/' \
+        -e 's/@@RAMDISK_LOAD_ADDRESS@@/${RAMDISK_LOAD_ADDRESS}/' \
+        -e 's:@@XEN_KERNEL_LOAD_ADDRESS@@:${XEN_KERNEL_LOAD_ADDRESS}:' \
+        -e 's:@@XEN_DEVICETREE_LOAD_ADDRESS@@:${XEN_DEVICETREE_LOAD_ADDRESS}:' \
+        -e 's:@@XEN_RAMDISK_LOAD_ADDRESS@@:${XEN_RAMDISK_LOAD_ADDRESS}:' \
+        -e 's:@@XEN_CMDLINE_APPEND@@:${XEN_CMDLINE_APPEND}:' \
+        -e 's:@@XEN_SERIAL_CONSOLES@@:${XEN_SERIAL_CONSOLES}:' \
+        -e 's/@@BOOTPARTNUM@@/${BOOTPARTNUM}/' \
+        -e 's/@@ROOTPARTNUM@@/${ROOTPARTNUM}/' \
+        -e 's:@@KERNEL_ROOT_SD@@:${KERNEL_ROOT_SD}:' \
+        -e 's:@@KERNEL_ROOT_RAMDISK@@:${KERNEL_ROOT_RAMDISK}:' \
+        -e 's/@@SDBOOTDEV@@/${SDBOOTDEV}/' \
+        -e "s:@@XEN_DOM0_KERNEL_NODE_UADDR@@:$(echo ${XEN_KERNEL_LOAD_ADDRESS} | sed 's/0x//g'):" \
+        -e "s:@@XEN_DOM0_RAMDISK_NODE_UADDR@@:$(echo ${XEN_RAMDISK_LOAD_ADDRESS} | sed 's/0x//g'):" \
+"

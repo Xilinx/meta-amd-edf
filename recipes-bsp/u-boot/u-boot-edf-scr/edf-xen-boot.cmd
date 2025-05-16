@@ -42,17 +42,17 @@ fdt set /chosen xen,xen-bootargs \"${xen_bootargs}\"
 
 # Check that env $ramdisk_size is 0 or not.
 if test -n ${ramdisk_size}; then
-	fdt mknod /chosen dom0-ramdisk
-	fdt set /chosen/dom0-ramdisk compatible  "xen,linux-initrd" "xen,multiboot-module" "multiboot,module"
-	fdt set /chosen/dom0-ramdisk reg <0x0 @@XEN_RAMDISK_LOAD_ADDRESS@@ 0x0 ${ramdisk_size}>
+	fdt mknod /chosen dom0-ramdisk@@@XEN_DOM0_RAMDISK_NODE_UADDR@@
+	fdt set /chosen/dom0-ramdisk@@@XEN_DOM0_RAMDISK_NODE_UADDR@@ compatible  "xen,linux-initrd" "xen,multiboot-module" "multiboot,module"
+	fdt set /chosen/dom0-ramdisk@@@XEN_DOM0_RAMDISK_NODE_UADDR@@ reg <0x0 @@XEN_RAMDISK_LOAD_ADDRESS@@ 0x0 ${ramdisk_size}>
 	setenv rootfs_param @@KERNEL_ROOT_RAMDISK@@
 else
     setenv rootfs_param @@KERNEL_ROOT_SD@@
 fi
 
-fdt mknod /chosen dom0
-fdt set /chosen/dom0 compatible  "xen,linux-zimage" "xen,multiboot-module" "multiboot,module"
-fdt set /chosen/dom0 reg <0x0 @@XEN_KERNEL_LOAD_ADDRESS@@ 0x0 ${kernel_size}>
+fdt mknod /chosen dom0@@@XEN_DOM0_KERNEL_NODE_UADDR@@
+fdt set /chosen/dom0@@@XEN_DOM0_KERNEL_NODE_UADDR@@ compatible  "xen,linux-zimage" "xen,multiboot-module" "multiboot,module"
+fdt set /chosen/dom0@@@XEN_DOM0_KERNEL_NODE_UADDR@@ reg <0x0 @@XEN_KERNEL_LOAD_ADDRESS@@ 0x0 ${kernel_size}>
 setenv dom0_bootargs "console=hvc0 earlycon=xen earlyprintk=xen clk_ignore_unused ${rootfs_param}"
 fdt set /chosen xen,dom0-bootargs \"${dom0_bootargs}\"
 
