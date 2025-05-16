@@ -103,7 +103,7 @@ fakeroot do_rootfs() {
 
     # Copy xen images to /root directory or xen partition
     if [ -f ${EDF_XEN_GUEST_ROOTFS} ]; then
-        install -v -m 0644 ${EDF_XEN_GUEST_ROOTFS} ${EDF_XEN_IMAGE_ROOTFS_DIR}/root/rootfs.cpio.gz
+        install -v -m 0644 ${EDF_XEN_GUEST_ROOTFS} ${EDF_XEN_IMAGE_ROOTFS_DIR}/root/core-image-minimal${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.cpio.gz
     else
         bbfatal "Copying minimal rootfs for xen guest failed"
     fi

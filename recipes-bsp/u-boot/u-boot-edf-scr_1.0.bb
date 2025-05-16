@@ -23,8 +23,9 @@ SRC_URI:append:versal-2ve-2vm = " \
 
 # Add Xen EDF variables as addendum.
 EDF_XEN_SCRIPT_SED_ADDENDUM = ""
+EDF_XEN_DOM0LESS_SCRIPT_SED_ADDENDUM = ""
 
-include edf-xen-boot-env.inc
+include edf-xen-dom0less-boot-env.inc
 
 do_compile() {
 
@@ -34,7 +35,12 @@ do_compile() {
     sed ${EDF_XEN_SCRIPT_SED_ADDENDUM} \
         "${WORKDIR}/edf-xen-boot.cmd" > "${WORKDIR}/xen-boot.cmd"
 
+    # For edf-xen-dom0less-boot.cmd
+    sed ${EDF_XEN_DOM0LESS_SCRIPT_SED_ADDENDUM} \
+        "${WORKDIR}/edf-xen-dom0less-boot.cmd" > "${WORKDIR}/xen-dom0less-boot.cmd"
+
 	mkimage -A arm -T script -C none -n "Xen Boot script" -d "${WORKDIR}/xen-boot.cmd" xen_boot.scr
+	mkimage -A arm -T script -C none -n "Xen Dom0less Boot script" -d "${WORKDIR}/xen-dom0less-boot.cmd" xen_dom0less_boot.scr
 }
 
 do_compile:append:versal-2ve-2vm() {
@@ -45,6 +51,7 @@ do_install() {
 	install -d ${D}/boot
 	install -m 0644 boot.scr ${D}/boot
 	install -m 0644 xen_boot.scr ${D}/boot
+	install -m 0644 xen_dom0less_boot.scr ${D}/boot
 }
 
 do_install:append:versal-2ve-2vm() {
@@ -57,6 +64,7 @@ do_deploy() {
 	install -d ${DEPLOYDIR}
 	install -m 0644 boot.scr ${DEPLOYDIR}
 	install -m 0644 xen_boot.scr ${DEPLOYDIR}
+	install -m 0644 xen_dom0less_boot.scr ${DEPLOYDIR}
 }
 
 do_deploy:append:versal-2ve-2vm() {
