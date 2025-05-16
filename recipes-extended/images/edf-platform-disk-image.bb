@@ -34,28 +34,28 @@ IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 
 # For the fstab we can't use SRC_URI or WORKDIR, because do_fetch is disabled in an image recipe
 # and there is no way to re-enable it
-BC_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/edf-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
-BC_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-edf-image-full-cmdline"
-BC_IMAGE_ROOTFS_FSTAB = "${LAYERBASE_amd-edf}/files/edf-disk-image/edf-image-full-cmdline-fstab"
-BC_IMAGE_ROOTFS_FSTAB[vardepsexclude] = "LAYERBASE_amd-edf"
+EDF_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/edf-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
+EDF_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-edf-image-full-cmdline"
+EDF_IMAGE_ROOTFS_FSTAB = "${LAYERBASE_amd-edf}/files/edf-disk-image/edf-image-full-cmdline-fstab"
+EDF_IMAGE_ROOTFS_FSTAB[vardepsexclude] = "LAYERBASE_amd-edf"
 
-BC_XEN_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/edf-xen-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
-BC_XEN_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-edf-xen-image-full-cmdline"
-BC_XEN_IMAGE_ROOTFS_FSTAB = "${LAYERBASE_amd-edf}/files/edf-disk-image/edf-xen-image-full-cmdline-fstab"
-BC_XEN_IMAGE_ROOTFS_FSTAB[vardepsexclude] = "LAYERBASE_amd-edf"
+EDF_XEN_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/edf-xen-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
+EDF_XEN_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-edf-xen-image-full-cmdline"
+EDF_XEN_IMAGE_ROOTFS_FSTAB = "${LAYERBASE_amd-edf}/files/edf-disk-image/edf-xen-image-full-cmdline-fstab"
+EDF_XEN_IMAGE_ROOTFS_FSTAB[vardepsexclude] = "LAYERBASE_amd-edf"
 
-BC_XEN_GUEST_ROOTFS = "${DEPLOY_DIR_IMAGE}/core-image-minimal${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.cpio.gz"
+EDF_XEN_GUEST_ROOTFS = "${DEPLOY_DIR_IMAGE}/core-image-minimal${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.cpio.gz"
 
 WICVARS:append = "\
     WORKDIR \
-    BC_IMAGE_ROOTFS_DIR \
-    BC_XEN_IMAGE_ROOTFS_DIR \
+    EDF_IMAGE_ROOTFS_DIR \
+    EDF_XEN_IMAGE_ROOTFS_DIR \
     "
 
 WICUFSVARS:append = "\
     WORKDIR \
-    BC_IMAGE_ROOTFS_DIR \
-    BC_XEN_IMAGE_ROOTFS_DIR \
+    EDF_IMAGE_ROOTFS_DIR \
+    EDF_XEN_IMAGE_ROOTFS_DIR \
     "
 
 DEPENDS += " \
@@ -75,38 +75,38 @@ do_rootfs[depends] += " \
 do_rootfs[prefuncs] += "edf_check_rootfs"
 fakeroot do_rootfs() {
     (
-     mkdir -p ${BC_IMAGE_ROOTFS_DIR}
-     cd ${BC_IMAGE_ROOTFS_DIR}
-     tar xvpfSz ${BC_IMAGE_ROOTFS}
+     mkdir -p ${EDF_IMAGE_ROOTFS_DIR}
+     cd ${EDF_IMAGE_ROOTFS_DIR}
+     tar xvpfSz ${EDF_IMAGE_ROOTFS}
 
-     if [ -f ${BC_IMAGE_ROOTFS_FSTAB} ]; then
-        install -m 0644 ${BC_IMAGE_ROOTFS_FSTAB} etc/fstab
+     if [ -f ${EDF_IMAGE_ROOTFS_FSTAB} ]; then
+        install -m 0644 ${EDF_IMAGE_ROOTFS_FSTAB} etc/fstab
      fi
     )
 
     (
-     mkdir -p ${BC_XEN_IMAGE_ROOTFS_DIR}
-     cd ${BC_XEN_IMAGE_ROOTFS_DIR}
-     tar xvpfSz ${BC_XEN_IMAGE_ROOTFS}
+     mkdir -p ${EDF_XEN_IMAGE_ROOTFS_DIR}
+     cd ${EDF_XEN_IMAGE_ROOTFS_DIR}
+     tar xvpfSz ${EDF_XEN_IMAGE_ROOTFS}
 
-     if [ -f ${BC_XEN_IMAGE_ROOTFS_FSTAB} ]; then
-        install -m 0644 ${BC_XEN_IMAGE_ROOTFS_FSTAB} etc/fstab
+     if [ -f ${EDF_XEN_IMAGE_ROOTFS_FSTAB} ]; then
+        install -m 0644 ${EDF_XEN_IMAGE_ROOTFS_FSTAB} etc/fstab
      fi
     )
 
     # Copy xen kernel images to /boot directory
-    if [ -f ${BC_XEN_IMAGE_ROOTFS_DIR}/boot/xen ]; then
-        (cd ${BC_XEN_IMAGE_ROOTFS_DIR}/boot && find xen* -print0 | cpio --verbose --null -pdlu ${BC_IMAGE_ROOTFS_DIR}/boot/)
+    if [ -f ${EDF_XEN_IMAGE_ROOTFS_DIR}/boot/xen ]; then
+        (cd ${EDF_XEN_IMAGE_ROOTFS_DIR}/boot && find xen* -print0 | cpio --verbose --null -pdlu ${EDF_IMAGE_ROOTFS_DIR}/boot/)
     else
-        bbfatal "Copying Xen files failed from location: ${BC_XEN_IMAGE_ROOTFS_DIR}boot/"
+        bbfatal "Copying Xen files failed from location: ${EDF_XEN_IMAGE_ROOTFS_DIR}boot/"
     fi
 
     # Copy xen images to /root directory or xen partition
-    if [ -f ${BC_XEN_GUEST_ROOTFS} ]; then
-        install -v -m 0644 ${BC_XEN_GUEST_ROOTFS} ${BC_XEN_IMAGE_ROOTFS_DIR}/root/rootfs.cpio.gz
+    if [ -f ${EDF_XEN_GUEST_ROOTFS} ]; then
+        install -v -m 0644 ${EDF_XEN_GUEST_ROOTFS} ${EDF_XEN_IMAGE_ROOTFS_DIR}/root/rootfs.cpio.gz
     else
         bbfatal "Copying minimal rootfs for xen guest failed"
     fi
 }
 
-do_rootfs[cleandirs] += "${BC_IMAGE_ROOTFS_DIR} ${BC_XEN_IMAGE_ROOTFS_DIR}"
+do_rootfs[cleandirs] += "${EDF_IMAGE_ROOTFS_DIR} ${EDF_XEN_IMAGE_ROOTFS_DIR}"
