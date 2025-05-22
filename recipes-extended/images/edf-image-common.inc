@@ -7,6 +7,9 @@ IMAGE_FSTYPES += "wic wic.xz wic.bmap"
 #### Disable Busybox
 SKIP_RECIPE[busybox] = "Busybox disabled"
 
+# Install license files into the image by default
+IMAGE_FEATURES .= "${@' lic-pkgs' if oe.data.typed_value('LICENSE_CREATE_PACKAGE', d) else ''}"
+
 # Minimal set packages for EDF images
 AMD-EDF_IMAGE_COMMON_INSTALL = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', ' dfx-mgr', '', d)} \
