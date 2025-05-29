@@ -21,4 +21,5 @@ fi
 fdt addr ${fdtcontroladdr}
 fdt get value bootargs /chosen bootargs
 setenv bootargs ${bootargs} root=/dev/mmcblk${devnum}p${rootpartnum} ro rootwait uio_pdrv_genirq.of_id=generic-uio
+bootefi ${kernel_addr_r} - ${fdtcontroladdr}
 booti ${kernel_addr_r} - ${fdtcontroladdr}
