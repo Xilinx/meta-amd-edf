@@ -24,8 +24,15 @@ UBOOT_ENV_OFFSET ?= "0x154_0000"
 UBOOT_ENV_BACKUP_OFFSET ?= "0x156_0000"
 IMAGE_A_OFFSET ?= "0x158_0000"
 IMAGE_B_OFFSET ?= "0x87C_0000"
-USER_SCRATCHPAD_OFFSET ?= "0xFA0_000"
+USER_SCRATCHPAD_OFFSET ?= "0xFA0_0000"
 SPI_SIZE ?= "0x1000_0000"
+
+# Calculate size available per component based on default layout
+IMAGE_SELECTOR_MAX_SIZE ?= "${@int(d.getVar('IMAGE_SELECTOR_BACKUP_OFFSET') or '0', 0) - int(d.getVar('IMAGE_SELECTOR_OFFSET') or '0', 0)}"
+IMAGE_RECOVERY_MAX_SIZE ?= "${@int(d.getVar('IMAGE_RECOVERY_META_OFFSET') or '0', 0) - int(d.getVar('IMAGE_RECOVERY_OFFSET') or '0', 0)}"
+CAPSULE_METADATA_MAX_SIZE ?= "${@int(d.getVar('CAPSULE_METADATA_BACKUP_OFFSET') or '0', 0) - int(d.getVar('CAPSULE_METADATA_OFFSET') or '0', 0)}"
+UBOOT_ENV_MAX_SIZE ?= "${@int(d.getVar('UBOOT_ENV_BACKUP_OFFSET') or '0', 0) - int(d.getVar('UBOOT_ENV_OFFSET') or '0', 0)}"
+IMAGE_MAX_SIZE ?= "${@int(d.getVar('USER_SCRATCHPAD_OFFSET') or '0', 0) - int(d.getVar('IMAGE_B_OFFSET') or '0', 0)}"
 
 # Default gzip settings for compressed OSPI
 OSPI_GZIP_CMD ?= "gzip -f -9 -n -c --rsyncable"
@@ -57,6 +64,12 @@ python do_compile() {
     image_b_offset = int(d.getVar("IMAGE_B_OFFSET") or '0', 0)
     spi_size = int(d.getVar("SPI_SIZE") or '0', 0)
 
+    image_selector_max_size = int(d.getVar("IMAGE_SELECTOR_MAX_SIZE") or '0', 0)
+    image_recovery_max_size = int(d.getVar("IMAGE_RECOVERY_MAX_SIZE") or '0', 0)
+    capsule_metadata_max_size = int(d.getVar("CAPSULE_METADATA_MAX_SIZE") or '0', 0)
+    uboot_env_max_size = int(d.getVar("UBOOT_ENV_MAX_SIZE") or '0', 0)
+    image_max_size = int(d.getVar("IMAGE_MAX_SIZE") or '0', 0)
+
     spi_data = io.BytesIO()
     spi_data.write(b'\xFF' * spi_size)
 
@@ -67,6 +80,10 @@ python do_compile() {
             imgsel_data = f.read(-1)
     except OSError as err:
         bb.fatal("Unable to open image selector file: " + str(err))
+
+    image_selector_size = sys.getsizeof(imgsel_data)
+    if (image_selector_size > image_selector_max_size):
+        bb.fatal("Image Selector file size (%s) exceeds allocated space (%s)" % (image_selector_size, image_selector_max_size))
 
     spi_data.seek(image_selector_offset)
     spi_data.write(imgsel_data)
@@ -81,6 +98,10 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open image recovery file: " + str(err))
 
+    image_recovery_size = sys.getsizeof(imgrcvry_data)
+    if (image_recovery_size > image_recovery_max_size):
+        bb.fatal("Image Recovery file size (%s) exceeds allocated space (%s)" % (image_recovery_size, image_recovery_max_size))
+
     spi_data.seek(image_recovery_offset)
     spi_data.write(imgrcvry_data)
 
@@ -91,6 +112,10 @@ python do_compile() {
             capsule_mdata = f.read(-1)
     except OSError as err:
         bb.fatal("Unable to open capsule metadata file: " + str(err))
+
+    capsule_metadata_size = sys.getsizeof(capsule_mdata)
+    if (capsule_metadata_size > capsule_metadata_max_size):
+        bb.fatal("Capsule metadata file size (%s) exceeds allocated space (%s)" % (capsule_metadata_size, capsule_metadata_max_size))
 
     spi_data.seek(capsule_metadata_offset)
     spi_data.write(capsule_mdata)
@@ -105,12 +130,16 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open UBoot env file: " + str(err))
 
+    uboot_env_size = sys.getsizeof(uboot_env)
+    if (uboot_env_size > uboot_env_max_size):
+        bb.fatal("U-Boot file size (%s) exceeds allocated space (%s)" % (uboot_env_size, uboot_env_max_size))
+
     spi_data.seek(uboot_env_offset)
     spi_data.write(uboot_env)
     spi_data.seek(uboot_env_backup_offset)
     spi_data.write(uboot_env)
 
-    # Image A/B
+    # Image A/B - boot.bin
 
     try:
         with open(d.getVar("DEPLOY_DIR_IMAGE")+"/boot.bin", "rb") as f:
@@ -118,7 +147,9 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open boot.bin file: " + str(err))
 
-    #FIXME add a size check here - 116736KB max on 2GB
+    bootbin_size = sys.getsizeof(bootbin)
+    if (bootbin_size > image_max_size):
+        bb.fatal("boot.bin file size (%s) exceeds allocated space (%s)" % (bootbin_size, image_max_size))
 
     spi_data.seek(image_a_offset)
     spi_data.write(bootbin)
