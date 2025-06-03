@@ -1,4 +1,4 @@
-DESCRIPTION = "AMD Embedded Development Framework Linux disk image containing only edf-image-full-cmdline"
+DESCRIPTION = "AMD Embedded Development Framework Linux image compositing rootfs and other binaries to a single wic image"
 LICENSE ?= "MIT"
 PACKAGES = ""
 
@@ -8,13 +8,68 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 INHIBIT_DEFAULT_DEPS = "1"
 
-require edf-image-full-cmdline.bb
+# Clear IMAGE_FEATURES, as they are implemented by the individual partition
+# images and may require the core-image or other image classes
+IMAGE_FEATURES = ""
 
-# For the minimal image we do not want OpenAMP, even if the distro feature is enabled
-OPENAMP_COMMON_INSTALL = ""
+# Note this recipe is NOT compatible with populate_sdk!  For an SDK, use one of the regulr image recipes.
 
-IMGCLASSES += "image-types-xilinx-qemu"
+inherit image
+
+# By default wic is not enable in IMAGE_FSTYPES so enable WIC image type support.
+IMAGE_FSTYPES = "wic wic.xz wic.bmap wic.qemu-sd"
+
+IMAGE_FSTYPES:append:versal-2ve-2vm = " wic.ufs wic.ufs.xz wic.ufs.bmap"
+
+# Reset the IMGCLASSES
+IMGCLASSES  = "rootfs_${IMAGE_PKGTYPE} image_types ${IMAGE_CLASSES}"
+IMGCLASSES += "image_types_wic image-types-xilinx-qemu"
+
+IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
+
+# Clear everything else
+#TOOLCHAIN_TARGET_TASK = ""
+#TOOLCHAIN_TARGET_TASK_ATTEMPTONLY = ""
+#POPULATE_SDK_POST_TARGET_COMMAND = ""
+
+# For the fstab we can't use SRC_URI or WORKDIR, because do_fetch is disabled in an image recipe
+# and there is no way to re-enable it
+EDF_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/edf-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
+EDF_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-edf-image-full-cmdline"
+EDF_IMAGE_ROOTFS_FSTAB = "${LAYERBASE_amd-edf}/files/edf-disk-image/edf-image-full-cmdline-fstab"
+EDF_IMAGE_ROOTFS_FSTAB[vardepsexclude] = "LAYERBASE_amd-edf"
+
+WICVARS:append = "\
+    WORKDIR \
+    EDF_IMAGE_ROOTFS_DIR \
+    "
+
+WICUFSVARS:append = "\
+    WORKDIR \
+    EDF_IMAGE_ROOTFS_DIR \
+    "
+
+DEPENDS += " \
+    edf-image-full-cmdline \
+    "
 
 WKS_FILES = "edf-disk-single-rootfs.wks"
 
+do_rootfs[depends] += " \
+    edf-image-full-cmdline:do_build \
+    "
+
 do_rootfs[prefuncs] += "edf_check_rootfs"
+fakeroot do_rootfs() {
+    (
+     mkdir -p ${EDF_IMAGE_ROOTFS_DIR}
+     cd ${EDF_IMAGE_ROOTFS_DIR}
+     tar xvpfSz ${EDF_IMAGE_ROOTFS}
+
+     if [ -f ${EDF_IMAGE_ROOTFS_FSTAB} ]; then
+        install -m 0644 ${EDF_IMAGE_ROOTFS_FSTAB} etc/fstab
+     fi
+    )
+}
+
+do_rootfs[cleandirs] += "${EDF_IMAGE_ROOTFS_DIR}"
