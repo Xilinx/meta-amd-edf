@@ -1,9 +1,11 @@
 COMPATIBLE_MACHINE:zynqmp = "${MACHINE}"
 COMPATIBLE_MACHINE:versal = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-2ve-2vm = "${MACHINE}"
+COMPATIBLE_MACHINE:zynq = "${MACHINE}"
 
 BOOTBIN_VER_MAX_LEN:versal ?= "50"
 BOOTBIN_VER_MAX_LEN:versal-2ve-2vm ?= "60"
+BOOTBIN_VER_MAX_LEN:zynq ?= "50"
 
 AMD-EDF_BOOTBIN_VER ?= "1"
 AMD-EDF_BOOTBIN_VER_FILE ?= "bootbin-version-header.bin"
