@@ -30,6 +30,7 @@
 # MACHINE = "zynqmp-zcu104-sdt-full"
 # MACHINE = "zynqmp-zcu111-sdt-full"
 # MACHINE = "versal-vek280-sdt-seg"
+# MACHINE = "versal-2ve-2vm-vek385-sdt-seg"
 #
 # This sets the default machine if no other machine is selected:
 MACHINE ??= "zynqmp-zcu104-sdt-full"

@@ -24,5 +24,6 @@ A boot.bin (xilinx-bootbin) can also be generated for the following platforms:
     - zcu104 - zynqmp-zcu104-sdt-full
     - zcu111 - zynqmp-zcu111-sdt-full
     - vek280 - versal-vek280-sdt-seg
+    - vek385 - versal-2ve-2vm-vek385-sdt-seg
 
 Example:    MACHINE=zynqmp-zcu104-sdt-full bitbake xilinx-bootbin
