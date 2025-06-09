@@ -84,6 +84,7 @@ AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     vcu2-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-client', '', d)} \
+    vek385-pl-bram-gpio-fw \
     "
 
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa53-common = " ${AMD_CORTEXA53_COMMON_INSTALL}"
