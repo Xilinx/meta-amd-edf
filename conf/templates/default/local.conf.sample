@@ -341,3 +341,7 @@ SKIP_META_VIRT_SANITY_CHECK = "1"
 SKIP_META_TPM_SANITY_CHECK = "1"
 SKIP_META_XILINX_MALI400_SANITY_CHECK = "1"
 SKIP_META_XILINX_MALIG78AE_SANITY_CHECK = "1"
+
+# Use Zephyr SDK toolchain to build application for cortex-r and microblaze-v
+# processor.
+ZEPHYR_TOOLCHAIN_VARIANT = "zephyr"
