@@ -25,6 +25,7 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-xilinx/meta-xilinx-mali400 \
   ##OEROOT##/../meta-xilinx/meta-xilinx-gpu-malig78ae \
   ##OEROOT##/../meta-xilinx/meta-microblaze \
+  ##OEROOT##/../meta-xilinx/meta-amd-zephyr \
   ##OEROOT##/../meta-xilinx-tsn \
   ##OEROOT##/../meta-openamp \
   ##OEROOT##/../meta-amd-edf \
@@ -41,4 +42,6 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-ros/meta-ros2-jazzy \
   ##OEROOT##/../meta-qt5 \
   ##OEROOT##/../meta-vitis \
+  ##OEROOT##/../meta-zephyr/meta-zephyr-core \
+  ##OEROOT##/../meta-zephyr/meta-zephyr-bsp \
 "
