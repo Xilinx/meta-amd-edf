@@ -2,6 +2,10 @@ DESCRIPTION = "A full featured console image for AMD Embedded Development Framew
 
 require edf-image-common.inc
 
+inherit features_check
+
+REQUIRED_DISTRO_FEATURES = "xen"
+
 IMAGE_FEATURES += "ssh-server-openssh package-management"
 
 IMAGE_INSTALL = "\

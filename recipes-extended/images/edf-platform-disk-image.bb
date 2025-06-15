@@ -14,7 +14,10 @@ IMAGE_FEATURES = ""
 
 # Note this recipe is NOT compatible with populate_sdk!  For an SDK, use one of the regulr image recipes.
 
-inherit image
+inherit image features_check
+
+# Unfortuantely this requires Xen, so it doesn't work on all systems
+REQUIRED_DISTRO_FEATURES = "xen"
 
 # By default wic is not enable in IMAGE_FSTYPES so enable WIC image type support.
 IMAGE_FSTYPES = "wic wic.xz wic.bmap wic.qemu-sd"
