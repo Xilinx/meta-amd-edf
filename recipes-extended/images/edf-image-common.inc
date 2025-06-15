@@ -29,16 +29,10 @@ AMD-EDF_IMAGE_COMMON_INSTALL = "\
 # Full set of packages for EDF images
 AMD-EDF_IMAGE_FULL_INSTALL = " \
     tree \
-    libdrm \
-    libdrm-tests \
-    packagegroup-xilinx-audio \
-    packagegroup-xilinx-gstreamer \
-    v4l-utils \
     yavta \
     ${AMD-EDF_IMAGE_COMMON_INSTALL} \
     can-utils \
     container-host-config \
-    docker-moby-contrib \
     dosfstools \
     dtc \
     ethtool \
@@ -48,47 +42,82 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     linux-xlnx-udev-rules \
     linuxptp \
     net-tools \
-    packagegroup-docker \
-    packagegroup-oci \
     phytool \
     python3-gpiod \
-    systemtap \
     tcf-agent \
     ufs-utils \
     util-linux-taskset \
     vim \
-    xrt \
-    packagegroup-openamp \
     "
 
+# COMMON is for anything in that family with no board specific items
+# w/o COMMON is for _JUST_ that type
+AMD_RISCV32_COMMON_INSTALL = ""
+AMD_RISCV32_INSTALL = ""
+
+AMD_RISCV64_COMMON_INSTALL = ""
+AMD_RISCV64_INSTALL = ""
+
+AMD_CORTEXA9_COMMON_INSTALL = ""
+AMD_CORTEXA9_INSTALL = ""
+
 AMD_CORTEXA53_COMMON_INSTALL = "\
+    docker-moby-contrib \
+    libdrm \
+    libdrm-tests \
+    packagegroup-xilinx-audio \
+    packagegroup-xilinx-gstreamer \
+    packagegroup-openamp \
+    packagegroup-oci \
+    packagegroup-docker \
+    systemtap \
+    v4l-utils \
+    xrt \
+    "
+
+AMD_CORTEXA53_INSTALL = "\
     zcu111-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA53_MALI_COMMON_INSTALL = "\
+    ${AMD_CORTEXA53_COMMON_INSTALL} \
     vcu-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     "
 
+AMD_CORTEXA53_MALI_INSTALL = "\
+    "
+
 AMD_CORTEXA72_COMMON_INSTALL = "\
     vdu-ctrlsw \
+    "
+
+AMD_CORTEXA72_INSTALL = "\
     vek280-pl-bram-uart-gpio-fw \
     vck190-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA78_COMMON_INSTALL = ""
+AMD_CORTEXA78_INSTALL = ""
 
 AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
+    ${AMD_CORTEXA78_COMMON_INSTALL} \
     isp-firmware \
     kernel-module-isp \
     vcu2-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-client', '', d)} \
+    "
+
+AMD_CORTEXA78_MALI_INSTALL = "\
     vek385-pl-bram-gpio-fw \
     "
 
-AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa53-common = " ${AMD_CORTEXA53_COMMON_INSTALL}"
-AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa53-mali-common = " ${AMD_CORTEXA53_MALI_COMMON_INSTALL}"
-AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa72-common = " ${AMD_CORTEXA72_COMMON_INSTALL}"
-AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa78-common = " ${AMD_CORTEXA78_COMMON_INSTALL}"
-AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa78-mali-common = " ${AMD_CORTEXA78_MALI_COMMON_INSTALL}"
+AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_COMMON_INSTALL} ${AMD_RISCV32_INSTALL}"
+AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv64imafdc-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV64_COMMON_INSTALL} ${AMD_RISCV64_INSTALL}"
+AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa9thf-neon-common = " ${AMD_CORTEXA9_COMMON_INSTALL} ${AMD_CORTEXA9_INSTALL}"
+AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa53-common = " ${AMD_CORTEXA53_COMMON_INSTALL} ${AMD_CORTEXA53_INSTALL}"
+AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa53-mali-common = " ${AMD_CORTEXA53_MALI_COMMON_INSTALL} ${AMD_CORTEXA53_MALI_INSTALL}"
+AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa72-common = " ${AMD_CORTEXA72_COMMON_INSTALL} ${AMD_CORTEXA72_INSTALL}"
+AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa78-common = " ${AMD_CORTEXA78_COMMON_INSTALL} ${AMD_CORTEXA78_INSTALL}"
+AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa78-mali-common = " ${AMD_CORTEXA78_MALI_COMMON_INSTALL} ${AMD_CORTEXA78_MALI_INSTALL}"

@@ -55,6 +55,10 @@ DEPENDS += " \
 
 WKS_FILES = "edf-disk-single-rootfs.wks"
 
+# Configure QEMU boot
+QB_KERNEL_ROOT:riscv32 = "/dev/vda3"
+QB_KERNEL_ROOT:riscv64 = "/dev/vda3"
+
 do_rootfs[depends] += " \
     edf-image-full-cmdline:do_build \
     "

@@ -12,7 +12,26 @@ AMD-EDF_WARN_IMAGES = "\
 	edf-xen-image-full-cmdline \
 "
 
+AMD-EDF_IMAGE_SUPPORTED_MACHINES:pn-edf-platform-disk-image = "\
+	amd-cortexa53-common \
+	amd-cortexa53-mali-common \
+	amd-cortexa72-common \
+	amd-cortexa78-common \
+	amd-cortexa78-mali-common \
+"
+
+AMD-EDF_IMAGE_SUPPORTED_MACHINES:pn-edf-xen-image-full-cmdline = "\
+	amd-cortexa53-common \
+	amd-cortexa53-mali-common \
+	amd-cortexa72-common \
+	amd-cortexa78-common \
+	amd-cortexa78-mali-common \
+"
+
 AMD-EDF_IMAGE_SUPPORTED_MACHINES = "\
+	amd-rv32imac-zicbom-zba-zbb-zbs-common \
+	amd-rv64imafdc-zicbom-zba-zbb-zbs-common \
+	amd-cortexa9thf-neon-common \
 	amd-cortexa53-common \
 	amd-cortexa53-mali-common \
 	amd-cortexa72-common \

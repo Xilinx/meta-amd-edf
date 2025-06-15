@@ -18,6 +18,14 @@ IMAGE_FEATURES = " \
     tools-sdk \
     tools-debug \
     tools-profile \
+    "
+
+# The following does not current work on risc-v due to RUST
+IMAGE_FEATURES:append:arm = " \
+    tools-testapps \
+    "
+
+IMAGE_FEATURES:append:aarch64 = " \
     tools-testapps \
     "
 
@@ -44,10 +52,7 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     e2fsprogs \
     packagegroup-lmsensors \
     packagegroup-xilinx-benchmarks \
-    packagegroup-self-hosted \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'packagegroup-core-weston', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
     bridge-utils \
@@ -66,50 +71,90 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     python3-graphviz \
     bootgen \
     wolfssl \
-    ${VITISAI_DEPENDENCIES} \
     kernel-devsrc \
     lopper \
-    packagegroup-xilinx-jupyter \
-    packagegroup-xilinx-ros \
-    packagegroup-tsn \
-    valgrind \
-    packagegroup-xilinx-qt \
-    packagegroup-vitis-aiml \
     memtester \
     "
 
-AMD_CORTEXA53_COMMON_INSTALL += " \
+AMD_RISCV32_FULL_INSTALL += " \
+    "
+
+AMD_RISCV64_FULL_INSTALL += " \
+    "
+
+AMD_CORTEXA9_FULL_INSTALL += " \
+    valgrind \
+    "
+
+AMD_CORTEXA53_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
+    ${VITISAI_DEPENDENCIES} \
+    packagegroup-xilinx-ros \
+    packagegroup-xilinx-qt \
+    packagegroup-vitis-aiml \
+    valgrind \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
+    packagegroup-xilinx-jupyter \
+    packagegroup-tsn \
     "
 
-AMD_CORTEXA53_MALI_COMMON_INSTALL += " \
+AMD_CORTEXA53_MALI_FULL_INSTALL += " \
+    ${AMD_CORTEXA53_FULL_INSTALL} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
-    kernel-module-dp \
-    kernel-module-hdmi \
-    kernel-module-hdmi21 \
     "
 
-AMD_CORTEXA72_COMMON_INSTALL += " \
+AMD_CORTEXA72_FULL_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     pm-notebooks \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
+    ${VITISAI_DEPENDENCIES} \
+    packagegroup-xilinx-ros \
+    packagegroup-xilinx-qt \
+    packagegroup-vitis-aiml \
+    valgrind \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
+    packagegroup-xilinx-jupyter \
+    packagegroup-tsn \
     "
 
-AMD_CORTEXA78_COMMON_INSTALL += ""
+AMD_CORTEXA78_FULL_INSTALL += " \
+    ${VITISAI_DEPENDENCIES} \
+    packagegroup-xilinx-ros \
+    packagegroup-xilinx-qt \
+    packagegroup-vitis-aiml \
+    valgrind \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
+    packagegroup-xilinx-jupyter \
+    packagegroup-tsn \
+    "
 
-AMD_CORTEXA78_MALI_COMMON_INSTALL += " \
+AMD_CORTEXA78_MALI_FULL_INSTALL += " \
+    ${AMD_CORTEXA78_FULL_INSTALL} \
     kernel-module-hdmi21 \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-os optee-examples optee-test', '', d)} \
+    ${VITISAI_DEPENDENCIES} \
     "
 
+AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_FULL_INSTALL}"
+AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv64imafdc-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV64_FULL_INSTALL}"
+AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa9thf-neon-common = " ${AMD_CORTEXA9_FULL_INSTALL}"
+AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa53-common = " ${AMD_CORTEXA53_FULL_INSTALL}"
+AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa53-mali-common = " ${AMD_CORTEXA53_MALI_FULL_INSTALL}"
+AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa72-common = " ${AMD_CORTEXA72_FULL_INSTALL}"
+AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa78-common = " ${AMD_CORTEXA78_FULL_INSTALL}"
+AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa78-mali-common = " ${AMD_CORTEXA78_MALI_FULL_INSTALL}"
+
 IMAGE_INSTALL = " ${AMD-EDF_IMAGE_FULL_INSTALL}"
+
 
 IMAGE_LINGUAS = " "
 
