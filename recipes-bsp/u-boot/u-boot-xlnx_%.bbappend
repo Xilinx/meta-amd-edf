@@ -1,10 +1,12 @@
 FILESEXTRAPATHS:prepend:zynqmp := "${THISDIR}/zynqmp:"
+FILESEXTRAPATHS:prepend:zynqmp-k24-sc-sdt-base := "${THISDIR}/zynqmp:"
 FILESEXTRAPATHS:prepend:versal := "${THISDIR}/versal:"
 FILESEXTRAPATHS:prepend:versal-2ve-2vm := "${THISDIR}/versal-2ve-2vm:"
 
 SRC_URI:append:zynqmp = " file://edf-env.cfg file://amd_edf.h"
 SRC_URI:append:versal = " file://edf-env.cfg file://amd_edf.h"
 SRC_URI:append:versal-2ve-2vm = " file://edf-env.cfg file://amd_edf.h"
+SRC_URI:append:zynqmp-k24-sc-sdt-base = " file://0001-Configure-dwc3-as-host-when-dr_mode-is-otg.patch"
 
 # Generate U-Boot environment binary image
 
