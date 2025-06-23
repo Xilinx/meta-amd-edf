@@ -10,9 +10,17 @@ SKIP_RECIPE[busybox] = "Busybox disabled"
 # Install license files into the image by default
 IMAGE_FEATURES .= "${@' lic-pkgs' if oe.data.typed_value('LICENSE_CREATE_PACKAGE', d) else ''}"
 
+# Default we use the fpga-overlay to select dfx-mgr
+AMD-EDF_FPGA_OVERLAY_INSTALL = "${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', 'dfx-mgr', '', d)}"
+
+# Eliminate architectures where this is not supported
+AMD-EDF_FPGA_OVERLAY_INSTALL:riscv32 = ""
+AMD-EDF_FPGA_OVERALY_INSTALL:riscv64 = ""
+AMD-EDF_FPGA_OVERLAY_INSTALL:arm     = ""
+
 # Minimal set packages for EDF images
 AMD-EDF_IMAGE_COMMON_INSTALL = "\
-    ${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', ' dfx-mgr', '', d)} \
+    ${AMD-EDF_FPGA_OVERLAY_INSTALL} \
     libgpiod \
     libgpiod-tools \
     devmem2 \
