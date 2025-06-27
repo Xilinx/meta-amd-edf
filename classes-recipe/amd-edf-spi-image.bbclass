@@ -5,7 +5,7 @@
 #
 
 INHIBIT_DEFAULT_DEPS = "1"
-DEPENDS = "virtual/boot-bin capsule-mdata virtual/imgsel virtual/imgrcry gzip-native"
+DEPENDS = "virtual/boot-bin uefi-capsule virtual/imgsel virtual/imgrcry gzip-native"
 
 inherit deploy image-artifact-names
 IMAGE_NAME_SUFFIX = ""
@@ -35,7 +35,7 @@ IMGRCVRY_BIN_FILE = "${DEPLOY_DIR_IMAGE}/${IMGRCRY_IMAGE_NAME}.bin"
 
 do_compile[depends] += " \
     virtual/boot-bin:do_deploy \
-    capsule-mdata:do_deploy \
+    uefi-capsule:do_deploy \
     virtual/imgsel:do_deploy \
     virtual/imgrcry:do_deploy \
     "
@@ -86,7 +86,7 @@ python do_compile() {
     # System ready IR - Capsule Metadata
 
     try:
-        with open(d.getVar("DEPLOY_DIR_IMAGE")+"/capsule-mdata-"+d.getVar("MACHINE")+".bin", "rb") as f:
+        with open(d.getVar("DEPLOY_DIR_IMAGE")+"/uefi-capsule-"+d.getVar("MACHINE")+"-metadata.bin", "rb") as f:
             capsule_mdata = f.read(-1)
     except OSError as err:
         bb.fatal("Unable to open capsule metadata file: " + str(err))
