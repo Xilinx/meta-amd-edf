@@ -74,6 +74,9 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     kernel-devsrc \
     lopper \
     memtester \
+    libiio \
+    libiio-iiod \
+    libiio-tests \
     "
 
 AMD_RISCV32_FULL_INSTALL += " \
