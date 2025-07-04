@@ -108,6 +108,8 @@ AMD_CORTEXA53_FULL_INSTALL += " \
 AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     ${AMD_CORTEXA53_FULL_INSTALL} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
+    glmark2 \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', '', 'kmscube', d)} \
     "
 
 AMD_CORTEXA72_FULL_INSTALL += " \
@@ -145,6 +147,8 @@ AMD_CORTEXA78_MALI_FULL_INSTALL += " \
     kernel-module-hdmi21 \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-os optee-examples optee-test', '', d)} \
     ${VITISAI_DEPENDENCIES} \
+    glmark2 \
+    kmscube \
     "
 
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_FULL_INSTALL}"
