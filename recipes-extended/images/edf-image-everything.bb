@@ -146,6 +146,7 @@ AMD_CORTEXA78_MALI_FULL_INSTALL += " \
     ${AMD_CORTEXA78_FULL_INSTALL} \
     kernel-module-hdmi21 \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-os optee-examples optee-test', '', d)} \
+    vek385-uefi-capsule-install \
     ${VITISAI_DEPENDENCIES} \
     glmark2 \
     kmscube \
