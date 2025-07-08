@@ -100,6 +100,7 @@ AMD_CORTEXA72_COMMON_INSTALL += " \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
+    vek280-uefi-capsule-install \
     "
 
 AMD_CORTEXA78_COMMON_INSTALL += ""
