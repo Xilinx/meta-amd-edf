@@ -119,6 +119,7 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
+    vek280-uefi-capsule-install \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-ros \
     packagegroup-xilinx-qt \
