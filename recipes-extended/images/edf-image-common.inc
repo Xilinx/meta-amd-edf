@@ -52,6 +52,7 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     packagegroup-oci \
     phytool \
     python3-gpiod \
+    python3-pip \
     systemtap \
     tcf-agent \
     ufs-utils \
