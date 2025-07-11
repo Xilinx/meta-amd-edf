@@ -8,7 +8,6 @@ SRC_URI[sha256sum] = "9c5387d9bb92333b541d51840f31a2b94c3c6920edcda04a426d405eb5
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa78-mali-common = "${MACHINE}"
-COMPATIBLE_MACHINE:versal-2ve-2vm-vek385-sdt-seg = "${MACHINE}"
 
 FW_DIR = "versal-2ve-2vm-vek385-sdt-seg_2025.1-uefi-capsule"
 
