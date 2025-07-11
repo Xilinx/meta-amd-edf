@@ -47,7 +47,7 @@ gen_uefi_metainfo_xml() {
     cat > ${WORKDIR}/${PN}.metainfo.xml <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="firmware">
-  <id>org.${UEFI_CAB_DEVELOPER_NAME}.guidcb27e5</id>
+  <id>org.${UEFI_CAB_DEVELOPER_NAME}.guid${UEFI_CAB_FW_ID}</id>
   <name>${UEFI_CAB_FW_NAME}</name>
   <summary>${UEFI_CAB_FW_SUMMARY}</summary>
   <description>
