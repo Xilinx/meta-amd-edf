@@ -52,6 +52,7 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     net-tools \
     phytool \
     python3-gpiod \
+    python3-pip \
     tcf-agent \
     ufs-utils \
     util-linux-taskset \
