@@ -20,3 +20,5 @@ SPI_SIZE ?= "0x400_0000"
 inherit amd-edf-spi-image
 
 COMPATIBLE_MACHINE = "^$"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
