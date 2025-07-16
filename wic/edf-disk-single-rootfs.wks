@@ -7,7 +7,7 @@
 #     /             6GB    - general-purpose, yocto-built Linux user-space filesystem
 #     storage       1GB    - user storage
 
-part  /boot/efi                                                                                      --fixed-size=512M  --align 4  --fstype=vfat  --use-label  --label efi
+part  /boot/efi                                                                                      --fixed-size=512M  --align 4  --fstype=vfat  --use-label  --label esp
 part  /boot      --source rootfs  --change-directory=boot  --rootfs-dir=${EDF_IMAGE_ROOTFS_DIR}      --fixed-size=512M  --align 4  --fstype=ext4  --use-label  --label boot     --active
 part  /          --source rootfs  --exclude-path=boot/     --rootfs-dir=${EDF_IMAGE_ROOTFS_DIR}      --fixed-size=6G    --align 4  --fstype=ext4  --use-label  --label root
 part  storage                                                                                        --fixed-size=1G    --align 4  --fstype=vfat  --use-label  --label storage
