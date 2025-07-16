@@ -5,4 +5,4 @@ tmpfs                /run                 tmpfs      mode=0755,nodev,nosuid,stri
 tmpfs                /var/volatile        tmpfs      defaults                           0  0
 
 LABEL=boot           /boot                auto       defaults                           0  0
-LABEL=efi            /boot/efi            vfat       defaults                           0  0
+LABEL=esp            /boot/efi            vfat       defaults                           0  0
