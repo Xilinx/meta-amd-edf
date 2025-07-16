@@ -6,6 +6,8 @@ SRC_URI:append:zynqmp = " file://edf-env.cfg file://amd_edf.h"
 SRC_URI:append:versal = " file://edf-env.cfg file://amd_edf.h"
 SRC_URI:append:versal-2ve-2vm = " file://edf-env.cfg file://amd_edf.h"
 
+SRC_URI:append:versal:amd-edf = " file://bootcmd-bootefi.cfg"
+
 # Generate U-Boot environment binary image
 
 DEPENDS += "u-boot-tools-xlnx-native"
