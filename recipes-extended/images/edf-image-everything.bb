@@ -77,6 +77,7 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     libiio \
     libiio-iiod \
     libiio-tests \
+    efibootmgr \
     "
 
 AMD_RISCV32_FULL_INSTALL += " \
