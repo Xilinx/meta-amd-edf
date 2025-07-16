@@ -50,8 +50,8 @@ python do_compile() {
     image_recovery_meta_offset = int(d.getVar("IMAGE_RECOVERY_META_OFFSET") or '0', 0)
     capsule_metadata_offset = int(d.getVar("CAPSULE_METADATA_OFFSET") or '0', 0)
     capsule_metadata_backup_offset = int(d.getVar("CAPSULE_METADATA_OFFSET") or '0', 0)
-    uboot_env_offset = int(d.getVar("UBOOT_ENV_A_OFFSET") or '0', 0)
-    uboot_env_backup_offset = int(d.getVar("UBOOT_ENV_B_OFFSET") or '0', 0)
+    uboot_env_offset = int(d.getVar("UBOOT_ENV_OFFSET") or '0', 0)
+    uboot_env_backup_offset = int(d.getVar("UBOOT_ENV_BACKUP_OFFSET") or '0', 0)
     image_a_offset = int(d.getVar("IMAGE_A_OFFSET") or '0', 0)
     image_b_offset = int(d.getVar("IMAGE_B_OFFSET") or '0', 0)
     spi_size = int(d.getVar("SPI_SIZE") or '0', 0)
@@ -67,8 +67,10 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open image selector file: " + str(err))
 
+    print("INFO: Write image selector to %s\n" % image_selector_offset)
     spi_data.seek(image_selector_offset)
     spi_data.write(imgsel_data)
+    print("INFO: Write image selector backup to %s\n" % image_selector_backup_offset)
     spi_data.seek(image_selector_backup_offset)
     spi_data.write(imgsel_data)
 
@@ -80,6 +82,7 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open image recovery file: " + str(err))
 
+    print("INFO: Write image recovery to %s\n" % image_recovery_offset)
     spi_data.seek(image_recovery_offset)
     spi_data.write(imgrcvry_data)
 
@@ -91,8 +94,10 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open capsule metadata file: " + str(err))
 
+    print("INFO: Write capsule to %s\n" % capsule_metadata_offset)
     spi_data.seek(capsule_metadata_offset)
     spi_data.write(capsule_mdata)
+    print("INFO: Write capsule backup to %s\n" % capsule_metadata_backup_offset)
     spi_data.seek(capsule_metadata_backup_offset)
     spi_data.write(capsule_mdata)
 
@@ -104,8 +109,10 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open UBoot env file: " + str(err))
 
+    print("INFO: Write uboot env to %s\n" % uboot_env_offset)
     spi_data.seek(uboot_env_offset)
     spi_data.write(uboot_env)
+    print("INFO: Write uboot backup env to %s\n" % uboot_env_backup_offset)
     spi_data.seek(uboot_env_backup_offset)
     spi_data.write(uboot_env)
 
@@ -119,8 +126,10 @@ python do_compile() {
 
     #FIXME add a size check here - 116736KB max on 2GB
 
+    print("INFO: Write image a to %s\n" % image_a_offset)
     spi_data.seek(image_a_offset)
     spi_data.write(bootbin)
+    print("INFO: Write image b to %s\n" % image_b_offset)
     spi_data.seek(image_b_offset)
     spi_data.write(bootbin)
 
