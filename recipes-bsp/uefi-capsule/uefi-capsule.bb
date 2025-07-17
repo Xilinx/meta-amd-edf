@@ -82,6 +82,7 @@ do_configure() {
     gen_uefi_metainfo_xml
 }
 
+do_compile[depends] += "virtual/boot-bin:do_deploy"
 do_compile() {
     # Generate efi metadata
     mkfwumdata -a 0 -b 2 -i 1 -v 2 ${LOC_GUID},${UEFI_METADATA_GUID},${IMG_0_GUID_0},${IMG_0_GUID_1} \
