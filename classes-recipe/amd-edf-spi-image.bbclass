@@ -27,12 +27,26 @@ IMAGE_B_OFFSET ?= "0x87C_0000"
 USER_SCRATCHPAD_OFFSET ?= "0xFA0_0000"
 SPI_SIZE ?= "0x1000_0000"
 
+
+AMD_EDF_SPI_VARS ?= "IMAGE_SELECTOR_OFFSET IMAGE_SELECTOR_BACKUP_OFFSET IMAGE_SELECTOR_SCRATCHPAD_OFFSET \
+    IMAGE_RECOVERY_OFFSET IMAGE_RECOVERY_META_OFFSET CAPSULE_METADATA_OFFSET CAPSULE_METADATA_BACKUP_OFFSET \
+    UBOOT_ENV_OFFSET UBOOT_ENV_BACKUP_OFFSET IMAGE_A_OFFSET IMAGE_B_OFFSET USER_SCRATCHPAD_OFFSET SPI_SIZE \
+"
+
+# Check if the required variables are set
+python() {
+    for var in d.getVar('AMD_EDF_SPI_VARS').split():
+        offset = d.getVar(var)
+        if not offset:
+            raise bb.parse.SkipRecipe(f"{var} is not set")
+}
+
 # Calculate size available per component based on default layout
-IMAGE_SELECTOR_MAX_SIZE ?= "${@int(d.getVar('IMAGE_SELECTOR_BACKUP_OFFSET') or '0', 0) - int(d.getVar('IMAGE_SELECTOR_OFFSET') or '0', 0)}"
-IMAGE_RECOVERY_MAX_SIZE ?= "${@int(d.getVar('IMAGE_RECOVERY_META_OFFSET') or '0', 0) - int(d.getVar('IMAGE_RECOVERY_OFFSET') or '0', 0)}"
-CAPSULE_METADATA_MAX_SIZE ?= "${@int(d.getVar('CAPSULE_METADATA_BACKUP_OFFSET') or '0', 0) - int(d.getVar('CAPSULE_METADATA_OFFSET') or '0', 0)}"
-UBOOT_ENV_MAX_SIZE ?= "${@int(d.getVar('UBOOT_ENV_BACKUP_OFFSET') or '0', 0) - int(d.getVar('UBOOT_ENV_OFFSET') or '0', 0)}"
-IMAGE_MAX_SIZE ?= "${@int(d.getVar('USER_SCRATCHPAD_OFFSET') or '0', 0) - int(d.getVar('IMAGE_B_OFFSET') or '0', 0)}"
+IMAGE_SELECTOR_MAX_SIZE ?= "${@int(d.getVar('IMAGE_SELECTOR_BACKUP_OFFSET'), 0) - int(d.getVar('IMAGE_SELECTOR_OFFSET'), 0)}"
+IMAGE_RECOVERY_MAX_SIZE ?= "${@int(d.getVar('IMAGE_RECOVERY_META_OFFSET'), 0) - int(d.getVar('IMAGE_RECOVERY_OFFSET'), 0)}"
+CAPSULE_METADATA_MAX_SIZE ?= "${@int(d.getVar('CAPSULE_METADATA_BACKUP_OFFSET'), 0) - int(d.getVar('CAPSULE_METADATA_OFFSET'), 0)}"
+UBOOT_ENV_MAX_SIZE ?= "${@int(d.getVar('UBOOT_ENV_BACKUP_OFFSET'), 0) - int(d.getVar('UBOOT_ENV_OFFSET'), 0)}"
+IMAGE_MAX_SIZE ?= "${@int(d.getVar('USER_SCRATCHPAD_OFFSET'), 0) - int(d.getVar('IMAGE_B_OFFSET'), 0)}"
 
 # Default gzip settings for compressed OSPI
 OSPI_GZIP_CMD ?= "gzip -f -9 -n -c --rsyncable"
@@ -47,28 +61,28 @@ do_compile[depends] += " \
     virtual/imgsel:do_deploy \
     virtual/imgrcry:do_deploy \
     "
-
+do_compile[vardeps] += "${AMD_EDF_SPI_VARS}"
 python do_compile() {
 
     import io
 
-    image_selector_offset = int(d.getVar("IMAGE_SELECTOR_OFFSET") or '0', 0)
-    image_selector_backup_offset = int(d.getVar("IMAGE_SELECTOR_BACKUP_OFFSET") or '0', 0)
-    image_recovery_offset = int(d.getVar("IMAGE_RECOVERY_OFFSET") or '0', 0)
-    image_recovery_meta_offset = int(d.getVar("IMAGE_RECOVERY_META_OFFSET") or '0', 0)
-    capsule_metadata_offset = int(d.getVar("CAPSULE_METADATA_OFFSET") or '0', 0)
-    capsule_metadata_backup_offset = int(d.getVar("CAPSULE_METADATA_OFFSET") or '0', 0)
-    uboot_env_offset = int(d.getVar("UBOOT_ENV_OFFSET") or '0', 0)
-    uboot_env_backup_offset = int(d.getVar("UBOOT_ENV_BACKUP_OFFSET") or '0', 0)
-    image_a_offset = int(d.getVar("IMAGE_A_OFFSET") or '0', 0)
-    image_b_offset = int(d.getVar("IMAGE_B_OFFSET") or '0', 0)
-    spi_size = int(d.getVar("SPI_SIZE") or '0', 0)
+    image_selector_offset = int(d.getVar("IMAGE_SELECTOR_OFFSET"), 0)
+    image_selector_backup_offset = int(d.getVar("IMAGE_SELECTOR_BACKUP_OFFSET"), 0)
+    image_recovery_offset = int(d.getVar("IMAGE_RECOVERY_OFFSET"), 0)
+    image_recovery_meta_offset = int(d.getVar("IMAGE_RECOVERY_META_OFFSET"), 0)
+    capsule_metadata_offset = int(d.getVar("CAPSULE_METADATA_OFFSET"), 0)
+    capsule_metadata_backup_offset = int(d.getVar("CAPSULE_METADATA_OFFSET"), 0)
+    uboot_env_offset = int(d.getVar("UBOOT_ENV_OFFSET"), 0)
+    uboot_env_backup_offset = int(d.getVar("UBOOT_ENV_BACKUP_OFFSET"), 0)
+    image_a_offset = int(d.getVar("IMAGE_A_OFFSET"), 0)
+    image_b_offset = int(d.getVar("IMAGE_B_OFFSET"), 0)
+    spi_size = int(d.getVar("SPI_SIZE"), 0)
 
-    image_selector_max_size = int(d.getVar("IMAGE_SELECTOR_MAX_SIZE") or '0', 0)
-    image_recovery_max_size = int(d.getVar("IMAGE_RECOVERY_MAX_SIZE") or '0', 0)
-    capsule_metadata_max_size = int(d.getVar("CAPSULE_METADATA_MAX_SIZE") or '0', 0)
-    uboot_env_max_size = int(d.getVar("UBOOT_ENV_MAX_SIZE") or '0', 0)
-    image_max_size = int(d.getVar("IMAGE_MAX_SIZE") or '0', 0)
+    image_selector_max_size = int(d.getVar("IMAGE_SELECTOR_MAX_SIZE"), 0)
+    image_recovery_max_size = int(d.getVar("IMAGE_RECOVERY_MAX_SIZE"), 0)
+    capsule_metadata_max_size = int(d.getVar("CAPSULE_METADATA_MAX_SIZE"), 0)
+    uboot_env_max_size = int(d.getVar("UBOOT_ENV_MAX_SIZE"), 0)
+    image_max_size = int(d.getVar("IMAGE_MAX_SIZE"), 0)
 
     spi_data = io.BytesIO()
     spi_data.write(b'\xFF' * spi_size)
