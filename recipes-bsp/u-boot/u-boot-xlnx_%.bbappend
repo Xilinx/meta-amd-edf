@@ -30,13 +30,26 @@ do_sys_config() {
 
 do_compile:append() {
     if [ -n "${UBOOT_INITIAL_ENV}" ]; then
-        uboot-mkenvimage -s 0x4200 -o ${WORKDIR}/uboot-initial-env.bin ${B}/${config}/u-boot-initial-env
+        UBOOT_ENV_SIZE="$(cat ${B}/.config | grep "^CONFIG_ENV_SIZE=" | cut -d'=' -f2)"
+
+        if [ -z "$UBOOT_ENV_SIZE" ]; then
+            bberror "Unable to read CONFIG_ENV_SIZE"
+        fi
+
+        REDUND=""
+        cat ${B}/.config | grep "^CONFIG_SYS_REDUNDAND_ENVIRONMENT=" > /dev/null
+        if [ $? -eq 0 ]; then
+            REDUND="-r"
+        fi
+
+        echo "Constructing u-boot-initial-env with size $UBOOT_ENV_SIZE"
+        uboot-mkenvimage $REDUND -s $UBOOT_ENV_SIZE ${B}/${config}/u-boot-initial-env -o ${B}/u-boot-initial-env.bin
     fi
 }
 
 do_deploy:append() {
     if [ -n "${UBOOT_INITIAL_ENV}" ]; then
-        install -D -m 644 ${WORKDIR}/uboot-initial-env.bin ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}.bin
+        install -D -m 644 ${B}/u-boot-initial-env.bin ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}.bin
         ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}.bin ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}.bin
         ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}.bin ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}.bin
     fi
