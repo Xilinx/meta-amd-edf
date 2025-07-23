@@ -67,7 +67,9 @@ AMD_RISCV32_INSTALL = ""
 AMD_RISCV64_COMMON_INSTALL = ""
 AMD_RISCV64_INSTALL = ""
 
-AMD_CORTEXA9_COMMON_INSTALL = ""
+AMD_CORTEXA9_COMMON_INSTALL = " \
+    packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
+    "
 AMD_CORTEXA9_INSTALL = ""
 
 AMD_CORTEXA53_COMMON_INSTALL = "\
@@ -82,6 +84,7 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
     systemtap \
     v4l-utils \
     xrt \
+    packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
     "
 
 AMD_CORTEXA53_INSTALL = "\
