@@ -37,8 +37,7 @@ do_compile:append() {
         fi
 
         REDUND=""
-        cat ${B}/.config | grep "^CONFIG_SYS_REDUNDAND_ENVIRONMENT=" > /dev/null
-        if [ $? -eq 0 ]; then
+        if grep -q "^CONFIG_SYS_REDUNDAND_ENVIRONMENT=y" ${B}/.config; then
             REDUND="-r"
         fi
 
