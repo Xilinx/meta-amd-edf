@@ -9,8 +9,8 @@ FILESEXTRAPATHS:prepend:amd-cortexa78-mali-common := "${THISDIR}/amd-cortexa78-m
 
 DEPENDS += "u-boot-efivars-native xxd-native python3-pyopenssl-native"
 
-SRC_URI:append:amd-cortexa72-common = "file://Boot0001.txt"
-SRC_URI:append:amd-cortexa78-mali-common = "file://Boot0001.txt file://Boot0002.txt"
+SRC_URI:append:amd-cortexa72-common = "file://Boot0032.txt"
+SRC_URI:append:amd-cortexa78-mali-common = "file://Boot0032.txt file://Boot0033.txt"
 
 inherit deploy python3native
 
@@ -25,21 +25,21 @@ do_compile() {
 }
 
 do_compile:append:amd-cortexa72-common() {
-    xxd -r -p ${WORKDIR}/Boot0001.txt Boot0001.bin
+    xxd -r -p ${WORKDIR}/Boot0032.txt Boot0032.bin
 
-    efivar.py set -i ubootefi.var -n Boot0001 -d Boot0001.bin -t file
-    efivar.py set -i ubootefi.var -n BootOrder -d 1 -t u16
+    efivar.py set -i ubootefi.var -n Boot0032 -d Boot0032.bin -t file
+    efivar.py set -i ubootefi.var -n BootOrder -d 32 -t u16
 }
 
 do_compile:append:amd-cortexa78-mali-common() {
-    xxd -r -p ${WORKDIR}/Boot0001.txt Boot0001.bin
-    xxd -r -p ${WORKDIR}/Boot0002.txt Boot0002.bin
+    xxd -r -p ${WORKDIR}/Boot0032.txt Boot0032.bin
+    xxd -r -p ${WORKDIR}/Boot0033.txt Boot0033.bin
 
-    echo "01 00 02 00" > ${WORKDIR}/BootOrder.txt
+    echo "32 00 33 00" > ${WORKDIR}/BootOrder.txt
     xxd -r -p ${WORKDIR}/BootOrder.txt BootOrder.bin
 
-    efivar.py set -i ubootefi.var -n Boot0001 -d Boot0001.bin -t file
-    efivar.py set -i ubootefi.var -n Boot0002 -d Boot0002.bin -t file
+    efivar.py set -i ubootefi.var -n Boot0032 -d Boot0032.bin -t file
+    efivar.py set -i ubootefi.var -n Boot0033 -d Boot0033.bin -t file
     efivar.py set -i ubootefi.var -n BootOrder -d BootOrder.bin -t file
 }
 
