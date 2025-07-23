@@ -110,12 +110,12 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open UBoot env file: " + str(err))
 
-    print("INFO: Write uboot env to %s\n" % uboot_env_offset)
-    spi_data.seek(uboot_env_offset)
-    spi_data.write(uboot_env)
-    print("INFO: Write uboot backup env to %s\n" % uboot_env_backup_offset)
-    spi_data.seek(uboot_env_backup_offset)
-    spi_data.write(uboot_env)
+    # print("INFO: Write uboot env to %s\n" % uboot_env_offset)
+    # spi_data.seek(uboot_env_offset)
+    # spi_data.write(uboot_env)
+    # print("INFO: Write uboot backup env to %s\n" % uboot_env_backup_offset)
+    # spi_data.seek(uboot_env_backup_offset)
+    # spi_data.write(uboot_env)
 
     # Image A/B
 
