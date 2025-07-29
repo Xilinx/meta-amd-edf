@@ -28,7 +28,7 @@ do_compile:append:amd-cortexa72-common() {
     xxd -r -p ${WORKDIR}/Boot0032.txt Boot0032.bin
 
     efivar.py set -i ubootefi.var -n Boot0032 -d Boot0032.bin -t file
-    efivar.py set -i ubootefi.var -n BootOrder -d 32 -t u16
+    efivar.py set -i ubootefi.var -n BootOrder -d 50 -t u16
 }
 
 do_compile:append:amd-cortexa78-mali-common() {
