@@ -70,7 +70,10 @@ AMD_RISCV64_INSTALL = ""
 AMD_CORTEXA9_COMMON_INSTALL = " \
     packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
     "
-AMD_CORTEXA9_INSTALL = ""
+
+AMD_CORTEXA9_INSTALL = " \
+    zc702-pl-bram-gpio-fw \
+"
 
 AMD_CORTEXA53_COMMON_INSTALL = "\
     docker-moby-contrib \
