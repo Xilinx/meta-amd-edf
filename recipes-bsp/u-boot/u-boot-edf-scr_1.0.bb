@@ -22,16 +22,32 @@ SRC_URI:append:versal-2ve-2vm = " \
     file://edf-linux-ufs-boot.cmd \
     "
 
+SRC_URI:zynq = " \
+    file://edf-linux-mmc-boot.cmd.zynq \
+    "
+
 # Add Xen EDF variables as addendum.
 EDF_XEN_SCRIPT_SED_ADDENDUM = ""
 EDF_XEN_DOM0LESS_SCRIPT_SED_ADDENDUM = ""
 
-include edf-xen-dom0less-boot-env.inc
+XEN_INC = "edf-xen-dom0less-boot-env.inc"
+XEN_INC:zynq = ""
+
+include ${XEN_INC}
+
+do_compile:prepend:zynq() {
+    # We need to use a different file
+    cp ${WORKDIR}/edf-linux-mmc-boot.cmd.zynq ${WORKDIR}/edf-linux-mmc-boot.cmd
+}
 
 do_compile() {
 
 	mkimage -A arm -T script -C none -n "Linux Boot script" -d "${WORKDIR}/edf-linux-mmc-boot.cmd" boot.scr
+}
 
+# Xen specific
+do_compile:append() {
+  if [ -n "${XEN_INC}" ]; then
     # For edf-xen-boot.cmd
     sed ${EDF_XEN_SCRIPT_SED_ADDENDUM} \
         "${WORKDIR}/edf-xen-boot.cmd" > "${WORKDIR}/xen-boot.cmd"
@@ -42,6 +58,7 @@ do_compile() {
 
 	mkimage -A arm -T script -C none -n "Xen Boot script" -d "${WORKDIR}/xen-boot.cmd" xen_boot.scr
 	mkimage -A arm -T script -C none -n "Xen Dom0less Boot script" -d "${WORKDIR}/xen-dom0less-boot.cmd" xen_dom0less_boot.scr
+  fi
 }
 
 do_compile:append:versal-2ve-2vm() {
@@ -51,8 +68,14 @@ do_compile:append:versal-2ve-2vm() {
 do_install() {
 	install -d ${D}/boot
 	install -m 0644 boot.scr ${D}/boot
+}
+
+# Xen specific
+do_install:append() {
+      if [ -n "${XEN_INC}" ]; then
 	install -m 0644 xen_boot.scr ${D}/boot
 	install -m 0644 xen_dom0less_boot.scr ${D}/boot
+      fi
 }
 
 do_install:append:versal-2ve-2vm() {
@@ -64,8 +87,14 @@ FILES:${PN} = "/boot/*"
 do_deploy() {
 	install -d ${DEPLOYDIR}
 	install -m 0644 boot.scr ${DEPLOYDIR}
+}
+
+# Xen specific
+do_deploy:append() {
+      if [ -n "${XEN_INC}" ]; then
 	install -m 0644 xen_boot.scr ${DEPLOYDIR}
 	install -m 0644 xen_dom0less_boot.scr ${DEPLOYDIR}
+      fi
 }
 
 do_deploy:append:versal-2ve-2vm() {
