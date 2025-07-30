@@ -104,6 +104,7 @@ WKS_FILES:versal-2ve-2vm = "edf-disk-single-rootfs-efi.wks"
 # Configure QEMU boot
 QB_KERNEL_ROOT:riscv32 = "/dev/vda3"
 QB_KERNEL_ROOT:riscv64 = "/dev/vda3"
+QB_KERNEL_ROOT:zynq = "/dev/mmcblk0p3"
 
 do_rootfs[depends] += " \
     edf-image-full-cmdline:do_build \
