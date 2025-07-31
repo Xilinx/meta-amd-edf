@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 DEPENDS += "u-boot-tools-native virtual/boot-bin gcab-native"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit deploy image-artifact-names
 
 IMAGE_NAME_SUFFIX = ""
@@ -82,13 +84,12 @@ do_configure() {
     gen_uefi_metainfo_xml
 }
 
-do_compile[depends] += "virtual/boot-bin:do_deploy"
 do_compile() {
     # Generate efi metadata
     mkfwumdata -a 0 -b 2 -i 1 -v 2 ${LOC_GUID},${UEFI_METADATA_GUID},${IMG_0_GUID_0},${IMG_0_GUID_1} \
         ${WORKDIR}/${PN}-metadata.bin -V ${WORKDIR}/${PN}-vendor.txt
     # Generate capsule file, file name should be firmware.bin
-    mkeficapsule -o 0x8000 -g ${UEFI_CAB_GUID} ${DEPLOY_DIR_IMAGE}/boot.bin \
+    mkeficapsule -o 0x8000 -g ${UEFI_CAB_GUID} ${RECIPE_SYSROOT}/boot/BOOT.bin \
         --index 1 ${WORKDIR}/firmware.bin
     # Generate acceptance capsule bin
     mkeficapsule -A -g ${UEFI_CAB_GUID} ${WORKDIR}/${PN}-bootfw-acceptance-capsule.bin
