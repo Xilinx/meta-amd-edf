@@ -92,7 +92,6 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
 
 AMD_CORTEXA53_INSTALL = "\
     zcu111-pl-bram-gpio-fw \
-    zcu106-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA53_MALI_COMMON_INSTALL = "\
@@ -100,6 +99,7 @@ AMD_CORTEXA53_MALI_COMMON_INSTALL = "\
     vcu-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     zcu104-pl-bram-gpio-fw \
+    zcu106-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA53_MALI_INSTALL = "\
