@@ -111,6 +111,7 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
     glmark2 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', '', 'kmscube', d)} \
+    packagegroup-amd-edf-gui \
     "
 
 AMD_CORTEXA72_FULL_INSTALL += " \
@@ -152,6 +153,7 @@ AMD_CORTEXA78_MALI_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     glmark2 \
     kmscube \
+    packagegroup-amd-edf-gui \
     "
 
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_FULL_INSTALL}"
