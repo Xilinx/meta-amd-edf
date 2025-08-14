@@ -114,6 +114,7 @@ AMD_CORTEXA72_INSTALL = "\
     vek280-pl-bram-gpio-fw \
     vck190-pl-bram-gpio-fw \
     vmk180-pl-bram-gpio-fw \
+    vpk120-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA78_COMMON_INSTALL = "\
