@@ -13,6 +13,7 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-openembedded/meta-filesystems \
   ##OEROOT##/../meta-openembedded/meta-networking \
   ##OEROOT##/../meta-openembedded/meta-multimedia \
+  ##OEROOT##/../meta-openembedded/meta-webserver \
   ##OEROOT##/../meta-virtualization \
   ##OEROOT##/../meta-security \
   ##OEROOT##/../meta-security/meta-tpm \
@@ -40,4 +41,5 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-ros/meta-ros2-jazzy \
   ##OEROOT##/../meta-qt5 \
   ##OEROOT##/../meta-vitis \
+  ##OEROOT##/../meta-system-controller \
 "
