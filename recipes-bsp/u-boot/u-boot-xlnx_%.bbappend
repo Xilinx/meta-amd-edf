@@ -41,6 +41,10 @@ do_compile:append() {
             REDUND="-r"
         fi
 
+        # There is a 33 byte checksum added to the environment, subtract this from the size
+        UBOOT_ENV_SIZE=$(printf "%d" $UBOOT_ENV_SIZE)
+        UBOOT_ENV_SIZE=$(expr $UBOOT_ENV_SIZE - 33)
+
         echo "Constructing u-boot-initial-env with size $UBOOT_ENV_SIZE"
         uboot-mkenvimage $REDUND -s $UBOOT_ENV_SIZE ${B}/${config}/u-boot-initial-env -o ${B}/u-boot-initial-env.bin
     fi
