@@ -92,6 +92,7 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
 
 AMD_CORTEXA53_INSTALL = "\
     zcu111-pl-bram-gpio-fw \
+    zcu102-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA53_MALI_COMMON_INSTALL = "\
