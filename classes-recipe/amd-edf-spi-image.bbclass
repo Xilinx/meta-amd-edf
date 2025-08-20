@@ -143,22 +143,7 @@ python do_compile() {
 
     # UBoot env
 
-    try:
-        with open(d.getVar("DEPLOY_DIR_IMAGE")+"/u-boot-xlnx-initial-env.bin", "rb") as f:
-            uboot_env = f.read(-1)
-    except OSError as err:
-        bb.fatal("Unable to open UBoot env file: " + str(err))
-
-    uboot_env_size = sys.getsizeof(uboot_env)
-    if (uboot_env_size > uboot_env_max_size):
-        bb.fatal("U-Boot file size (%s) exceeds allocated space (%s)" % (uboot_env_size, uboot_env_max_size))
-
-    # print("INFO: Write uboot env to %s\n" % uboot_env_offset)
-    # spi_data.seek(uboot_env_offset)
-    # spi_data.write(uboot_env)
-    # print("INFO: Write uboot backup env to %s\n" % uboot_env_backup_offset)
-    # spi_data.seek(uboot_env_backup_offset)
-    # spi_data.write(uboot_env)
+    # NOTE: Disable pre-population of uboot env in favour of saving the env on first boot
 
     # Image A/B - boot.bin
 

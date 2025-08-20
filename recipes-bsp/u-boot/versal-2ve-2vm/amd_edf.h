@@ -2,6 +2,7 @@
 #define __CONFIG_EDF_VERSAL2_H
 
 #include <configs/amd_versal2.h>
+#include <configs/amd_edf_common.h>
 
 #define ENV_MEM_LAYOUT_SETTINGS \
 	"fdt_addr_r=0x21000000\0" \
@@ -15,11 +16,11 @@
 	"script_size_f=0x80000\0"
 
 /* Initial environment variables */
-#ifndef CFG_EXTRA_ENV_SETTINGS
+#undef CFG_EXTRA_ENV_SETTINGS
 #define CFG_EXTRA_ENV_SETTINGS \
     ENV_MEM_LAYOUT_SETTINGS \
+    ENV_EDF_SETTINGS \
     BOOTENV
-#endif
 
 /* Define image type guid, this should match with the capsule-metadata recipe value*/
 #define XILINX_BOOT_IMAGE_GUID \
