@@ -88,6 +88,7 @@ AMD_RISCV64_FULL_INSTALL += " \
 
 AMD_CORTEXA9_FULL_INSTALL += " \
     valgrind \
+    dmidecode \
     "
 
 AMD_CORTEXA53_FULL_INSTALL += " \
@@ -104,6 +105,7 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-xilinx-jupyter \
     packagegroup-tsn \
+    dmidecode \
     "
 
 AMD_CORTEXA53_MALI_FULL_INSTALL += " \
