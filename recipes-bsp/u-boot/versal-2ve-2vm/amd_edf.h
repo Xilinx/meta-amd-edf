@@ -22,8 +22,4 @@
     ENV_EDF_SETTINGS \
     BOOTENV
 
-/* Define image type guid, this should match with the capsule-metadata recipe value*/
-#define XILINX_BOOT_IMAGE_GUID \
-	EFI_GUID(0xcb27e54d, 0x08f3a, 0x4c77, 0x8a, 0x72, \
-		 0x1c, 0x76, 0xd2, 0xd4, 0xe9, 0x38)
 #endif /* __CONFIG_EDF_VERSAL_H */
