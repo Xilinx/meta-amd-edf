@@ -41,5 +41,4 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-ros/meta-ros2-jazzy \
   ##OEROOT##/../meta-qt5 \
   ##OEROOT##/../meta-vitis \
-  ##OEROOT##/../meta-system-controller \
 "
