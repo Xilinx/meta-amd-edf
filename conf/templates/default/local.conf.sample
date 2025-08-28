@@ -85,12 +85,12 @@ MACHINE ??= "zynqmp-zcu104-sdt-full"
 #
 # The distribution setting controls which policy settings are used as defaults.
 # The default value is fine for general Yocto project use, at least initially.
-# Ultimately when creating custom policy, people will likely end up subclassing 
+# Ultimately when creating custom policy, people will likely end up subclassing
 # these defaults.
 #
 DISTRO ?= "amd-edf"
 # As an example of a subclass there is a "bleeding" edge policy configuration
-# where many versions are set to the absolute latest code from the upstream 
+# where many versions are set to the absolute latest code from the upstream
 # source control systems. This is just mentioned here as an example, its not
 # useful to most new users.
 # DISTRO ?= "poky-bleeding"
@@ -246,7 +246,7 @@ BB_DISKMON_DIRS ??= "\
 # By default native qemu will build with a builtin VNC server where graphical output can be
 # seen. The line below enables the SDL UI frontend too.
 PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
-# By default libsdl2-native will be built, if you want to use your host's libSDL instead of 
+# By default libsdl2-native will be built, if you want to use your host's libSDL instead of
 # the minimal libsdl built by libsdl2-native then uncomment the ASSUME_PROVIDED line below.
 #ASSUME_PROVIDED += "libsdl2-native"
 
@@ -318,6 +318,8 @@ CONF_VERSION = "2"
 SDK_CLASSES += "amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools"
 
 # Source and Sstate mirror settings
+AMD-EDF_VERSION = "25.11"
+
 INHERIT += "own-mirrors"
 SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/downloads"
 
