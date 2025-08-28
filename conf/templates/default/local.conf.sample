@@ -317,6 +317,8 @@ CONF_VERSION = "2"
 SDK_CLASSES += "amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools"
 
 # Source and Sstate mirror settings
+AMD-EDF_VERSION = "25.05"
+
 INHERIT += "own-mirrors"
 SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/downloads"
 
