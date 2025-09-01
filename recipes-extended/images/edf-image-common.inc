@@ -126,6 +126,7 @@ AMD_CORTEXA78_INSTALL = ""
 
 AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     ${AMD_CORTEXA78_COMMON_INSTALL} \
+    isp-media-server \
     isp-firmware \
     kernel-module-isp \
     vcu2-ctrlsw \
