@@ -8,6 +8,7 @@ IMAGE_INSTALL = "\
     packagegroup-core-boot \
     packagegroup-core-full-cmdline \
     ${AMD-EDF_IMAGE_FULL_INSTALL} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
     "
 
 inherit core-image

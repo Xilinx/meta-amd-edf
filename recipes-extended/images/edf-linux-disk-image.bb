@@ -48,10 +48,12 @@ IMAGE_EFI_BOOT_FILES ?= ""
 IMAGE_EFI_BOOT_FILES:versal ?= " \
     loader/loader.conf;loader/loader.conf \
     loader/edf-linux.conf;loader/entries/edf-linux.conf \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
     "
 IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
     loader/loader.conf;loader/loader.conf \
     loader/edf-linux.conf;loader/entries/edf-linux.conf \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
     "
 
 EDF_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/edf-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
