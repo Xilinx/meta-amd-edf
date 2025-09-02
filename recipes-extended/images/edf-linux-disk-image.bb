@@ -1,4 +1,5 @@
 DESCRIPTION = "AMD Embedded Development Framework Linux image compositing rootfs and other binaries to a single wic image"
+
 LICENSE ?= "MIT"
 PACKAGES = ""
 
@@ -44,16 +45,17 @@ ESP_PART_UUID = "BF3C203E-435A-48F6-BDFE-D729C531491B"
 ESP_PART_TYPE = "C12A7328-F81F-11D2-BA4B-00A0C93EC93B"
 
 IMAGE_EFI_BOOT_FILES ?= ""
-IMAGE_EFI_BOOT_FILES:versal = "ubootefi.var"
-IMAGE_EFI_BOOT_FILES:versal-net = "ubootefi.var"
-IMAGE_EFI_BOOT_FILES:versal-2ve-2vm = "ubootefi.var"
+IMAGE_EFI_BOOT_FILES:versal ?= " \
+    loader/loader.conf;loader/loader.conf \
+    loader/edf-linux.conf;loader/entries/edf-linux.conf \
+    "
+IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
+    loader/loader.conf;loader/loader.conf \
+    loader/edf-linux.conf;loader/entries/edf-linux.conf \
+    "
 
-# For the fstab we can't use SRC_URI or WORKDIR, because do_fetch is disabled in an image recipe
-# and there is no way to re-enable it
 EDF_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/edf-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
 EDF_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-edf-image-full-cmdline"
-EDF_IMAGE_ROOTFS_FSTAB = "${LAYERBASE_amd-edf}/files/edf-disk-image/edf-image-full-cmdline-fstab"
-EDF_IMAGE_ROOTFS_FSTAB[vardepsexclude] = "LAYERBASE_amd-edf"
 
 WICVARS:append = "\
     WORKDIR \
@@ -62,6 +64,7 @@ WICVARS:append = "\
     ROOTFS_PART_TYPE \
     ESP_PART_UUID \
     ESP_PART_TYPE \
+    EFI_PROVIDER \
     "
 
 WICUFSVARS:append = "\
@@ -71,30 +74,12 @@ WICUFSVARS:append = "\
     ROOTFS_PART_TYPE \
     ESP_PART_UUID \
     ESP_PART_TYPE \
+    EFI_PROVIDER \
     "
 
 DEPENDS += " \
     edf-image-full-cmdline \
     "
-
-# Recipe dependency of u-boot-efi-var
-EFI_DEPENDS ?= ""
-EFI_DEPENDS:versal = "u-boot-efi-var"
-EFI_DEPENDS:versal-net = "u-boot-efi-var"
-EFI_DEPENDS:versal-2ve-2vm = "u-boot-efi-var"
-DEPENDS += "${EFI_DEPENDS}"
-
-# Image dependency of u-boot-efi-var:do_deploy
-IMAGE_DEPENDS ?= ""
-IMAGE_DEPENDS:versal = "u-boot-efi-var:do_deploy"
-IMAGE_DEPENDS:versal-net = "u-boot-efi-var:do_deploy"
-IMAGE_DEPENDS:versal-2ve-2vm = "u-boot-efi-var:do_deploy"
-do_configure[depends] += "${IMAGE_DEPENDS}"
-
-# Remove the dependency on UBOOT_BOOT_SCRIPT as it is not used with UEFI boot
-IMAGE_BOOT_FILES:remove:versal = "boot.scr"
-IMAGE_BOOT_FILES:remove:versal-net = "boot.scr"
-IMAGE_BOOT_FILES:remove:versal-2ve-2vm = "boot.scr"
 
 WKS_FILES = "edf-disk-single-rootfs.wks"
 WKS_FILES:versal = "edf-disk-single-rootfs-efi.wks"
@@ -110,16 +95,19 @@ do_rootfs[depends] += " \
     edf-image-full-cmdline:do_build \
     "
 
+ADDN_IMAGE_RDEPENDS = ""
+ADDN_IMAGE_RDEPENDS:versal = "virtual-systemd-bootconf:do_deploy"
+ADDN_IMAGE_RDEPENDS:versal-net = "virtual-systemd-bootconf:do_deploy"
+ADDN_IMAGE_RDEPENDS:versal-2ve-2vm = "virtual-systemd-bootconf:do_deploy"
+
+do_rootfs[rdepends] += "${ADDN_IMAGE_RDEPENDS}"
+
 do_rootfs[prefuncs] += "edf_check_rootfs"
 fakeroot do_rootfs() {
     (
      mkdir -p ${EDF_IMAGE_ROOTFS_DIR}
      cd ${EDF_IMAGE_ROOTFS_DIR}
      tar xvpfSz ${EDF_IMAGE_ROOTFS}
-
-     if [ -f ${EDF_IMAGE_ROOTFS_FSTAB} ]; then
-        install -m 0644 ${EDF_IMAGE_ROOTFS_FSTAB} etc/fstab
-     fi
     )
 }
 
