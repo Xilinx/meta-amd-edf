@@ -5,19 +5,9 @@ addhandler edf_check_image_event
 edf_check_image_event[eventmask] = "bb.event.DepTreeGenerated"
 
 AMD-EDF_WARN_IMAGES = "\
-	edf-platform-disk-image \
 	edf-linux-disk-image \
 	edf-image-everything \
 	edf-image-full-cmdline \
-	edf-xen-image-full-cmdline \
-"
-
-AMD-EDF_IMAGE_SUPPORTED_MACHINES:pn-edf-platform-disk-image = "\
-	amd-cortexa53-common \
-	amd-cortexa53-mali-common \
-	amd-cortexa72-common \
-	amd-cortexa78-common \
-	amd-cortexa78-mali-common \
 "
 
 AMD-EDF_IMAGE_SUPPORTED_MACHINES:pn-edf-xen-image-full-cmdline = "\
