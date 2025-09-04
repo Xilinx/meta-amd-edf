@@ -88,6 +88,7 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
     v4l-utils \
     xrt \
     packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
+    fwupd-quirks \
     "
 
 AMD_CORTEXA53_INSTALL = "\
