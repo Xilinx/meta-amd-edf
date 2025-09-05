@@ -3,4 +3,4 @@ default=xen
 
 [xen]
 options=console=dtuart dtuart=serial0 dom0_mem=1500M dom0_max_vcpus=1 bootscrub=0 vwfi=native
-kernel=Image console=hvc0 earlycon=xen earlyprintk=xen clk_ignore_unused root=PARTUUID=3C68F6D9-0132-48EE-A739-6302E3CA6EF4 ro rootwait
+kernel=Image console=hvc0 earlycon=xen earlyprintk=xen clk_ignore_unused root=PARTUUID=@@ROOTFS_UUID@@ ro rootwait

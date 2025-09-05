@@ -6,8 +6,8 @@
 #     /            6GB      - general-purpose, Yocto-built Linux user-space filesystem
 #     storage      1GB      - user storage
 
-part  /efi       --source bootimg-efi-amd --sourceparams="loader=${EFI_PROVIDER}" --fixed-size=1G  --align 16 --fstype=vfat  --use-label  --label esp  --active  --mbr  --use-uuid  --uuid="${ESP_PART_UUID}"    --part-type="${ESP_PART_TYPE}"  --part-name="ESP"
-part  /          --source rootfs          --rootfs-dir=${EDF_IMAGE_ROOTFS_DIR}    --fixed-size=6G  --align 4  --fstype=ext4  --use-label  --label root                  --use-uuid  --uuid="${ROOTFS_PART_UUID}" --part-type="${ROOTFS_PART_TYPE}"
+part  /efi       --source bootimg-efi-amd --sourceparams="loader=${EFI_PROVIDER},rootfs_uuid=${ROOTFS_PART_UUID}" --fixed-size=1G  --align 16 --fstype=vfat  --use-label  --label esp  --active  --mbr  --use-uuid  --part-type="${ESP_PART_TYPE}"  --part-name="ESP"
+part  /          --source rootfs --rootfs-dir=${EDF_IMAGE_ROOTFS_DIR}    --fixed-size=6G  --align 4  --fstype=ext4  --use-label  --label root  --use-uuid  --uuid="${ROOTFS_PART_UUID}" --part-type="${ROOTFS_PART_TYPE}"
 part  storage                                                                                  --fixed-size=1G    --align 4  --fstype=vfat  --use-label  --label storage
 
 bootloader --ptable gpt-hybrid

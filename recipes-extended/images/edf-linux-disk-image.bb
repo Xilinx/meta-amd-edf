@@ -33,13 +33,7 @@ IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 #TOOLCHAIN_TARGET_TASK_ATTEMPTONLY = ""
 #POPULATE_SDK_POST_TARGET_COMMAND = ""
 
-# Root filesystem part uuid must match in the wic and kernel command line (in ubootefi.var)
-ROOTFS_PART_UUID = "3C68F6D9-0132-48EE-A739-6302E3CA6EF4"
-
 ROOTFS_PART_TYPE = "B921B045-1DF0-41C3-AF44-4C6F280D3FAE"
-
-# EFI System Partition (ESP) UUID must match in the wic and ubootefi.var file
-ESP_PART_UUID = "BF3C203E-435A-48F6-BDFE-D729C531491B"
 
 # ESP partition UUID is fixed - uboot will not detect the ESP partition if this is not set
 ESP_PART_TYPE = "C12A7328-F81F-11D2-BA4B-00A0C93EC93B"
@@ -59,12 +53,22 @@ IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
 EDF_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/edf-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
 EDF_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-edf-image-full-cmdline"
 
+# Generate a UUID for the rootfs and pass it to wic - we need to do it here because it also needs to
+# be passed to the wic plugin which is installing the ESP config files for systemd-boot and Xen
+do_rootfs_wicenv:prepend:versal () {
+    import uuid
+    d.setVar("ROOTFS_PART_UUID", str(uuid.uuid4()))
+}
+do_rootfs_wicufsenv:prepend:versal-2ve-2vm () {
+    import uuid
+    d.setVar("ROOTFS_PART_UUID", str(uuid.uuid4()))
+}
+
 WICVARS:append = "\
     WORKDIR \
     EDF_IMAGE_ROOTFS_DIR \
     ROOTFS_PART_UUID \
     ROOTFS_PART_TYPE \
-    ESP_PART_UUID \
     ESP_PART_TYPE \
     EFI_PROVIDER \
     "
@@ -74,7 +78,6 @@ WICUFSVARS:append = "\
     EDF_IMAGE_ROOTFS_DIR \
     ROOTFS_PART_UUID \
     ROOTFS_PART_TYPE \
-    ESP_PART_UUID \
     ESP_PART_TYPE \
     EFI_PROVIDER \
     "
