@@ -1,38 +1,33 @@
+SUMMARY = "A full featured console image for AMD Embedded Development Framework"
 DESCRIPTION = "AMD Embedded Development Framework Linux image compositing rootfs and other binaries to a single wic image"
 
 LICENSE ?= "MIT"
-PACKAGES = ""
 
-EXCLUDE_FROM_WORLD = "1"
+require edf-image-common.inc
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+IMAGE_FEATURES += "ssh-server-openssh package-management"
 
-INHIBIT_DEFAULT_DEPS = "1"
+IMAGE_INSTALL = "\
+    packagegroup-core-boot \
+    packagegroup-core-full-cmdline \
+    ${AMD-EDF_IMAGE_FULL_INSTALL} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
+    "
 
-# Clear IMAGE_FEATURES, as they are implemented by the individual partition
-# images and may require the core-image or other image classes
-IMAGE_FEATURES = ""
+inherit core-image
 
-# Note this recipe is NOT compatible with populate_sdk!  For an SDK, use one of the regulr image recipes.
+do_rootfs[prefuncs] += "edf_check_rootfs"
 
-inherit image
+# Reset the IMAGE_FSTYPES to only those we support
+# cpio is NOT supported, this image will be too large for a ramdisk!
+IMAGE_FSTYPES = "tar.gz wic wic.xz wic.bmap${@' wic.qemu-sd' if bb.data.inherits_class('image-types-xilinx-qemu', d) else ''}"
 
-# By default wic is not enable in IMAGE_FSTYPES so enable WIC image type support.
-IMAGE_FSTYPES = "wic wic.xz wic.bmap${@' wic.qemu-sd' if bb.data.inherits_class('image-types-xilinx-qemu', d) else ''}"
-
+# Add the UFS (4k) ones when required
 IMAGE_FSTYPES:append:versal-2ve-2vm = " wic.ufs wic.ufs.xz wic.ufs.bmap"
-
-# Reset the IMGCLASSES
-IMGCLASSES  = "rootfs_${IMAGE_PKGTYPE} image_types ${IMAGE_CLASSES}"
-IMGCLASSES += "image_types_wic image-types-xilinx-qemu"
 
 IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 
-# Clear everything else
-#TOOLCHAIN_TARGET_TASK = ""
-#TOOLCHAIN_TARGET_TASK_ATTEMPTONLY = ""
-#POPULATE_SDK_POST_TARGET_COMMAND = ""
-
+# ROOT Partition type UUID
 ROOTFS_PART_TYPE = "B921B045-1DF0-41C3-AF44-4C6F280D3FAE"
 
 # ESP partition UUID is fixed - uboot will not detect the ESP partition if this is not set
@@ -50,9 +45,6 @@ IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
     "
 
-EDF_IMAGE_ROOTFS = "${DEPLOY_DIR_IMAGE}/edf-image-full-cmdline${IMAGE_MACHINE_SUFFIX}${IMAGE_NAME_SUFFIX}.tar.gz"
-EDF_IMAGE_ROOTFS_DIR = "${WORKDIR}/rootfs-edf-image-full-cmdline"
-
 # Generate a UUID for the rootfs and pass it to wic - we need to do it here because it also needs to
 # be passed to the wic plugin which is installing the ESP config files for systemd-boot and Xen
 do_rootfs_wicenv:prepend:versal () {
@@ -64,9 +56,15 @@ do_rootfs_wicufsenv:prepend:versal-2ve-2vm () {
     d.setVar("ROOTFS_PART_UUID", str(uuid.uuid4()))
 }
 
+ADDN_IMAGE_RDEPENDS = ""
+ADDN_IMAGE_RDEPENDS:versal = "virtual-systemd-bootconf:do_deploy"
+ADDN_IMAGE_RDEPENDS:versal-net = "virtual-systemd-bootconf:do_deploy"
+ADDN_IMAGE_RDEPENDS:versal-2ve-2vm = "virtual-systemd-bootconf:do_deploy"
+
+do_rootfs[rdepends] += "${ADDN_IMAGE_RDEPENDS}"
+
 WICVARS:append = "\
     WORKDIR \
-    EDF_IMAGE_ROOTFS_DIR \
     ROOTFS_PART_UUID \
     ROOTFS_PART_TYPE \
     ESP_PART_TYPE \
@@ -75,15 +73,10 @@ WICVARS:append = "\
 
 WICUFSVARS:append = "\
     WORKDIR \
-    EDF_IMAGE_ROOTFS_DIR \
     ROOTFS_PART_UUID \
     ROOTFS_PART_TYPE \
     ESP_PART_TYPE \
     EFI_PROVIDER \
-    "
-
-DEPENDS += " \
-    edf-image-full-cmdline \
     "
 
 WKS_FILES = "edf-disk-single-rootfs.wks"
@@ -95,25 +88,3 @@ WKS_FILES:versal-2ve-2vm = "edf-disk-single-rootfs-efi.wks"
 QB_KERNEL_ROOT:riscv32 = "/dev/vda3"
 QB_KERNEL_ROOT:riscv64 = "/dev/vda3"
 QB_KERNEL_ROOT:zynq = "/dev/mmcblk0p3"
-
-do_rootfs[depends] += " \
-    edf-image-full-cmdline:do_build \
-    "
-
-ADDN_IMAGE_RDEPENDS = ""
-ADDN_IMAGE_RDEPENDS:versal = "virtual-systemd-bootconf:do_deploy"
-ADDN_IMAGE_RDEPENDS:versal-net = "virtual-systemd-bootconf:do_deploy"
-ADDN_IMAGE_RDEPENDS:versal-2ve-2vm = "virtual-systemd-bootconf:do_deploy"
-
-do_rootfs[rdepends] += "${ADDN_IMAGE_RDEPENDS}"
-
-do_rootfs[prefuncs] += "edf_check_rootfs"
-fakeroot do_rootfs() {
-    (
-     mkdir -p ${EDF_IMAGE_ROOTFS_DIR}
-     cd ${EDF_IMAGE_ROOTFS_DIR}
-     tar xvpfSz ${EDF_IMAGE_ROOTFS}
-    )
-}
-
-do_rootfs[cleandirs] += "${EDF_IMAGE_ROOTFS_DIR}"
