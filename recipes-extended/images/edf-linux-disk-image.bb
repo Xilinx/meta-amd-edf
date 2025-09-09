@@ -88,3 +88,12 @@ WKS_FILES:versal-2ve-2vm = "edf-disk-single-rootfs-efi.wks"
 QB_KERNEL_ROOT:riscv32 = "/dev/vda3"
 QB_KERNEL_ROOT:riscv64 = "/dev/vda3"
 QB_KERNEL_ROOT:zynq = "/dev/mmcblk0p3"
+
+VIRTUAL_SYSTEMD_BOOTCONF = ""
+VIRTUAL_SYSTEMD_BOOTCONF:versal = "virtual-systemd-bootconf:do_deploy"
+VIRTUAL_SYSTEMD_BOOTCONF:versal-net = "virtual-systemd-bootconf:do_deploy"
+VIRTUAL_SYSTEMD_BOOTCONF:versal-2ve-2vm = "virtual-systemd-bootconf:do_deploy"
+
+do_rootfs[rdepends] += " \
+    ${VIRTUAL_SYSTEMD_BOOTCONF} \
+    "
