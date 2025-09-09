@@ -75,6 +75,7 @@ AMD_CORTEXA72_COMMON_INSTALL = "\
     vdu-ctrlsw \
     vek280-pl-bram-uart-gpio-fw \
     vck190-pl-bram-gpio-fw \
+    vrk160-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA78_COMMON_INSTALL = ""
