@@ -138,6 +138,7 @@ AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
 
 AMD_CORTEXA78_MALI_INSTALL = "\
     vek385-pl-bram-gpio-fw \
+    vek385-revb-pl-bram-gpio-fw \
     "
 
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_COMMON_INSTALL} ${AMD_RISCV32_INSTALL}"
