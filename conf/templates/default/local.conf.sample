@@ -33,7 +33,7 @@
 # MACHINE = "versal-2ve-2vm-vek385-sdt-seg"
 #
 # This sets the default machine if no other machine is selected:
-MACHINE ??= "zynqmp-zcu104-sdt-full"
+MACHINE ??= "qemuarm64"
 
 # These are some of the more commonly used values. Looking at the files in the
 # meta/conf/machine directory, or the conf/machine directory of any additional layers
