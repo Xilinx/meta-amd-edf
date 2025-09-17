@@ -47,7 +47,6 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     hexedit \
     htop \
     iperf3 \
-    linux-xlnx-udev-rules \
     linuxptp \
     net-tools \
     phytool \
@@ -61,13 +60,14 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
 
 # COMMON is for anything in that family with no board specific items
 # w/o COMMON is for _JUST_ that type
-AMD_RISCV32_COMMON_INSTALL = ""
+AMD_RISCV32_COMMON_INSTALL = "linux-xlnx-udev-rules"
 AMD_RISCV32_INSTALL = ""
 
-AMD_RISCV64_COMMON_INSTALL = ""
+AMD_RISCV64_COMMON_INSTALL = "linux-xlnx-udev-rules"
 AMD_RISCV64_INSTALL = ""
 
 AMD_CORTEXA9_COMMON_INSTALL = " \
+    linux-xlnx-udev-rules \
     packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
     "
 
@@ -79,6 +79,7 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
     docker-moby-contrib \
     libdrm \
     libdrm-tests \
+    linux-xlnx-udev-rules \
     packagegroup-xilinx-audio \
     packagegroup-xilinx-gstreamer \
     packagegroup-openamp \
@@ -100,11 +101,11 @@ AMD_CORTEXA53_MALI_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
     vcu-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
-    zcu104-pl-bram-gpio-fw \
-    zcu106-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA53_MALI_INSTALL = "\
+    zcu104-pl-bram-gpio-fw \
+    zcu106-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA72_COMMON_INSTALL = "\
