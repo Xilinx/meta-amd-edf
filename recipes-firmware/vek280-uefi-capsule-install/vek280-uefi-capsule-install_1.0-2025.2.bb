@@ -3,8 +3,8 @@ DESCRIPTION = "VEK280 Capsule files"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRC_URI = "https://petalinux.xilinx.com/sswreleases/rel-v2025.2/edf_files/2025.2/09160540/external/uefi-capsule/versal-vek280-sdt-seg_uefi-capsule_09160540.tar.gz"
-SRC_URI[sha256sum] = "121c1a26f76b475c24f0d4554c06badd4d21b6fe6de532f9a2e0c5d7f86da36d"
+SRC_URI = "https://petalinux.xilinx.com/sswreleases/rel-v2025.2/edf_files/2025.2/09192047/external/uefi-capsule/versal-vek280-sdt-seg_uefi-capsule_09192047.tar.gz"
+SRC_URI[sha256sum] = "4ec9e16b8ece8e7ed968ae6f9d054e6ec6668ab754a1f521944b1fd332c3895f"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa78-mali-common = "${MACHINE}"
