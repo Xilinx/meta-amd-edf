@@ -327,15 +327,6 @@ SSTATE_MIRRORS = " \
 file://.* https://petalinux.xilinx.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/aarch64/sstate-cache/PATH;downloadfilename=PATH \n \
 "
 
-#
-# Enable the image recovery multiconfig and configure it
-BBMULTICONFIG += "xilinx-image-recovery"
-
-IMGRCRY_DEPENDS = ""
-IMGRCRY_MCDEPENDS = "mc::xilinx-image-recovery:image-recovery-tiny-initramfs:do_image_complete"
-IMGRCRY_DEPLOY_DIR = "${TMPDIR}-${MACHINE}-xilinx-image-recovery/deploy/images/${MACHINE}"
-IMGRCRY_IMAGE_NAME = "image-recovery-tiny-initramfs-${MACHINE}.imgrcry"
-
 # Skip warning messages
 SKIP_META_XILINX_STANDALONE_SANITY_CHECK = "1"
 SKIP_META_XILINX_STANDALONE_SDT_SANITY_CHECK = "1"
