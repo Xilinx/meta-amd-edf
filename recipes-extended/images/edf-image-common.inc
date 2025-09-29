@@ -120,6 +120,11 @@ AMD_CORTEXA72_INSTALL = "\
     vmk180-pl-bram-gpio-fw \
     vpk120-pl-bram-gpio-fw \
     vrk160-pl-bram-gpio-fw \
+    l20-openamp-fw-examples \
+    vck190-openamp-fw-examples \
+    vek280-openamp-fw-examples \
+    vmk180-openamp-fw-examples \
+    vpk120-openamp-fw-examples \
     "
 
 AMD_CORTEXA78_COMMON_INSTALL = "\
@@ -141,6 +146,7 @@ AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
 AMD_CORTEXA78_MALI_INSTALL = "\
     vek385-pl-bram-gpio-fw \
     vek385-revb-pl-bram-gpio-fw \
+    vek385-openamp-fw-examples \
     "
 
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_COMMON_INSTALL} ${AMD_RISCV32_INSTALL}"
