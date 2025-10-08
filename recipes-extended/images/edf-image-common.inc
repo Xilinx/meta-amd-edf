@@ -86,6 +86,7 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
     packagegroup-openamp \
     packagegroup-oci \
     packagegroup-docker \
+    packagegroup-opencv \
     systemtap \
     v4l-utils \
     xrt \
