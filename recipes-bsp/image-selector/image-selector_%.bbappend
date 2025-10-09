@@ -1,10 +1,9 @@
-IMGSEL_VERSION ?= "${DISTRO_VERSION}"
-IMGSEL_VERSION_STRING ?= "amd-edf-${MACHINE}-imgsel-v${IMGSEL_VERSION}"
+IMGSEL_VERSION ?= "${PV}"
 IMGSEL_VERSION_FILE ?= "${WORKDIR}/${PN}-version.txt"
 
 do_configure:append () {
 	if [ "${SOC_FAMILY}" != "zynqmp" ]; then
-		echo "${IMGSEL_VERSION_STRING}" > ${IMGSEL_VERSION_FILE}
+		echo "${IMGSEL_VERSION}" > ${IMGSEL_VERSION_FILE}
 	fi
 }
 
