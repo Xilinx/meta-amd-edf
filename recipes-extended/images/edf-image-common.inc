@@ -131,7 +131,6 @@ AMD_CORTEXA72_INSTALL = "\
 
 AMD_CORTEXA78_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' xen-zephyr-domu-image', '', d)} \
     "
 
 AMD_CORTEXA78_INSTALL = ""
@@ -144,6 +143,7 @@ AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     vcu2-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-client', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' xen-zephyr-domu-image', '', d)} \
     "
 
 AMD_CORTEXA78_MALI_INSTALL = "\
