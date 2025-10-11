@@ -113,7 +113,6 @@ AMD_CORTEXA53_MALI_INSTALL = "\
 AMD_CORTEXA72_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
     vdu-ctrlsw \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' xen-zephyr-domu-image', '', d)} \
     "
 
 AMD_CORTEXA72_INSTALL = "\
@@ -131,7 +130,6 @@ AMD_CORTEXA72_INSTALL = "\
 
 AMD_CORTEXA78_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' xen-zephyr-domu-image', '', d)} \
     "
 
 AMD_CORTEXA78_INSTALL = ""
