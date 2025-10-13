@@ -71,7 +71,7 @@ python do_compile() {
     image_recovery_offset = int(d.getVar("IMAGE_RECOVERY_OFFSET"), 0)
     image_recovery_meta_offset = int(d.getVar("IMAGE_RECOVERY_META_OFFSET"), 0)
     capsule_metadata_offset = int(d.getVar("CAPSULE_METADATA_OFFSET"), 0)
-    capsule_metadata_backup_offset = int(d.getVar("CAPSULE_METADATA_OFFSET"), 0)
+    capsule_metadata_backup_offset = int(d.getVar("CAPSULE_METADATA_BACKUP_OFFSET"), 0)
     uboot_env_offset = int(d.getVar("UBOOT_ENV_OFFSET"), 0)
     uboot_env_backup_offset = int(d.getVar("UBOOT_ENV_BACKUP_OFFSET"), 0)
     image_a_offset = int(d.getVar("IMAGE_A_OFFSET"), 0)
