@@ -122,7 +122,7 @@ AMD_CORTEXA72_INSTALL = "\
     vmk180-pl-bram-gpio-fw \
     vpk120-pl-bram-gpio-fw \
     vrk160-pl-bram-gpio-fw \
-    l20-openamp-fw-examples \
+    vm-p-m1369-00-reva-x-prc-01-reva-openamp-fw-examples \
     vck190-openamp-fw-examples \
     vek280-openamp-fw-examples \
     vmk180-openamp-fw-examples \
