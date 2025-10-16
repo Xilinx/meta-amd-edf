@@ -321,10 +321,10 @@ SDK_CLASSES += "amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools"
 AMD-EDF_VERSION = "25.11"
 
 INHERIT += "own-mirrors"
-SOURCE_MIRROR_URL = "https://petalinux.xilinx.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/downloads"
+SOURCE_MIRROR_URL = "https://edf.amd.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/downloads"
 
 SSTATE_MIRRORS = " \
-file://.* https://petalinux.xilinx.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/aarch64/sstate-cache/PATH;downloadfilename=PATH \n \
+file://.* https://edf.amd.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/aarch64/sstate-cache/PATH;downloadfilename=PATH \n \
 "
 
 # Skip warning messages
