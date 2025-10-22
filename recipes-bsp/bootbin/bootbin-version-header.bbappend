@@ -22,11 +22,12 @@ python do_configure:append:amd-edf() {
     if d.getVar('SOC_FAMILY') == 'zynqmp':
        edf_version = d.getVar('MACHINE') + '-v' + d.getVar('BOOTBIN_ROLLBACK_COUNTER')
        edf_ver_f = edf_version.encode("utf-8").hex()
+       with open(d.expand("${B}/${BOOTBIN_ROLLBACK_COUNTER_FILE}"), 'w') as f:
+          f.write(edf_ver_f)
     else:
-       edf_ver_f = int(edf_version).to_bytes(4, 'little').decode('utf-8')
-
-    with open(d.expand("${B}/${BOOTBIN_ROLLBACK_COUNTER_FILE}"), "w") as f:
-       f.write(edf_ver_f)
+       edf_ver_f = int(edf_version).to_bytes(4, 'little')
+       with open(d.expand("${B}/${BOOTBIN_ROLLBACK_COUNTER_FILE}"), 'wb') as f:
+          f.write(edf_ver_f)
 }
 
 do_deploy:append:amd-edf() {
