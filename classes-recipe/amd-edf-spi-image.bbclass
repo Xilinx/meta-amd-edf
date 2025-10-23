@@ -95,7 +95,7 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open image selector file: " + str(err))
 
-    image_selector_size = sys.getsizeof(imgsel_data)
+    image_selector_size = len(imgsel_data)
     if (image_selector_size > image_selector_max_size):
         bb.fatal("Image Selector file size (%s) exceeds allocated space (%s)" % (image_selector_size, image_selector_max_size))
 
@@ -114,7 +114,7 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open image recovery file: " + str(err))
 
-    image_recovery_size = sys.getsizeof(imgrcvry_data)
+    image_recovery_size = len(imgrcvry_data)
     if (image_recovery_size > image_recovery_max_size):
         bb.fatal("Image Recovery file size (%s) exceeds allocated space (%s)" % (image_recovery_size, image_recovery_max_size))
 
@@ -130,7 +130,7 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open capsule metadata file: " + str(err))
 
-    capsule_metadata_size = sys.getsizeof(capsule_mdata)
+    capsule_metadata_size = len(capsule_mdata)
     if (capsule_metadata_size > capsule_metadata_max_size):
         bb.fatal("Capsule metadata file size (%s) exceeds allocated space (%s)" % (capsule_metadata_size, capsule_metadata_max_size))
 
@@ -153,7 +153,7 @@ python do_compile() {
     except OSError as err:
         bb.fatal("Unable to open boot.bin file: " + str(err))
 
-    bootbin_size = sys.getsizeof(bootbin)
+    bootbin_size = len(bootbin)
     if (bootbin_size > image_max_size):
         bb.fatal("boot.bin file size (%s) exceeds allocated space (%s)" % (bootbin_size, image_max_size))
 
