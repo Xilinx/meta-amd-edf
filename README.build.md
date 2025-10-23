@@ -83,7 +83,7 @@ $ source edf-init-build-env
 > **Note:**
 > Depending on the build configuration, several 10s of GB of storage space may
 > be required in the TMPDIR. Please make sure you have plenty of storage space
-> available. Alternatively, to save disk space, you can add the below varibale to
+> available. Alternatively, to save disk space, you can add the below variable to
 > build/conf/local.conf file. This option removes the work dir after build and only
 > keeps the logs around.
 >  ```
