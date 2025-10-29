@@ -161,3 +161,35 @@ AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa53-mali-common = " ${AMD_CORTEXA5
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa72-common = " ${AMD_CORTEXA72_COMMON_INSTALL} ${AMD_CORTEXA72_INSTALL}"
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa78-common = " ${AMD_CORTEXA78_COMMON_INSTALL} ${AMD_CORTEXA78_INSTALL}"
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa78-mali-common = " ${AMD_CORTEXA78_MALI_COMMON_INSTALL} ${AMD_CORTEXA78_MALI_INSTALL}"
+
+# Based on some code from meta-xilinx-virtualization
+SERVICES_TO_DISABLE ?= ""
+
+# Only enable console-getty.service is serial_consoles is blank
+SERVICES_TO_ENABLE ?= " \
+    ${@'console-getty.service' if not d.getVar('SERIAL_CONSOLES') else ''} \
+"
+
+disable_systemd_services () {
+        SERVICES_TO_DISABLE="${SERVICES_TO_DISABLE}"
+        if [ -n "$SERVICES_TO_DISABLE" ]; then
+                echo "Disabling systemd services:"
+                for service in $SERVICES_TO_DISABLE; do
+                        echo "    $service"
+                        systemctl --root="${IMAGE_ROOTFS}" mask $service > /dev/null 2>&1
+                done
+        fi
+}
+
+enable_systemd_services () {
+        SERVICES_TO_ENABLE="${SERVICES_TO_ENABLE}"
+        if [ -n "$SERVICES_TO_ENABLE" ]; then
+                echo "Enabling additional systemd services:"
+                for service in $SERVICES_TO_ENABLE; do
+                        echo "    $service"
+                        systemctl --root="${IMAGE_ROOTFS}" enable $service > /dev/null 2>&1
+                done
+        fi
+}
+
+ROOTFS_POSTPROCESS_COMMAND += "disable_systemd_services; enable_systemd_services;"
