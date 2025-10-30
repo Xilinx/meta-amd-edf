@@ -5,6 +5,10 @@ SRC_URI += "\
     file://versal-2ve-2vm-xen-efi-config \
     "
 
+# Any machine or soc specific override requires a different package_arch
+PACKAGE_ARCH:versal = "${MACHINE_ARCH}"
+PACKAGE_ARCH:versal-2ve-2vm = "${MACHINE_ARCH}"
+
 do_install:append:versal() {
     install -m 0644 ${WORKDIR}/versal-xen-efi-config ${D}/boot/xen.cfg
 }

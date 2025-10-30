@@ -17,6 +17,8 @@ COMPATIBLE_MACHINE:versal = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-net = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-2ve-2vm = "${MACHINE}"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 INHIBIT_DEFAULT_DEPS = "1"
 
 do_patch[noexec] = "1"
