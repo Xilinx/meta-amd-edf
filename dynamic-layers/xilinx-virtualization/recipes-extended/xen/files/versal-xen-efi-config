@@ -1,3 +1,5 @@
+# Warning: This file is auto-generated and may be overwritten if the Xen package is updated
+
 [global]
 default=xen
 
