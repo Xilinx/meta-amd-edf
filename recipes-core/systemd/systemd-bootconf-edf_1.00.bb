@@ -62,4 +62,60 @@ do_deploy() {
     fi
 }
 
+pkg_postinst:${PN} () {
+    # Skip during rootfs creation so the copy runs only on the live target.
+    if [ -n "$D" ]; then
+        echo "systemd-bootconf-edf: skipping postinst during image build."
+        exit 0
+    fi
+
+    loader_dir="/boot/loader"
+    efi_dir="/efi"
+
+    if [ ! -d "$loader_dir" ]; then
+        echo "systemd-bootconf-edf: /boot/loader missing; skipping ESP sync."
+        exit 0
+    fi
+
+    if [ ! -d "$efi_dir" ]; then
+        echo "systemd-bootconf-edf: /efi not mounted; skipping ESP sync."
+        exit 0
+    fi
+
+    if ! grep -qs " ${efi_dir} " /proc/mounts; then
+        echo "systemd-bootconf-edf: /efi not mounted; skipping ESP sync."
+        exit 0
+    fi
+
+    dest_loader="${efi_dir}/loader"
+
+    rootfs_uuid=""
+    if [ -r /proc/cmdline ]; then
+        rootfs_uuid="$(sed -n 's/.*root=PARTUUID=\([^ ]*\).*/\1/p' /proc/cmdline)"
+    fi
+
+    install -d "${dest_loader}/entries"
+
+    if [ -f "${loader_dir}/loader.conf" ]; then
+        install -m 0644 "${loader_dir}/loader.conf" "${dest_loader}/loader.conf"
+    fi
+
+    for entry in "${loader_dir}"/entries/*.conf; do
+        [ -f "$entry" ] || continue
+        dest_entry="${dest_loader}/entries/$(basename "$entry")"
+
+        uuid="${rootfs_uuid}"
+        if [ -z "$uuid" ] && [ -f "$dest_entry" ]; then
+            uuid="$(sed -n 's/.*root=PARTUUID=\([^ ]*\).*/\1/p' "$dest_entry")"
+        fi
+
+        if [ -n "$uuid" ]; then
+            sed "s#@@ROOTFS_UUID@@#${uuid}#g" "$entry" > "$dest_entry"
+            chmod 0644 "$dest_entry"
+        else
+            echo "systemd-bootconf-edf: PARTUUID unavailable; keeping existing $(basename "$dest_entry")."
+        fi
+    done
+}
+
 addtask do_deploy after do_compile
