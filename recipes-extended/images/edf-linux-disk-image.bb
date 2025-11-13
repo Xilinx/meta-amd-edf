@@ -47,11 +47,11 @@ IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
 
 # Generate a UUID for the rootfs and pass it to wic - we need to do it here because it also needs to
 # be passed to the wic plugin which is installing the ESP config files for systemd-boot and Xen
-do_rootfs_wicenv:prepend:versal () {
+do_rootfs_wicenv:prepend () {
     import uuid
     d.setVar("ROOTFS_PART_UUID", str(uuid.uuid4()))
 }
-do_rootfs_wicufsenv:prepend:versal-2ve-2vm () {
+do_rootfs_wicufsenv:prepend () {
     import uuid
     d.setVar("ROOTFS_PART_UUID", str(uuid.uuid4()))
 }
