@@ -72,8 +72,8 @@ $ source edf-init-build-env
 6. Once environment is initialized `bblayers.conf` add `local.conf` are set from
    meta-amd-edf templates.
 
-7. For list of available board machines see meta-adaptive-socs/meta-amd-<eval-board>/conf/machine/*.conf
-   file.
+7. For list of available board machines see
+   meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp/conf/machine/*.conf file.
 
 8. For NFS build host system modify the build/conf/local.conf and add TMPDIR
    path as shown below. On local storage $TMPDIR will be set to build/tmp
