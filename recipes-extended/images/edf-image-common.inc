@@ -127,6 +127,7 @@ AMD_CORTEXA72_INSTALL = "\
     vek280-openamp-fw-examples \
     vmk180-openamp-fw-examples \
     vpk120-openamp-fw-examples \
+    vrk160-openamp-fw-examples \
     "
 
 AMD_CORTEXA78_COMMON_INSTALL = "\
