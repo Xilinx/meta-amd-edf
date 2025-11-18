@@ -15,6 +15,7 @@ IMAGE_INSTALL = "\
     "
 
 inherit core-image
+inherit amd-edf-wic-efi
 require recipes-core/images/edf-systemd-service.inc
 
 do_rootfs[prefuncs] += "edf_check_rootfs"
@@ -28,12 +29,6 @@ IMAGE_FSTYPES:append:versal-2ve-2vm = " wic.ufs wic.ufs.xz wic.ufs.bmap"
 
 IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 
-# ROOT Partition type UUID
-ROOTFS_PART_TYPE = "B921B045-1DF0-41C3-AF44-4C6F280D3FAE"
-
-# ESP partition UUID is fixed - uboot will not detect the ESP partition if this is not set
-ESP_PART_TYPE = "C12A7328-F81F-11D2-BA4B-00A0C93EC93B"
-
 IMAGE_EFI_BOOT_FILES ?= ""
 IMAGE_EFI_BOOT_FILES:versal ?= " \
     loader/loader.conf;loader/loader.conf \
@@ -46,39 +41,12 @@ IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
     "
 
-# Generate a UUID for the rootfs and pass it to wic - we need to do it here because it also needs to
-# be passed to the wic plugin which is installing the ESP config files for systemd-boot and Xen
-do_rootfs_wicenv:prepend () {
-    import uuid
-    d.setVar("ROOTFS_PART_UUID", str(uuid.uuid4()))
-}
-do_rootfs_wicufsenv:prepend () {
-    import uuid
-    d.setVar("ROOTFS_PART_UUID", str(uuid.uuid4()))
-}
-
 ADDN_IMAGE_RDEPENDS = ""
 ADDN_IMAGE_RDEPENDS:versal = "virtual-systemd-bootconf:do_deploy"
 ADDN_IMAGE_RDEPENDS:versal-net = "virtual-systemd-bootconf:do_deploy"
 ADDN_IMAGE_RDEPENDS:versal-2ve-2vm = "virtual-systemd-bootconf:do_deploy"
 
 do_rootfs[rdepends] += "${ADDN_IMAGE_RDEPENDS}"
-
-WICVARS:append = "\
-    WORKDIR \
-    ROOTFS_PART_UUID \
-    ROOTFS_PART_TYPE \
-    ESP_PART_TYPE \
-    EFI_PROVIDER \
-    "
-
-WICUFSVARS:append = "\
-    WORKDIR \
-    ROOTFS_PART_UUID \
-    ROOTFS_PART_TYPE \
-    ESP_PART_TYPE \
-    EFI_PROVIDER \
-    "
 
 WKS_FILES = "edf-disk-single-rootfs.wks"
 WKS_FILES:versal = "edf-disk-single-rootfs-efi.wks"
