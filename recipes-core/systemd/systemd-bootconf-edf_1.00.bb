@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 
 RPROVIDES:${PN} += "virtual-systemd-bootconf"
 
+FILESEXTRAPATHS:prepend:zynqmp := "${THISDIR}/zynqmp:"
 FILESEXTRAPATHS:prepend:versal := "${THISDIR}/versal:"
 FILESEXTRAPATHS:prepend:versal-net := "${THISDIR}/versal:"
 FILESEXTRAPATHS:prepend:versal-2ve-2vm := "${THISDIR}/versal-2ve-2vm:"
@@ -13,6 +14,7 @@ FILESEXTRAPATHS:prepend:versal-2ve-2vm := "${THISDIR}/versal-2ve-2vm:"
 inherit deploy
 
 COMPATIBLE_MACHINE = "^$"
+COMPATIBLE_MACHINE:zynqmp = "${MACHINE}"
 COMPATIBLE_MACHINE:versal = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-net = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-2ve-2vm = "${MACHINE}"
@@ -25,16 +27,8 @@ do_patch[noexec] = "1"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-SRC_URI = "file://loader.conf"
-SRC_URI:append:versal = " \
-    file://edf-linux.conf \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'file://edf-xen.conf', '', d)} \
-    "
-SRC_URI:append:versal-net = " \
-    file://edf-linux.conf \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'file://edf-xen.conf', '', d)} \
-    "
-SRC_URI:append:versal-2ve-2vm = " \
+SRC_URI = " \
+    file://loader.conf \
     file://edf-linux.conf \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'file://edf-xen.conf', '', d)} \
     "
