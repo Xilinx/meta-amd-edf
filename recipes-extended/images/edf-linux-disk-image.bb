@@ -15,6 +15,7 @@ IMAGE_INSTALL = "\
     "
 
 inherit core-image
+require recipes-core/images/edf-systemd-service.inc
 
 do_rootfs[prefuncs] += "edf_check_rootfs"
 
