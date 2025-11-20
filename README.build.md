@@ -69,8 +69,8 @@ $ source edf-init-build-env
 >    you will run into templateconf errors.
 >    `Error: TEMPLATECONF value points to nonexistent directory '<template-path>'`
 
-6. Once environment is initialized `bblayers.conf` add `local.conf` are set from
-   meta-amd-edf templates.
+6. Once the environment is initialized, `bblayers.conf` and `local.conf` are set
+   from the meta-amd-edf templates.
 
 7. For list of available board machines see
    meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp/conf/machine/*.conf file.
@@ -103,8 +103,8 @@ $ source edf-init-build-env
 
 10. Manually configure a tap interface for your build system. As root run
    <path-to>/sources/poky/scripts/runqemu-gen-tapdevs, which should generate a
-   list of tap devices. Once tap interfaces are successfully create you should
-   be able to see all the interfaces by running ifconfig command.
+   list of tap devices. Once the tap interfaces are successfully created, you
+   should be able to see all the interfaces by running the ifconfig command.
       ```
       $ sudo ./<path-to-layer>/poky/scripts/runqemu-gen-tapdevs $(id -g $USER) 4
       ```
@@ -150,7 +150,7 @@ $ source edf-init-build-env
 ## Release Information
 
 Refer [AMD Xilinx Yocto wiki](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/2613018625)
-page for release features, known issue and limitations.
+page for release features, known issues and limitations.
 
 ## Additional Documentation
 
