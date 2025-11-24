@@ -1,4 +1,4 @@
-SRC_URI += " file://config_cgroup_bpf.cfg"
+KERNEL_FEATURES += "features/bpf/bpf.cfg"
 
 #FIXME - temporary work-around for this not being available yet
 def kernel_cache_feature(src_uri,feature):
