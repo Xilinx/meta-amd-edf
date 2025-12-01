@@ -74,6 +74,7 @@ AMD_CORTEXA9_COMMON_INSTALL = " \
 
 AMD_CORTEXA9_INSTALL = " \
     zc702-pl-bram-gpio-fw \
+    zc706-pl-bram-gpio-fw \
 "
 
 AMD_CORTEXA53_COMMON_INSTALL = "\
