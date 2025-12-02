@@ -23,6 +23,7 @@ TOOLCHAIN_TARGET_TASK:append:aarch64 = " \
     packagegroup-vitis-aiml-dev \
     packagegroup-opencv \
     xrt-dev \
+    libmetal \
     "
 
 # add these items to the "native" side of the SDK
