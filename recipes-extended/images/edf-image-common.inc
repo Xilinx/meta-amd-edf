@@ -32,6 +32,7 @@ AMD-EDF_IMAGE_COMMON_INSTALL = "\
     bmaptool \
     usbutils \
     fpga-manager-script \
+    git \
     "
 
 # Full set of packages for EDF images
