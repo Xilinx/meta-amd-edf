@@ -30,6 +30,11 @@ IMAGE_FSTYPES:append:versal-2ve-2vm = " wic.ufs wic.ufs.xz wic.ufs.bmap"
 IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 
 IMAGE_EFI_BOOT_FILES ?= ""
+IMAGE_EFI_BOOT_FILES:zynqmp ?= " \
+    loader/loader.conf;loader/loader.conf \
+    loader/edf-linux.conf;loader/entries/edf-linux.conf \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
+    "
 IMAGE_EFI_BOOT_FILES:versal ?= " \
     loader/loader.conf;loader/loader.conf \
     loader/edf-linux.conf;loader/entries/edf-linux.conf \
@@ -47,6 +52,7 @@ IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
     "
 
 ADDN_IMAGE_RDEPENDS = ""
+ADDN_IMAGE_RDEPENDS:zynqmp = "virtual-systemd-bootconf:do_deploy"
 ADDN_IMAGE_RDEPENDS:versal = "virtual-systemd-bootconf:do_deploy"
 ADDN_IMAGE_RDEPENDS:versal-net = "virtual-systemd-bootconf:do_deploy"
 ADDN_IMAGE_RDEPENDS:versal-2ve-2vm = "virtual-systemd-bootconf:do_deploy"
@@ -54,6 +60,7 @@ ADDN_IMAGE_RDEPENDS:versal-2ve-2vm = "virtual-systemd-bootconf:do_deploy"
 do_rootfs[rdepends] += "${ADDN_IMAGE_RDEPENDS}"
 
 WKS_FILES = "edf-disk-single-rootfs.wks"
+WKS_FILES:zynqmp = "edf-disk-single-rootfs-efi.wks"
 WKS_FILES:versal = "edf-disk-single-rootfs-efi.wks"
 WKS_FILES:versal-net = "edf-disk-single-rootfs-efi.wks"
 WKS_FILES:versal-2ve-2vm = "edf-disk-single-rootfs-efi.wks"
