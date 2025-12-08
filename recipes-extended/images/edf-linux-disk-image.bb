@@ -35,6 +35,11 @@ IMAGE_EFI_BOOT_FILES:versal ?= " \
     loader/edf-linux.conf;loader/entries/edf-linux.conf \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
     "
+IMAGE_EFI_BOOT_FILES:versal-net ?= " \
+    loader/loader.conf;loader/loader.conf \
+    loader/edf-linux.conf;loader/entries/edf-linux.conf \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
+    "
 IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
     loader/loader.conf;loader/loader.conf \
     loader/edf-linux.conf;loader/entries/edf-linux.conf \
