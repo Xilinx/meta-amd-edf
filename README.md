@@ -73,7 +73,7 @@ This layer depends on:
 	branch: scarthgap or AMD release version (e.g. rel-v2024.2)
 
 	URI:
-        https://gitenterprise.xilinx.com/Yocto/meta-amd-adaptive-socs (development and AMD release)
+        https://github.com/Xilinx/meta-amd-adaptive-socs (official, development and AMD release)
 	layers: meta-amd-adaptive-socs-core, meta-amd-adaptive-socs-bsp
 	branch: scarthgap or AMD release version (e.g. rel-v2024.2)
 
