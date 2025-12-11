@@ -1,7 +1,7 @@
-include ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'edf-virt.inc', '', d)}
+require ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'edf-virt.inc', '', d)}
 
 # Audit is required or systemd can fail to start the journal
-KERNEL_FEATURES += "cgl/features/audit/audit.cfg"
+KERNEL_FEATURES:append = " cgl/features/audit/audit.cfg"
 
 pkg_postinst:${KERNEL_PACKAGE_NAME}-image:append () {
     # Only run on the live target so we don't depend on /efi during rootfs builds.
