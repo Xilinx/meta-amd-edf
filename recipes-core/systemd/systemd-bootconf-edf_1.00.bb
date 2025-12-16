@@ -6,18 +6,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 
 RPROVIDES:${PN} += "virtual-systemd-bootconf"
 
-FILESEXTRAPATHS:prepend:zynqmp := "${THISDIR}/zynqmp:"
-FILESEXTRAPATHS:prepend:versal := "${THISDIR}/versal:"
-FILESEXTRAPATHS:prepend:versal-net := "${THISDIR}/versal:"
-FILESEXTRAPATHS:prepend:versal-2ve-2vm := "${THISDIR}/versal-2ve-2vm:"
-
 inherit deploy
 
+# Use aarch64 override for machine compatibility
 COMPATIBLE_MACHINE = "^$"
-COMPATIBLE_MACHINE:zynqmp = "${MACHINE}"
-COMPATIBLE_MACHINE:versal = "${MACHINE}"
-COMPATIBLE_MACHINE:versal-net = "${MACHINE}"
-COMPATIBLE_MACHINE:versal-2ve-2vm = "${MACHINE}"
+COMPATIBLE_MACHINE:aarch64 = "${MACHINE}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -25,7 +18,6 @@ INHIBIT_DEFAULT_DEPS = "1"
 
 do_patch[noexec] = "1"
 do_configure[noexec] = "1"
-do_compile[noexec] = "1"
 
 SRC_URI = " \
     file://loader.conf \
@@ -35,10 +27,22 @@ SRC_URI = " \
 
 S = "${WORKDIR}"
 
+# Extra kernel command line options - override per platform as needed
+KERNEL_CMDLINE_EXTRA ?= ""
+KERNEL_CMDLINE_EXTRA:zynqmp = "earlycon"
+KERNEL_CMDLINE_EXTRA:versal = "uio_pdrv_genirq.of_id=generic-uio"
+KERNEL_CMDLINE_EXTRA:versal-net = "uio_pdrv_genirq.of_id=generic-uio"
+KERNEL_CMDLINE_EXTRA:versal-2ve-2vm = ""
+
+do_compile() {
+    # Substitute the kernel cmdline extra placeholder
+    sed 's#@@KERNEL_CMDLINE_EXTRA@@#${KERNEL_CMDLINE_EXTRA}#g' ${S}/edf-linux.conf > ${WORKDIR}/edf-linux.conf.out
+}
+
 do_install() {
     install -d ${D}/boot/loader/entries
     install -m 0644 ${S}/loader.conf ${D}/boot/loader/
-    install -m 0644 ${S}/edf-linux.conf ${D}/boot/loader/entries/
+    install -m 0644 ${WORKDIR}/edf-linux.conf.out ${D}/boot/loader/entries/edf-linux.conf
     if [ -e "${S}/edf-xen.conf" ]; then
         install -m 0644 ${S}/edf-xen.conf ${D}/boot/loader/entries/
     fi
@@ -47,10 +51,9 @@ do_install() {
 FILES:${PN} = "/boot/loader/loader.conf /boot/loader/entries/*.conf"
 
 do_deploy() {
-    install -d ${DEPLOYDIR}
     install -d ${DEPLOYDIR}/loader
     install -m 0644 ${S}/loader.conf ${DEPLOYDIR}/loader
-    install -m 0644 ${S}/edf-linux.conf ${DEPLOYDIR}/loader
+    install -m 0644 ${WORKDIR}/edf-linux.conf.out ${DEPLOYDIR}/loader/edf-linux.conf
     if [ -e "${S}/edf-xen.conf" ]; then
         install -m 0644 ${S}/edf-xen.conf ${DEPLOYDIR}/loader
     fi
