@@ -24,46 +24,27 @@ do_rootfs[prefuncs] += "edf_check_rootfs"
 # cpio is NOT supported, this image will be too large for a ramdisk!
 IMAGE_FSTYPES = "tar.gz wic wic.xz wic.bmap${@' wic.qemu-sd' if bb.data.inherits_class('image-types-xilinx-qemu', d) else ''}"
 
-# Add the UFS (4k) ones when required
+# Add the UFS (4k) ones when required for versal-2ve-2vm
 IMAGE_FSTYPES:append:versal-2ve-2vm = " wic.ufs wic.ufs.xz wic.ufs.bmap"
-
 IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 
+# EFI boot files for all aarch64 platforms
 IMAGE_EFI_BOOT_FILES ?= ""
-IMAGE_EFI_BOOT_FILES:zynqmp ?= " \
-    loader/loader.conf;loader/loader.conf \
-    loader/edf-linux.conf;loader/entries/edf-linux.conf \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
-    "
-IMAGE_EFI_BOOT_FILES:versal ?= " \
-    loader/loader.conf;loader/loader.conf \
-    loader/edf-linux.conf;loader/entries/edf-linux.conf \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
-    "
-IMAGE_EFI_BOOT_FILES:versal-net ?= " \
-    loader/loader.conf;loader/loader.conf \
-    loader/edf-linux.conf;loader/entries/edf-linux.conf \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
-    "
-IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
+IMAGE_EFI_BOOT_FILES:aarch64 ?= " \
     loader/loader.conf;loader/loader.conf \
     loader/edf-linux.conf;loader/entries/edf-linux.conf \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
     "
 
+# systemd-boot configuration dependency for aarch64
 ADDN_IMAGE_RDEPENDS = ""
-ADDN_IMAGE_RDEPENDS:zynqmp = "virtual-systemd-bootconf:do_deploy"
-ADDN_IMAGE_RDEPENDS:versal = "virtual-systemd-bootconf:do_deploy"
-ADDN_IMAGE_RDEPENDS:versal-net = "virtual-systemd-bootconf:do_deploy"
-ADDN_IMAGE_RDEPENDS:versal-2ve-2vm = "virtual-systemd-bootconf:do_deploy"
+ADDN_IMAGE_RDEPENDS:aarch64 = "virtual-systemd-bootconf:do_deploy"
 
 do_rootfs[rdepends] += "${ADDN_IMAGE_RDEPENDS}"
 
+# WKS file selection - EFI for aarch64, default for others
 WKS_FILES = "edf-disk-single-rootfs.wks"
-WKS_FILES:zynqmp = "edf-disk-single-rootfs-efi.wks"
-WKS_FILES:versal = "edf-disk-single-rootfs-efi.wks"
-WKS_FILES:versal-net = "edf-disk-single-rootfs-efi.wks"
-WKS_FILES:versal-2ve-2vm = "edf-disk-single-rootfs-efi.wks"
+WKS_FILES:aarch64 = "edf-disk-single-rootfs-efi.wks"
 
 # Configure QEMU boot
 QB_KERNEL_ROOT:riscv32 = "/dev/vda3"
