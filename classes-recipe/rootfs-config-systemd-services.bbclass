@@ -1,10 +1,14 @@
 # Common console wiring for EDF rootfs images.
 
 # These variables let individual images append to the enable/disable lists.
-SERVICES_TO_ENABLE ?= " \
-    ${@'console-getty.service' if not d.getVar('SERIAL_CONSOLES') else ''} \
-"
+SERVICES_TO_ENABLE ?= ""
+
 SERVICES_TO_DISABLE ?= ""
+
+# Define a new image feature 'console-getty'
+
+IMAGE_FEATURES[validitems] += "console-getty"
+SERVICES_TO_ENABLE += '${@bb.utils.contains("IMAGE_FEATURES", "console-getty", "console-getty.service", "", d)}'
 
 disable_systemd_services () {
     SERVICES_TO_DISABLE="${SERVICES_TO_DISABLE}"

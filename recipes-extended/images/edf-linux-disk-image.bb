@@ -16,7 +16,6 @@ IMAGE_INSTALL = "\
 
 inherit core-image
 inherit amd-edf-wic-efi
-inherit rootfs-config-systemd-services
 
 do_rootfs[prefuncs] += "edf_check_rootfs"
 
