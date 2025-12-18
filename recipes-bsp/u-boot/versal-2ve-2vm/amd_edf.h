@@ -5,7 +5,7 @@
 #include <configs/amd_edf_common.h>
 
 #define ENV_MEM_LAYOUT_SETTINGS \
-	"fdt_addr_r=0x21000000\0" \
+	"fdt_addr_r=0x3F000000\0" \
 	"fdt_size_r=0x400000\0" \
 	"pxefile_addr_r=0x10000000\0" \
 	"kernel_addr_r=0x20200000\0" \
