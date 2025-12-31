@@ -45,6 +45,12 @@ IMAGE_EFI_BOOT_FILES:versal-2ve-2vm ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
     "
 
+IMAGE_EFI_BOOT_FILES:versal-net ?= " \
+    loader/loader.conf;loader/loader.conf \
+    loader/edf-linux.conf;loader/entries/edf-linux.conf \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
+    "
+
 # Generate a UUID for the rootfs and pass it to wic - we need to do it here because it also needs to
 # be passed to the wic plugin which is installing the ESP config files for systemd-boot and Xen
 do_rootfs_wicenv:prepend () {

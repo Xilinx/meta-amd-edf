@@ -2,12 +2,15 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot-xlnx:"
 FILESEXTRAPATHS:prepend:zynqmp := "${THISDIR}/zynqmp:"
 FILESEXTRAPATHS:prepend:versal := "${THISDIR}/versal:"
 FILESEXTRAPATHS:prepend:versal-2ve-2vm := "${THISDIR}/versal-2ve-2vm:"
+FILESEXTRAPATHS:prepend:versal-net := "${THISDIR}/versal:"
 
 SRC_URI:append:zynqmp = " file://edf-env.cfg file://amd_edf.h"
 SRC_URI:append:versal = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
 SRC_URI:append:versal-2ve-2vm = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
+SRC_URI:append:versal-net = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
 
 SRC_URI:append:versal:amd-edf = " file://bootcmd-bootefi.cfg"
+SRC_URI:append:versal-net:amd-edf = " file://bootcmd-bootefi.cfg"
 
 # Generate U-Boot environment binary image
 
@@ -22,6 +25,10 @@ do_unpack:append:versal() {
 }
 
 do_unpack:append:versal-2ve-2vm() {
+    bb.build.exec_func('do_sys_config', d)
+}
+
+do_unpack:append:versal-net() {
     bb.build.exec_func('do_sys_config', d)
 }
 
