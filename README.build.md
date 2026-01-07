@@ -99,7 +99,7 @@ $ source edf-init-build-env
 >     10.
 >  2. To build qemu-helper-native recipes you can use any one of the
 >     amd-<tunearch>-common machine name. Here is the list of supported common
->     machines https://github.com/Xilinx/meta-xilinx/tree/rel-v2025.2/meta-xilinx-core/conf/machine
+>     machines https://github.com/Xilinx/meta-xilinx/tree/rel-v2026.1/meta-xilinx-core/conf/machine
 
 10. Manually configure a tap interface for your build system. As root run
    <path-to>/sources/poky/scripts/runqemu-gen-tapdevs, which should generate a
