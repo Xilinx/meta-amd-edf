@@ -3,15 +3,28 @@ LICENSE = "MIT"
 
 PR = "r0"
 
-COMPATIBLE_MACHINE = "^$"
-COMPATIBLE_MACHINE:amd-cortexa9thf-neon-common = "${MACHINE}"
-COMPATIBLE_MACHINE:amd-cortexa53-common = "${MACHINE}"
-COMPATIBLE_MACHINE:amd-cortexa53-mali-common = "${MACHINE}"
-COMPATIBLE_MACHINE:amd-cortexa72-common = "${MACHINE}"
-COMPATIBLE_MACHINE:amd-cortexa78-common = "${MACHINE}"
-COMPATIBLE_MACHINE:amd-cortexa78-mali-common = "${MACHINE}"
+# Buildable for any MACHINE; validated on EDF common bases only.
+# Warn (when building) if none of these overrides are active.
+AMD_EDF_APP_SDK_EXPECTED_MACHINE_OVERRIDES = "\
+    amd-cortexa9thf-neon-common \
+    amd-cortexa53-common \
+    amd-cortexa53-mali-common \
+    amd-cortexa72-common \
+    amd-cortexa78-common \
+    amd-cortexa78-mali-common \
+"
+
+python amd_edf_app_sdk_machinecheck() {
+    expected = set((d.getVar('AMD_EDF_APP_SDK_EXPECTED_MACHINE_OVERRIDES') or "").split())
+
+    if expected and expected.isdisjoint((d.getVar('OVERRIDES') or "").split(':')):
+        bb.warn("meta-edf-app-sdk: current MACHINE '%s' is not based on a validated AMD common base (%s); SDK output is unvalidated and may be incorrect."
+                % (d.getVar('MACHINE'), " ".join(sorted(expected))))
+}
 
 inherit populate_sdk amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools
+
+do_populate_sdk[prefuncs] += "amd_edf_app_sdk_machinecheck"
 
 # add these items to the "cross" side of the SDK
 TOOLCHAIN_TARGET_TASK:append = " \
