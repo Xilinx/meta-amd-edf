@@ -27,12 +27,7 @@ SRC_URI = " \
 
 S = "${WORKDIR}"
 
-# Extra kernel command line options - override per platform as needed
-KERNEL_CMDLINE_EXTRA ?= ""
-KERNEL_CMDLINE_EXTRA:zynqmp = "earlycon"
-KERNEL_CMDLINE_EXTRA:versal = "uio_pdrv_genirq.of_id=generic-uio"
-KERNEL_CMDLINE_EXTRA:versal-net = "uio_pdrv_genirq.of_id=generic-uio"
-KERNEL_CMDLINE_EXTRA:versal-2ve-2vm = ""
+KERNEL_CMDLINE_EXTRA ?= "earlycon uio_pdrv_genirq.of_id=generic-uio"
 
 do_compile() {
     # Substitute the kernel cmdline extra placeholder
