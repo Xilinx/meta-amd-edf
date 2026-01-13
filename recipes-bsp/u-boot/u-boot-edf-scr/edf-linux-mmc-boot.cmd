@@ -6,13 +6,13 @@
 
 setenv kernelname Image
 
-setenv bootpartnum 2
+setenv bootpartnum 1
 setenv rootpartnum 3
 
 echo "Checking for kernel:${kernelname}"
 if test -e ${devtype} ${devnum}:${bootpartnum} ${kernelname}; then
        echo "Loading ${kernelname} at ${kernel_addr_r}"
-       ext4load ${devtype} ${devnum}:${bootpartnum} ${kernel_addr_r} ${kernelname};
+       fatload ${devtype} ${devnum}:${bootpartnum} ${kernel_addr_r} ${kernelname};
 else
        echo "kernel image ${kernelname} not found on ${devtype} ${devnum}:${bootpartnum}"
        exit
