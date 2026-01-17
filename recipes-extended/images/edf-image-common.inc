@@ -78,17 +78,21 @@ AMD_CORTEXA9_INSTALL = " \
     zc706-pl-bram-gpio-fw \
 "
 
+# TODO: Temporarily disable packages that depend on kernel-module-vcu2 because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# kernel-module-vcu2 is buildable with the 6.18 kernel.
+#    packagegroup-xilinx-gstreamer
+#    packagegroup-opencv
+
 AMD_CORTEXA53_COMMON_INSTALL = "\
     docker-moby-contrib \
     libdrm \
     libdrm-tests \
     linux-xlnx-udev-rules \
     packagegroup-xilinx-audio \
-    packagegroup-xilinx-gstreamer \
     packagegroup-openamp \
     packagegroup-oci \
     packagegroup-docker \
-    packagegroup-opencv \
     systemtap \
     v4l-utils \
     xrt \
@@ -139,12 +143,16 @@ AMD_CORTEXA78_COMMON_INSTALL = "\
 
 AMD_CORTEXA78_INSTALL = ""
 
+# TODO: Temporarily disable packages that depend on kernel-module-vcu2 because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# kernel-module-vcu2 is buildable with the 6.18 kernel.
+#    vcu2-ctrlsw
+
 AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     ${AMD_CORTEXA78_COMMON_INSTALL} \
     isp-media-server \
     isp-firmware \
     kernel-module-isp \
-    vcu2-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-client', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' xen-zephyr-domu-image', '', d)} \

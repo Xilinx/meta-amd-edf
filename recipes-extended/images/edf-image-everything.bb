@@ -31,10 +31,13 @@ IMAGE_FEATURES:append:aarch64 = " \
 
 VITISAI_DEPENDENCIES = "opencv googletest protobuf-c boost json-c libunwind"
 
+# TODO: Temporarily disable packages that depend on kernel-module-vcu2 because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# kernel-module-vcu2 is buildable with the 6.18 kernel.
+#    packagegroup-opencv
 AMD-EDF_IMAGE_FULL_INSTALL += " \
     packagegroup-base \
     packagegroup-core-boot \
-    packagegroup-opencv \
     tcpdump \
     wireshark \
     packagegroup-networking-stack \
@@ -134,13 +137,17 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     packagegroup-tsn \
     "
 
+# TODO: Temporarily disable packages that depend on kernel-module-vcu2 because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# kernel-module-vcu2 is buildable with the 6.18 kernel.
+#    packagegroup-xilinx-gstreamer is included in packagegroup-xilinx-multimedia
+#    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
 AMD_CORTEXA78_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-ros \
     packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
     valgrind \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-xilinx-jupyter \
     packagegroup-tsn \
