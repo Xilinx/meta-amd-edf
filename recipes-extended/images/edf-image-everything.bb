@@ -29,7 +29,7 @@ IMAGE_FEATURES:append:aarch64 = " \
     tools-testapps \
     "
 
-VITISAI_DEPENDENCIES = "opencv googletest protobuf-c boost json-c libunwind"
+VITISAI_DEPENDENCIES = "googletest protobuf-c boost json-c libunwind"
 
 # TODO: Temporarily disable packages that depend on kernel-module-vcu2 because
 # these modules do not build with the 6.18 kernel. Re-enable them once
@@ -41,7 +41,6 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     tcpdump \
     wireshark \
     packagegroup-networking-stack \
-    python3-pip\
     python3-multiprocessing \
     python3-numpy \
     python3-shell \
