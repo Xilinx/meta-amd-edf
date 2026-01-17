@@ -113,9 +113,13 @@ AMD_CORTEXA53_INSTALL = "\
     zcu208-pl-bram-gpio-fw \
     "
 
+# TODO: Temporarily disable packages that depend on kernel-module-vcu because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# kernel-module-vcu is buildable with the 6.18 kernel.
+#    vcu-ctrlsw
+
 AMD_CORTEXA53_MALI_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
-    vcu-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     "
 

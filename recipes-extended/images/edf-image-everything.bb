@@ -94,6 +94,10 @@ AMD_CORTEXA9_FULL_INSTALL += " \
     dmidecode \
     "
 
+# TODO: Temporarily disable packages that depend on kernel-module-vcu because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# kernel-module-vcu is buildable with the 6.18 kernel.
+#    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
 AMD_CORTEXA53_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
@@ -104,16 +108,18 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
     valgrind \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-xilinx-jupyter \
     packagegroup-tsn \
     dmidecode \
     "
 
+# TODO: Temporarily disable packages that depend on kernel-module-vcu because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# kernel-module-vcu is buildable with the 6.18 kernel.
+#    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)}
 AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     ${AMD_CORTEXA53_FULL_INSTALL} \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
     glmark2 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', '', 'kmscube', d)} \
     packagegroup-amd-edf-gui \
