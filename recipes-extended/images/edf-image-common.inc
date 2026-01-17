@@ -11,7 +11,11 @@ SKIP_RECIPE[busybox] = "Busybox disabled"
 IMAGE_FEATURES .= "${@' lic-pkgs' if oe.data.typed_value('LICENSE_CREATE_PACKAGE', d) else ''}"
 
 # Default we use the fpga-overlay to select dfx-mgr
-AMD-EDF_FPGA_OVERLAY_INSTALL = "${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', 'dfx-mgr', '', d)}"
+# AMD-EDF_FPGA_OVERLAY_INSTALL = "${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', 'dfx-mgr', '', d)}"
+# TODO: Temporarily disable packages that depend on zocl because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# zocl is buildable with the 6.18 kernel.
+AMD-EDF_FPGA_OVERLAY_INSTALL:aarch64 = ""
 
 # Eliminate architectures where this is not supported
 AMD-EDF_FPGA_OVERLAY_INSTALL:riscv32 = ""
@@ -84,6 +88,11 @@ AMD_CORTEXA9_INSTALL = " \
 #    packagegroup-xilinx-gstreamer
 #    packagegroup-opencv
 
+# TODO: Temporarily disable packages that depend on zocl because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# zocl is buildable with the 6.18 kernel.
+#    xrt
+
 AMD_CORTEXA53_COMMON_INSTALL = "\
     docker-moby-contrib \
     libdrm \
@@ -95,7 +104,6 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
     packagegroup-docker \
     systemtap \
     v4l-utils \
-    xrt \
     packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
     fwupd-quirks \
     "
