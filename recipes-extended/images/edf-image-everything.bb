@@ -98,10 +98,14 @@ AMD_CORTEXA9_FULL_INSTALL += " \
 # these modules do not build with the 6.18 kernel. Re-enable them once
 # kernel-module-vcu is buildable with the 6.18 kernel.
 #    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
+
+# TODO: Temporarily disable packages that depend on kernel-module-hdmi because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# kernel-module-hdmi is buildable with the 6.18 kernel.
+#    kernel-module-hdmi
 AMD_CORTEXA53_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
-    kernel-module-hdmi \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-ros \
@@ -125,12 +129,15 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     packagegroup-amd-edf-gui \
     "
 
+# TODO: Temporarily disable packages that depend on kernel-module-hdmi because
+# these modules do not build with the 6.18 kernel. Re-enable them once
+# kernel-module-hdmi is buildable with the 6.18 kernel.
+#    kernel-module-hdmi
 AMD_CORTEXA72_FULL_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     pm-notebooks \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
-    kernel-module-hdmi \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-ros \
