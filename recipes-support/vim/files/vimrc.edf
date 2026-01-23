@@ -1,0 +1,34 @@
+" AMD Embedded Development Framework - Vim Configuration
+
+" Core settings
+set nocompatible
+filetype plugin indent on
+syntax on
+set encoding=utf-8
+
+" Display
+set number
+set ruler
+set showcmd
+set showmode
+set showmatch
+set laststatus=2
+set wildmenu
+set background=dark
+
+" Search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+" Indentation
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set autoindent
+
+" Editing
+set backspace=indent,eol,start
+set scrolloff=3
+set autoread
