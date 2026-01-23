@@ -31,14 +31,10 @@ TOOLCHAIN_TARGET_TASK:append = " \
     kernel-devsrc \
     "
 
-# TODO: Temporarily disable packages that depend on zocl because
-# these modules do not build with the 6.18 kernel. Re-enable them once
-# zocl is buildable with the 6.18 kernel.
-#    xrt-dev
-
 TOOLCHAIN_TARGET_TASK:append:aarch64 = " \
     packagegroup-vitis-aiml-dev \
     packagegroup-opencv \
+    xrt-dev \
     libmetal \
     "
 
