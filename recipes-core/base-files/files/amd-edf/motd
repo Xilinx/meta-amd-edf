@@ -1,5 +1,4 @@
+AMD Embedded Development Framework
 
-WARNING: AMD Embedded Development Framework is a reference Yocto Project
-distribution that should be used for testing and development purposes only.
-It is recommended that you create your own distribution for production use.
-
+WARNING: Embedded Development Framework is a reference Yocto Project
+distribution that intended for testing and development purposes only.
