@@ -1,0 +1,21 @@
+# /etc/inputrc - global inputrc for libreadline
+# AMD Embedded Development Framework enhanced configuration
+
+# Be 8 bit clean
+set input-meta on
+set output-meta on
+
+# Case-insensitive tab completion
+set completion-ignore-case on
+
+# Show all completions on first tab if ambiguous
+set show-all-if-ambiguous on
+
+# Color files by type during completion
+set colored-stats on
+
+# Append file type indicator during completion (like ls -F)
+set visible-stats on
+
+# Color completion prefix
+set colored-completion-prefix on
