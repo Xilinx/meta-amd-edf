@@ -6,19 +6,18 @@
 
 setenv kernelname uImage
 
-setenv bootpartnum 1
 setenv rootpartnum 3
 
-echo "Checking for kernel:${kernelname}"
-if test -e ${devtype} ${devnum}:${bootpartnum} ${kernelname}; then
+echo "Checking for kernel: /boot/${kernelname}"
+if test -e ${devtype} ${devnum}:${rootpartnum} /boot/${kernelname}; then
        echo "Loading ${kernelname} at ${kernel_addr_r}"
-       fatload ${devtype} ${devnum}:${bootpartnum} ${kernel_addr_r} ${kernelname};
+       ext4load ${devtype} ${devnum}:${rootpartnum} ${kernel_addr_r} /boot/${kernelname};
 else
-       echo "kernel image ${kernelname} not found on ${devtype} ${devnum}:${bootpartnum}"
+       echo "kernel image /boot/${kernelname} not found on ${devtype} ${devnum}:${rootpartnum}"
        exit
 fi
 
 fdt addr ${fdtcontroladdr}
 fdt get value bootargs /chosen bootargs
-setenv bootargs ${bootargs} root=/dev/mmcblk${devnum}p${rootpartnum} ro rootwait uio_pdrv_genirq.of_id=generic-uio
+setenv bootargs ${bootargs} root=/dev/mmcblk${devnum}p${rootpartnum} ro rootwait
 bootm ${kernel_addr_r} - ${fdtcontroladdr}

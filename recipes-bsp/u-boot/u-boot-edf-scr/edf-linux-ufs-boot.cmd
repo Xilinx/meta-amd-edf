@@ -4,19 +4,18 @@
 #
 ################
 setenv kernel_name Image
-setenv bootpartnum 1
 setenv rootpartnum 3
 
 # UFS Boot
 setenv devtype scsi
 setenv devnum 0
 
-echo "Checking for kernel:${kernel_name}"
-if test -e ${devtype} ${devnum}:${bootpartnum} ${kernel_name}; then
+echo "Checking for kernel: /boot/${kernel_name}"
+if test -e ${devtype} ${devnum}:${rootpartnum} /boot/${kernel_name}; then
 	echo "Loading ${kernel_name} at ${kernel_addr_r}"
-	fatload ${devtype} ${devnum}:${bootpartnum} ${kernel_addr_r} ${kernel_name};
+	ext4load ${devtype} ${devnum}:${rootpartnum} ${kernel_addr_r} /boot/${kernel_name};
 else
-	echo "kernel image ${kernel_name} not found on ${devtype} ${devnum}:${bootpartnum}"
+	echo "kernel image /boot/${kernel_name} not found on ${devtype} ${devnum}:${rootpartnum}"
 	exit
 fi
 

@@ -2,12 +2,16 @@
 # Based on a total disk size of 8GB
 #
 # layout:
-#     /boot       1GB      - kernel, device tree, u-boot scripts
+#     /efi        1GB      - empty vfat partition (see note below)
 #     storage     1GB      - user storage (no default mount)
-#     /           6GB      - general-purpose, Yocto-built Linux user-space filesystem
+#     /           6GB      - general-purpose, Yocto-built Linux user-space filesystem (includes /boot)
+#
+# Note: The /efi partition mirrors the EFI layout for consistent partition numbering.
+# It is not used for EFI boot, but can hold BOOT.bin for SD card boot on platforms
+# that load firmware from the first vfat partition.
 
-part  /boot      --source rootfs  --change-directory=boot  --fixed-size=1G  --align 4  --fstype=vfat  --use-label  --label boot  --active
+part  /efi       --fixed-size=1G  --align 4  --fstype=vfat  --use-label  --label esp  --active
 part  storage    --fixed-size=1G  --align 4  --fstype=vfat  --use-label  --label storage
-part  /          --source rootfs  --exclude-path=boot/     --fixed-size=6G  --align 4  --fstype=ext4  --use-label  --label root
+part  /          --source rootfs  --fixed-size=6G  --align 4  --fstype=ext4  --use-label  --label root
 
 bootloader --ptable msdos
