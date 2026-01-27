@@ -173,6 +173,9 @@ AMD_CORTEXA78_MALI_INSTALL = "\
     vek385-revb-openamp-fw-examples \
     "
 
+# Enable weston for mali family variants
+IMAGE_FEATURES += "${@bb.utils.contains('DISTRO_FEATURES', 'libmali wayland', 'weston', '', d)}"
+
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_COMMON_INSTALL} ${AMD_RISCV32_INSTALL}"
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv64imafdc-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV64_COMMON_INSTALL} ${AMD_RISCV64_INSTALL}"
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa9thf-neon-common = " ${AMD_CORTEXA9_COMMON_INSTALL} ${AMD_CORTEXA9_INSTALL}"
