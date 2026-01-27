@@ -1,47 +1,65 @@
-[MTD\VENDOR_xlnx&NAME_Bank-A-Space]
+# MTD partition quirks for Xilinx platforms
+#
+# fwupd matches MTD devices by their partition label from the device tree.
+# These quirks disable probing on partitions that should not be updated via fwupd.
+#
+# Partition naming conventions vary by platform:
+#   - "U-Boot Variables" (title case): QSPI-based platforms
+#   - "U-Boot storage variables" (lowercase): OSPI-based platforms
+# Both variants are included to ensure consistent behavior across all boards.
+
+[MTD\VENDOR_xlnx&NAME_Bank A Space]
 Flags = no-probe
 
-[MTD\NAME_Bank-B-Space]
+[MTD\VENDOR_xlnx&NAME_Bank B Space]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_Image-Recovery]
+[MTD\VENDOR_xlnx&NAME_Image Recovery]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_Image-Recovery-Scratchpad]
+[MTD\VENDOR_xlnx&NAME_Image Recovery Scratchpad]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_Image-Selector]
+[MTD\VENDOR_xlnx&NAME_Image Selector]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_Image-Selector-Backup]
+[MTD\VENDOR_xlnx&NAME_Image Selector Backup]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_Image-Selector-Scratchpad]
+[MTD\VENDOR_xlnx&NAME_Image Selector Scratchpad]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_SystemReady-DT-Update-Metadata]
+[MTD\VENDOR_xlnx&NAME_SystemReady-DT Update Metadata]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_SystemReady-DT-Update-Metadata-Backup]
+[MTD\VENDOR_xlnx&NAME_SystemReady-DT Update Metadata Backup]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_U-Boot-Variables]
+# OSPI platforms use lowercase "storage variables"
+[MTD\VENDOR_xlnx&NAME_U-Boot storage variables]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_U-Boot-Variables-Backup]
+[MTD\VENDOR_xlnx&NAME_U-Boot storage variables backup]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_U-Boot-Variables-Bank-A]
+# QSPI platforms use title case "Variables"
+[MTD\VENDOR_xlnx&NAME_U-Boot Variables]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_U-Boot-Variables-Bank-A-Backup]
+[MTD\VENDOR_xlnx&NAME_U-Boot Variables Backup]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_U-Boot-Variables-Bank-B]
+[MTD\VENDOR_xlnx&NAME_U-Boot Variables Bank A]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_U-Boot-Variables-Bank-B-Backup]
+[MTD\VENDOR_xlnx&NAME_U-Boot Variables Bank A Backup]
 Flags = no-probe
 
-[MTD\VENDOR_xlnx&NAME_User-Scratchpad]
+[MTD\VENDOR_xlnx&NAME_U-Boot Variables Bank B]
+Flags = no-probe
+
+[MTD\VENDOR_xlnx&NAME_U-Boot Variables Bank B Backup]
+Flags = no-probe
+
+[MTD\VENDOR_xlnx&NAME_User Scratchpad]
 Flags = no-probe
