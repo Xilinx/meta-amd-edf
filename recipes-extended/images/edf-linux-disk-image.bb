@@ -23,7 +23,10 @@ do_rootfs[prefuncs] += "edf_check_rootfs"
 # cpio is NOT supported, this image will be too large for a ramdisk!
 IMAGE_FSTYPES = "tar.gz wic wic.xz wic.bmap${@' wic.qemu-sd' if bb.data.inherits_class('image-types-xilinx-qemu', d) else ''}"
 
-# Add the UFS (4k) ones when required for versal-2ve-2vm
+# Add the UFS (4k) ones when required for versal-net and versal-2ve-2vm
+IMAGE_FSTYPES:append:versal-net = " wic.ufs wic.ufs.xz wic.ufs.bmap"
+IMGCLASSES:append:versal-net = " image_types_ufs"
+
 IMAGE_FSTYPES:append:versal-2ve-2vm = " wic.ufs wic.ufs.xz wic.ufs.bmap"
 IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 
