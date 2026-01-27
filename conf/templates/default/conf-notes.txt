@@ -44,6 +44,10 @@ zynqmp
     - zcu106  - zynqmp-zcu106-sdt-full
     - zc702   - zynq-zc702-sdt-full
     - k24-sc  - zynqmp-k24-sc-sdt-base
+    - k26-smk-kv - k26-smk-kv-sdt
+    - k26-smk-kr - k26-smk-kr-sdt
+    - k24-smk-kd - k24-smk-kd-sdt
+
 
 zynq:
     - zc702  - zynq-zc702-sdt-full
@@ -52,3 +56,4 @@ Example:
     $ MACHINE=versal-2ve-2vm-vek385-sdt-seg bitbake edf-ospi
     $ MACHINE=versal-vck190-sdt-seg bitbake edf-qspi
     $ MACHINE=zynqmp-zcu104-sdt-full bitbake xilinx-bootbin
+    $ MACHINE=k26-smk-kv-sdt bitbake kria-qspi
