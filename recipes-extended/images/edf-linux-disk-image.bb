@@ -38,11 +38,8 @@ IMAGE_EFI_BOOT_FILES:aarch64 ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
     "
 
-# systemd-boot configuration dependency for aarch64
-ADDN_IMAGE_RDEPENDS = ""
-ADDN_IMAGE_RDEPENDS:aarch64 = "virtual-systemd-bootconf:do_deploy"
-
-do_rootfs[rdepends] += "${ADDN_IMAGE_RDEPENDS}"
+# WIC bootloader dependencies for aarch64 EFI boot
+WKS_FILE_DEPENDS_BOOTLOADERS:aarch64 = "systemd-boot virtual-systemd-bootconf"
 
 # WKS file selection - EFI for aarch64, default for others
 WKS_FILES = "edf-disk-single-rootfs.wks"
