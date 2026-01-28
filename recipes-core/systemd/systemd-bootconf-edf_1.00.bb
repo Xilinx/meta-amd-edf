@@ -4,6 +4,7 @@ DESCRIPTION = "systemd-boot configuration files to be deployed to the ESP for us
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
+PROVIDES += "virtual-systemd-bootconf"
 RPROVIDES:${PN} += "virtual-systemd-bootconf"
 
 inherit deploy
