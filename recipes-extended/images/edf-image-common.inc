@@ -40,6 +40,7 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     tree \
     yavta \
     ${AMD-EDF_IMAGE_COMMON_INSTALL} \
+    btop \
     can-utils \
     container-host-config \
     dosfstools \
@@ -48,10 +49,14 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     hexedit \
     htop \
     iperf3 \
+    libiio-tests \
     linuxptp \
+    lmsensors-sensors \
     net-tools \
+    netperf \
     phytool \
     python3-gpiod \
+    python3-frugy \
     python3-pip \
     systemd-conf-edf \
     tcf-agent \

@@ -75,7 +75,6 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     memtester \
     libiio \
     libiio-iiod \
-    libiio-tests \
     efibootmgr \
     "
 
