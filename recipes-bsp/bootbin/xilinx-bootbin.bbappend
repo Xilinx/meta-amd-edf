@@ -1,3 +1,19 @@
+# Add bootbin-version-header to the manifest where appropriate
+# Note += is correct here, as we're appending to the value before the
+# override is processed.  If the implementation changes in the base
+# .bb, then this may need to change to match.
+MANIFEST_AGGREGATE_COMPONENTS:zynq += "bootbin-version-header"
+MANIFEST_AGGREGATE_COMPONENTS:zynqmp += "bootbin-version-header"
+MANIFEST_AGGREGATE_COMPONENTS:versal += "bootbin-version-header"
+MANIFEST_AGGREGATE_COMPONENTS:versal-net += "bootbin-version-header"
+MANIFEST_AGGREGATE_COMPONENTS:versal-2ve-2vm += "bootbin-version-header"
+
+MANIFEST_AGGREGATE_DEPENDS:zynq += "bootbin-version-header"
+MANIFEST_AGGREGATE_DEPENDS:zynqmp += "bootbin-version-header"
+MANIFEST_AGGREGATE_DEPENDS:versal += "bootbin-version-header"
+MANIFEST_AGGREGATE_DEPENDS:versal-net += "bootbin-version-header"
+MANIFEST_AGGREGATE_DEPENDS:versal-2ve-2vm += "bootbin-version-header"
+
 BOOTBIN_DEPENDS ?= ""
 BOOTBIN_DEPENDS:append:amd-edf = " bootbin-version-header:do_deploy"
 BOOTBIN_DEPENDS:append:amd-edf:versal = " bootbin-version-string:do_deploy"
