@@ -117,13 +117,9 @@ AMD_CORTEXA53_MALI_INSTALL = "\
     zcu106-pl-bram-gpio-fw \
     "
 
-# TODO: Temporarily disable packages that depend on kernel-module-vdu because
-# these modules do not build with the 6.18 kernel. Re-enable them once
-# kernel-module-vdu is buildable with the 6.18 kernel.
-#    vdu-ctrlsw
-
 AMD_CORTEXA72_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
+    vdu-ctrlsw \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' xen-zephyr-domu-image', '', d)} \
     "
 
