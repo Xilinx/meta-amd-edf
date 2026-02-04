@@ -34,6 +34,8 @@ TOOLCHAIN_TARGET_TASK:append = " \
 TOOLCHAIN_TARGET_TASK:append:aarch64 = " \
     packagegroup-vitis-aiml-dev \
     packagegroup-opencv \
+    packagegroup-xilinx-audio \
+    packagegroup-xilinx-gstreamer \
     xrt-dev \
     libmetal \
     "
