@@ -80,3 +80,8 @@ This layer depends on:
 	URI: https://git.yoctoproject.org/meta-arm
 	layers: meta-arm, meta-arm-toolchain
 	branch: scarthgap
+
+Optional dependencies (for Kria support):
+
+	URI: https://github.com/Xilinx/meta-kria
+	branch: AMD release version (e.g. rel-v2026.1)
