@@ -5,7 +5,7 @@
 #
 
 INHIBIT_DEFAULT_DEPS = "1"
-DEPENDS = "virtual/boot-bin uefi-capsule virtual/imgsel virtual/imgrcry gzip-native"
+DEPENDS = "virtual/boot-bin virtual/imgsel virtual/imgrcry gzip-native"
 
 inherit deploy image-artifact-names
 IMAGE_NAME_SUFFIX = ""
@@ -39,6 +39,9 @@ python() {
         offset = d.getVar(var)
         if not offset:
             raise bb.parse.SkipRecipe(f"{var} is not set")
+    # Conditionally depend on uefi-capsule only if PRODUCT_GUID is set
+    if d.getVar('PRODUCT_GUID'):
+        d.appendVar('DEPENDS', ' uefi-capsule')
 }
 
 # Calculate size available per component based on default layout
@@ -57,14 +60,14 @@ IMGRCVRY_BIN_FILE = "${DEPLOY_DIR_IMAGE}/${IMGRCRY_IMAGE_NAME}.bin"
 
 do_compile[depends] += " \
     virtual/boot-bin:do_deploy \
-    uefi-capsule:do_deploy \
     virtual/imgsel:do_deploy \
     virtual/imgrcry:do_deploy \
     "
+do_compile[depends] += "${@'uefi-capsule:do_deploy' if d.getVar('PRODUCT_GUID') else ''}"
 do_compile[vardeps] += "${AMD_EDF_SPI_VARS}"
 python do_compile() {
 
-    import io
+    import io, os
 
     image_selector_offset = int(d.getVar("IMAGE_SELECTOR_OFFSET"), 0)
     image_selector_backup_offset = int(d.getVar("IMAGE_SELECTOR_BACKUP_OFFSET"), 0)
@@ -124,22 +127,26 @@ python do_compile() {
 
     # System ready IR - Capsule Metadata
 
-    try:
-        with open(d.getVar("DEPLOY_DIR_IMAGE")+"/uefi-capsule-"+d.getVar("MACHINE")+"-metadata.bin", "rb") as f:
-            capsule_mdata = f.read(-1)
-    except OSError as err:
-        bb.fatal("Unable to open capsule metadata file: " + str(err))
+    capsule_metadata_file = d.getVar("DEPLOY_DIR_IMAGE")+"/uefi-capsule-"+d.getVar("MACHINE")+"-metadata.bin"
+    if os.path.exists(capsule_metadata_file):
+        try:
+            with open(capsule_metadata_file, "rb") as f:
+                capsule_mdata = f.read(-1)
+        except OSError as err:
+            bb.fatal("Unable to open capsule metadata file: " + str(err))
 
-    capsule_metadata_size = len(capsule_mdata)
-    if (capsule_metadata_size > capsule_metadata_max_size):
-        bb.fatal("Capsule metadata file size (%s) exceeds allocated space (%s)" % (capsule_metadata_size, capsule_metadata_max_size))
+        capsule_metadata_size = len(capsule_mdata)
+        if (capsule_metadata_size > capsule_metadata_max_size):
+            bb.fatal("Capsule metadata file size (%s) exceeds allocated space (%s)" % (capsule_metadata_size, capsule_metadata_max_size))
 
-    print("INFO: Write capsule to %s\n" % capsule_metadata_offset)
-    spi_data.seek(capsule_metadata_offset)
-    spi_data.write(capsule_mdata)
-    print("INFO: Write capsule backup to %s\n" % capsule_metadata_backup_offset)
-    spi_data.seek(capsule_metadata_backup_offset)
-    spi_data.write(capsule_mdata)
+        print("INFO: Write capsule to %s\n" % capsule_metadata_offset)
+        spi_data.seek(capsule_metadata_offset)
+        spi_data.write(capsule_mdata)
+        print("INFO: Write capsule backup to %s\n" % capsule_metadata_backup_offset)
+        spi_data.seek(capsule_metadata_backup_offset)
+        spi_data.write(capsule_mdata)
+    else:
+        print("INFO: Skipping capsule metadata (PRODUCT_GUID not set)\n")
 
     # UBoot env
 
