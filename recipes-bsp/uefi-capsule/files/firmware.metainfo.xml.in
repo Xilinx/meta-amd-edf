@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="firmware">
+  <id>${UEFI_CAB_ID}</id>
+  <name>${UEFI_CAB_FW_NAME}</name>
+  <summary>${UEFI_CAB_FW_SUMMARY}</summary>
+  <description>
+    <p>${UEFI_CAB_FW_DESCRIPTION}</p>
+  </description>
+  <provides>
+    <firmware type="flashed">${PRODUCT_GUID}</firmware>
+  </provides>
+  <url type="homepage">${PRODUCT_URL}</url>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>proprietary</project_license>
+  <developer id="com.amd">
+    <name>${UEFI_CAB_DEVELOPER_NAME}</name>
+  </developer>
+  <releases>
+    <release version="${VER_STRING}" date="${LVFS_DATE}">
+      <description>
+        <p>${UEFI_CAB_RELEASE_DESCRIPTION}</p>
+      </description>
+      <checksum type="sha256" filename="firmware.bin">${FW_CHECKSUM}</checksum>
+    </release>
+  </releases>
+  <custom>
+    <value key="LVFS::VersionFormat">${VER_FORMAT}</value>
+    <value key="LVFS::UpdateProtocol">${UEFI_CAB_UPDATE_PROTOCOL}</value>
+  </custom>
+</component>
