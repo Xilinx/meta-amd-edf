@@ -1,12 +1,12 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot-xlnx:"
 FILESEXTRAPATHS:prepend:zynqmp := "${THISDIR}/zynqmp:"
 FILESEXTRAPATHS:prepend:versal := "${THISDIR}/versal:"
-FILESEXTRAPATHS:prepend:versal-net := "${THISDIR}/versal:"
+FILESEXTRAPATHS:prepend:versal-net := "${THISDIR}/versal-net:"
 FILESEXTRAPATHS:prepend:versal-2ve-2vm := "${THISDIR}/versal-2ve-2vm:"
 
 SRC_URI:append:zynqmp = " file://edf-env.cfg file://amd_edf.h"
 SRC_URI:append:versal = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
-SRC_URI:append:versal-net = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
+SRC_URI:append:versal-net = " file://edf-env-vn.cfg file://amd_edf.h file://amd_edf_common.h"
 SRC_URI:append:versal-2ve-2vm = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
 
 SRC_URI:append:versal:amd-edf = " file://bootcmd-bootefi.cfg"
