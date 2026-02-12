@@ -124,13 +124,14 @@ AMD_CORTEXA72_COMMON_INSTALL = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' xen-zephyr-domu-image', '', d)} \
     "
 
+# TODO - Temporarily disable below packages.
+#    vek280-pl-bram-gpio-fw
+#    vck190-pl-bram-gpio-fw
+#    vmk180-pl-bram-gpio-fw
+#    vpk120-pl-bram-gpio-fw
+#    vrk160-pl-bram-gpio-fw
+#    vrk165-pl-bram-gpio-fw
 AMD_CORTEXA72_INSTALL = "\
-    vek280-pl-bram-gpio-fw \
-    vck190-pl-bram-gpio-fw \
-    vmk180-pl-bram-gpio-fw \
-    vpk120-pl-bram-gpio-fw \
-    vrk160-pl-bram-gpio-fw \
-    vrk165-pl-bram-gpio-fw \
     vck190-openamp-fw-examples \
     vek280-openamp-fw-examples \
     vmk180-openamp-fw-examples \
@@ -144,6 +145,9 @@ AMD_CORTEXA78_COMMON_INSTALL = "\
 
 AMD_CORTEXA78_INSTALL = ""
 
+# TODO - Temporarily disable below packages.
+#    vek385-pl-bram-gpio-fw
+#    vek385-revb-pl-bram-gpio-fw
 AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     ${AMD_CORTEXA78_COMMON_INSTALL} \
     isp-media-server \
@@ -156,8 +160,6 @@ AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     "
 
 AMD_CORTEXA78_MALI_INSTALL = "\
-    vek385-pl-bram-gpio-fw \
-    vek385-revb-pl-bram-gpio-fw \
     vek385-openamp-fw-examples \
     vek385-revb-openamp-fw-examples \
     "
