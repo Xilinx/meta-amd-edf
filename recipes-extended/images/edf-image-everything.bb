@@ -115,6 +115,7 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     glmark2 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', '', 'kmscube', d)} \
     packagegroup-amd-edf-gui \
+    packagegroup-kria \
     "
 
 # TODO: Temporarily disable packages that depend on kernel-module-hdmi because
