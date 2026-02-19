@@ -42,7 +42,7 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     ${AMD-EDF_IMAGE_COMMON_INSTALL} \
     btop \
     can-utils \
-    container-host-config \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'container-host-config', '', d)} \
     dosfstools \
     dtc \
     ethtool \
@@ -84,15 +84,14 @@ AMD_CORTEXA9_INSTALL = " \
 "
 
 AMD_CORTEXA53_COMMON_INSTALL = "\
-    docker-moby-contrib \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'docker-moby-contrib', '', d)} \
     libdrm \
     libdrm-tests \
     linux-xlnx-udev-rules \
     packagegroup-xilinx-audio \
     packagegroup-xilinx-gstreamer \
-    packagegroup-openamp \
-    packagegroup-oci \
-    packagegroup-docker \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'packagegroup-oci packagegroup-docker', '', d)} \
     packagegroup-opencv \
     systemtap \
     v4l-utils \
@@ -108,7 +107,7 @@ AMD_CORTEXA53_INSTALL = "\
 
 AMD_CORTEXA53_MALI_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
-    vcu-ctrlsw \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', 'vcu-ctrlsw', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     "
 
@@ -120,7 +119,7 @@ AMD_CORTEXA53_MALI_INSTALL = "\
 
 AMD_CORTEXA72_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
-    vdu-ctrlsw \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', 'vdu-ctrlsw', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' xen-zephyr-domu-image', '', d)} \
     "
 
@@ -131,12 +130,21 @@ AMD_CORTEXA72_COMMON_INSTALL = "\
 #    vpk120-pl-bram-gpio-fw
 #    vrk160-pl-bram-gpio-fw
 #    vrk165-pl-bram-gpio-fw
-AMD_CORTEXA72_INSTALL = "\
+AMD_CORTEXA72_INSTALL = ""
+
+AMD_CORTEXA72_OPENAMP_INSTALL = "\
     vck190-openamp-fw-examples \
     vek280-openamp-fw-examples \
     vmk180-openamp-fw-examples \
     vpk120-openamp-fw-examples \
     vrk160-openamp-fw-examples \
+    "
+
+AMD_CORTEXA72_INSTALL:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', d.getVar('AMD_CORTEXA72_OPENAMP_INSTALL'), '', d)}"
+
+AMD_CORTEXA78_MALI_OPENAMP_INSTALL = "\
+    vek385-openamp-fw-examples \
+    vek385-revb-openamp-fw-examples \
     "
 
 AMD_CORTEXA78_COMMON_INSTALL = "\
@@ -145,24 +153,23 @@ AMD_CORTEXA78_COMMON_INSTALL = "\
 
 AMD_CORTEXA78_INSTALL = ""
 
-# TODO - Temporarily disable below packages.
-#    vek385-pl-bram-gpio-fw
-#    vek385-revb-pl-bram-gpio-fw
 AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     ${AMD_CORTEXA78_COMMON_INSTALL} \
     isp-media-server \
     isp-firmware \
     kernel-module-isp \
-    vcu2-ctrlsw \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu2', 'vcu2-ctrlsw', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', ' libmali-xlnx', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-client', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' xen-zephyr-domu-image', '', d)} \
     "
 
-AMD_CORTEXA78_MALI_INSTALL = "\
-    vek385-openamp-fw-examples \
-    vek385-revb-openamp-fw-examples \
-    "
+# TODO - Temporarily disable below packages.
+#    vek385-pl-bram-gpio-fw
+#    vek385-revb-pl-bram-gpio-fw
+AMD_CORTEXA78_MALI_INSTALL = ""
+
+AMD_CORTEXA78_MALI_INSTALL:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', d.getVar('AMD_CORTEXA78_MALI_OPENAMP_INSTALL'), '', d)}"
 
 # Enable weston for mali family variants
 IMAGE_FEATURES += "${@bb.utils.contains('DISTRO_FEATURES', 'libmali wayland', 'weston', '', d)}"

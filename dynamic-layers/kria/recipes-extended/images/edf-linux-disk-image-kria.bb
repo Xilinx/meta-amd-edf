@@ -12,6 +12,5 @@ IMAGE_INSTALL += " \
     u-boot-tools \
     udev-extraconf \
     wireless-regdb-static \
-    k24-openamp-fw-examples \
-    k26-openamp-fw-examples \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'k24-openamp-fw-examples k26-openamp-fw-examples', '', d)} \
 "
