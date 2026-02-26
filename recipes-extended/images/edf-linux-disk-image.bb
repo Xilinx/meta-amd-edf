@@ -31,12 +31,14 @@ IMAGE_FSTYPES:append:versal-2ve-2vm = " wic.ufs wic.ufs.xz wic.ufs.bmap"
 IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 
 # EFI boot files for all aarch64 platforms
-IMAGE_EFI_BOOT_FILES ?= ""
-IMAGE_EFI_BOOT_FILES:aarch64 ?= " \
+EDF_LINUX_EFI_BOOT_FILES = ""
+EDF_LINUX_EFI_BOOT_FILES:aarch64 = " \
     loader/loader.conf;loader/loader.conf \
     loader/edf-linux.conf;loader/entries/edf-linux.conf \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', "xen.cfg xen.efi loader/edf-xen.conf;loader/entries/edf-xen.conf", '', d)} \
     "
+
+IMAGE_EFI_BOOT_FILES += "${EDF_LINUX_EFI_BOOT_FILES}"
 
 # WIC bootloader dependencies for aarch64 EFI boot
 WKS_FILE_DEPENDS_BOOTLOADERS:aarch64 = "systemd-boot virtual-systemd-bootconf"
