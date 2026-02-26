@@ -21,39 +21,71 @@ Can build the following images:
 Example:
     $ MACHINE=amd-cortexa72-common bitbake edf-linux-disk-image
 
-A boot.bin (xilinx-bootbin) or ospi or qspi (edf-ospi, edf-qspi, kria-qspi)
-image can also be generated for the following platforms:
+A boot.bin (xilinx-bootbin), ospi (edf-ospi), or qspi (edf-qspi,kria-qspi)
+image can be generated for the following platforms.
 
-versal-2ve-2vm:
-    - vek385-reva - versal-2ve-2vm-vek385-sdt-seg
-    - vek385-revb - versal-2ve-2vm-vek385-revb-sdt-seg
+versal-2ve-2vm
+    Linux only:
+        - vek385-reva - versal-2ve-2vm-vek385-sdt-seg
+        - vek385-revb - versal-2ve-2vm-vek385-revb-sdt-seg
+    Multi-domain:
+        - vek385-reva - versal-2ve-2vm-vek385-multidomain
+        - vek385-revb - versal-2ve-2vm-vek385-revb-multidomain
 
-versal:
-    - vek280 - versal-vek280-sdt-seg
-    - vck190 - versal-vck190-sdt-seg
-    - vmk180 - versal-vmk180-sdt-seg
-    - vpk120 - versal-vpk120-sdt-seg
-    - vrk160 - versal-vrk160-sdt-seg
-    - v80    - versal-v80-sdt-seg
-    - vm-p-m1369  - versal-vm-p-m1369-00-reva-x-prc-01-reva-sdt-seg
+versal
+    Linux only:
+        - vek280      - versal-vek280-sdt-seg
+        - vck190      - versal-vck190-sdt-seg
+        - vmk180      - versal-vmk180-sdt-seg
+        - vpk120      - versal-vpk120-sdt-seg
+        - vrk160      - versal-vrk160-sdt-seg
+        - vrk165      - versal-vrk165-sdt-seg
+        - v80         - versal-v80-sdt-seg
+        - vm-p-m1369  - versal-vm-p-m1369-00-reva-x-prc-01-reva-sdt-seg
+    Multi-domain:
+        - vek280      - versal-vek280-multidomain
+        - vck190      - versal-vck190-multidomain
+        - vmk180      - versal-vmk180-multidomain
+        - vpk120      - versal-vpk120-multidomain
+        - vrk160      - versal-vrk160-multidomain
+        - vrk165      - versal-vrk165-multidomain
+        - v80         - versal-v80-multidomain
+        - vm-p-m1369  - versal-vm-p-m1369-00-reva-x-prc-01-reva-multidomain
 
 zynqmp
-    - zcu104  - zynqmp-zcu104-sdt-full
-    - zcu111  - zynqmp-zcu111-sdt-full
-    - zcu102  - zynqmp-zcu102-sdt-full
-    - zcu106  - zynqmp-zcu106-sdt-full
-    - zc702   - zynq-zc702-sdt-full
-    - k24-sc  - zynqmp-k24-sc-sdt-base
-    - k26-smk-kv - k26-smk-kv-sdt
-    - k26-smk-kr - k26-smk-kr-sdt
-    - k24-smk-kd - k24-smk-kd-sdt
+    Linux only:
+        - zcu104      - zynqmp-zcu104-sdt-full
+        - zcu111      - zynqmp-zcu111-sdt-full
+        - zcu102      - zynqmp-zcu102-sdt-full
+        - zcu106      - zynqmp-zcu106-sdt-full
+        - zcu208      - zynqmp-zcu208-sdt-full
+        - k24-sc      - zynqmp-k24-sc-sdt-base
+        - k26-sc      - zynqmp-k26-sc-sdt-base
+        - k26-sm      - k26-sm-sdt
+        - k24i-sm     - k24i-sm-sdt
+        - k24c-sm     - k24c-sm-sdt
+        - k26-smk-kv  - k26-smk-kv-sdt
+        - k26-smk-kr  - k26-smk-kr-sdt
+        - k24-smk-kd  - k24-smk-kd-sdt
+    Multi-domain:
+        - zcu104      - zynqmp-zcu104-multidomain
+        - zcu111      - zynqmp-zcu111-multidomain
+        - zcu102      - zynqmp-zcu102-multidomain
+        - zcu106      - zynqmp-zcu106-multidomain
+        - zcu208      - zynqmp-zcu208-multidomain
 
+zynq
+    Linux only:
+        - zc702      - zynq-zc702-sdt-full
+        - zc706      - zynq-zc706-sdt-full
 
-zynq:
-    - zc702  - zynq-zc702-sdt-full
+embedded-plus
+    Linux only:
+        - rave-xrt   - emb-plus-ve2302-xrt
+        - rave-amr   - emb-plus-ve2302-amr
 
 Example:
-    $ MACHINE=versal-2ve-2vm-vek385-sdt-seg bitbake edf-ospi
-    $ MACHINE=versal-vck190-sdt-seg bitbake edf-qspi
+    $ MACHINE=versal-2ve-2vm-vek385-sdt-seg bitbake xilinx-bootbin
+    $ MACHINE=versal-2ve-2vm-vek385-multidomain bitbake edf-ospi
     $ MACHINE=zynqmp-zcu104-sdt-full bitbake xilinx-bootbin
     $ MACHINE=k26-smk-kv-sdt bitbake kria-qspi
