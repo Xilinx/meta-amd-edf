@@ -10,7 +10,7 @@
 # It is not used for EFI boot, but can hold BOOT.bin for SD card boot on platforms
 # that load firmware from the first vfat partition.
 
-part  /efi       --source rootfs  --change-directory=boot  --fixed-size=1G  --align 4  --fstype=vfat  --use-label  --label esp  --active
+part  /efi       --source bootimg-partition  --fixed-size=1G  --align 4  --fstype=vfat  --use-label  --label esp  --active
 part  storage    --fixed-size=1G  --align 4  --fstype=vfat  --use-label  --label storage
 part  /          --source rootfs  --fixed-size=6G  --align 4  --fstype=ext4  --use-label  --label root
 
