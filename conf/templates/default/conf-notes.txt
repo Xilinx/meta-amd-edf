@@ -14,12 +14,13 @@ The following common machines:
 
 Can build the following images:
     - edf-linux-disk-image
+    - edf-platform-disk-image
     - meta-edf-app-sdk
     - container-app-hello-world
     - container-devtools-edf
 
 Example:
-    $ MACHINE=amd-cortexa72-common bitbake edf-linux-disk-image
+    $ MACHINE=amd-cortexa72-common bitbake edf-platform-disk-image
 
 A boot.bin (xilinx-bootbin), ospi (edf-ospi), or qspi (edf-qspi,kria-qspi)
 image can be generated for the following platforms.

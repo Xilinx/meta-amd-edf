@@ -6,6 +6,7 @@ edf_check_image_event[eventmask] = "bb.event.DepTreeGenerated"
 
 AMD-EDF_WARN_IMAGES = "\
 	edf-linux-disk-image \
+	edf-platform-disk-image \
 	edf-image-everything \
 	edf-image-full-cmdline \
 "

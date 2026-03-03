@@ -141,6 +141,12 @@ $ source edf-init-build-env
       $ MACHINE=amd-cortexa78-mali-common bitbake edf-linux-disk-image
       ```
 
+   To include Xen and OpenAMP platform packages, build the platform image
+   instead:
+      ```
+      $ MACHINE=amd-cortexa72-common bitbake edf-platform-disk-image
+      ```
+
 4. Once complete the images for the target machine will be available in the output
    directory `${TMPDIR}/deploy/images/${MACHINE}/`.
 

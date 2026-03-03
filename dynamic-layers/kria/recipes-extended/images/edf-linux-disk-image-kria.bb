@@ -1,16 +1,15 @@
-require recipes-extended/images/edf-linux-disk-image.bb
+SUMMARY = "Linux-only Kria image for AMD EDF"
+DESCRIPTION = "AMD EDF Linux image for Kria without OpenAMP"
 
-COMPATIBLE_MACHINE = "^$"
-COMPATIBLE_MACHINE:amd-cortexa53-mali-common = "${MACHINE}"
+require recipes-extended/images/edf-disk-image.inc
 
-IMAGE_FEATURES += "splash hwcodecs"
+require edf-disk-image-kria-common.inc
 
-IMAGE_INSTALL += " \
-    nfs-utils-client \
-    nfs-utils \
-    packagegroup-kria \
-    u-boot-tools \
-    udev-extraconf \
-    wireless-regdb-static \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'k24-openamp-fw-examples k26-openamp-fw-examples', '', d)} \
-"
+# EFI boot files - Linux-only (no Xen entries)
+EDF_LINUX_EFI_BOOT_FILES = ""
+EDF_LINUX_EFI_BOOT_FILES:aarch64 = " \
+    loader/loader.conf;loader/loader.conf \
+    loader/edf-linux.conf;loader/entries/edf-linux.conf \
+    "
+
+IMAGE_EFI_BOOT_FILES += "${EDF_LINUX_EFI_BOOT_FILES}"
