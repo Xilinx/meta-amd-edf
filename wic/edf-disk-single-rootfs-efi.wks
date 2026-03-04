@@ -6,7 +6,7 @@
 #     /                     - general-purpose, Yocto-built Linux user-space filesystem (no fixed size, systemd will grow the partition and file system during boot based on disk size)
 
 part  /efi       --source bootimg-efi-amd --sourceparams="loader=${EFI_PROVIDER},rootfs_uuid=${ROOTFS_PART_UUID}" --fixed-size=1G  --align 16 --fstype=vfat  --use-label  --label esp  --active  --mbr  --use-uuid  --part-type="${ESP_PART_TYPE}"  --part-name="ESP"
-part  storage                             --fixed-size=1G    --align 4  --fstype=vfat  --use-label  --label storage  --mbr
+part  storage                             --fixed-size=1G    --align 4  --fstype=vfat  --use-label  --label storage  --mbr  --part-type="${STORAGE_PART_TYPE}"  --part-name="storage"
 part  /          --source rootfs          --align 4  --fstype=ext4  --use-label  --label root --uuid="${ROOTFS_PART_UUID}"  --use-uuid --part-type="${ROOTFS_PART_TYPE}"
 
 bootloader --ptable gpt-hybrid

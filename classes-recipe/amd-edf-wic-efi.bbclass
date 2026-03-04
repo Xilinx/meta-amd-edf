@@ -9,6 +9,7 @@ WICVARS:append = " \
     ROOTFS_PART_TYPE \
     ESP_PART_TYPE \
     EFI_PROVIDER \
+    STORAGE_PART_TYPE \
     "
 
 # Mirror the same metadata into the UFS-specific variable for Versal platforms.
@@ -18,7 +19,9 @@ WICUFSVARS:append = " \
     ROOTFS_PART_TYPE \
     ESP_PART_TYPE \
     EFI_PROVIDER \
+    STORAGE_PART_TYPE \
     "
+
 
 python amd_edf_set_rootfs_uuid () {
     import uuid
