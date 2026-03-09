@@ -192,3 +192,35 @@ do_deploy () {
 }
 
 addtask deploy after do_compress
+
+# We want to deploy this into the build directory and copy it later
+IMGDEPLOYDIR ??= "${DEPLOYDIR}"
+
+QEMU_FLASH_FILE = "${IMAGE_NAME}"
+
+# Calculate the multiboot offset (32k blocks from the start of the spi)
+# to IMAGE_A for qemu booting
+QB_OPT_APPEND += "-boot multiboot=${@int(int(d.getVar("IMAGE_A_OFFSET"), 0) / 32 / 1024)}"
+
+# Generate a qemuboot.conf file for this output
+inherit ${@bb.utils.contains('IMAGE_CLASSES', 'qemuboot-xilinx', 'qemuboot-xilinx', '', d)}
+do_deploy[postfuncs] += "${@bb.utils.contains('IMAGE_CLASSES', 'qemuboot-xilinx', 'do_write_qemuboot_conf', '', d)}"
+
+# Need this for the flash_stripe.py tool
+DEPENDS += "qemu-xilinx-multiarch-helper-native"
+
+# Avoid circular dependencies
+EXTRA_IMAGEDEPENDS:remove := "${PN}"
+python() {
+    def extraimage_getdepends(task):
+        deps = ""
+        for dep in (d.getVar('EXTRA_IMAGEDEPENDS') or "").split():
+            if ":" in dep:
+                deps += " %s " % (dep)
+            else:
+                deps += " %s:%s" % (dep, task)
+        return deps
+
+    deps = " " + extraimage_getdepends('do_populate_sysroot')
+    d.appendVarFlag('do_deploy', 'depends', deps)
+}
