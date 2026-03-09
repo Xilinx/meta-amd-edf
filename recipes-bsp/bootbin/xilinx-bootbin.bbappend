@@ -53,9 +53,6 @@ BIF_OPTIONAL_DATA:append:amd-edf:versal = "${MANIFEST_AGGREGATE_OUTPUT}, id=0x24
 BIF_OPTIONAL_DATA:append:amd-edf:versal-net = "${MANIFEST_AGGREGATE_OUTPUT}, id=0x24;"
 BIF_OPTIONAL_DATA:append:amd-edf:versal-2ve-2vm = "${MANIFEST_AGGREGATE_OUTPUT}, id=0x24;"
 
-# For EDF we want zynq to boot using u-boot, not directly to the kernel
-QB_DEFAULT_KERNEL:zynq = "u-boot.elf"
-
 # Avoid EDF specific circular dependencies
 EXTRA_IMAGEDEPENDS:remove = "edf-qspi"
 EXTRA_IMAGEDEPENDS:remove = "edf-ospi"
