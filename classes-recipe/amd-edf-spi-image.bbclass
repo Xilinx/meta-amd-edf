@@ -25,12 +25,12 @@ UBOOT_ENV_BACKUP_OFFSET ?= "0x156_0000"
 IMAGE_A_OFFSET ?= "0x158_0000"
 IMAGE_B_OFFSET ?= "0x87C_0000"
 USER_SCRATCHPAD_OFFSET ?= "0xFA0_0000"
-SPI_SIZE ?= "0x1000_0000"
+SPI_IMAGE_SIZE ?= "0x1000_0000"
 
 
 AMD_EDF_SPI_VARS ?= "IMAGE_SELECTOR_OFFSET IMAGE_SELECTOR_BACKUP_OFFSET IMAGE_SELECTOR_SCRATCHPAD_OFFSET \
     IMAGE_RECOVERY_OFFSET IMAGE_RECOVERY_META_OFFSET CAPSULE_METADATA_OFFSET CAPSULE_METADATA_BACKUP_OFFSET \
-    UBOOT_ENV_OFFSET UBOOT_ENV_BACKUP_OFFSET IMAGE_A_OFFSET IMAGE_B_OFFSET USER_SCRATCHPAD_OFFSET SPI_SIZE \
+    UBOOT_ENV_OFFSET UBOOT_ENV_BACKUP_OFFSET IMAGE_A_OFFSET IMAGE_B_OFFSET USER_SCRATCHPAD_OFFSET SPI_IMAGE_SIZE \
 "
 
 # Check if the required variables are set
@@ -79,7 +79,7 @@ python do_compile() {
     uboot_env_backup_offset = int(d.getVar("UBOOT_ENV_BACKUP_OFFSET"), 0)
     image_a_offset = int(d.getVar("IMAGE_A_OFFSET"), 0)
     image_b_offset = int(d.getVar("IMAGE_B_OFFSET"), 0)
-    spi_size = int(d.getVar("SPI_SIZE"), 0)
+    spi_image_size = int(d.getVar("SPI_IMAGE_SIZE"), 0)
 
     image_selector_max_size = int(d.getVar("IMAGE_SELECTOR_MAX_SIZE"), 0)
     image_recovery_max_size = int(d.getVar("IMAGE_RECOVERY_MAX_SIZE"), 0)
@@ -88,7 +88,7 @@ python do_compile() {
     image_max_size = int(d.getVar("IMAGE_MAX_SIZE"), 0)
 
     spi_data = io.BytesIO()
-    spi_data.write(b'\xFF' * spi_size)
+    spi_data.write(b'\xFF' * spi_image_size)
 
     # Image selector
 
