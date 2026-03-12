@@ -75,7 +75,7 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     memtester \
     libiio \
     libiio-iiod \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'efibootmgr', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'efi', 'efibootmgr', '', d)} \
     "
 
 AMD_RISCV32_FULL_INSTALL += " \

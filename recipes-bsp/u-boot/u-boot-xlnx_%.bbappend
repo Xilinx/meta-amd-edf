@@ -9,7 +9,9 @@ SRC_URI:append:versal = " file://edf-env.cfg file://amd_edf.h file://amd_edf_com
 SRC_URI:append:versal-net = " file://edf-env-vn.cfg file://amd_edf.h file://amd_edf_common.h"
 SRC_URI:append:versal-2ve-2vm = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
 
-SRC_URI:append:aarch64:amd-edf = " file://aarch64-bootcmd-bootefi.cfg"
+EDF_BOOTCMD_CFG = "${@bb.utils.contains('MACHINE_FEATURES', 'efi', \
+    'file://aarch64-bootcmd-bootefi.cfg', '', d)}"
+SRC_URI:append:aarch64:amd-edf = " ${EDF_BOOTCMD_CFG}"
 
 # Generate U-Boot environment binary image
 

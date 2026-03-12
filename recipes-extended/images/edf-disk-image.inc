@@ -29,12 +29,21 @@ IMGCLASSES:append:versal-net = " image_types_ufs"
 IMAGE_FSTYPES:append:versal-2ve-2vm = " wic.ufs wic.ufs.xz wic.ufs.bmap"
 IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 
-# WIC bootloader dependencies for aarch64 EFI boot
-WKS_FILE_DEPENDS_BOOTLOADERS:aarch64 = "systemd-boot virtual-systemd-bootconf"
+# WIC bootloader dependencies
+EDF_BOOTLOADER_DEPS = "${@bb.utils.contains('COMBINED_FEATURES', 'efi', \
+    'systemd-boot virtual-systemd-bootconf', '${UBOOT_BOOT_SCRIPT}', d)}"
+WKS_FILE_DEPENDS_BOOTLOADERS:aarch64 = "${EDF_BOOTLOADER_DEPS}"
 
 # WKS file selection - EFI for aarch64, default for others
 WKS_FILES = "edf-disk-single-rootfs.wks"
-WKS_FILES:aarch64 = "edf-disk-single-rootfs-efi.wks"
+WKS_FILES:aarch64 = "${@bb.utils.contains('COMBINED_FEATURES', 'efi', \
+    'edf-disk-single-rootfs-efi.wks', 'edf-disk-single-rootfs.wks', d)}"
+
+# Distro boot: deploy boot script and optional boot.bin to the boot partition
+EDF_DISTROBOOT_ESP_FILES ?= "${@'boot.bin ' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' else ''}boot.scr"
+IMAGE_BOOT_FILES_label-esp = "${@'' if bb.utils.contains('COMBINED_FEATURES', 'efi', True, False, d) else '${EDF_DISTROBOOT_ESP_FILES}'}"
+WICVARS:append = "${@'' if bb.utils.contains('COMBINED_FEATURES', 'efi', True, False, d) else ' IMAGE_BOOT_FILES_label-esp'}"
+WICUFSVARS:append = "${@'' if bb.utils.contains('COMBINED_FEATURES', 'efi', True, False, d) else ' IMAGE_BOOT_FILES_label-esp'}"
 
 # Configure QEMU boot
 QB_KERNEL_ROOT:riscv32 = "/dev/vda3"

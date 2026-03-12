@@ -26,7 +26,7 @@ AMD-EDF_IMAGE_COMMON_INSTALL = "\
     devmem2 \
     kernel-modules \
     mtd-utils \
-    fwupd \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'efi', 'fwupd', '', d)} \
     i2c-tools \
     pciutils \
     bmaptool \
@@ -96,7 +96,7 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
     v4l-utils \
     xrt \
     packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
-    fwupd-quirks \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'efi', 'fwupd-quirks', '', d)} \
     libubootenv \
     libubootenv-bin \
     mmc-utils \
