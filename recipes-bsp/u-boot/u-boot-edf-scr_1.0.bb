@@ -14,50 +14,36 @@ COMPATIBLE_MACHINE:versal = "versal"
 COMPATIBLE_MACHINE:versal-net = "versal-net"
 COMPATIBLE_MACHINE:versal-2ve-2vm = "versal-2ve-2vm"
 
-SRC_URI = " \
-    file://edf-linux-mmc-boot.cmd \
-    "
+SRC_URI = "file://edf-linux-boot.cmd"
 
-SRC_URI:append:versal-2ve-2vm = " \
-    file://edf-linux-ufs-boot.cmd \
-    "
+KERNEL_BOOTCMD:zynq ?= "bootm"
+KERNEL_BOOTCMD:aarch64 ?= "booti"
 
-SRC_URI:zynq = " \
-    file://edf-linux-mmc-boot.cmd.zynq \
-    "
+# KERNEL_IMAGETYPE resolves to uImage on zynq (arm), Image on aarch64
+KERNEL_IMAGE ?= "${KERNEL_IMAGETYPE}"
 
-do_compile:prepend:zynq() {
-    # We need to use a different file
-    cp ${WORKDIR}/edf-linux-mmc-boot.cmd.zynq ${WORKDIR}/edf-linux-mmc-boot.cmd
-}
+EDF_ROOT_PARTNUM ?= "3"
 
 do_compile() {
+    sed -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
+        -e 's/@@KERNEL_IMAGE@@/${KERNEL_IMAGE}/' \
+        -e 's/@@ROOT_PARTNUM@@/${EDF_ROOT_PARTNUM}/' \
+        "${WORKDIR}/edf-linux-boot.cmd" > "${WORKDIR}/boot.cmd"
 
-	mkimage -A arm -T script -C none -n "Linux Boot script" -d "${WORKDIR}/edf-linux-mmc-boot.cmd" boot.scr
-}
-
-do_compile:append:versal-2ve-2vm() {
-    mkimage -A arm -T script -C none -n "Linux UFS Boot script" -d "${WORKDIR}/edf-linux-ufs-boot.cmd" boot_ufs.scr
+    mkimage -A arm -T script -C none -n "EDF Boot script" \
+        -d "${WORKDIR}/boot.cmd" boot.scr
 }
 
 do_install() {
-	install -d ${D}/boot
-	install -m 0644 boot.scr ${D}/boot
-}
-
-do_install:append:versal-2ve-2vm() {
-	install -m 0644 boot_ufs.scr ${D}/boot
+    install -d ${D}/boot
+    install -m 0644 boot.scr ${D}/boot
 }
 
 FILES:${PN} = "/boot/*"
 
 do_deploy() {
-	install -d ${DEPLOYDIR}
-	install -m 0644 boot.scr ${DEPLOYDIR}
-}
-
-do_deploy:append:versal-2ve-2vm() {
-    install -m 0644 boot_ufs.scr ${DEPLOYDIR}
+    install -d ${DEPLOYDIR}
+    install -m 0644 boot.scr ${DEPLOYDIR}
 }
 
 addtask do_deploy after do_compile before do_build

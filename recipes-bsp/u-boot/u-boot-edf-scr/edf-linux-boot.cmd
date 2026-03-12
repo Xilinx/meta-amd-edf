@@ -1,14 +1,12 @@
-# This is a boot script for U-Boot with Linux env for UFS boot mode.
-# Generate edf_linux_ufs_boot.scr:
-# mkimage -c none -A arm -T script -d edf-linux-ufs-boot.cmd edf_linux_ufs_boot.scr
+# Boot script for U-Boot - AMD Embedded Development Framework
+# Works with any block device (MMC, UFS/SCSI, USB) where devtype and
+# devnum are set by the distro boot framework before this script runs.
 #
 ################
-setenv kernel_name Image
-setenv rootpartnum 3
 
-# UFS Boot
-setenv devtype scsi
-setenv devnum 0
+setenv kernel_name @@KERNEL_IMAGE@@
+setenv rootpartnum @@ROOT_PARTNUM@@
+setenv kernel_bootcmd @@KERNEL_BOOTCMD@@
 
 echo "Checking for kernel: /boot/${kernel_name}"
 if test -e ${devtype} ${devnum}:${rootpartnum} /boot/${kernel_name}; then
@@ -28,4 +26,4 @@ fi
 fdt addr ${fdtcontroladdr}
 fdt get value bootargs /chosen bootargs
 setenv bootargs ${bootargs} root=PARTUUID=${distro_rootpart_uuid} ro rootwait
-booti ${kernel_addr_r} - ${fdtcontroladdr}
+${kernel_bootcmd} ${kernel_addr_r} - ${fdtcontroladdr}
