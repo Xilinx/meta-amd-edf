@@ -129,6 +129,7 @@ AMD_CORTEXA53_MALI_INSTALL = "\
 AMD_CORTEXA72_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', 'vdu-ctrlsw', '', d)} \
+    vpk180-pl-bram-gpio-fw \
     "
 
 AMD_CORTEXA72_INSTALL = "\
