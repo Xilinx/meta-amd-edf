@@ -131,14 +131,13 @@ AMD_CORTEXA72_COMMON_INSTALL = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', 'vdu-ctrlsw', '', d)} \
     "
 
-# TODO - Temporarily disable below packages.
-#    vek280-pl-bram-gpio-fw
-#    vck190-pl-bram-gpio-fw
-#    vmk180-pl-bram-gpio-fw
-#    vpk120-pl-bram-gpio-fw
-#    vrk160-pl-bram-gpio-fw
-#    vrk165-pl-bram-gpio-fw
 AMD_CORTEXA72_INSTALL = "\
+    vek280-pl-bram-gpio-fw \
+    vck190-pl-bram-gpio-fw \
+    vmk180-pl-bram-gpio-fw \
+    vpk120-pl-bram-gpio-fw \
+    vrk160-pl-bram-gpio-fw \
+    vrk165-pl-bram-gpio-fw \
     image-update \
     "
 
@@ -158,10 +157,10 @@ AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', ' optee-client', '', d)} \
     "
 
-# TODO - Temporarily disable below packages.
-#    vek385-pl-bram-gpio-fw
-#    vek385-revb-pl-bram-gpio-fw
-AMD_CORTEXA78_MALI_INSTALL = ""
+AMD_CORTEXA78_MALI_INSTALL = "\
+    vek385-pl-bram-gpio-fw \
+    vek385-revb-pl-bram-gpio-fw \
+    "
 
 # Enable weston for mali family variants
 IMAGE_FEATURES += "${@bb.utils.contains('DISTRO_FEATURES', 'libmali wayland', 'weston', '', d)}"
