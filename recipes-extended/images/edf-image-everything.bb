@@ -112,6 +112,8 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     packagegroup-xilinx-jupyter \
     packagegroup-tsn \
     dmidecode \
+    raft \
+    image-update \
     "
 
 AMD_CORTEXA53_MALI_FULL_INSTALL += " \
@@ -120,6 +122,8 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     glmark2 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', '', 'kmscube', d)} \
     packagegroup-amd-edf-gui \
+    raft \
+    image-update \
     "
 
 AMD_CORTEXA72_FULL_INSTALL += " \
@@ -138,6 +142,7 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-xilinx-jupyter \
     packagegroup-tsn \
+    image-update \
     "
 
 AMD_CORTEXA78_FULL_INSTALL += " \
