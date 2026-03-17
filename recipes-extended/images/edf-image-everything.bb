@@ -76,6 +76,12 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     libiio \
     libiio-iiod \
     ${@bb.utils.contains('COMBINED_FEATURES', 'efi', 'efibootmgr', '', d)} \
+    libubootenv \
+    libubootenv-bin \
+    mmc-utils \
+    udev-extraconf \
+    ser2net \
+    picocom \
     "
 
 AMD_RISCV32_FULL_INSTALL += " \
