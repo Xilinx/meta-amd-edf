@@ -78,6 +78,12 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     libiio-iiod \
     libiio-tests \
     efibootmgr \
+    libubootenv \
+    libubootenv-bin \
+    mmc-utils \
+    udev-extraconf \
+    ser2net \
+    picocom \
     "
 
 AMD_RISCV32_FULL_INSTALL += " \
