@@ -97,19 +97,11 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
     xrt \
     packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
     ${@bb.utils.contains('COMBINED_FEATURES', 'efi', 'fwupd-quirks', '', d)} \
-    libubootenv \
-    libubootenv-bin \
-    mmc-utils \
-    udev-extraconf \
-    ser2net \
-    picocom \
     "
 
 AMD_CORTEXA53_INSTALL = "\
     zcu111-pl-bram-gpio-fw \
     zcu208-pl-bram-gpio-fw \
-    raft \
-    image-update \
     "
 
 AMD_CORTEXA53_MALI_COMMON_INSTALL = "\
@@ -122,8 +114,6 @@ AMD_CORTEXA53_MALI_INSTALL = "\
     zcu102-pl-bram-gpio-fw \
     zcu104-pl-bram-gpio-fw \
     zcu106-pl-bram-gpio-fw \
-    raft \
-    image-update \
     "
 
 AMD_CORTEXA72_COMMON_INSTALL = "\
@@ -139,14 +129,13 @@ AMD_CORTEXA72_INSTALL = "\
     vpk120-pl-bram-gpio-fw \
     vrk160-pl-bram-gpio-fw \
     vrk165-pl-bram-gpio-fw \
-    image-update \
     "
 
 AMD_CORTEXA78_COMMON_INSTALL = "\
     ${AMD_CORTEXA53_COMMON_INSTALL} \
     "
 
-AMD_CORTEXA78_INSTALL = "image-update"
+AMD_CORTEXA78_INSTALL = ""
 
 AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
     ${AMD_CORTEXA78_COMMON_INSTALL} \
