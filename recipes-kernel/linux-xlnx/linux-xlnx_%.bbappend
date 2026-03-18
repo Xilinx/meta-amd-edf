@@ -1,5 +1,12 @@
 require ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'edf-virt.inc', '', d)}
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+EDF_DISTRO_INCLUDE = ""
+EDF_DISTRO_INCLUDE:amd-edf = "linux-xlnx-edf.inc"
+
+require ${EDF_DISTRO_INCLUDE}
+
 # Audit is required or systemd can fail to start the journal
 KERNEL_FEATURES:append = " cgl/features/audit/audit.cfg"
 
