@@ -63,6 +63,7 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     ufs-utils \
     util-linux-taskset \
     vim \
+    packagegroup-base-wifi \
     "
 
 # COMMON is for anything in that family with no board specific items
