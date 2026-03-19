@@ -13,6 +13,13 @@ KERNEL_FEATURES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', \
 KERNEL_FEATURES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', \
     ' features/bpf/bpf.scc cfg/net/bridge.scc cfg/kubernetes.scc', '', d)}"
 
+# EDF-owned kernel features
+SRC_URI += " file://edf-kmeta;type=kmeta;name=edf-kmeta;destsuffix=edf-kmeta"
+
+# Crypto options required for iwd wireless daemon
+KERNEL_FEATURES:append = "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', \
+    ' features/iwd/iwd-crypto.scc', '', d)}"
+
 pkg_postinst:${KERNEL_PACKAGE_NAME}-image:append () {
     # Only run on the live target so we don't depend on /efi during rootfs builds.
     if [ -n "$D" ]; then
