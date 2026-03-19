@@ -16,9 +16,11 @@ KERNEL_FEATURES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'virtualizatio
 # EDF-owned kernel features
 SRC_URI += " file://edf-kmeta;type=kmeta;name=edf-kmeta;destsuffix=edf-kmeta"
 
-# Crypto options required for iwd wireless daemon
+# USB wifi drivers (upstream scc + edf-kmeta iwd crypto) and local supplement
+SRC_URI += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', \
+    ' file://wifi-usb-extra.cfg', '', d)}"
 KERNEL_FEATURES:append = "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', \
-    ' features/iwd/iwd-crypto.scc', '', d)}"
+    ' features/iwd/iwd-crypto.scc features/wifi/wifi-usb.scc', '', d)}"
 
 pkg_postinst:${KERNEL_PACKAGE_NAME}-image:append () {
     # Only run on the live target so we don't depend on /efi during rootfs builds.
