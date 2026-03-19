@@ -35,6 +35,29 @@ AMD-EDF_IMAGE_COMMON_INSTALL = "\
     git \
     "
 
+WIFI_FIRMWARE_INSTALL = " \
+    linux-firmware-ath9k \
+    linux-firmware-bcm43143 \
+    linux-firmware-bcm43242a \
+    linux-firmware-bcm43569 \
+    linux-firmware-bcm4373 \
+    linux-firmware-carl9170 \
+    linux-firmware-mt7601u \
+    linux-firmware-mt7610 \
+    linux-firmware-mt7662 \
+    linux-firmware-mt7663 \
+    linux-firmware-mt7921 \
+    linux-firmware-mt7925 \
+    linux-firmware-ralink \
+    linux-firmware-rtl8188 \
+    linux-firmware-rtl8192cu \
+    linux-firmware-rtl8723 \
+    linux-firmware-rtl8821 \
+    linux-firmware-rtl8822 \
+    linux-firmware-rtw88 \
+    linux-firmware-rtw89 \
+    "
+
 # Full set of packages for EDF images
 AMD-EDF_IMAGE_FULL_INSTALL = " \
     tree \
@@ -64,6 +87,7 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     util-linux-taskset \
     vim \
     packagegroup-base-wifi \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'wifi', '${WIFI_FIRMWARE_INSTALL}', '', d)} \
     "
 
 # COMMON is for anything in that family with no board specific items
