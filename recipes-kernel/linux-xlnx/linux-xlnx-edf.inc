@@ -6,7 +6,8 @@ KERNEL_FEATURES += "${@bb.utils.contains('COMBINED_FEATURES', 'usbgadget', \
     ' features/usb/usb-gadgets.scc', '', d)}"
 
 # Audit is required or systemd can fail to start the journal
-KERNEL_FEATURES:append = " cgl/features/audit/audit.cfg"
+KERNEL_FEATURES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', \
+    ' cgl/features/audit/audit.scc', '', d)}"
 
 # Virtualization and container support: eBPF, network bridging, Kubernetes
 KERNEL_FEATURES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', \
