@@ -7,6 +7,6 @@ do_configure:append () {
 	fi
 }
 
-BIF_OPTIONAL_DATA:versal ?= "${IMGSEL_VERSION_FILE},id=0x21;"
-BIF_OPTIONAL_DATA:versal-net ?= "${IMGSEL_VERSION_FILE},id=0x21;"
-BIF_OPTIONAL_DATA:versal-2ve-2vm ?= "${IMGSEL_VERSION_FILE},id=0x21;"
+IMGSEL_BIF_OPTIONAL_DATA:versal ?= "${IMGSEL_VERSION_FILE},id=0x21;"
+IMGSEL_BIF_OPTIONAL_DATA:versal-net ?= "${IMGSEL_VERSION_FILE},id=0x21;"
+IMGSEL_BIF_OPTIONAL_DATA:versal-2ve-2vm ?= "${IMGSEL_VERSION_FILE},id=0x21;"
