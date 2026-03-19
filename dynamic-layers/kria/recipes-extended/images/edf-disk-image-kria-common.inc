@@ -10,5 +10,4 @@ IMAGE_INSTALL += " \
     packagegroup-kria \
     u-boot-tools \
     udev-extraconf \
-    wireless-regdb-static \
 "
