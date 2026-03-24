@@ -13,10 +13,17 @@ COMPATIBLE_MACHINE:zynqmp = "zynqmp"
 COMPATIBLE_MACHINE:versal = "versal"
 COMPATIBLE_MACHINE:versal-net = "versal-net"
 COMPATIBLE_MACHINE:versal-2ve-2vm = "versal-2ve-2vm"
+COMPATIBLE_MACHINE:microblaze-v = "microblaze-v"
 
-SRC_URI = "file://edf-linux-boot.cmd"
+SRC_URI_MBV ?= ""
+SRC_URI_MBV:microblaze-v = "file://edf-linux-boot.cmd.mbv64"
+SRC_URI = " \
+    file://edf-linux-boot.cmd \
+    ${SRC_URI_MBV} \
+    "
 
 KERNEL_BOOTCMD:zynq ?= "bootm"
+KERNEL_BOOTCMD:microblaze-v ?= "booti"
 KERNEL_BOOTCMD:aarch64 ?= "booti"
 
 # KERNEL_IMAGETYPE resolves to uImage on zynq (arm), Image on aarch64
@@ -29,6 +36,14 @@ do_compile() {
         -e 's/@@KERNEL_IMAGE@@/${KERNEL_IMAGE}/' \
         -e 's/@@ROOT_PARTNUM@@/${EDF_ROOT_PARTNUM}/' \
         "${WORKDIR}/edf-linux-boot.cmd" > "${WORKDIR}/boot.cmd"
+
+    mkimage -A arm -T script -C none -n "EDF Boot script" \
+        -d "${WORKDIR}/boot.cmd" boot.scr
+}
+
+do_compile:microblaze-v () {
+    sed -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
+        "${WORKDIR}/edf-linux-boot.cmd.mbv64" > "${WORKDIR}/boot.cmd"
 
     mkimage -A arm -T script -C none -n "EDF Boot script" \
         -d "${WORKDIR}/boot.cmd" boot.scr

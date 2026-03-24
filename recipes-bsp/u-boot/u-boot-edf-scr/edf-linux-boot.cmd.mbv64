@@ -1,0 +1,21 @@
+# MB-V 64-bit Boot script for U-Boot - AMD Embedded Development Framework
+# For QSPI or OSPI boot
+#
+################
+
+setenv kernel_bootcmd @@KERNEL_BOOTCMD@@
+setenv kernel_addr_r 0x90000000
+setenv spi_kernel_offset 0xF80000
+setenv spi_kernel_size 0x2200000
+setenv ramdisk_addr_r 0x92e00000
+setenv spi_ramdisk_offset 0x3180000
+setenv spi_ramdisk_size 0x4E80000
+
+echo "Booting from SPI Flash"
+sf probe 0 0 0
+sf read ${kernel_addr_r} ${spi_kernel_offset} ${spi_kernel_size}
+sf read ${ramdisk_addr_r} ${spi_ramdisk_offset} ${spi_ramdisk_size}
+fdt addr ${fdtcontroladdr}
+fdt get value bootargs /chosen bootargs
+setenv bootargs 'console=ttyUL0,115200 earlycon root=/dev/ram0 rw'
+${kernel_bootcmd} ${kernel_addr_r} ${ramdisk_addr_r} $fdtcontroladdr
