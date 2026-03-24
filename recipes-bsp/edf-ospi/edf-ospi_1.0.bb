@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2025, Advanced Micro Devices, Inc.  All rights reserved.
+# Copyright (C) 2026, Advanced Micro Devices, Inc.  All rights reserved.
 #
 # SPDX-License-Identifier: MIT
 #
@@ -14,8 +14,9 @@ inherit amd-spi-image deploy image-artifact-names
 COMPATIBLE_MACHINE = "^$"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-# OSPI Memory Map (256MB default) - SPI_IMAGE_SIZE must be set in machine config
-# All offsets can be overridden per-machine in bbappends
+# OSPI Memory Map (256MB default)
+# All offsets can be overridden per-machine in machineyaml or bbappends
+SPI_IMAGE_SIZE ?= "0x1000_0000"
 SPI_FLASH_TYPE = "OSPI"
 SPI_ERASE_BLOCK_SIZE = "0x20000"
 SPI_IMGSEL_OFFSET           ?= "0x0 0x6_0000"
