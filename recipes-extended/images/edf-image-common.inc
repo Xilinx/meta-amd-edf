@@ -16,7 +16,6 @@ AMD-EDF_FPGA_OVERLAY_INSTALL = "${@bb.utils.contains('MACHINE_FEATURES', 'fpga-o
 # Eliminate architectures where this is not supported
 AMD-EDF_FPGA_OVERLAY_INSTALL:riscv32 = ""
 AMD-EDF_FPGA_OVERLAY_INSTALL:riscv64 = ""
-AMD-EDF_FPGA_OVERLAY_INSTALL:arm     = ""
 
 # Minimal set packages for EDF images
 AMD-EDF_IMAGE_COMMON_INSTALL = "\
