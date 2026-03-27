@@ -1,7 +1,7 @@
-#ifndef __CONFIG_EDF_VERSAL_H
-#define __CONFIG_EDF_VERSAL_H
+#ifndef __CONFIG_EDF_VERSAL_NET_H
+#define __CONFIG_EDF_VERSAL_NET_H
 
-#include <configs/xilinx_versal.h>
+#include <configs/xilinx_versal_net.h>
 #include <configs/amd_edf_common.h>
 
 #define ENV_MEM_LAYOUT_SETTINGS \
@@ -22,4 +22,4 @@
     ENV_EDF_SETTINGS \
     BOOTENV
 
-#endif /* __CONFIG_EDF_VERSAL_H */
+#endif /* __CONFIG_EDF_VERSAL_NET_H */
