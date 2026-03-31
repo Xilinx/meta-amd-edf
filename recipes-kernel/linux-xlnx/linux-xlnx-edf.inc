@@ -16,6 +16,25 @@ KERNEL_FEATURES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'virtualizatio
 # EDF-owned kernel features
 SRC_URI += " file://edf-kmeta;type=kmeta;name=edf-kmeta;destsuffix=edf-kmeta"
 
+EDF_KERNEL_DEBUG_FEATURES = " \
+    cfg/debug/printk/debug-dynamic-debug.scc \
+    features/kfence/kfence.scc \
+    cfg/debug/irq/debug-shirq.scc \
+    cfg/debug/misc/debug-panic-oops.scc \
+    cfg/debug/lock_hang/debug-wq-watchdog.scc \
+    cfg/debug/tracer/debug-kernel-func.scc \
+    features/coresight/debug-coresight.scc \
+    features/coresight/etm-debug.scc \
+    features/debug/debug-info-dwarf5.scc \
+    features/debug/lockup.scc \
+    features/debug/rcu-debug.scc \
+    features/debug/sanitizer.scc \
+    features/drm/drm-debug.scc \
+    features/tracing/debug-tracing.scc \
+    "
+KERNEL_FEATURES:append = "${@bb.utils.contains('ENABLE_KERNEL_DEBUG', '1', \
+    ' ${EDF_KERNEL_DEBUG_FEATURES}', '', d)}"
+
 # USB wifi drivers (upstream scc + edf-kmeta iwd crypto) and local supplement
 SRC_URI += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', \
     ' file://wifi-usb-extra.cfg', '', d)}"
