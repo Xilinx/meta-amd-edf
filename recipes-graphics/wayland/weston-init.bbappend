@@ -5,6 +5,8 @@ SRC_URI += " \
     file://weston.service.d/10-edf-overrides.conf \
 "
 
+PACKAGECONFIG:append = " no-idle-timeout"
+
 do_install:append() {
     # Install udev rule to tag DRI card devices for systemd so
     # weston is only started when a display device is present.
