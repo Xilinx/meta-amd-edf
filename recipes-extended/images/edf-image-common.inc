@@ -177,7 +177,11 @@ AMD_CORTEXA78_MALI_INSTALL = "\
     "
 
 # Enable weston for mali family variants
-IMAGE_FEATURES += "${@bb.utils.contains('DISTRO_FEATURES', 'libmali wayland', 'weston', '', d)}"
+IMAGE_FEATURES += "${@ 'weston' \
+    if ( bb.utils.contains('DISTRO_FEATURES', 'wayland', True, False, d) and \
+       ( bb.utils.contains('MACHINE_FEATURES', 'mali400', True, False, d) or \
+         bb.utils.contains('MACHINE_FEATURES', 'malig78ae', True, False, d))) \
+    else '' }"
 
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_COMMON_INSTALL} ${AMD_RISCV32_INSTALL}"
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv64imafdc-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV64_COMMON_INSTALL} ${AMD_RISCV64_INSTALL}"
