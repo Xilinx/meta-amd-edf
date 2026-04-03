@@ -43,6 +43,7 @@ if [ -z "$FAIL" ]; then
     # Set default template if one is not already in the env or passed
     if [ -z ${TEMPLATECONF} ]; then
         TEMPLATECONF=$ROOT/sources/meta-amd-edf/conf/templates/default
+        CLEANTEMPLATE=1
     fi
 
     # Public release gen-machine-conf path
@@ -54,4 +55,9 @@ if [ -z "$FAIL" ]; then
     # Fake it so we oe-init-build-env works in dash
     BASH_SOURCE=$ROOT/sources/poky/oe-init-build-env
     . $ROOT/sources/poky/oe-init-build-env "$@"
+
+    # We set TEMPLATECONF, so clear this
+    if [ -n ${CLEANTEMPLATE} ]; then
+        unset -v TEMPLATECONF CLEANTEMPLATE
+    fi
 fi
