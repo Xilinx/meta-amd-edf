@@ -12,8 +12,13 @@ IMAGE_FSTYPES = "cpio.gz.u-boot"
 # and adds a few more packages that are not needed.
 IMAGE_FEATURES:remove = " splash"
 
-# By default we use the fpga-overlay to select fpga-manager-script
-AMD-EDF_FPGA_OVERLAY_INSTALL = "${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', 'fpga-manager-script', '', d)}"
+# By default we use the fpga-overlay to select fpga-manager-script and dfx-mgr
+# packages for FPGA overlay support.
+# This is needed for AMD-EDF platforms that support FPGA overlay. For other
+# platforms, this will not add any additional packages.
+AMD-EDF_FPGA_OVERLAY_INSTALL = " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', 'fpga-manager-script dfx-mgr', '', d)} \
+    "
 
 # Eliminate architectures where this is not supported
 AMD-EDF_FPGA_OVERLAY_INSTALL:riscv32 = ""
