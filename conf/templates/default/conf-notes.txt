@@ -74,6 +74,9 @@ zynqmp
         - zcu102      - zynqmp-zcu102-multidomain
         - zcu106      - zynqmp-zcu106-multidomain
         - zcu208      - zynqmp-zcu208-multidomain
+        - k26-smk-kv  - k26-smk-kv-sdt-multidomain
+        - k26-smk-kr  - k26-smk-kr-sdt-multidomain
+        - k24-smk-kd  - k24-smk-kd-sdt-multidomain
 
 zynq
     Linux only:
@@ -89,4 +92,4 @@ Example:
     $ MACHINE=versal-2ve-2vm-vek385-sdt-seg bitbake xilinx-bootbin
     $ MACHINE=versal-2ve-2vm-vek385-multidomain bitbake edf-ospi
     $ MACHINE=zynqmp-zcu104-sdt-full bitbake xilinx-bootbin
-    $ MACHINE=k26-smk-kv-sdt bitbake kria-qspi
+    $ MACHINE=k26-smk-kv-sdt-multidomain bitbake kria-qspi
