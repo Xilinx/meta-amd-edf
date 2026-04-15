@@ -198,4 +198,20 @@ DEPENDS:append = " \
     libeigen \
 "
 
+# We want to download the ESW sources, but only if a particular version is enabled
+DEPENDS:append = " ${@'embeddedsw-source-' + d.getVar('XILINX_RELEASE_VERSION').replace('v', '') if d.getVar('XILINX_RELEASE_VERSION') else ''}"
+
+# Extra dependencies
+EXTRA_DEPENDS = ""
+
+EXTRA_DEPENDS:append:aarch64 = " \
+    trusted-firmware-a:do_fetch \
+"
+
+EXTRA_DEPENDS:append:riscv64 = " \
+    opensbi:do_fetch \
+"
+
+do_rootfs[depends] += "${EXTRA_DEPENDS}"
+
 do_rootfs[prefuncs] += "edf_check_rootfs"
