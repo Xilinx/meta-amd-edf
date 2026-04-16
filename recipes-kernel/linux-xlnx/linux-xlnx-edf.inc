@@ -1,5 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
+# USB gadget support
 SRC_URI += "${@bb.utils.contains('COMBINED_FEATURES', 'usbgadget', \
     ' file://usb-gadgets-extra.cfg', '', d)}"
 KERNEL_FEATURES += "${@bb.utils.contains('COMBINED_FEATURES', 'usbgadget', \
@@ -13,9 +14,7 @@ KERNEL_FEATURES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', \
 KERNEL_FEATURES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', \
     ' features/bpf/bpf.scc cfg/net/bridge.scc cfg/kubernetes.scc', '', d)}"
 
-# EDF-owned kernel features
-SRC_URI += " file://edf-kmeta;type=kmeta;name=edf-kmeta;destsuffix=edf-kmeta"
-
+# Various kernel debug features
 EDF_KERNEL_DEBUG_FEATURES = " \
     cfg/debug/printk/debug-dynamic-debug.scc \
     features/kfence/kfence.scc \
