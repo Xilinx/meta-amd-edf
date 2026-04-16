@@ -84,6 +84,8 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     systemd-conf-edf \
     tcf-agent \
     ufs-utils \
+    usb-modeswitch \
+    usb-modeswitch-data \
     util-linux-taskset \
     vim \
     packagegroup-base-wifi \
