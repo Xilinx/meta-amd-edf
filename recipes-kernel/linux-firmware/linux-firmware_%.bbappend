@@ -4,6 +4,7 @@ PACKAGES =+ " \
     ${PN}-mt7663 \
     ${PN}-mt7921 \
     ${PN}-mt7925 \
+    ${PN}-rtl8192eu \
     ${PN}-rtw88 \
     ${PN}-rtw89 \
 "
@@ -52,6 +53,16 @@ FILES:${PN}-mt7925 = " \
     ${nonarch_base_libdir}/firmware/mediatek/mt7925/WIFI_MT7925_PATCH_MCU_1_1_hdr.bin \
 "
 RDEPENDS:${PN}-mt7925 += "${PN}-mediatek-license"
+
+# Realtek RTL8192EU - 802.11n USB (rtl8xxxu driver)
+# Firmware exists in upstream linux-firmware but has no subpackage.
+LICENSE:${PN}-rtl8192eu = "Firmware-rtlwifi_firmware"
+FILES:${PN}-rtl8192eu = " \
+    ${nonarch_base_libdir}/firmware/rtlwifi/rtl8192eu_nic.bin \
+    ${nonarch_base_libdir}/firmware/rtlwifi/rtl8192eu_wowlan.bin \
+    ${nonarch_base_libdir}/firmware/rtlwifi/rtl8192eu_ap_wowlan.bin \
+"
+RDEPENDS:${PN}-rtl8192eu += "${PN}-rtl-license"
 
 # Realtek rtw88 - firmware not split into named subpackages upstream.
 # rtw8821*/rtw8822* are already claimed by linux-firmware-rtl8821/rtl8822.
