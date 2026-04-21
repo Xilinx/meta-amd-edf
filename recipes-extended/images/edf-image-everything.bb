@@ -51,7 +51,7 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     e2fsprogs \
     packagegroup-lmsensors \
     packagegroup-xilinx-benchmarks \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11 xeyes xclock', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'packagegroup-core-weston', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
     bridge-utils \
