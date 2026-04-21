@@ -178,6 +178,7 @@ AMD_CORTEXA78_MALI_COMMON_INSTALL = "\
 AMD_CORTEXA78_MALI_INSTALL = "\
     vek385-pl-bram-gpio-fw \
     vek385-revb-pl-bram-gpio-fw \
+    vek386-pl-bram-gpio-fw \
     "
 
 # Enable weston for mali family variants
