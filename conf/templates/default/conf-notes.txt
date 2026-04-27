@@ -60,8 +60,6 @@ zynqmp
         - zcu102      - zynqmp-zcu102-sdt-full
         - zcu106      - zynqmp-zcu106-sdt-full
         - zcu208      - zynqmp-zcu208-sdt-full
-        - k24-sc      - zynqmp-k24-sc-sdt-base
-        - k26-sc      - zynqmp-k26-sc-sdt-base
         - k26-sm      - k26-sm-sdt
         - k24i-sm     - k24i-sm-sdt
         - k24c-sm     - k24c-sm-sdt
