@@ -1,10 +1,11 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-# USB gadget support
-SRC_URI += "${@bb.utils.contains('COMBINED_FEATURES', 'usbgadget', \
-    ' file://usb-gadgets-extra.cfg', '', d)}"
-KERNEL_FEATURES += "${@bb.utils.contains('COMBINED_FEATURES', 'usbgadget', \
-    ' features/usb/usb-gadgets.scc', '', d)}"
+# Limit USB gadget to aarch64 only to avoid zynq USB host :CHIPIDEA=m conflict with 'usbgadget'
+AMD_FPGA_USBGADGET = ""
+AMD_FPGA_USBGADGET:aarch64 = "${@bb.utils.contains('COMBINED_FEATURES', 'usbgadget', \
+    ' features/usb/usb-gadgets.scc features/usb-gadgets-extra/usb-gadgets-extra.scc', '', d)}"
+
+KERNEL_FEATURES:append = " ${AMD_FPGA_USBGADGET}"
 
 # Audit is required or systemd can fail to start the journal
 KERNEL_FEATURES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', \
