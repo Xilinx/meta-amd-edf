@@ -1,4 +1,7 @@
 SUMMARY = "U-boot script for AMD Embedded Development Framework"
+DESCRIPTION = "Builds the U-Boot boot.scr boot script used by the AMD \
+Embedded Development Framework (EDF) reference distribution to load \
+the kernel, device tree and initramfs at boot."
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 

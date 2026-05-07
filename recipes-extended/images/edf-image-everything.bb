@@ -1,3 +1,5 @@
+SUMMARY = "EDF reference image that pulls in every available EDF \
+packagegroup and demo for kitchen-sink validation builds."
 DESCRIPTION = "AMD Embedded Development Framework image everything"
 LICENSE = "MIT"
 

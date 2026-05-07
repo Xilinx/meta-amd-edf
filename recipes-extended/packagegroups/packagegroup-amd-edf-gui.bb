@@ -1,5 +1,8 @@
 SUMMARY = "Xilinx EDF packagegroup for GUI on-boarding"
 
+DESCRIPTION = "Packagegroup pulling in the Wayland/Weston compositor, \
+fonts, icons and helper utilities that make up the AMD Embedded \
+Development Framework graphical on-boarding experience."
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(^$)"
 COMPATIBLE_MACHINE:aarch64 = "(.*)"

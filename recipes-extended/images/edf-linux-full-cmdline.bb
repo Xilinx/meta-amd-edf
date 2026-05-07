@@ -1,6 +1,7 @@
 SUMMARY = "EDF Linux full command line image"
-DESCRIPTION = "An EDF Linux full command line image based on core-image-full-cmdline \
-    that can fit into RAM for basic test and debug."
+DESCRIPTION = "Full command-line (no graphical session) reference \
+image for the AMD Embedded Development Framework, including the \
+standard EDF package set plus the on-target developer tooling."
 
 require recipes-extended/images/core-image-full-cmdline.bb
 

@@ -1,4 +1,7 @@
-DESCRIPTION = "AMD Embedded Development Framework packages for native SDK"
+SUMMARY = "Native-SDK packagegroup of host-side EDF tooling shipped in \
+the AMD Embedded Development Framework SDK installer."
+DESCRIPTION = "AMD Embedded Development Framework packages for native \
+SDK"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

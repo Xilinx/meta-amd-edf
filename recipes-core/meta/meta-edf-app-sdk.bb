@@ -1,4 +1,9 @@
-SUMMARY = "Package for building a installable toolchain for AMD Embedded Development Framework SDK"
+SUMMARY = "Package for building a installable toolchain for AMD \
+Embedded Development Framework SDK"
+DESCRIPTION = "Meta-recipe that pulls in the toolchain components, \
+sysroots and helper scripts needed to produce an installable \
+application SDK tarball for the AMD Embedded Development Framework \
+(EDF)."
 LICENSE = "MIT"
 
 PR = "r0"

@@ -1,4 +1,6 @@
 # Hello world recipe copied from meta-skeleton
+SUMMARY = "GNU Hello example application packaged for the AMD Embedded \
+Development Framework reference images."
 
 DESCRIPTION = "GNU Helloworld application"
 SECTION = "examples"

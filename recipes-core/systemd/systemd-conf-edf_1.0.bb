@@ -1,4 +1,7 @@
 SUMMARY = "EDF default systemd configuration files"
+DESCRIPTION = "Drop-in systemd configuration overrides (units, \
+presets, tmpfiles and sysctl snippets) that adjust the default systemd \
+behaviour for AMD Embedded Development Framework (EDF) target images."
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
