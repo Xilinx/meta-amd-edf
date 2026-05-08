@@ -1,0 +1,53 @@
+From: Christian Kohn <chris.kohn@amd.com>
+Subject: [PATCH] mount.sh: replace external tool calls with udev environment variables
+
+mount.sh is invoked by udev as a RUN handler. Two functions call
+external tools (lsblk, blkid) that query the udev database, which
+is still locked waiting for mount.sh to finish -- creating a circular
+deadlock. This prevents /dev/disk/by-label and /dev/disk/by-uuid
+symlinks from being published, causing fstab mounts to time out and
+the system to drop into emergency mode.
+
+Replace lsblk calls in automount_systemd() and the blkid call in
+get_label_name() with udev environment variables (ID_FS_LABEL,
+ID_FS_UUID, ID_PART_ENTRY_NAME, ID_PART_ENTRY_UUID) which are
+already populated by udev's built-in blkid before RUN handlers
+execute. This eliminates all external tool calls that query the
+udev database.
+
+Upstream-Status: Pending
+
+AI-Generated: Claude Opus 4.6
+Signed-off-by: Christian Kohn <chris.kohn@amd.com>
+---
+ mount.sh | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+
+--- a/mount.sh
++++ b/mount.sh
+@@ -67,11 +67,11 @@
+ 
+     # Skip the partition which are already in /etc/fstab
+     grep "^[[:space:]]*$DEVNAME" /etc/fstab && return
+-    for n in LABEL PARTLABEL UUID PARTUUID; do
+-        tmp="$(lsblk -o $n $DEVNAME | sed -e '1d')"
+-        test -z "$tmp" && continue
+-        tmp="$n=$tmp"
+-        grep "^[[:space:]]*$tmp" /etc/fstab && return
++    for _fstab_id in "LABEL=$ID_FS_LABEL" "PARTLABEL=$ID_PART_ENTRY_NAME" \
++                     "UUID=$ID_FS_UUID" "PARTUUID=$ID_PART_ENTRY_UUID"; do
++        _fstab_val="${_fstab_id#*=}"
++        test -z "$_fstab_val" && continue
++        grep -q "^[[:space:]]*$_fstab_id" /etc/fstab && return
+     done
+ 
+     if ! is_filesystem_supported $ID_FS_TYPE; then
+@@ -178,7 +178,7 @@
+ 
+ get_label_name() {
+ 	# Get the LABEL or PARTLABEL
+-	LABEL=`/sbin/blkid | grep "$1:" | grep -o 'LABEL=".*"' | cut -d '"' -f2`
++	LABEL="${ID_FS_LABEL:-$ID_PART_ENTRY_NAME}"
+ 	# If the $DEVNAME has a LABEL or a PARTLABEL
+ 	if [ -n "$LABEL" ]; then
+ 	        # Set the mount location dir name to LABEL appended
