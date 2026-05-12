@@ -208,6 +208,7 @@ AMD_CORTEXA72_OPENAMP_FW_EXAMPLES = "\
     vmk180-openamp-fw-examples \
     vpk120-openamp-fw-examples \
     vrk160-openamp-fw-examples \
+    vrk165-openamp-fw-examples \
     versal-vm-p-m1369-00-reva-x-prc-01-openamp-fw-examples \
     "
 
