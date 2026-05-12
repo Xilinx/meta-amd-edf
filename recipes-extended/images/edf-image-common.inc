@@ -125,6 +125,7 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
     packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
     ${@bb.utils.contains('COMBINED_FEATURES', 'efi', 'fwupd-quirks', '', d)} \
     python3-image-mgmt \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'kvm', 'kernel-module-vhost', '', d)} \
     "
 
 AMD_CORTEXA53_INSTALL = "\
