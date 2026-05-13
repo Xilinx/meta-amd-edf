@@ -85,9 +85,11 @@ embedded-plus
     Linux only:
         - rave-xrt   - emb-plus-ve2302-xrt
         - rave-amr   - emb-plus-ve2302-amr
+        - v80        - alveo-v80-amr
 
 Example:
     $ MACHINE=versal-2ve-2vm-vek385-sdt-seg bitbake xilinx-bootbin
     $ MACHINE=versal-2ve-2vm-vek385-multidomain bitbake edf-ospi
     $ MACHINE=zynqmp-zcu104-sdt-full bitbake xilinx-bootbin
     $ MACHINE=k26-smk-kv-sdt-multidomain bitbake kria-qspi
+    $ DISTRO=amd-edf-small MACHINE=emb-plus-ve2302-amr bitbake emb-plus-apu-image
