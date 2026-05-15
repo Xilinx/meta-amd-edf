@@ -45,4 +45,5 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-vitis \
   ##OEROOT##/../meta-zephyr/meta-zephyr-core \
   ##OEROOT##/../meta-zephyr/meta-zephyr-bsp \
+  ##OEROOT##/../meta-embedded-plus \
 "
