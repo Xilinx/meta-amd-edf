@@ -48,7 +48,7 @@ do_compile:microblaze-v () {
     sed -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
         "${WORKDIR}/edf-linux-boot.cmd.mbv64" > "${WORKDIR}/boot.cmd"
 
-    mkimage -A arm -T script -C none -n "EDF Boot script" \
+    mkimage -A riscv -T script -C none -n "EDF Boot script" \
         -d "${WORKDIR}/boot.cmd" boot.scr
 }
 
