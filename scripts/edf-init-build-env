@@ -41,7 +41,7 @@ if [ -z "$FAIL" ]; then
     export ROOT=$(readlink -f $(dirname "$THIS_SCRIPT"))
 
     # Set default template if one is not already in the env or passed
-    if [ -z ${TEMPLATECONF} ]; then
+    if [ -z "${TEMPLATECONF}" ]; then
         TEMPLATECONF=$ROOT/sources/meta-amd-edf/conf/templates/default
         CLEANTEMPLATE=1
     fi
@@ -57,7 +57,7 @@ if [ -z "$FAIL" ]; then
     . $ROOT/sources/poky/oe-init-build-env "$@"
 
     # We set TEMPLATECONF, so clear this
-    if [ -n ${CLEANTEMPLATE} ]; then
+    if [ -n "${CLEANTEMPLATE}" ]; then
         unset -v TEMPLATECONF CLEANTEMPLATE
     fi
 fi
