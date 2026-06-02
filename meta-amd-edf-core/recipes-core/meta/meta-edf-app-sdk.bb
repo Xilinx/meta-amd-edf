@@ -36,11 +36,12 @@ TOOLCHAIN_TARGET_TASK:append = " \
     kernel-devsrc \
     "
 
+# TODO: Temporarily disable gstreamer for wrynose release integration
+#    packagegroup-xilinx-gstreamer
 TOOLCHAIN_TARGET_TASK:append:aarch64 = " \
     packagegroup-vitis-aiml-dev \
     packagegroup-opencv \
     packagegroup-xilinx-audio \
-    packagegroup-xilinx-gstreamer \
     xrt-dev \
     libmetal \
     "

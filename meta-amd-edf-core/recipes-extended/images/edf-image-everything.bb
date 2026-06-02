@@ -121,9 +121,10 @@ AMD_CORTEXA53_FULL_INSTALL += " \
 
 # TODO: Temporarily disable Qt and GUI.
 # packagegroup-amd-edf-gui
+# TODO: Temporarily disable gstreamer for wrynose release integration
+#    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)}
 AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     ${AMD_CORTEXA53_FULL_INSTALL} \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
     glmark2 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', '', 'kmscube', d)} \
     packagegroup-kria \
