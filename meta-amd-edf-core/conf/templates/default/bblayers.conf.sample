@@ -41,7 +41,6 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-ros/meta-ros-common \
   ##OEROOT##/../meta-ros/meta-ros2 \
   ##OEROOT##/../meta-ros/meta-ros2-jazzy \
-  ##OEROOT##/../meta-qt5 \
   ##OEROOT##/../meta-vitis \
   ##OEROOT##/../meta-zephyr/meta-zephyr-core \
   ##OEROOT##/../meta-zephyr/meta-zephyr-bsp \
