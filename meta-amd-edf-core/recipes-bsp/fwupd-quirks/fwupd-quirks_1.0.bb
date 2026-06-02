@@ -11,7 +11,7 @@ SRC_URI = " \
    file://xlnx-pci.quirk \
 "
 
-S = "${WORKDIR}"
+S = "${UNPACKDIR}"
 
 do_install() {
     install -d ${D}/${datadir}/fwupd/quirks.d

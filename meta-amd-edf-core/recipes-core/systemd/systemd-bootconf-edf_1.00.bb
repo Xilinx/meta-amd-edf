@@ -26,19 +26,19 @@ SRC_URI = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'file://edf-xen.conf', '', d)} \
     "
 
-S = "${WORKDIR}"
+S = "${UNPACKDIR}"
 
 KERNEL_CMDLINE_EXTRA ?= "earlycon uio_pdrv_genirq.of_id=generic-uio"
 
 do_compile() {
     # Substitute the kernel cmdline extra placeholder
-    sed 's#@@KERNEL_CMDLINE_EXTRA@@#${KERNEL_CMDLINE_EXTRA}#g' ${S}/edf-linux.conf > ${WORKDIR}/edf-linux.conf.out
+    sed 's#@@KERNEL_CMDLINE_EXTRA@@#${KERNEL_CMDLINE_EXTRA}#g' ${S}/edf-linux.conf > ${UNPACKDIR}/edf-linux.conf.out
 }
 
 do_install() {
     install -d ${D}/boot/loader/entries
     install -m 0644 ${S}/loader.conf ${D}/boot/loader/
-    install -m 0644 ${WORKDIR}/edf-linux.conf.out ${D}/boot/loader/entries/edf-linux.conf
+    install -m 0644 ${UNPACKDIR}/edf-linux.conf.out ${D}/boot/loader/entries/edf-linux.conf
     if [ -e "${S}/edf-xen.conf" ]; then
         install -m 0644 ${S}/edf-xen.conf ${D}/boot/loader/entries/
     fi
@@ -49,7 +49,7 @@ FILES:${PN} = "/boot/loader/loader.conf /boot/loader/entries/*.conf"
 do_deploy() {
     install -d ${DEPLOYDIR}/loader
     install -m 0644 ${S}/loader.conf ${DEPLOYDIR}/loader
-    install -m 0644 ${WORKDIR}/edf-linux.conf.out ${DEPLOYDIR}/loader/edf-linux.conf
+    install -m 0644 ${UNPACKDIR}/edf-linux.conf.out ${DEPLOYDIR}/loader/edf-linux.conf
     if [ -e "${S}/edf-xen.conf" ]; then
         install -m 0644 ${S}/edf-xen.conf ${DEPLOYDIR}/loader
     fi

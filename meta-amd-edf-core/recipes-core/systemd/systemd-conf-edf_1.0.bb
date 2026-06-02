@@ -12,7 +12,7 @@ SRC_URI = " \
     file://timesyncd.conf \
 "
 
-S = "${WORKDIR}"
+S = "${UNPACKDIR}"
 
 do_install() {
     install -d ${D}${sysconfdir}/repart.d/
