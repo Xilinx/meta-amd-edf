@@ -33,6 +33,8 @@ IMAGE_FEATURES:append:aarch64 = " \
 
 VITISAI_DEPENDENCIES = "googletest protobuf-c boost json-c libunwind"
 
+# TODO: Temporarily disable Qt and GUI.
+# ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11 xeyes xclock', '', d)}
 AMD-EDF_IMAGE_FULL_INSTALL += " \
     packagegroup-base \
     packagegroup-core-boot \
@@ -53,7 +55,6 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     e2fsprogs \
     packagegroup-lmsensors \
     packagegroup-xilinx-benchmarks \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11 xeyes xclock', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
     bridge-utils \
     nfs-utils \
@@ -96,6 +97,10 @@ AMD_CORTEXA9_FULL_INSTALL += " \
     dmidecode \
     "
 
+# TODO: Temporarily disable Qt and GUI.
+# packagegroup-xilinx-qt
+# ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
+# ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)}
 AMD_CORTEXA53_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
@@ -103,11 +108,8 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-ros \
-    packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
     valgrind \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-xilinx-jupyter \
     packagegroup-tsn \
     dmidecode \
@@ -115,17 +117,22 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     image-update \
     "
 
+# TODO: Temporarily disable Qt and GUI.
+# packagegroup-amd-edf-gui
 AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     ${AMD_CORTEXA53_FULL_INSTALL} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)} \
     glmark2 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', '', 'kmscube', d)} \
-    packagegroup-amd-edf-gui \
     packagegroup-kria \
     raft \
     image-update \
     "
 
+# TODO: Temporarily disable Qt and GUI.
+# packagegroup-xilinx-qt
+# ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
+# ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)}
 AMD_CORTEXA72_FULL_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     pm-notebooks \
@@ -135,28 +142,28 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-ros \
-    packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
     valgrind \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-xilinx-jupyter \
     packagegroup-tsn \
     image-update \
     "
 
+# TODO: Temporarily disable Qt and GUI.
+# packagegroup-xilinx-qt
+# ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
+# ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)}
 AMD_CORTEXA78_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-ros \
-    packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
     valgrind \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-xilinx-jupyter \
     packagegroup-tsn \
     "
 
+# TODO: Temporarily disable Qt and GUI.
+# packagegroup-amd-edf-gui
 AMD_CORTEXA78_MALI_FULL_INSTALL += " \
     ${AMD_CORTEXA78_FULL_INSTALL} \
     kernel-module-hdmi21 \
@@ -164,7 +171,6 @@ AMD_CORTEXA78_MALI_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     glmark2 \
     kmscube \
-    packagegroup-amd-edf-gui \
     "
 
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_FULL_INSTALL}"
