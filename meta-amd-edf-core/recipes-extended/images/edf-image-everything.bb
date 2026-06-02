@@ -101,13 +101,15 @@ AMD_CORTEXA9_FULL_INSTALL += " \
 # packagegroup-xilinx-qt
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)}
+
+# TODO: Temporarily disable ROS for wrynose release integration
+# packagegroup-xilinx-ros
 AMD_CORTEXA53_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
-    packagegroup-xilinx-ros \
     packagegroup-vitis-aiml \
     valgrind \
     packagegroup-xilinx-jupyter \
@@ -133,6 +135,9 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
 # packagegroup-xilinx-qt
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)}
+
+# TODO: Temporarily disable ROS for wrynose release integration
+# packagegroup-xilinx-ros
 AMD_CORTEXA72_FULL_INSTALL += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
     pm-notebooks \
@@ -141,7 +146,6 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
-    packagegroup-xilinx-ros \
     packagegroup-vitis-aiml \
     valgrind \
     packagegroup-xilinx-jupyter \
@@ -153,9 +157,11 @@ AMD_CORTEXA72_FULL_INSTALL += " \
 # packagegroup-xilinx-qt
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)}
+
+# TODO: Temporarily disable ROS for wrynose release integration
+# packagegroup-xilinx-ros
 AMD_CORTEXA78_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
-    packagegroup-xilinx-ros \
     packagegroup-vitis-aiml \
     valgrind \
     packagegroup-xilinx-jupyter \

@@ -46,3 +46,8 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-zephyr/meta-zephyr-bsp \
   ##OEROOT##/../meta-embedded-plus \
 "
+
+# TODO: Temporarily disable ROS for wrynose release integration
+#  ##OEROOT##/../meta-ros/meta-ros-common \
+#  ##OEROOT##/../meta-ros/meta-ros2 \
+#  ##OEROOT##/../meta-ros/meta-ros2-jazzy \
