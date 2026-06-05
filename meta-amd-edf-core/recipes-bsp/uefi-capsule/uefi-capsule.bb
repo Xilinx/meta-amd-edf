@@ -168,9 +168,9 @@ LVFS_DATE[vardepsexclude] += "DATE SOURCE_DATE_EPOCH"
 # Internal Variables
 # =============================================================================
 
-CAPSULE_VENDOR_BLOB = "${WORKDIR}/${PN}-vendor.txt"
-CAPSULE_META_TEMPLATE = "${WORKDIR}/firmware.metainfo.xml.in"
-CAPSULE_META_OUTPUT = "${WORKDIR}/firmware.metainfo.xml"
+CAPSULE_VENDOR_BLOB = "${UNPACKDIR}/${PN}-vendor.txt"
+CAPSULE_META_TEMPLATE = "${UNPACKDIR}/firmware.metainfo.xml.in"
+CAPSULE_META_OUTPUT = "${UNPACKDIR}/firmware.metainfo.xml"
 
 python do_configure() {
     import re
@@ -218,15 +218,15 @@ do_compile() {
     # GUIDs: <location>,<image_type>,<bank0_image>,<bank1_image>
     mkfwumdata -a 0 -b 2 -i 1 -v 2 \
         ${LOC_GUID},${METADATA_GUID},${IMG_0_GUID_0},${IMG_0_GUID_1} \
-        "${WORKDIR}/${PN}-metadata.bin" -V "${CAPSULE_VENDOR_BLOB}"
+        "${UNPACKDIR}/${PN}-metadata.bin" -V "${CAPSULE_VENDOR_BLOB}"
 
     # Generate UEFI capsule from boot.bin
     # -o: OEM flags, -g: GUID, --index: image index, -v: firmware version (VER_RAW_PAIR)
     mkeficapsule -o 0x8000 -g ${PRODUCT_GUID} --index 1 -v ${VER_RAW_PAIR} \
-        "${DEPLOY_DIR_IMAGE}/boot.bin" "${WORKDIR}/firmware.bin"
+        "${DEPLOY_DIR_IMAGE}/boot.bin" "${UNPACKDIR}/firmware.bin"
 
     # Generate acceptance capsule (used to commit an update after successful boot)
-    mkeficapsule -A -g ${PRODUCT_GUID} "${WORKDIR}/${PN}-bootfw-acceptance-capsule.bin"
+    mkeficapsule -A -g ${PRODUCT_GUID} "${UNPACKDIR}/${PN}-bootfw-acceptance-capsule.bin"
 }
 
 python do_generate_metainfo() {
@@ -257,39 +257,39 @@ python do_generate_metainfo() {
         bb.warn("AppStream validation issues (cabinet may not pass LVFS checks):\n%s" % output)
 }
 do_generate_metainfo[vardeps] += "${UEFI_CAB_META_VARS}"
-do_generate_metainfo[dirs] = "${WORKDIR}"
+do_generate_metainfo[dirs] = "${UNPACKDIR}"
 addtask do_generate_metainfo after do_compile before do_create_cabinet
 
 do_create_cabinet() {
     # Package firmware and metainfo into LVFS-compatible cabinet
     gcab --create --nopath \
-        "${WORKDIR}/${PN}-bootfw-firmware.cab" \
-        "${WORKDIR}/firmware.bin" \
+        "${UNPACKDIR}/${PN}-bootfw-firmware.cab" \
+        "${UNPACKDIR}/firmware.bin" \
         "${CAPSULE_META_OUTPUT}"
 
     bbnote "Cabinet contents:"
-    gcab --list "${WORKDIR}/${PN}-bootfw-firmware.cab"
+    gcab --list "${UNPACKDIR}/${PN}-bootfw-firmware.cab"
 }
-do_create_cabinet[dirs] = "${WORKDIR}"
+do_create_cabinet[dirs] = "${UNPACKDIR}"
 addtask do_create_cabinet after do_generate_metainfo before do_deploy
 
 do_deploy() {
     install -d ${DEPLOYDIR}
 
     # FWU metadata (written to SPI flash by edf-ospi/edf-qspi recipes)
-    install -Dm 0644 ${WORKDIR}/${PN}-metadata.bin ${DEPLOYDIR}/${IMAGE_NAME}-metadata.bin
+    install -Dm 0644 ${UNPACKDIR}/${PN}-metadata.bin ${DEPLOYDIR}/${IMAGE_NAME}-metadata.bin
     ln -sf ${IMAGE_NAME}-metadata.bin ${DEPLOYDIR}/${IMAGE_LINK_NAME}-metadata.bin
 
     # UEFI capsule (can be placed on ESP for capsule-on-disk update)
-    install -Dm 0644 ${WORKDIR}/firmware.bin ${DEPLOYDIR}/${IMAGE_NAME}-capsule.bin
+    install -Dm 0644 ${UNPACKDIR}/firmware.bin ${DEPLOYDIR}/${IMAGE_NAME}-capsule.bin
     ln -sf ${IMAGE_NAME}-capsule.bin ${DEPLOYDIR}/${IMAGE_LINK_NAME}-capsule.bin
 
     # Acceptance capsule (used to accept/commit firmware update)
-    install -Dm 0644 ${WORKDIR}/${PN}-bootfw-acceptance-capsule.bin ${DEPLOYDIR}/${IMAGE_NAME}-acceptance-capsule.bin
+    install -Dm 0644 ${UNPACKDIR}/${PN}-bootfw-acceptance-capsule.bin ${DEPLOYDIR}/${IMAGE_NAME}-acceptance-capsule.bin
     ln -sf ${IMAGE_NAME}-acceptance-capsule.bin ${DEPLOYDIR}/${IMAGE_LINK_NAME}-acceptance-capsule.bin
 
     # Cabinet file for fwupd/LVFS
-    install -Dm 0644 ${WORKDIR}/${PN}-bootfw-firmware.cab ${DEPLOYDIR}/${IMAGE_NAME}-bootfw-firmware.cab
+    install -Dm 0644 ${UNPACKDIR}/${PN}-bootfw-firmware.cab ${DEPLOYDIR}/${IMAGE_NAME}-bootfw-firmware.cab
     ln -sf ${IMAGE_NAME}-bootfw-firmware.cab ${DEPLOYDIR}/${IMAGE_LINK_NAME}-bootfw-firmware.cab
 
     # User-friendly cabinet name for LVFS submission

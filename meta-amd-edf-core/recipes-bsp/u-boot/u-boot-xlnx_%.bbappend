@@ -34,9 +34,9 @@ do_unpack:append:versal-2ve-2vm() {
 }
 
 do_sys_config() {
-    cp ${WORKDIR}/amd_edf.h ${S}/include/configs/amd_edf.h
-    if [ -e ${WORKDIR}/amd_edf_common.h ]; then
-        cp ${WORKDIR}/amd_edf_common.h ${S}/include/configs/amd_edf_common.h
+    cp ${UNPACKDIR}/amd_edf.h ${S}/include/configs/amd_edf.h
+    if [ -e ${UNPACKDIR}/amd_edf_common.h ]; then
+        cp ${UNPACKDIR}/amd_edf_common.h ${S}/include/configs/amd_edf_common.h
     fi
 }
 

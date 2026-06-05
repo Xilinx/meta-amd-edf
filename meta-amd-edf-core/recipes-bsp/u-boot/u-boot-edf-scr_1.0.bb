@@ -9,6 +9,8 @@ inherit deploy
 
 DEPENDS = "u-boot-mkimage-native"
 
+S = "${UNPACKDIR}"
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE ?= "^$"
 COMPATIBLE_MACHINE:zynq = "zynq"
@@ -38,18 +40,18 @@ do_compile() {
     sed -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
         -e 's/@@KERNEL_IMAGE@@/${KERNEL_IMAGE}/' \
         -e 's/@@ROOT_PARTNUM@@/${EDF_ROOT_PARTNUM}/' \
-        "${WORKDIR}/edf-linux-boot.cmd" > "${WORKDIR}/boot.cmd"
+        "${UNPACKDIR}/edf-linux-boot.cmd" > "${UNPACKDIR}/boot.cmd"
 
     mkimage -A arm -T script -C none -n "EDF Boot script" \
-        -d "${WORKDIR}/boot.cmd" boot.scr
+        -d "${UNPACKDIR}/boot.cmd" boot.scr
 }
 
 do_compile:microblaze-v () {
     sed -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
-        "${WORKDIR}/edf-linux-boot.cmd.mbv64" > "${WORKDIR}/boot.cmd"
+        "${UNPACKDIR}/edf-linux-boot.cmd.mbv64" > "${UNPACKDIR}/boot.cmd"
 
     mkimage -A riscv -T script -C none -n "EDF Boot script" \
-        -d "${WORKDIR}/boot.cmd" boot.scr
+        -d "${UNPACKDIR}/boot.cmd" boot.scr
 }
 
 do_install() {

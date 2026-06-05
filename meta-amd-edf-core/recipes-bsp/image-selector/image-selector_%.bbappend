@@ -1,5 +1,5 @@
 IMGSEL_VERSION ?= "${PV}"
-IMGSEL_VERSION_FILE ?= "${WORKDIR}/${PN}-version.txt"
+IMGSEL_VERSION_FILE ?= "${UNPACKDIR}/${PN}-version.txt"
 
 do_configure:append () {
 	if [ "${SOC_FAMILY}" != "zynqmp" ]; then
