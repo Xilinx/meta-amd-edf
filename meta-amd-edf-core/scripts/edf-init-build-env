@@ -53,8 +53,8 @@ if [ -z "$FAIL" ]; then
 
     # '.' is POSIX, 'source' is not, use 'source' for dash
     # Fake it so we oe-init-build-env works in dash
-    BASH_SOURCE=$ROOT/sources/poky/oe-init-build-env
-    . $ROOT/sources/poky/oe-init-build-env "$@"
+    BASH_SOURCE=$ROOT/sources/openembedded-core/oe-init-build-env
+    . $ROOT/sources/openembedded-core/oe-init-build-env "$@"
 
     # We set TEMPLATECONF, so clear this
     if [ -n ${CLEANTEMPLATE} ]; then
