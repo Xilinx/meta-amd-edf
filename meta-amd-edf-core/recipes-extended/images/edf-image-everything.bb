@@ -35,6 +35,8 @@ VITISAI_DEPENDENCIES = "googletest protobuf-c boost json-c libunwind"
 
 # TODO: Temporarily disable Qt and GUI.
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11 xeyes xclock', '', d)}
+# TODO: Temporarily disable Xen
+# ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)}
 AMD-EDF_IMAGE_FULL_INSTALL += " \
     packagegroup-base \
     packagegroup-core-boot \
@@ -55,7 +57,6 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     e2fsprogs \
     packagegroup-lmsensors \
     packagegroup-xilinx-benchmarks \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
     bridge-utils \
     nfs-utils \
     nfs-utils-client \
@@ -104,15 +105,16 @@ AMD_CORTEXA9_FULL_INSTALL += " \
 
 # TODO: Temporarily disable ROS for wrynose release integration
 # packagegroup-xilinx-ros
+# TODO: Temporarily disable jupyter-notebooks
+# packagegroup-xilinx-jupyter
+# ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)}
 AMD_CORTEXA53_FULL_INSTALL += " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-vitis-aiml \
     valgrind \
-    packagegroup-xilinx-jupyter \
     packagegroup-tsn \
     dmidecode \
     raft \
@@ -139,17 +141,19 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
 
 # TODO: Temporarily disable ROS for wrynose release integration
 # packagegroup-xilinx-ros
+# TODO: Temporarily disable jupyter-notebooks
+# packagegroup-xilinx-jupyter
+# ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)}
+# pm-notebooks
+# TODO: gstreamer1.0-omx is not available
+# ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)}
 AMD_CORTEXA72_FULL_INSTALL += " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)} \
-    pm-notebooks \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)} \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-vitis-aiml \
     valgrind \
-    packagegroup-xilinx-jupyter \
     packagegroup-tsn \
     image-update \
     "
@@ -161,11 +165,12 @@ AMD_CORTEXA72_FULL_INSTALL += " \
 
 # TODO: Temporarily disable ROS for wrynose release integration
 # packagegroup-xilinx-ros
+# TODO: Temporarily disable jupyter-notbook
+# packagegroup-xilinx-jupyter
 AMD_CORTEXA78_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-vitis-aiml \
     valgrind \
-    packagegroup-xilinx-jupyter \
     packagegroup-tsn \
     "
 
