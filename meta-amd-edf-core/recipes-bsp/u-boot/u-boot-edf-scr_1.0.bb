@@ -40,30 +40,30 @@ do_compile() {
     sed -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
         -e 's/@@KERNEL_IMAGE@@/${KERNEL_IMAGE}/' \
         -e 's/@@ROOT_PARTNUM@@/${EDF_ROOT_PARTNUM}/' \
-        "${UNPACKDIR}/edf-linux-boot.cmd" > "${UNPACKDIR}/boot.cmd"
+        "${S}/edf-linux-boot.cmd" > "${B}/boot.cmd"
 
     mkimage -A arm -T script -C none -n "EDF Boot script" \
-        -d "${UNPACKDIR}/boot.cmd" boot.scr
+        -d "${B}/boot.cmd" ${B}/boot.scr
 }
 
 do_compile:microblaze-v () {
     sed -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
-        "${UNPACKDIR}/edf-linux-boot.cmd.mbv64" > "${UNPACKDIR}/boot.cmd"
+        "${S}/edf-linux-boot.cmd.mbv64" > "${B}/boot.cmd"
 
     mkimage -A riscv -T script -C none -n "EDF Boot script" \
-        -d "${UNPACKDIR}/boot.cmd" boot.scr
+        -d "${B}/boot.cmd" ${B}/boot.scr
 }
 
 do_install() {
     install -d ${D}/boot
-    install -m 0644 boot.scr ${D}/boot
+    install -m 0644 ${B}/boot.scr ${D}/boot
 }
 
 FILES:${PN} = "/boot/*"
 
 do_deploy() {
     install -d ${DEPLOYDIR}
-    install -m 0644 boot.scr ${DEPLOYDIR}
+    install -m 0644 ${B}/boot.scr ${DEPLOYDIR}
 }
 
 addtask do_deploy after do_compile before do_build
