@@ -239,7 +239,7 @@ python do_generate_metainfo() {
     import subprocess
     from pathlib import Path
 
-    firmware = Path(d.getVar("WORKDIR")) / "firmware.bin"
+    firmware = Path(d.getVar("UNPACKDIR")) / "firmware.bin"
     checksum = hashlib.sha256(firmware.read_bytes()).hexdigest()
     d.setVar("FW_CHECKSUM", checksum)
 
