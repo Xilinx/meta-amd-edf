@@ -309,7 +309,7 @@ CONF_VERSION = "2"
 SDK_CLASSES += "amd-qemu-xilinx-sdk-tools amd-misc-sdk-tools"
 
 # Source and Sstate mirror settings
-AMD-EDF_VERSION = "26.06"
+AMD-EDF_VERSION ??= "26.11"
 
 INHERIT += "own-mirrors"
 SOURCE_MIRROR_URL = "https://edf.amd.com/sswreleases/amd-edf/${AMD-EDF_VERSION}/downloads"
