@@ -38,8 +38,10 @@ TOOLCHAIN_TARGET_TASK:append = " \
 
 # TODO: Temporarily disable gstreamer for wrynose release integration
 #    packagegroup-xilinx-gstreamer
+
+# TODO: various vitis aiml python libraries need to be fixed
+#    packagegroup-vitis-aiml-dev
 TOOLCHAIN_TARGET_TASK:append:aarch64 = " \
-    packagegroup-vitis-aiml-dev \
     packagegroup-opencv \
     packagegroup-xilinx-audio \
     xrt-dev \
@@ -52,6 +54,8 @@ TOOLCHAIN_HOST_TASK:append = " \
 	nativesdk-packagegroup-edf-tools \
 	"
 
+# TODO:
+# Various vitis-aiml need to be fixed
+#	nativesdk-packagegroup-vitis-aiml
 TOOLCHAIN_HOST_TASK:append:aarch64 = " \
-	nativesdk-packagegroup-vitis-aiml \
 	"
