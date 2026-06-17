@@ -17,15 +17,15 @@ udev database.
 
 Upstream-Status: Pending
 
-AI-Generated: Claude Opus 4.6
+AI-Generated: Claude Opus 4.8
 Signed-off-by: Christian Kohn <chris.kohn@amd.com>
 ---
- mount.sh | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ mount.sh | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
 --- a/mount.sh
 +++ b/mount.sh
-@@ -67,11 +67,11 @@
+@@ -68,11 +68,11 @@
  
      # Skip the partition which are already in /etc/fstab
      grep "^[[:space:]]*$DEVNAME" /etc/fstab && return
@@ -42,12 +42,15 @@ Signed-off-by: Christian Kohn <chris.kohn@amd.com>
      done
  
      if ! is_filesystem_supported $ID_FS_TYPE; then
-@@ -178,7 +178,7 @@
+@@ -178,8 +178,10 @@
+ }
  
  get_label_name() {
++	# NOTE: derives LABEL from the udev environment (ID_FS_LABEL /
++	# ID_PART_ENTRY_NAME); returns empty if run outside a udev RUN handler.
  	# Get the LABEL or PARTLABEL
--	LABEL=`/sbin/blkid | grep "$1:" | grep -o 'LABEL=".*"' | cut -d '"' -f2`
-+	LABEL="${ID_FS_LABEL:-$ID_PART_ENTRY_NAME}"
+-	LABEL=`/sbin/blkid "$1" | grep -o 'LABEL=".*"' | cut -d '"' -f2 | sed 's,/,_,g'`
++	LABEL=`echo "${ID_FS_LABEL:-$ID_PART_ENTRY_NAME}" | sed 's,/,_,g'`
  	# If the $DEVNAME has a LABEL or a PARTLABEL
  	if [ -n "$LABEL" ]; then
  	        # Set the mount location dir name to LABEL appended
