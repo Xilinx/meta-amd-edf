@@ -41,7 +41,6 @@ versal
         - vpk120      - versal-vpk120-sdt-seg
         - vrk160      - versal-vrk160-sdt-seg
         - vrk165      - versal-vrk165-sdt-seg
-        - v80         - versal-v80-sdt-seg
         - vm-p-m1369  - versal-vm-p-m1369-00-reva-x-prc-01-reva-sdt-seg
     Multi-domain:
         - vek280      - versal-vek280-multidomain
@@ -50,7 +49,6 @@ versal
         - vpk120      - versal-vpk120-multidomain
         - vrk160      - versal-vrk160-multidomain
         - vrk165      - versal-vrk165-multidomain
-        - v80         - versal-v80-multidomain
         - vm-p-m1369  - versal-vm-p-m1369-00-reva-x-prc-01-reva-multidomain
 
 zynqmp
