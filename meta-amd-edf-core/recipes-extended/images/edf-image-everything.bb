@@ -33,8 +33,6 @@ IMAGE_FEATURES:append:aarch64 = " \
 
 VITISAI_DEPENDENCIES = "googletest protobuf-c boost json-c libunwind"
 
-# TODO: Temporarily disable Qt and GUI.
-# ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11 xeyes xclock', '', d)}
 # TODO: Temporarily disable Xen
 # ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)}
 AMD-EDF_IMAGE_FULL_INSTALL += " \
@@ -57,6 +55,7 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     e2fsprogs \
     packagegroup-lmsensors \
     packagegroup-xilinx-benchmarks \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11 xeyes xclock', '', d)} \
     bridge-utils \
     nfs-utils \
     nfs-utils-client \
