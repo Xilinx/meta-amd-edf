@@ -100,7 +100,6 @@ AMD_CORTEXA9_FULL_INSTALL += " \
 # TODO: Temporarily disable Qt and GUI.
 # packagegroup-xilinx-qt
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
-# ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)}
 
 # TODO: Temporarily disable ROS for wrynose release integration
 # packagegroup-xilinx-ros
@@ -114,6 +113,7 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-vitis-aiml \
     valgrind \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
     dmidecode \
     raft \
@@ -136,7 +136,6 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
 # TODO: Temporarily disable Qt and GUI.
 # packagegroup-xilinx-qt
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
-# ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)}
 
 # TODO: Temporarily disable ROS for wrynose release integration
 # packagegroup-xilinx-ros
@@ -153,6 +152,7 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-vitis-aiml \
     valgrind \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
     image-update \
     "
@@ -160,7 +160,6 @@ AMD_CORTEXA72_FULL_INSTALL += " \
 # TODO: Temporarily disable Qt and GUI.
 # packagegroup-xilinx-qt
 # ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
-# ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)}
 
 # TODO: Temporarily disable ROS for wrynose release integration
 # packagegroup-xilinx-ros
@@ -170,6 +169,7 @@ AMD_CORTEXA78_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-vitis-aiml \
     valgrind \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
     "
 
