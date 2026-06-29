@@ -7,7 +7,7 @@
     "fdt_addr_r=0x40000000\0" \
     "fdt_size_r=0x400000\0" \
     "pxefile_addr_r=0x10000000\0" \
-    "kernel_addr_r=0x18000000\0" \
+    "kernel_addr_r=0x30000000\0" \
     "kernel_size_r=0x10000000\0" \
     "kernel_comp_addr_r=0x30000000\0" \
     "kernel_comp_size=0x3C00000\0" \
