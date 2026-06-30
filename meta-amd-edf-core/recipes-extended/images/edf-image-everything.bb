@@ -54,6 +54,7 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     smartmontools \
     e2fsprogs \
     packagegroup-lmsensors \
+    stress-ng \
     packagegroup-xilinx-benchmarks \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11 xeyes xclock', '', d)} \
     bridge-utils \
