@@ -5,6 +5,10 @@
 # enabled.
 PACKAGECONFIG:append = " repart openssl"
 
+# TEMPORARY: drop the OSC 3008 shell hook; its escape sequences are invisible
+# in real terminals but pollute raw log capture (Vitis/ROAST).
+PACKAGECONFIG:remove = " osc-context"
+
 # Enable systemd-growfs-root.service by default.
 # This does nothing unless a systemd-repart conf file is provided
 # that triggers the growfs service.
