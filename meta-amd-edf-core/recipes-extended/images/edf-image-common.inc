@@ -88,7 +88,7 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
     usb-modeswitch-data \
     util-linux-taskset \
     vim \
-    packagegroup-base-wifi \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'wifi', 'packagegroup-base-wifi', '', d)} \
     ${@bb.utils.contains('COMBINED_FEATURES', 'wifi', '${WIFI_FIRMWARE_INSTALL}', '', d)} \
     "
 
