@@ -101,6 +101,7 @@ AMD_RISCV64_COMMON_INSTALL = "linux-xlnx-udev-rules"
 AMD_RISCV64_INSTALL = ""
 
 AMD_CORTEXA9_COMMON_INSTALL = " \
+    gpio-bram-test \
     linux-xlnx-udev-rules \
     packagegroup-core-sdk packagegroup-core-standalone-sdk-target \
     "
@@ -113,6 +114,7 @@ AMD_CORTEXA9_INSTALL = " \
 # TODO: Temporarily disable gstreamer for wrynose release integration
 #    packagegroup-xilinx-gstreamer
 AMD_CORTEXA53_COMMON_INSTALL = "\
+    gpio-bram-test \
     ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'docker-moby-contrib', '', d)} \
     libdrm \
     libdrm-tests \
