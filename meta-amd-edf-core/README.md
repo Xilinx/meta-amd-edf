@@ -48,4 +48,5 @@ This layer depends on:
 Optional dependencies (for Kria support):
 
 	URI: https://github.com/Xilinx/meta-kria
+	layers: meta-kria-core, meta-kria-bsp
 	branch: AMD release version (e.g. rel-v2026.1)

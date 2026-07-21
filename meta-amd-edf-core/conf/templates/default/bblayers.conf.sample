@@ -31,7 +31,8 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-openamp \
   ##OEROOT##/../meta-amd-edf/meta-amd-edf-core \
   ##OEROOT##/../meta-amd-edf/meta-amd-edf-bsp \
-  ##OEROOT##/../meta-kria \
+  ##OEROOT##/../meta-kria/meta-kria-core \
+  ##OEROOT##/../meta-kria/meta-kria-bsp \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-core \
   ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp \
   ##OEROOT##/../meta-xilinx/meta-xilinx-imgrcvry \
