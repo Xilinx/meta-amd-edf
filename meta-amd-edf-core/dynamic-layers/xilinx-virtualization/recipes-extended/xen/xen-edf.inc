@@ -14,41 +14,41 @@ PACKAGE_ARCH:versal-net = "${MACHINE_ARCH}"
 PACKAGE_ARCH:versal-2ve-2vm = "${MACHINE_ARCH}"
 
 do_install:append:zynqmp() {
-    install -m 0644 ${WORKDIR}/zynqmp-xen-efi-config ${D}/boot/xen.cfg
+    install -m 0644 ${UNPACKDIR}/zynqmp-xen-efi-config ${D}/boot/xen.cfg
 }
 
 do_install:append:versal() {
-    install -m 0644 ${WORKDIR}/versal-xen-efi-config ${D}/boot/xen.cfg
+    install -m 0644 ${UNPACKDIR}/versal-xen-efi-config ${D}/boot/xen.cfg
 }
 
 do_install:append:versal-net() {
-    install -m 0644 ${WORKDIR}/versal-net-xen-efi-config ${D}/boot/xen.cfg
+    install -m 0644 ${UNPACKDIR}/versal-net-xen-efi-config ${D}/boot/xen.cfg
 }
 
 do_install:append:versal-2ve-2vm() {
-    install -m 0644 ${WORKDIR}/versal-2ve-2vm-xen-efi-config ${D}/boot/xen.cfg
+    install -m 0644 ${UNPACKDIR}/versal-2ve-2vm-xen-efi-config ${D}/boot/xen.cfg
 }
 
 FILES:${PN}-efi += "/boot/xen.cfg"
 
 do_deploy:append:zynqmp() {
     install -d ${DEPLOYDIR}
-    install -m 0644 ${WORKDIR}/zynqmp-xen-efi-config ${DEPLOYDIR}/xen.cfg
+    install -m 0644 ${UNPACKDIR}/zynqmp-xen-efi-config ${DEPLOYDIR}/xen.cfg
 }
 
 do_deploy:append:versal() {
     install -d ${DEPLOYDIR}
-    install -m 0644 ${WORKDIR}/versal-xen-efi-config ${DEPLOYDIR}/xen.cfg
+    install -m 0644 ${UNPACKDIR}/versal-xen-efi-config ${DEPLOYDIR}/xen.cfg
 }
 
 do_deploy:append:versal-net() {
     install -d ${DEPLOYDIR}
-    install -m 0644 ${WORKDIR}/versal-net-xen-efi-config ${DEPLOYDIR}/xen.cfg
+    install -m 0644 ${UNPACKDIR}/versal-net-xen-efi-config ${DEPLOYDIR}/xen.cfg
 }
 
 do_deploy:append:versal-2ve-2vm() {
     install -d ${DEPLOYDIR}
-    install -m 0644 ${WORKDIR}/versal-2ve-2vm-xen-efi-config ${DEPLOYDIR}/xen.cfg
+    install -m 0644 ${UNPACKDIR}/versal-2ve-2vm-xen-efi-config ${DEPLOYDIR}/xen.cfg
 }
 
 pkg_postinst:${PN}-efi:append () {
