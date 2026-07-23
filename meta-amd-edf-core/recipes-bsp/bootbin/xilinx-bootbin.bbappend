@@ -8,15 +8,6 @@ MANIFEST_AGGREGATE_COMPONENTS:zynqmp += "bootbin-version-header"
 MANIFEST_AGGREGATE_DEPENDS:zynq += "bootbin-version-header"
 MANIFEST_AGGREGATE_DEPENDS:zynqmp += "bootbin-version-header"
 
-# Add bootbin-rollback-counter to the manifest for versal variants
-MANIFEST_AGGREGATE_COMPONENTS:versal += "bootbin-rollback-counter"
-MANIFEST_AGGREGATE_COMPONENTS:versal-net += "bootbin-rollback-counter"
-MANIFEST_AGGREGATE_COMPONENTS:versal-2ve-2vm += "bootbin-rollback-counter"
-
-MANIFEST_AGGREGATE_DEPENDS:versal += "bootbin-rollback-counter"
-MANIFEST_AGGREGATE_DEPENDS:versal-net += "bootbin-rollback-counter"
-MANIFEST_AGGREGATE_DEPENDS:versal-2ve-2vm += "bootbin-rollback-counter"
-
 BOOTBIN_DEPENDS ?= ""
 BOOTBIN_DEPENDS:append:amd-edf:zynq = " bootbin-version-header:do_deploy"
 BOOTBIN_DEPENDS:append:amd-edf:zynqmp = " bootbin-version-header:do_deploy"
@@ -24,6 +15,9 @@ BOOTBIN_DEPENDS:append:amd-edf:versal = " bootbin-rollback-counter:do_deploy boo
 BOOTBIN_DEPENDS:append:amd-edf:versal-net = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy"
 BOOTBIN_DEPENDS:append:amd-edf:versal-2ve-2vm = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy base-pdi-unique-id:do_deploy"
 do_configure[depends] += "${BOOTBIN_DEPENDS}"
+# The aggregate manifest hashes deploy-path BIF images (e.g. version-header), so
+# it must run after those artifacts are deployed, not just before do_configure.
+do_manifest_aggregate[depends] += "${BOOTBIN_DEPENDS}"
 
 # User Defined Field Boot Header for version tracking on zynq/zynqmp
 # For Kria machines, meta-kria sets BIF_UDFBH_ATTR:kria which takes precedence
