@@ -45,6 +45,36 @@ IMAGE_BOOT_FILES_label-esp = "${@'' if bb.utils.contains('COMBINED_FEATURES', 'e
 WICVARS:append = "${@'' if bb.utils.contains('COMBINED_FEATURES', 'efi', True, False, d) else ' IMAGE_BOOT_FILES_label-esp'}"
 WICUFSVARS:append = "${@'' if bb.utils.contains('COMBINED_FEATURES', 'efi', True, False, d) else ' IMAGE_BOOT_FILES_label-esp'}"
 
+# EDF version file on the FAT ESP. Deployed under the stable per-image link
+# name (IMAGE_NAME carries DATETIME) to DEPLOY_DIR_IMAGE where wic reads it.
+EDF_BOOT_VERSION_FILE = "${IMAGE_LINK_NAME}.edf-version.txt"
+
+do_write_boot_version_manifest() {
+    cat > ${DEPLOY_DIR_IMAGE}/${EDF_BOOT_VERSION_FILE} <<EOF
+AMD Embedded Development Framework
+Release:      ${DISTRO_VERSION}
+Machine:      ${MACHINE}
+Architecture: ${TARGET_ARCH}
+EOF
+}
+addtask write_boot_version_manifest after do_rootfs before do_image_wic
+do_write_boot_version_manifest[dirs] = "${DEPLOY_DIR_IMAGE}"
+
+# Version file + rootfs manifest on the ESP. IMAGE_MANIFEST is an absolute
+# path; wic reads it during do_image_wic, before do_image_complete moves it.
+EDF_ESP_FILES = "${EDF_BOOT_VERSION_FILE};edf-version.txt ${IMAGE_MANIFEST};image.manifest"
+
+# Single-machine builds (boot.bin on disk): add its component manifest, plus
+# the version string on versal (zynq/zynqmp use a hex header, not text).
+EDF_ESP_FILES:append = "${@' boot.bin.manifest.json' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' else ''}"
+EDF_ESP_FILES:append = "${@' bootbin-version-string-${MACHINE}.txt;boot-version.txt' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' and d.getVar('SOC_FAMILY') in ('versal', 'versal-net', 'versal-2ve-2vm') else ''}"
+
+IMAGE_EFI_BOOT_FILES:append = " ${EDF_ESP_FILES}"
+IMAGE_BOOT_FILES_label-esp:append = "${@'' if bb.utils.contains('COMBINED_FEATURES', 'efi', True, False, d) else ' ${EDF_ESP_FILES}'}"
+
+do_image_wic[depends] += "${@' virtual/boot-bin:do_deploy' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' else ''}"
+do_image_wic[depends] += "${@' bootbin-version-string:do_deploy' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' and d.getVar('SOC_FAMILY') in ('versal', 'versal-net', 'versal-2ve-2vm') else ''}"
+
 # Configure QEMU boot
 QB_KERNEL_ROOT:riscv32 = "/dev/vda3"
 QB_KERNEL_ROOT:riscv64 = "/dev/vda3"
