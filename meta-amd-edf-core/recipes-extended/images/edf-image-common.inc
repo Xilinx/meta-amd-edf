@@ -111,8 +111,6 @@ AMD_CORTEXA9_INSTALL = " \
     zc706-pl-bram-gpio-fw \
 "
 
-# TODO: Temporarily disable gstreamer for wrynose release integration
-#    packagegroup-xilinx-gstreamer
 AMD_CORTEXA53_COMMON_INSTALL = "\
     gpio-bram-test \
     ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'docker-moby-contrib', '', d)} \
@@ -120,6 +118,7 @@ AMD_CORTEXA53_COMMON_INSTALL = "\
     libdrm-tests \
     linux-xlnx-udev-rules \
     packagegroup-xilinx-audio \
+    packagegroup-xilinx-gstreamer \
     ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'packagegroup-oci packagegroup-docker', '', d)} \
     packagegroup-opencv \
     systemtap \
