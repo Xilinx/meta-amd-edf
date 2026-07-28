@@ -13,7 +13,7 @@ BOOTBIN_DEPENDS:append:amd-edf:zynq = " bootbin-version-header:do_deploy"
 BOOTBIN_DEPENDS:append:amd-edf:zynqmp = " bootbin-version-header:do_deploy"
 BOOTBIN_DEPENDS:append:amd-edf:versal = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy"
 BOOTBIN_DEPENDS:append:amd-edf:versal-net = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy"
-BOOTBIN_DEPENDS:append:amd-edf:versal-2ve-2vm = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy base-pdi-unique-id:do_deploy"
+BOOTBIN_DEPENDS:append:amd-edf:versal-2ve-2vm = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy"
 do_configure[depends] += "${BOOTBIN_DEPENDS}"
 # The aggregate manifest hashes deploy-path BIF images (e.g. version-header), so
 # it must run after those artifacts are deployed, not just before do_configure.
@@ -31,7 +31,6 @@ BIF_PARTITION_IMAGE[bootbin-version-header] = "${BIF_VERSION_HEADER_IMAGE}"
 # Versal BIF optional data:
 #   id=0x21 = human-readable version string (text)
 #   id=0x22 = rollback counter (binary)
-#   id=0x23 = PDI unique ID
 #   id=0x24 = component manifest JSON (see shared-manifest-aggregate.bbclass)
 BIF_OPTIONAL_DATA:append:amd-edf:versal = "${DEPLOY_DIR_IMAGE}/bootbin-version-string-${MACHINE}.txt, id=0x21;"
 BIF_OPTIONAL_DATA:append:amd-edf:versal = "${DEPLOY_DIR_IMAGE}/bootbin-rollback-counter-${MACHINE}.bin, id=0x22;"
@@ -39,7 +38,6 @@ BIF_OPTIONAL_DATA:append:amd-edf:versal-net = "${DEPLOY_DIR_IMAGE}/bootbin-versi
 BIF_OPTIONAL_DATA:append:amd-edf:versal-net = "${DEPLOY_DIR_IMAGE}/bootbin-rollback-counter-${MACHINE}.bin, id=0x22;"
 BIF_OPTIONAL_DATA:append:amd-edf:versal-2ve-2vm = "${DEPLOY_DIR_IMAGE}/bootbin-version-string-${MACHINE}.txt, id=0x21;"
 BIF_OPTIONAL_DATA:append:amd-edf:versal-2ve-2vm = "${DEPLOY_DIR_IMAGE}/bootbin-rollback-counter-${MACHINE}.bin, id=0x22;"
-BIF_OPTIONAL_DATA:append:amd-edf:versal-2ve-2vm = "${DEPLOY_DIR_IMAGE}/base-pdi-unique-id-${MACHINE}.txt, id=0x23;"
 
 # Embed the component manifest JSON in BOOT.BIN as optional data (Versal only)
 # id=0x24; max size per entry is 128KB, manifest is typically < 1KB
