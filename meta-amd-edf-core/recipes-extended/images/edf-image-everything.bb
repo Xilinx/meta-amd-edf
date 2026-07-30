@@ -97,10 +97,6 @@ AMD_CORTEXA9_FULL_INSTALL += " \
     dmidecode \
     "
 
-# TODO: Temporarily disable Qt and GUI.
-# packagegroup-xilinx-qt
-# ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
-
 # TODO: Temporarily disable ROS for wrynose release integration
 # packagegroup-xilinx-ros
 # TODO: Temporarily disable jupyter-notebooks
@@ -111,8 +107,10 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
+    packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
     valgrind \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
     dmidecode \
@@ -120,22 +118,17 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     image-update \
     "
 
-# TODO: Temporarily disable Qt and GUI.
-# packagegroup-amd-edf-gui
 # TODO: Temporarily disable gstreamer for wrynose release integration
 #    ${@bb.utils.contains('MACHINE_FEATURES', 'vcu', ' gstreamer-vcu-examples gstreamer-vcu-notebooks', '', d)}
 AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     ${AMD_CORTEXA53_FULL_INSTALL} \
     glmark2 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', '', 'kmscube', d)} \
+    packagegroup-amd-edf-gui \
     packagegroup-kria \
     raft \
     image-update \
     "
-
-# TODO: Temporarily disable Qt and GUI.
-# packagegroup-xilinx-qt
-# ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
 
 # TODO: Temporarily disable ROS for wrynose release integration
 # packagegroup-xilinx-ros
@@ -150,16 +143,14 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
+    packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
     valgrind \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
     image-update \
     "
-
-# TODO: Temporarily disable Qt and GUI.
-# packagegroup-xilinx-qt
-# ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)}
 
 # TODO: Temporarily disable ROS for wrynose release integration
 # packagegroup-xilinx-ros
@@ -167,14 +158,14 @@ AMD_CORTEXA72_FULL_INSTALL += " \
 # packagegroup-xilinx-jupyter
 AMD_CORTEXA78_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
+    packagegroup-xilinx-qt \
     packagegroup-vitis-aiml \
     valgrind \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
     "
 
-# TODO: Temporarily disable Qt and GUI.
-# packagegroup-amd-edf-gui
 AMD_CORTEXA78_MALI_FULL_INSTALL += " \
     ${AMD_CORTEXA78_FULL_INSTALL} \
     kernel-module-hdmi21 \
@@ -182,6 +173,7 @@ AMD_CORTEXA78_MALI_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     glmark2 \
     kmscube \
+    packagegroup-amd-edf-gui \
     "
 
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_FULL_INSTALL}"
