@@ -31,10 +31,9 @@ RDEPENDS:${PN}-qt = "\
     packagegroup-xilinx-qt \
     qtsvg \
     qttools \
-    qtwebkit \
     qtdeclarative \
+    qtdeclarative-qmlplugins \
     qtimageformats \
-    qtquickcontrols \
     "
 
 SUMMARY:${PN}-other = "Xilinx EDF GUI - other misc packages"
