@@ -49,6 +49,7 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-embedded-plus/meta-embedded-plus-core \
   ##OEROOT##/../meta-embedded-plus/meta-embedded-plus-bsp \
   ##OEROOT##/../meta-dpdk \
+  ##OEROOT##/../meta-xilinx/meta-amd-dpdk \
 "
 
 # TODO: Temporarily disable ROS for wrynose release integration

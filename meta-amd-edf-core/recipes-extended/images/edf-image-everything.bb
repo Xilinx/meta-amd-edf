@@ -185,6 +185,9 @@ AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa72-common = " ${AMD_CORTEXA72_FULL_
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa78-common = " ${AMD_CORTEXA78_FULL_INSTALL}"
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa78-mali-common = " ${AMD_CORTEXA78_MALI_FULL_INSTALL}"
 
+# Pull DPDK into the feed when meta-dpdk is present; xxv-pmd lands with its recipe.
+AMD-EDF_IMAGE_FULL_INSTALL:append:aarch64 = " ${@bb.utils.contains('BBFILE_COLLECTIONS', 'dpdk', 'dpdk dpdk-examples dpdk-tools', '', d)}"
+
 IMAGE_INSTALL = " ${AMD-EDF_IMAGE_COMMON_INSTALL} ${AMD-EDF_IMAGE_FULL_INSTALL} ${AMD-EDF_PLATFORM_INSTALL}"
 
 

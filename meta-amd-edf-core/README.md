@@ -50,3 +50,15 @@ Optional dependencies (for Kria support):
 	URI: https://github.com/Xilinx/meta-kria
 	layers: meta-kria-core, meta-kria-bsp
 	branch: AMD release version (e.g. rel-v2026.1)
+
+Optional dependencies (for DPDK support):
+
+	URI: https://github.com/AMD-AECG-SSW-PUBLIC/meta-dpdk
+	layers: meta-dpdk
+	branch: AMD release version (e.g. rel-v2026.2)
+
+	URI:
+        https://git.yoctoproject.org/meta-xilinx (official version)
+        https://github.com/Xilinx/meta-xilinx (development and AMD release)
+	layers: meta-amd-dpdk
+	branch: AMD release version (e.g. rel-v2026.2)
