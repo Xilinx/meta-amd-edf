@@ -213,6 +213,7 @@ AMD_CORTEXA72_OPENAMP_FW_EXAMPLES = "\
     vek280-openamp-fw-examples \
     vmk180-openamp-fw-examples \
     vpk120-openamp-fw-examples \
+    vpk360-openamp-fw-examples \
     vpk180-openamp-fw-examples \
     vrk160-openamp-fw-examples \
     vrk165-openamp-fw-examples \
@@ -227,6 +228,7 @@ AMD_CORTEXA72_PLATFORM_INSTALL = "\
 AMD_CORTEXA78_MALI_OPENAMP_FW_EXAMPLES = "\
     vek385-openamp-fw-examples \
     vek385-revb-openamp-fw-examples \
+    vek386-openamp-fw-examples \
     "
 
 AMD_CORTEXA78_PLATFORM_INSTALL = ""
