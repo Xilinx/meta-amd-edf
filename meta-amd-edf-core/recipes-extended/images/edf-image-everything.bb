@@ -114,7 +114,6 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
     dmidecode \
-    raft \
     image-update \
     "
 
@@ -126,7 +125,6 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libmali', '', 'kmscube', d)} \
     packagegroup-amd-edf-gui \
     packagegroup-kria \
-    raft \
     image-update \
     "
 
