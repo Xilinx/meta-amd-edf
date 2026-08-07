@@ -34,6 +34,14 @@ KERNEL_IMAGE ?= "${KERNEL_IMAGETYPE}"
 
 EDF_ROOT_PARTNUM ?= "3"
 
+# MBV64 kernel/ramdisk DDR load addresses are offsets from the machine's
+# DDR_BASEADDR, so the same boot script works for both low-memory (revA,
+# 0x80000000) and high-memory (revB, 0x100000000) DDR maps.
+EDF_KERNEL_LOAD_OFFSET ?= "0x10000000"
+EDF_RAMDISK_LOAD_OFFSET ?= "0x12e00000"
+EDF_KERNEL_ADDR_R = "${@'0x%x' % (int(d.getVar('DDR_BASEADDR') or '0x0', 16) + int(d.getVar('EDF_KERNEL_LOAD_OFFSET'), 16))}"
+EDF_RAMDISK_ADDR_R = "${@'0x%x' % (int(d.getVar('DDR_BASEADDR') or '0x0', 16) + int(d.getVar('EDF_RAMDISK_LOAD_OFFSET'), 16))}"
+
 do_compile() {
     sed -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
         -e 's/@@KERNEL_IMAGE@@/${KERNEL_IMAGE}/' \
@@ -46,6 +54,8 @@ do_compile() {
 
 do_compile:microblaze-v () {
     sed -e 's/@@KERNEL_BOOTCMD@@/${KERNEL_BOOTCMD}/' \
+        -e 's/@@KERNEL_ADDR_R@@/${EDF_KERNEL_ADDR_R}/' \
+        -e 's/@@RAMDISK_ADDR_R@@/${EDF_RAMDISK_ADDR_R}/' \
         "${WORKDIR}/edf-linux-boot.cmd.mbv64" > "${WORKDIR}/boot.cmd"
 
     mkimage -A riscv -T script -C none -n "EDF Boot script" \

@@ -4,10 +4,10 @@
 ################
 
 setenv kernel_bootcmd @@KERNEL_BOOTCMD@@
-setenv kernel_addr_r 0x90000000
+setenv kernel_addr_r @@KERNEL_ADDR_R@@
 setenv spi_kernel_offset 0xF80000
 setenv spi_kernel_size 0x2200000
-setenv ramdisk_addr_r 0x92e00000
+setenv ramdisk_addr_r @@RAMDISK_ADDR_R@@
 setenv spi_ramdisk_offset 0x3180000
 setenv spi_ramdisk_size 0x4E80000
 
