@@ -52,8 +52,3 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-xilinx/meta-amd-dpdk \
 "
 
-# TODO: Temporarily disable ROS for wrynose release integration
-#  ##OEROOT##/../meta-ros/meta-ros-common \
-#  ##OEROOT##/../meta-ros/meta-ros2 \
-#  ##OEROOT##/../meta-ros/meta-ros2-jazzy \
-#

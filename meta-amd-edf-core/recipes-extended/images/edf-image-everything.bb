@@ -97,8 +97,6 @@ AMD_CORTEXA9_FULL_INSTALL += " \
     dmidecode \
     "
 
-# TODO: Temporarily disable ROS for wrynose release integration
-# packagegroup-xilinx-ros
 # TODO: Temporarily disable jupyter-notebooks
 # packagegroup-xilinx-jupyter
 # ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)}
@@ -108,6 +106,7 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-qt \
+    packagegroup-xilinx-ros \
     packagegroup-vitis-aiml \
     valgrind \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
@@ -128,8 +127,6 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     image-update \
     "
 
-# TODO: Temporarily disable ROS for wrynose release integration
-# packagegroup-xilinx-ros
 # TODO: Temporarily disable jupyter-notebooks
 # packagegroup-xilinx-jupyter
 # ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)}
@@ -142,6 +139,7 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     kernel-module-hdmi21 \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-qt \
+    packagegroup-xilinx-ros \
     packagegroup-vitis-aiml \
     valgrind \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
@@ -150,13 +148,12 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     image-update \
     "
 
-# TODO: Temporarily disable ROS for wrynose release integration
-# packagegroup-xilinx-ros
 # TODO: Temporarily disable jupyter-notbook
 # packagegroup-xilinx-jupyter
 AMD_CORTEXA78_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-qt \
+    packagegroup-xilinx-ros \
     packagegroup-vitis-aiml \
     valgrind \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
