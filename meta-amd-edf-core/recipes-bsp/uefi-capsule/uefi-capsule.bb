@@ -69,6 +69,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit deploy image-artifact-names nopackages
 
+S = "${UNPACKDIR}"
+
 IMAGE_NAME_SUFFIX = ""
 
 INHIBIT_DEFAULT_DEPS = "1"
