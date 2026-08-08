@@ -18,6 +18,7 @@ COMPATIBLE_MACHINE:zynqmp = "zynqmp"
 COMPATIBLE_MACHINE:versal = "versal"
 COMPATIBLE_MACHINE:versal-net = "versal-net"
 COMPATIBLE_MACHINE:versal-2ve-2vm = "versal-2ve-2vm"
+COMPATIBLE_MACHINE:versal-2vp = "versal-2vp"
 COMPATIBLE_MACHINE:microblaze-v = "microblaze-v"
 
 SRC_URI_MBV ?= ""

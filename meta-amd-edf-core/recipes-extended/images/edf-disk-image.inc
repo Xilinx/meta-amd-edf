@@ -67,13 +67,13 @@ EDF_ESP_FILES = "${EDF_BOOT_VERSION_FILE};edf-version.txt ${IMAGE_MANIFEST};imag
 # Single-machine builds (boot.bin on disk): add its component manifest, plus
 # the version string on versal (zynq/zynqmp use a hex header, not text).
 EDF_ESP_FILES:append = "${@' boot.bin.manifest.json' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' else ''}"
-EDF_ESP_FILES:append = "${@' bootbin-version-string-${MACHINE}.txt;boot-version.txt' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' and d.getVar('SOC_FAMILY') in ('versal', 'versal-net', 'versal-2ve-2vm') else ''}"
+EDF_ESP_FILES:append = "${@' bootbin-version-string-${MACHINE}.txt;boot-version.txt' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' and d.getVar('SOC_FAMILY') in ('versal', 'versal-net', 'versal-2ve-2vm', 'versal-2vp') else ''}"
 
 IMAGE_EFI_BOOT_FILES:append = " ${EDF_ESP_FILES}"
 IMAGE_BOOT_FILES_label-esp:append = "${@'' if bb.utils.contains('COMBINED_FEATURES', 'efi', True, False, d) else ' ${EDF_ESP_FILES}'}"
 
 do_image_wic[depends] += "${@' virtual/boot-bin:do_deploy' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' else ''}"
-do_image_wic[depends] += "${@' bootbin-version-string:do_deploy' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' and d.getVar('SOC_FAMILY') in ('versal', 'versal-net', 'versal-2ve-2vm') else ''}"
+do_image_wic[depends] += "${@' bootbin-version-string:do_deploy' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' and d.getVar('SOC_FAMILY') in ('versal', 'versal-net', 'versal-2ve-2vm', 'versal-2vp') else ''}"
 
 # Configure QEMU boot
 QB_KERNEL_ROOT:riscv32 = "/dev/vda3"

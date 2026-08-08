@@ -14,6 +14,7 @@ BOOTBIN_DEPENDS:append:amd-edf:zynqmp = " bootbin-version-header:do_deploy"
 BOOTBIN_DEPENDS:append:amd-edf:versal = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy"
 BOOTBIN_DEPENDS:append:amd-edf:versal-net = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy"
 BOOTBIN_DEPENDS:append:amd-edf:versal-2ve-2vm = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy"
+BOOTBIN_DEPENDS:append:amd-edf:versal-2vp = " bootbin-rollback-counter:do_deploy bootbin-version-string:do_deploy"
 do_configure[depends] += "${BOOTBIN_DEPENDS}"
 # The aggregate manifest hashes deploy-path BIF images (e.g. version-header), so
 # it must run after those artifacts are deployed, not just before do_configure.
@@ -38,12 +39,15 @@ BIF_OPTIONAL_DATA:append:amd-edf:versal-net = "${DEPLOY_DIR_IMAGE}/bootbin-versi
 BIF_OPTIONAL_DATA:append:amd-edf:versal-net = "${DEPLOY_DIR_IMAGE}/bootbin-rollback-counter-${MACHINE}.bin, id=0x22;"
 BIF_OPTIONAL_DATA:append:amd-edf:versal-2ve-2vm = "${DEPLOY_DIR_IMAGE}/bootbin-version-string-${MACHINE}.txt, id=0x21;"
 BIF_OPTIONAL_DATA:append:amd-edf:versal-2ve-2vm = "${DEPLOY_DIR_IMAGE}/bootbin-rollback-counter-${MACHINE}.bin, id=0x22;"
+BIF_OPTIONAL_DATA:append:amd-edf:versal-2vp = "${DEPLOY_DIR_IMAGE}/bootbin-version-string-${MACHINE}.txt, id=0x21;"
+BIF_OPTIONAL_DATA:append:amd-edf:versal-2vp = "${DEPLOY_DIR_IMAGE}/bootbin-rollback-counter-${MACHINE}.bin, id=0x22;"
 
 # Embed the component manifest JSON in BOOT.BIN as optional data (Versal only)
 # id=0x24; max size per entry is 128KB, manifest is typically < 1KB
 BIF_OPTIONAL_DATA:append:amd-edf:versal = "${MANIFEST_AGGREGATE_OUTPUT}, id=0x24;"
 BIF_OPTIONAL_DATA:append:amd-edf:versal-net = "${MANIFEST_AGGREGATE_OUTPUT}, id=0x24;"
 BIF_OPTIONAL_DATA:append:amd-edf:versal-2ve-2vm = "${MANIFEST_AGGREGATE_OUTPUT}, id=0x24;"
+BIF_OPTIONAL_DATA:append:amd-edf:versal-2vp = "${MANIFEST_AGGREGATE_OUTPUT}, id=0x24;"
 
 # Avoid EDF specific circular dependencies
 EXTRA_IMAGEDEPENDS:remove = "edf-qspi"

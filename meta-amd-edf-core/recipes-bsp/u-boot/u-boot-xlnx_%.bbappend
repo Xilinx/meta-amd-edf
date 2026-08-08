@@ -3,11 +3,13 @@ FILESEXTRAPATHS:prepend:zynqmp := "${THISDIR}/zynqmp:"
 FILESEXTRAPATHS:prepend:versal := "${THISDIR}/versal:"
 FILESEXTRAPATHS:prepend:versal-net := "${THISDIR}/versal-net:"
 FILESEXTRAPATHS:prepend:versal-2ve-2vm := "${THISDIR}/versal-2ve-2vm:"
+FILESEXTRAPATHS:prepend:versal-2vp := "${THISDIR}/versal:"
 
 SRC_URI:append:zynqmp = " file://edf-env.cfg file://amd_edf.h"
 SRC_URI:append:versal = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
 SRC_URI:append:versal-net = " file://edf-env-vn.cfg file://amd_edf.h file://amd_edf_common.h"
 SRC_URI:append:versal-2ve-2vm = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
+SRC_URI:append:versal-2vp = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
 
 EDF_BOOTCMD_CFG = "${@bb.utils.contains('MACHINE_FEATURES', 'efi', \
     'file://aarch64-bootcmd-bootefi.cfg', '', d)}"
@@ -30,6 +32,10 @@ do_unpack:append:versal-net() {
 }
 
 do_unpack:append:versal-2ve-2vm() {
+    bb.build.exec_func('do_sys_config', d)
+}
+
+do_unpack:append:versal-2vp() {
     bb.build.exec_func('do_sys_config', d)
 }
 

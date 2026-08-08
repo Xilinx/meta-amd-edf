@@ -12,6 +12,7 @@ PACKAGE_ARCH:zynqmp = "${MACHINE_ARCH}"
 PACKAGE_ARCH:versal = "${MACHINE_ARCH}"
 PACKAGE_ARCH:versal-net = "${MACHINE_ARCH}"
 PACKAGE_ARCH:versal-2ve-2vm = "${MACHINE_ARCH}"
+PACKAGE_ARCH:versal-2vp = "${MACHINE_ARCH}"
 
 do_install:append:zynqmp() {
     install -m 0644 ${UNPACKDIR}/zynqmp-xen-efi-config ${D}/boot/xen.cfg
@@ -27,6 +28,10 @@ do_install:append:versal-net() {
 
 do_install:append:versal-2ve-2vm() {
     install -m 0644 ${UNPACKDIR}/versal-2ve-2vm-xen-efi-config ${D}/boot/xen.cfg
+}
+
+do_install:append:versal-2vp() {
+    install -m 0644 ${UNPACKDIR}/versal-xen-efi-config ${D}/boot/xen.cfg
 }
 
 FILES:${PN}-efi += "/boot/xen.cfg"
@@ -49,6 +54,11 @@ do_deploy:append:versal-net() {
 do_deploy:append:versal-2ve-2vm() {
     install -d ${DEPLOYDIR}
     install -m 0644 ${UNPACKDIR}/versal-2ve-2vm-xen-efi-config ${DEPLOYDIR}/xen.cfg
+}
+
+do_deploy:append:versal-2vp() {
+    install -d ${DEPLOYDIR}
+    install -m 0644 ${UNPACKDIR}/versal-xen-efi-config ${DEPLOYDIR}/xen.cfg
 }
 
 pkg_postinst:${PN}-efi:append () {
