@@ -159,6 +159,7 @@ AMD_CORTEXA72_INSTALL = "\
     vrk160-pl-bram-gpio-fw \
     vrk165-pl-bram-gpio-fw \
     vpk360-pl-bram-gpio-fw \
+    vrk160-revb-pl-bram-gpio-fw \
     vrk165-revb-pl-bram-gpio-fw \
     "
 
