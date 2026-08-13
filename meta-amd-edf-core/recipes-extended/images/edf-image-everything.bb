@@ -97,10 +97,8 @@ AMD_CORTEXA9_FULL_INSTALL += " \
     dmidecode \
     "
 
-# TODO: Temporarily disable jupyter-notebooks
-# packagegroup-xilinx-jupyter
-# ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)}
 AMD_CORTEXA53_FULL_INSTALL += " \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'jupyter-layer', bb.utils.contains('DISTRO_FEATURES', 'openamp', 'openamp-demo-notebooks', '', d), '', d)} \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
@@ -109,6 +107,7 @@ AMD_CORTEXA53_FULL_INSTALL += " \
     packagegroup-xilinx-ros \
     packagegroup-vitis-aiml \
     valgrind \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'jupyter-layer', 'packagegroup-xilinx-jupyter', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
@@ -127,13 +126,11 @@ AMD_CORTEXA53_MALI_FULL_INSTALL += " \
     image-update \
     "
 
-# TODO: Temporarily disable jupyter-notebooks
-# packagegroup-xilinx-jupyter
-# ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', ' openamp-demo-notebooks', '', d)}
-# pm-notebooks
 # TODO: gstreamer1.0-omx is not available
 # ${@bb.utils.contains('MACHINE_FEATURES', 'vdu', ' gstreamer-vdu-examples gstreamer-vdu-notebooks', '', d)}
 AMD_CORTEXA72_FULL_INSTALL += " \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'jupyter-layer', 'pm-notebooks', '', d)} \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'jupyter-layer', bb.utils.contains('DISTRO_FEATURES', 'openamp', 'openamp-demo-notebooks', '', d), '', d)} \
     kernel-module-dp \
     kernel-module-hdmi \
     kernel-module-hdmi21 \
@@ -142,20 +139,20 @@ AMD_CORTEXA72_FULL_INSTALL += " \
     packagegroup-xilinx-ros \
     packagegroup-vitis-aiml \
     valgrind \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'jupyter-layer', 'packagegroup-xilinx-jupyter', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
     image-update \
     "
 
-# TODO: Temporarily disable jupyter-notbook
-# packagegroup-xilinx-jupyter
 AMD_CORTEXA78_FULL_INSTALL += " \
     ${VITISAI_DEPENDENCIES} \
     packagegroup-xilinx-qt \
     packagegroup-xilinx-ros \
     packagegroup-vitis-aiml \
     valgrind \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'jupyter-layer', 'packagegroup-xilinx-jupyter', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-xilinx-multimedia', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'packagegroup-self-hosted', '', d)} \
     packagegroup-tsn \
