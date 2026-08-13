@@ -54,9 +54,9 @@ GPIO_MAX_SCAN_LINES = int(os.environ.get("GPIO_BRAM_MAX_SCAN_LINES", "32"))
 SKIP_MMIO = os.environ.get("GPIO_BRAM_SKIP_MMIO", "0") == "1"
 
 
-HELP_TEXT = """Usage: gpio_bram_test.py [--help]
+HELP_TEXT = """Usage: gpio_bram_test.py [OPTIONS]
 
-GPIO BRAM test utility for AMD EDF platforms.
+GPIO-BRAM test utility for AMD EDF platforms.
 
 What this script does:
   1) MMIO BRAM validation
@@ -72,6 +72,18 @@ What this script does:
     - Uses GPIO_BRAM_IN_LINES if set; otherwise auto-detects changing lines
       across PL gpiochips
     - Waits for DIP/button transitions and prints per-line results
+
+Options:
+  -h, --help      Show this help message and exit.
+  --all           Run all test blocks.
+                  This is the default when no block option is provided.
+  --mmio          Run only the MMIO BRAM validation block.
+  --gpio-output   Run only the GPIO output toggle block (drive lines).
+  --gpio-input    Run only the GPIO input transition block (monitor lines).
+
+Examples:
+  gpio_bram_test.py --gpio-output
+  gpio_bram_test.py --mmio --gpio-input
 """
 
 
@@ -505,19 +517,47 @@ def gpio_input_test():
     )
 
 
-def main():
-    if len(sys.argv) > 1:
-        arg = sys.argv[1]
+def _parse_selected_blocks(argv):
+    selected = set()
+
+    for arg in argv[1:]:
         if arg in ("-h", "--help"):
             print(HELP_TEXT)
-            return
+            return None
+        if arg == "--all":
+            selected.update(("mmio", "gpio-out", "gpio-in"))
+            continue
+        if arg == "--mmio":
+            selected.add("mmio")
+            continue
+        if arg == "--gpio-output":
+            selected.add("gpio-out")
+            continue
+        if arg == "--gpio-input":
+            selected.add("gpio-in")
+            continue
+
         print("Unknown option: {}\n".format(arg))
         print(HELP_TEXT)
         sys.exit(2)
 
-    memory_test()
-    gpio_toggle_test()
-    gpio_input_test()
+    if not selected:
+        selected.update(("mmio", "gpio-out", "gpio-in"))
+
+    return selected
+
+
+def main():
+    selected = _parse_selected_blocks(sys.argv)
+    if selected is None:
+        return
+
+    if "mmio" in selected:
+        memory_test()
+    if "gpio-out" in selected:
+        gpio_toggle_test()
+    if "gpio-in" in selected:
+        gpio_input_test()
 
 
 if __name__ == "__main__":
