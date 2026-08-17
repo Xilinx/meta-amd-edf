@@ -46,3 +46,13 @@ BIF_OPTIONAL_DATA_FILE[0x24] = "${MANIFEST_AGGREGATE_OUTPUT}"
 # Avoid EDF specific circular dependencies
 EXTRA_IMAGEDEPENDS:remove = "edf-qspi"
 EXTRA_IMAGEDEPENDS:remove = "edf-ospi"
+
+do_deploy:append() {
+    cat << EOF > ${DEPLOYDIR}/${BOOTBIN_BASE_NAME}.version.txt
+${BOOTBIN_DESCRIPTION}
+${BOOTBIN_VERSION}
+${BOOTBIN_TOOLS_VERSION}
+EOF
+    ln -sf ${BOOTBIN_BASE_NAME}.version.txt ${DEPLOYDIR}/${BOOTBIN_LINK_NAME}.version.txt
+    ln -sf ${BOOTBIN_BASE_NAME}.version.txt ${DEPLOYDIR}/bootbin-version.txt
+}
