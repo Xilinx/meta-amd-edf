@@ -81,7 +81,6 @@ zynq
 
 embedded-plus
     Linux only:
-        - rave-xrt   - emb-plus-ve2302-xrt
         - rave-amr   - emb-plus-ve2302-amr
         - v80        - alveo-v80-amr
 
