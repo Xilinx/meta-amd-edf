@@ -79,7 +79,7 @@ zynq
         - zc702      - zynq-zc702-sdt-full
         - zc706      - zynq-zc706-sdt-full
 
-embedded-plus
+amd-hybrid
     Linux only:
         - rave-amr   - emb-plus-ve2302-amr
         - v80        - alveo-v80-amr
