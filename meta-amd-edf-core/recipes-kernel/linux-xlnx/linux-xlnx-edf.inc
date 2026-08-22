@@ -1,8 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-# Limit USB gadget to aarch64 only to avoid zynq USB host :CHIPIDEA=m conflict with 'usbgadget'
-AMD_FPGA_USBGADGET = ""
-AMD_FPGA_USBGADGET:aarch64 = "${@bb.utils.contains('COMBINED_FEATURES', 'usbgadget', \
+AMD_FPGA_USBGADGET = "${@bb.utils.contains('COMBINED_FEATURES', 'usbgadget', \
     ' features/usb/usb-gadgets.scc features/usb-gadgets-extra/usb-gadgets-extra.scc', '', d)}"
 
 KERNEL_FEATURES:append = " ${AMD_FPGA_USBGADGET}"
