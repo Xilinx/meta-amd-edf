@@ -210,6 +210,10 @@ AMD_CORTEXA53_PLATFORM_INSTALL = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp', '', d)} \
     "
 
+AMD_ZYNQMP_PLATFORM_INSTALL = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'xen-zephyr-domu-image', '', d)} \
+    "
+
 AMD_CORTEXA72_OPENAMP_FW_EXAMPLES = "\
     vck190-openamp-fw-examples \
     vek280-openamp-fw-examples \
@@ -246,3 +250,4 @@ AMD-EDF_PLATFORM_INSTALL:amd-cortexa53-mali-common = "${AMD_CORTEXA53_PLATFORM_I
 AMD-EDF_PLATFORM_INSTALL:amd-cortexa72-common = "${AMD_CORTEXA53_PLATFORM_INSTALL} ${AMD_CORTEXA72_PLATFORM_INSTALL}"
 AMD-EDF_PLATFORM_INSTALL:amd-cortexa78-common = "${AMD_CORTEXA53_PLATFORM_INSTALL} ${AMD_CORTEXA78_PLATFORM_INSTALL} "
 AMD-EDF_PLATFORM_INSTALL:amd-cortexa78-mali-common = "${AMD_CORTEXA53_PLATFORM_INSTALL} ${AMD_CORTEXA78_MALI_PLATFORM_INSTALL}"
+AMD-EDF_PLATFORM_INSTALL:append:zynqmp = " ${AMD_ZYNQMP_PLATFORM_INSTALL}"
