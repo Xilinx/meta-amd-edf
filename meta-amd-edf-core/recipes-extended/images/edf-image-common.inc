@@ -206,8 +206,22 @@ AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa78-common = " ${AMD_CORTEXA78_COM
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa78-mali-common = " ${AMD_CORTEXA78_MALI_COMMON_INSTALL} ${AMD_CORTEXA78_MALI_INSTALL}"
 
 # Platform-specific packages (Xen/OpenAMP) - used by edf-platform-disk-image
+AMD_CORTEXA53_OPENAMP_FW_EXAMPLES = "\
+    zcu111-openamp-fw-examples \
+    zcu208-openamp-fw-examples \
+    zcu216-openamp-fw-examples \
+    "
+
 AMD_CORTEXA53_PLATFORM_INSTALL = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp ${AMD_CORTEXA53_OPENAMP_FW_EXAMPLES}', '', d)} \
+    "
+
+AMD_CORTEXA53_MALI_OPENAMP_FW_EXAMPLES = "\
+    zcu104-openamp-fw-examples \
+    "
+
+AMD_CORTEXA53_MALI_PLATFORM_INSTALL = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp ${AMD_CORTEXA53_MALI_OPENAMP_FW_EXAMPLES}', '', d)} \
     "
 
 AMD_CORTEXA72_OPENAMP_FW_EXAMPLES = "\
@@ -219,13 +233,17 @@ AMD_CORTEXA72_OPENAMP_FW_EXAMPLES = "\
     vpk180-openamp-fw-examples \
     vrk160-openamp-fw-examples \
     vrk165-openamp-fw-examples \
+    vrk160-revb-openamp-fw-examples \
+    vrk165-revb-openamp-fw-examples \
     versal-vm-p-m1369-00-reva-x-prc-01-openamp-fw-examples \
     "
 
 AMD_CORTEXA72_PLATFORM_INSTALL = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'xen-zephyr-domu-image', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', '${AMD_CORTEXA72_OPENAMP_FW_EXAMPLES}', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp ${AMD_CORTEXA72_OPENAMP_FW_EXAMPLES}', '', d)} \
     "
+
+AMD_CORTEXA78_PLATFORM_INSTALL = ""
 
 AMD_CORTEXA78_MALI_OPENAMP_FW_EXAMPLES = "\
     vek385-openamp-fw-examples \
@@ -233,16 +251,14 @@ AMD_CORTEXA78_MALI_OPENAMP_FW_EXAMPLES = "\
     vek386-openamp-fw-examples \
     "
 
-AMD_CORTEXA78_PLATFORM_INSTALL = ""
-
 AMD_CORTEXA78_MALI_PLATFORM_INSTALL = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'xen-zephyr-domu-image', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', '${AMD_CORTEXA78_MALI_OPENAMP_FW_EXAMPLES}', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp ${AMD_CORTEXA78_MALI_OPENAMP_FW_EXAMPLES}', '', d)} \
     "
 
 AMD-EDF_PLATFORM_INSTALL = ""
-AMD-EDF_PLATFORM_INSTALL:amd-cortexa53-common = "${AMD_CORTEXA53_PLATFORM_INSTALL}"
-AMD-EDF_PLATFORM_INSTALL:amd-cortexa53-mali-common = "${AMD_CORTEXA53_PLATFORM_INSTALL}"
-AMD-EDF_PLATFORM_INSTALL:amd-cortexa72-common = "${AMD_CORTEXA53_PLATFORM_INSTALL} ${AMD_CORTEXA72_PLATFORM_INSTALL}"
-AMD-EDF_PLATFORM_INSTALL:amd-cortexa78-common = "${AMD_CORTEXA53_PLATFORM_INSTALL} ${AMD_CORTEXA78_PLATFORM_INSTALL} "
-AMD-EDF_PLATFORM_INSTALL:amd-cortexa78-mali-common = "${AMD_CORTEXA53_PLATFORM_INSTALL} ${AMD_CORTEXA78_MALI_PLATFORM_INSTALL}"
+AMD-EDF_PLATFORM_INSTALL:amd-cortexa53-common      = "${AMD_CORTEXA53_PLATFORM_INSTALL}"
+AMD-EDF_PLATFORM_INSTALL:amd-cortexa53-mali-common = "${AMD_CORTEXA53_MALI_PLATFORM_INSTALL}"
+AMD-EDF_PLATFORM_INSTALL:amd-cortexa72-common      = "${AMD_CORTEXA72_PLATFORM_INSTALL}"
+AMD-EDF_PLATFORM_INSTALL:amd-cortexa78-common      = "${AMD_CORTEXA78_PLATFORM_INSTALL} "
+AMD-EDF_PLATFORM_INSTALL:amd-cortexa78-mali-common = "${AMD_CORTEXA78_MALI_PLATFORM_INSTALL}"
