@@ -214,6 +214,7 @@ AMD_CORTEXA53_OPENAMP_FW_EXAMPLES = "\
 
 AMD_CORTEXA53_PLATFORM_INSTALL = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp ${AMD_CORTEXA53_OPENAMP_FW_EXAMPLES}', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'xenvm-zephyr-domu-image', '', d)} \
     "
 
 AMD_CORTEXA53_MALI_OPENAMP_FW_EXAMPLES = "\
@@ -222,6 +223,7 @@ AMD_CORTEXA53_MALI_OPENAMP_FW_EXAMPLES = "\
 
 AMD_CORTEXA53_MALI_PLATFORM_INSTALL = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp ${AMD_CORTEXA53_MALI_OPENAMP_FW_EXAMPLES}', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'xenvm-zephyr-domu-image', '', d)} \
     "
 
 AMD_CORTEXA72_OPENAMP_FW_EXAMPLES = "\
