@@ -37,7 +37,7 @@ AMD-EDF_IMAGE_FULL_CMDLINE_COMMON_INSTALL = "\
     bmaptool \
     can-utils \
     devmem2 \
-    dhcpcd \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', 'dhcpcd', d)} \
     dtc \
     hdparm \
     hexedit \
