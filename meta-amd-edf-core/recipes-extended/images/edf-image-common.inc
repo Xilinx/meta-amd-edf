@@ -229,6 +229,7 @@ AMD_CORTEXA53_MALI_PLATFORM_INSTALL = "\
 AMD_CORTEXA72_OPENAMP_FW_EXAMPLES = "\
     vck190-openamp-fw-examples \
     vek280-openamp-fw-examples \
+    vhk158-openamp-fw-examples \
     vmk180-openamp-fw-examples \
     vpk120-openamp-fw-examples \
     vpk360-openamp-fw-examples \
