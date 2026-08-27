@@ -63,7 +63,7 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     meson \
     u-boot-tools \
     u-boot-tools-xlnx \
-    ${@'libdfx' if 'xilinx-tools' in d.getVar('BBFILE_COLLECTIONS').split() else ''} \
+    libdfx \
     ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization vmsep', ' packagegroup-container docker-compose', '', d)} \
     ltp \
     ttf-bitstream-vera \
@@ -167,6 +167,12 @@ AMD_CORTEXA78_MALI_FULL_INSTALL += " \
     kmscube \
     packagegroup-amd-edf-gui \
     "
+
+# libdfx is COMPATIBLE_MACHINE-filtered to zynq/zynqmp/versal/versal-net
+# variants only, so it must be dropped again on the RISC-V machines that
+# this image also targets.
+AMD-EDF_IMAGE_FULL_INSTALL:remove:riscv32 = "libdfx"
+AMD-EDF_IMAGE_FULL_INSTALL:remove:riscv64 = "libdfx"
 
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_FULL_INSTALL}"
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv64imafdc-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV64_FULL_INSTALL}"
