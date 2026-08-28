@@ -218,7 +218,9 @@ AMD_CORTEXA53_PLATFORM_INSTALL = "\
     "
 
 AMD_CORTEXA53_MALI_OPENAMP_FW_EXAMPLES = "\
+    zcu102-openamp-fw-examples \
     zcu104-openamp-fw-examples \
+    zcu106-openamp-fw-examples \
     "
 
 AMD_CORTEXA53_MALI_PLATFORM_INSTALL = "\
@@ -252,6 +254,7 @@ AMD_CORTEXA78_MALI_OPENAMP_FW_EXAMPLES = "\
     vek385-openamp-fw-examples \
     vek385-revb-openamp-fw-examples \
     vek386-openamp-fw-examples \
+    vmk365-openamp-fw-examples \
     "
 
 AMD_CORTEXA78_MALI_PLATFORM_INSTALL = "\
