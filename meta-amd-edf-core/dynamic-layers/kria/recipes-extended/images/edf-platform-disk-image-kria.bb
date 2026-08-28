@@ -8,7 +8,7 @@ require edf-disk-image-kria-common.inc
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'packagegroup-xen', '', d)} \
     ${AMD-EDF_PLATFORM_INSTALL} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'k24-openamp-fw-examples k26-openamp-fw-examples', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'k24c-sm-sdt-openamp-fw-examples k24i-sm-sdt-openamp-fw-examples k26-smk-kr-sdt-multidomain-openamp-fw-examples k26-smk-kv-sdt-multidomain-openamp-fw-examples', '', d)} \
     "
 
 EDF_LINUX_EFI_BOOT_FILES:aarch64 = " \
