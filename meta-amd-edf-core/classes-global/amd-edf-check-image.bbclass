@@ -20,7 +20,6 @@ AMD-EDF_IMAGE_SUPPORTED_MACHINES:pn-edf-xen-image-full-cmdline = "\
 "
 
 AMD-EDF_IMAGE_SUPPORTED_MACHINES = "\
-	amd-rv32imac-zicbom-zba-zbb-zbs-common \
 	amd-rv64imafdc-zicbom-zba-zbb-zbs-common \
 	amd-cortexa9thf-neon-common \
 	amd-cortexa53-common \

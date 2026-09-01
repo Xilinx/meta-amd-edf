@@ -75,6 +75,5 @@ IMAGE_BOOT_FILES_label-esp:append = "${@'' if bb.utils.contains('COMBINED_FEATUR
 do_image_wic[depends] += "${@' virtual/boot-bin:do_deploy' if d.getVar('SOC_ON_DISK_BOOT_BIN') == '1' else ''}"
 
 # Configure QEMU boot
-QB_KERNEL_ROOT:riscv32 = "/dev/vda3"
 QB_KERNEL_ROOT:riscv64 = "/dev/vda3"
 QB_KERNEL_ROOT:zynq = "/dev/mmcblk0p3"

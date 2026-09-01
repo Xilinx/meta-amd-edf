@@ -86,9 +86,6 @@ AMD-EDF_IMAGE_FULL_INSTALL += " \
     picocom \
     "
 
-AMD_RISCV32_FULL_INSTALL += " \
-    "
-
 AMD_RISCV64_FULL_INSTALL += " \
     "
 
@@ -171,10 +168,8 @@ AMD_CORTEXA78_MALI_FULL_INSTALL += " \
 # libdfx is COMPATIBLE_MACHINE-filtered to zynq/zynqmp/versal/versal-net
 # variants only, so it must be dropped again on the RISC-V machines that
 # this image also targets.
-AMD-EDF_IMAGE_FULL_INSTALL:remove:riscv32 = "libdfx"
 AMD-EDF_IMAGE_FULL_INSTALL:remove:riscv64 = "libdfx"
 
-AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_FULL_INSTALL}"
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-rv64imafdc-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV64_FULL_INSTALL}"
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa9thf-neon-common = " ${AMD_CORTEXA9_FULL_INSTALL}"
 AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa53-common = " ${AMD_CORTEXA53_FULL_INSTALL}"

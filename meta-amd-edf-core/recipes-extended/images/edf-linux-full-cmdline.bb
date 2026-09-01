@@ -22,7 +22,6 @@ AMD-EDF_FPGA_OVERLAY_INSTALL = " \
     "
 
 # Eliminate architectures where this is not supported
-AMD-EDF_FPGA_OVERLAY_INSTALL:riscv32 = ""
 AMD-EDF_FPGA_OVERLAY_INSTALL:riscv64 = ""
 
 AMD-EDF_AARCH64_FULL_CMDLINE_COMMON_INSTALL ?= ""

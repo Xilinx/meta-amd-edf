@@ -14,7 +14,6 @@ IMAGE_FEATURES .= "${@' lic-pkgs' if oe.data.typed_value('LICENSE_CREATE_PACKAGE
 AMD-EDF_FPGA_OVERLAY_INSTALL = "${@bb.utils.contains('MACHINE_FEATURES', 'fpga-overlay', 'dfx-mgr', '', d)}"
 
 # Eliminate architectures where this is not supported
-AMD-EDF_FPGA_OVERLAY_INSTALL:riscv32 = ""
 AMD-EDF_FPGA_OVERLAY_INSTALL:riscv64 = ""
 
 # Minimal set packages for EDF images
@@ -94,9 +93,6 @@ AMD-EDF_IMAGE_FULL_INSTALL = " \
 
 # COMMON is for anything in that family with no board specific items
 # w/o COMMON is for _JUST_ that type
-AMD_RISCV32_COMMON_INSTALL = "linux-xlnx-udev-rules"
-AMD_RISCV32_INSTALL = ""
-
 AMD_RISCV64_COMMON_INSTALL = "linux-xlnx-udev-rules"
 AMD_RISCV64_INSTALL = ""
 
@@ -196,7 +192,6 @@ IMAGE_FEATURES += "${@ 'weston' \
          bb.utils.contains('MACHINE_FEATURES', 'malig78ae', True, False, d))) \
     else '' }"
 
-AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv32imac-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV32_COMMON_INSTALL} ${AMD_RISCV32_INSTALL}"
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-rv64imafdc-zicbom-zba-zbb-zbs-common = " ${AMD_RISCV64_COMMON_INSTALL} ${AMD_RISCV64_INSTALL}"
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa9thf-neon-common = " ${AMD_CORTEXA9_COMMON_INSTALL} ${AMD_CORTEXA9_INSTALL}"
 AMD-EDF_IMAGE_COMMON_INSTALL:append:amd-cortexa53-common = " ${AMD_CORTEXA53_COMMON_INSTALL} ${AMD_CORTEXA53_INSTALL}"
