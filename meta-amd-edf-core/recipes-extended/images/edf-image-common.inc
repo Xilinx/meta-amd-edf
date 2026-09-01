@@ -248,7 +248,9 @@ AMD_CORTEXA72_PLATFORM_INSTALL = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp ${AMD_CORTEXA72_OPENAMP_FW_EXAMPLES}', '', d)} \
     "
 
-AMD_CORTEXA78_PLATFORM_INSTALL = ""
+AMD_CORTEXA78_PLATFORM_INSTALL = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'openamp', 'packagegroup-openamp', '', d)} \
+    "
 
 AMD_CORTEXA78_MALI_OPENAMP_FW_EXAMPLES = "\
     vek385-openamp-fw-examples \
