@@ -13,13 +13,15 @@
 	"kernel_comp_addr_r=0x30000000\0" \
 	"kernel_comp_size=0x3C00000\0" \
 	"ramdisk_addr_r=0x24000000\0" \
-	"script_size_f=0x80000\0"
+	"script_offset_f=0x7F80000\0" \
+	"script_size_f=0x80000\0" \
 
 /* Initial environment variables */
 #undef CFG_EXTRA_ENV_SETTINGS
 #define CFG_EXTRA_ENV_SETTINGS \
     ENV_MEM_LAYOUT_SETTINGS \
     ENV_EDF_SETTINGS \
-    BOOTENV
+    BOOTENV \
+    BOOTENV_DEV_SHARED_XSPI
 
 #endif /* __CONFIG_EDF_VERSAL_H */
