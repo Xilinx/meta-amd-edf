@@ -182,6 +182,7 @@ AMD-EDF_IMAGE_FULL_INSTALL:append:amd-cortexa78-mali-common = " ${AMD_CORTEXA78_
 # DPDK poll mode drivers when meta-amd-dpdk is present.
 AMD-EDF_IMAGE_FULL_INSTALL:append:aarch64 = " ${@bb.utils.contains('BBFILE_COLLECTIONS', 'dpdk', 'dpdk dpdk-examples dpdk-tools', '', d)}"
 AMD-EDF_IMAGE_FULL_INSTALL:append:aarch64 = " ${@bb.utils.contains('BBFILE_COLLECTIONS', 'amd-dpdk', 'ethernet-pmd', '', d)}"
+AMD-EDF_IMAGE_FULL_INSTALL:append:aarch64 = " crash kexec kdump vmcore-dmesg makedumpfile"
 
 IMAGE_INSTALL = " ${AMD-EDF_IMAGE_COMMON_INSTALL} ${AMD-EDF_IMAGE_FULL_INSTALL} ${AMD-EDF_PLATFORM_INSTALL}"
 
