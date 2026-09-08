@@ -50,5 +50,6 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-amd-hybrid/meta-amd-hybrid-bsp \
   ##OEROOT##/../meta-dpdk \
   ##OEROOT##/../meta-xilinx/meta-amd-dpdk \
+  ##OEROOT##/../meta-xilinx/meta-amd-zephyr-bsp \
 "
 
