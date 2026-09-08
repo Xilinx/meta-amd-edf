@@ -27,7 +27,11 @@ AMD-EDF_FPGA_OVERLAY_INSTALL:riscv64 = ""
 AMD-EDF_AARCH64_FULL_CMDLINE_COMMON_INSTALL ?= ""
 AMD-EDF_AARCH64_FULL_CMDLINE_COMMON_INSTALL:append:aarch64 = "\
     dfu-util \
+    kdump \
+    kexec \
+    makedumpfile \
     ufs-utils \
+    vmcore-dmesg \
     "
 
 # Minimal set of packages for EDF Linux full command line image.
