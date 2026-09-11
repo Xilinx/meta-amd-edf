@@ -91,11 +91,13 @@ def _is_likely_non_pl_gpio(label):
     # Exclude PS-side and non-PL GPIO controllers by label pattern.
     # Labels starting with "pmc" are platform-management-controller GPIO (PS side).
     # Labels containing "zynqmp" are PS GPIO controllers on Zynq UltraScale+ devices.
+    # Labels containing "versal_gpio" are PS GPIO controllers on Versal devices.
     # Labels containing "pca" are I2C GPIO expanders (e.g. PCA9554/PCA9555 class).
     # All other address-based labels (e.g. "a4000000.gpio") are treated as PL AXI GPIO.
     lower_label = label.lower()
     return (
         "zynqmp" in lower_label
+        or "versal_gpio" in lower_label
         or "pca" in lower_label
         or lower_label.startswith("pmc")
     )
@@ -136,7 +138,11 @@ def _is_pl_gpio_chip(label, compatible):
         if "axi-gpio" in lower_compat or "xps-gpio" in lower_compat:
             return True
         # If compatible explicitly points to PS/non-PL blocks, exclude.
-        if "zynqmp-gpio" in lower_compat or "pca" in lower_compat:
+        if (
+            "zynqmp-gpio" in lower_compat
+            or "versal-gpio" in lower_compat
+            or "pca" in lower_compat
+        ):
             return False
 
     # Fallback to label heuristics for systems where compatible is unavailable.
