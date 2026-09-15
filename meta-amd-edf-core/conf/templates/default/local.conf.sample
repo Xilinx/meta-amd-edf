@@ -335,3 +335,6 @@ ZEPHYR_TOOLCHAIN_VARIANT = "zephyr"
 # This must be in local.conf (not distro conf) because HOSTTOOLS
 # is global across all multiconfigs.
 ROS_WORLD_SKIP_GROUPS:append = " fortran"
+
+# Bring in the standard CVE exclusions to the SBOM
+include conf/distro/include/cve-extra-exclusions.inc 
