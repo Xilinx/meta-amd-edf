@@ -16,6 +16,7 @@ AMD-EDF_QEMU_HOST_TASK = "\
     nativesdk-bootgen \
     nativesdk-qemu-devicetrees \
     nativesdk-qemuboot-tool \
+    nativesdk-qemu-serial-port-tool \
 "
 
 AMD-EDF_QEMU_HOST_TASK:sdkmingw32 = ""
