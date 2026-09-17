@@ -5,15 +5,19 @@ FILESEXTRAPATHS:prepend:versal-net := "${THISDIR}/versal-net:"
 FILESEXTRAPATHS:prepend:versal-2ve-2vm := "${THISDIR}/versal-2ve-2vm:"
 FILESEXTRAPATHS:prepend:versal-2vp := "${THISDIR}/versal:"
 
-SRC_URI:append:zynqmp = " file://edf-env.cfg file://amd_edf.h"
-SRC_URI:append:versal = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
-SRC_URI:append:versal-net = " file://edf-env-vn.cfg file://amd_edf.h file://amd_edf_common.h"
-SRC_URI:append:versal-2ve-2vm = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
-SRC_URI:append:versal-2vp = " file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
+EDF_UBOOT_ENV_SRC = ""
+EDF_UBOOT_ENV_SRC:zynqmp = "file://edf-env.cfg file://amd_edf.h"
+EDF_UBOOT_ENV_SRC:versal = "file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
+EDF_UBOOT_ENV_SRC:versal-net = "file://edf-env-vn.cfg file://amd_edf.h file://amd_edf_common.h"
+EDF_UBOOT_ENV_SRC:versal-2ve-2vm = "file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
+EDF_UBOOT_ENV_SRC:versal-2vp = "file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
 
 EDF_BOOTCMD_CFG = "${@bb.utils.contains('MACHINE_FEATURES', 'efi', \
     'file://aarch64-bootcmd-bootefi.cfg', '', d)}"
-SRC_URI:append:aarch64:amd-edf = " ${EDF_BOOTCMD_CFG}"
+EDF_BOOTCMD_SRC = ""
+EDF_BOOTCMD_SRC:aarch64:amd-edf = "${EDF_BOOTCMD_CFG}"
+
+SRC_URI += "${EDF_UBOOT_ENV_SRC} ${EDF_BOOTCMD_SRC}"
 
 # Generate U-Boot environment binary image
 
