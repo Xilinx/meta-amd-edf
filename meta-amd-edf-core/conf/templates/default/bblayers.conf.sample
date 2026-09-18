@@ -51,5 +51,6 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-dpdk \
   ##OEROOT##/../meta-xilinx/meta-amd-dpdk \
   ##OEROOT##/../meta-xilinx/meta-amd-zephyr-bsp \
+  ##OEROOT##/../meta-amd-adaptive-socs/meta-amd-adaptive-socs-zephyr-bsp \
 "
 
