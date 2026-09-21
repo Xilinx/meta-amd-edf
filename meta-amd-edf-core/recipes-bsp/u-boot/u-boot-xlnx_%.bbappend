@@ -12,12 +12,21 @@ EDF_UBOOT_ENV_SRC:versal-net = "file://edf-env-vn.cfg file://amd_edf.h file://am
 EDF_UBOOT_ENV_SRC:versal-2ve-2vm = "file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
 EDF_UBOOT_ENV_SRC:versal-2vp = "file://edf-env.cfg file://amd_edf.h file://amd_edf_common.h"
 
-EDF_BOOTCMD_CFG = "${@bb.utils.contains('MACHINE_FEATURES', 'efi', \
-    'file://aarch64-bootcmd-bootefi.cfg', '', d)}"
-EDF_BOOTCMD_SRC = ""
-EDF_BOOTCMD_SRC:aarch64:amd-edf = "${EDF_BOOTCMD_CFG}"
+# Consumed as UBOOT_PREBOOT_CFG by meta-xilinx-core u-boot-xlnx.inc. Family
+# default; a board layer selects its own sequence per machine.
+DEFAULT_UBOOT_PREBOOT_CFG:versal = "file://edf-preboot.cfg"
+DEFAULT_UBOOT_PREBOOT_CFG:versal-net = "file://edf-preboot-vn.cfg"
+DEFAULT_UBOOT_PREBOOT_CFG:versal-2ve-2vm = "file://edf-preboot.cfg"
+DEFAULT_UBOOT_PREBOOT_CFG:versal-2vp = "file://edf-preboot.cfg"
 
-SRC_URI += "${EDF_UBOOT_ENV_SRC} ${EDF_BOOTCMD_SRC}"
+EDF_BOOTCMD_CFG = ""
+EDF_BOOTCMD_CFG:aarch64:amd-edf = "${@bb.utils.contains('MACHINE_FEATURES', 'efi', \
+    'file://aarch64-bootcmd-bootefi.cfg', '', d)}"
+
+SRC_URI += "${EDF_UBOOT_ENV_SRC}"
+
+# Unscoped so a board's machine override wins.
+DEFAULT_UBOOT_BOOTCMD_CFG = "${EDF_BOOTCMD_CFG}"
 
 # Generate U-Boot environment binary image
 
