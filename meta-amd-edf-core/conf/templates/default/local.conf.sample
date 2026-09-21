@@ -337,4 +337,17 @@ ZEPHYR_TOOLCHAIN_VARIANT = "zephyr"
 ROS_WORLD_SKIP_GROUPS:append = " fortran"
 
 # Bring in the standard CVE exclusions to the SBOM
-include conf/distro/include/cve-extra-exclusions.inc 
+include conf/distro/include/cve-extra-exclusions.inc
+
+# Capture CVE exclusion information
+INHERIT += "vex"
+
+# Using the SBOM and vex information a CVE scan can be run using:
+#   git clone https://github.com/bootlin/sbom-cve-check
+#   (setup environemnt, see README)
+#   sbom-cve-check -v \
+#     --databases-dir `pwd`/database \
+#     --sbom-path <path_to_spdx.json> \
+#     --yocto-vex-manifest <path_to_vex.json> \
+#     --export-type yocto-cve-check-manifest \
+#     --export-path cve-check.json
