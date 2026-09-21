@@ -32,7 +32,15 @@ IMGCLASSES:append:versal-2ve-2vm = " image_types_ufs"
 # WIC bootloader dependencies
 EDF_BOOTLOADER_DEPS = "${@bb.utils.contains('COMBINED_FEATURES', 'efi', \
     'systemd-boot virtual-systemd-bootconf', '${UBOOT_BOOT_SCRIPT}', d)}"
-WKS_FILE_DEPENDS_BOOTLOADERS:aarch64 = "${EDF_BOOTLOADER_DEPS}"
+
+# Set in an anonymous python function rather than a plain ":aarch64" override.
+# image_types_wic.bbclass / image_types_ufs.bbclass are pulled in via
+# IMGCLASSES/inherit_defer, so they are parsed *after* this .inc file and
+# their own unconditional ":aarch64" override ("grub-efi systemd-boot") would
+# otherwise silently clobber this setting, regardless of COMBINED_FEATURES.
+python () {
+    d.setVar('WKS_FILE_DEPENDS_BOOTLOADERS:aarch64', d.getVar('EDF_BOOTLOADER_DEPS'))
+}
 
 # WKS file selection - EFI for aarch64, default for others
 WKS_FILES = "edf-disk-single-rootfs.wks"
