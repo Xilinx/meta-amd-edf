@@ -33,6 +33,12 @@ EDF_KERNEL_DEBUG_FEATURES = " \
 KERNEL_FEATURES:append = "${@bb.utils.contains('ENABLE_KERNEL_DEBUG', '1', \
     ' ${EDF_KERNEL_DEBUG_FEATURES}', '', d)}"
 
+# CONFIG_UBSAN from sanitizer.scc leaves source paths in .rodata that no
+# prefix-map rewrites, so warn instead of erroring, for the debug build
+# only.
+ERROR_QA:remove = "${@bb.utils.contains('ENABLE_KERNEL_DEBUG', '1', 'buildpaths', '', d)}"
+WARN_QA:append = "${@bb.utils.contains('ENABLE_KERNEL_DEBUG', '1', ' buildpaths', '', d)}"
+
 # USB wifi drivers (upstream scc + edf-kmeta iwd crypto) and local supplement
 SRC_URI += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', \
     ' file://wifi-usb-extra.cfg', '', d)}"
