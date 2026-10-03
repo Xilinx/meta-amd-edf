@@ -41,6 +41,7 @@ AMD-EDF_IMAGE_FULL_CMDLINE_COMMON_INSTALL = "\
     can-utils \
     devmem2 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', 'dhcpcd', d)} \
+    dosfstools \
     dtc \
     hdparm \
     hexedit \
