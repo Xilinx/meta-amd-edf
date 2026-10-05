@@ -16,7 +16,7 @@ See meta-amd-edf README.md file for details on sending patches, and maintainers.
 This layer depends on:
 
 	URI: https://github.com/Xilinx/meta-amd-edf
-	layers: .
-	branch: scarthgap
+	layers: meta-amd-edf-core
+	branch: AMD release version (e.g. rel-v2026.2)
 
 See meta-amd-edf README.md for additional dependencies.

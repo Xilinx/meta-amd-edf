@@ -1,66 +1,71 @@
 # meta-amd-edf-core
 
-This layer enables AMD Embedded Development Framework (EDF) metadata for poky, 
-oe, meta-xilinx and other layers.
+The AMD Embedded Development Framework (EDF) core layer is a distribution
+layer which consists of metadata for OE, meta-xilinx and other layers.
 
 ## Dependencies
 
 This layer depends on:
 
-	URI: https://git.yoctoproject.org/poky
-	layers: meta, meta-poky
-	branch: scarthgap
+	URI: https://git.openembedded.org/openembedded-core
+	layers: meta
+	branch: wrynose
+
+	URI: https://git.yoctoproject.org/meta-yocto
+	layers: meta-poky
+	branch: wrynose
 
 	URI: https://git.openembedded.org/meta-openembedded
 	layers: meta-oe, meta-python, meta-filesystems, meta-networking.
-	branch: scarthgap
+	branch: wrynose
 
 	URI:
         https://git.yoctoproject.org/meta-xilinx (official version)
         https://github.com/Xilinx/meta-xilinx (development and AMD release)
 	layers: meta-xilinx-core, meta-xilinx-standalone, meta-xilinx-standalone-sdt,
-	        meta-microblaze.
-	branch: scarthgap or AMD release version (e.g. rel-v2026.1)
+	        meta-microblaze, meta-xilinx-demos, meta-xilinx-imgrcvry,
+	        meta-xilinx-virtualization, meta-amd-dpdk
+	branch: wrynose or AMD release version (e.g. rel-v2026.2)
 
 	URI: https://git.yoctoproject.org/meta-security
 	layers: meta-tpm
-	branch: scarthgap
+	branch: wrynose
 
 	URI:
         https://git.yoctoproject.org/meta-virtualization (official version)
         https://github.com/Xilinx/meta-virtualization (development and AMD release)
-	branch: scarthgap or AMD release version (e.g. rel-v2026.1)
+	branch: wrynose or AMD release version (e.g. rel-v2026.2)
 
 	URI:
         https://github.com/OpenAMP/meta-openamp (official version)
         https://github.com/Xilinx/meta-openamp (development and AMD release)
-	branch: scarthgap or AMD release version (e.g. rel-v2026.1)
+	branch: wrynose or AMD release version (e.g. rel-v2026.2)
 
 	URI:
         https://github.com/Xilinx/meta-amd-adaptive-socs (official, development and AMD release)
 	layers: meta-amd-adaptive-socs-core, meta-amd-adaptive-socs-bsp
-	branch: scarthgap or AMD release version (e.g. rel-v2026.1)
+	branch: AMD release version (e.g. rel-v2026.2)
 
 	URI: https://git.yoctoproject.org/meta-arm
 	layers: meta-arm, meta-arm-toolchain
-	branch: scarthgap
+	branch: wrynose
 
-Optional dependencies (for Kria support):
+	URI:
+        https://github.com/ros/meta-ros (official version)
+        https://github.com/Xilinx/meta-ros (development and AMD release)
+	layers: meta-ros-common, meta-ros2, meta-ros2-lyrical.
+	branch: wrynose or AMD release version (e.g. rel-v2026.2)
+
+	URI: https://code.qt.io/yocto/meta-qt6.git
+	layers: meta-qt6
+	branch: wrynose
 
 	URI: https://github.com/Xilinx/meta-kria
 	layers: meta-kria-core, meta-kria-bsp
-	branch: AMD release version (e.g. rel-v2026.1)
-
-Optional dependencies (for DPDK support):
+	branch: AMD release version (e.g. rel-v2026.2)
 
 	URI: https://github.com/AMD-AECG-SSW-PUBLIC/meta-dpdk
 	layers: meta-dpdk
-	branch: AMD release version (e.g. rel-v2026.2)
-
-	URI:
-        https://git.yoctoproject.org/meta-xilinx (official version)
-        https://github.com/Xilinx/meta-xilinx (development and AMD release)
-	layers: meta-amd-dpdk
 	branch: AMD release version (e.g. rel-v2026.2)
 
 ## Note: 
