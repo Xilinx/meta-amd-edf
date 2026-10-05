@@ -10,6 +10,9 @@ SERVICES_TO_DISABLE ?= ""
 IMAGE_FEATURES[validitems] += "console-getty"
 SERVICES_TO_ENABLE += '${@bb.utils.contains("IMAGE_FEATURES", "console-getty", "console-getty.service", "", d)}'
 
+# Otherwise mask it, so it cannot fight systemd-getty-generator for the console
+SERVICES_TO_DISABLE += '${@bb.utils.contains("IMAGE_FEATURES", "console-getty", "", "console-getty.service", d)}'
+
 disable_systemd_services () {
     SERVICES_TO_DISABLE="${SERVICES_TO_DISABLE}"
     if [ -n "${SERVICES_TO_DISABLE}" ]; then
