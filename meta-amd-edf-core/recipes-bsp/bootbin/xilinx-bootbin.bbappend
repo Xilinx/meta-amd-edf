@@ -29,34 +29,29 @@ BIF_PARTITION_IMAGE[bootbin-version-header] = "${BIF_VERSION_HEADER_IMAGE}"
 #   id=0x21 description
 #   id=0x22 component version
 #   id=0x23 tool version
-#   id=0x24 build id (absent when no id is supplied)
-#   id=0x25 = component manifest JSON (see shared-manifest-aggregate.bbclass).
+#   id=0x24 = component manifest JSON (see shared-manifest-aggregate.bbclass).
 
 BOOTBIN_VERSION ?= "1.2"
 BOOTBIN_DESCRIPTION ?= "AMD EDF Boot Firmware (${MACHINE})"
 BOOTBIN_TOOLS_VERSION ?= "${@(d.getVar('XILINX_RELEASE_VERSION') or '').replace('v', '')}"
-# Build id of the automation build; empty for a local build.
-BOOTBIN_VER_BUILD ??= ""
 
 BIF_OPTIONAL_DATA_VAL[0x21] = "${BOOTBIN_DESCRIPTION}"
 BIF_OPTIONAL_DATA_VAL[0x22] = "${BOOTBIN_VERSION}"
 BIF_OPTIONAL_DATA_VAL[0x23] = "${BOOTBIN_TOOLS_VERSION}"
-BIF_OPTIONAL_DATA_VAL[0x24] = "${BOOTBIN_VER_BUILD}"
 
 # Embed the component manifest JSON in BOOT.BIN as optional data (Versal only)
-# id=0x25; max size per entry is 128KB, manifest is typically < 1KB
-BIF_OPTIONAL_DATA_FILE[0x25] = "${MANIFEST_AGGREGATE_OUTPUT}"
+# id=0x24; max size per entry is 128KB, manifest is typically < 1KB
+BIF_OPTIONAL_DATA_FILE[0x24] = "${MANIFEST_AGGREGATE_OUTPUT}"
 
 # Avoid EDF specific circular dependencies
 EXTRA_IMAGEDEPENDS:remove = "edf-qspi"
 EXTRA_IMAGEDEPENDS:remove = "edf-ospi"
 
 do_deploy:append() {
-    cat << 'EOF' > ${DEPLOYDIR}/${BOOTBIN_BASE_NAME}.version.txt
+    cat << EOF > ${DEPLOYDIR}/${BOOTBIN_BASE_NAME}.version.txt
 ${BOOTBIN_DESCRIPTION}
 ${BOOTBIN_VERSION}
 ${BOOTBIN_TOOLS_VERSION}
-${BOOTBIN_VER_BUILD}
 EOF
     ln -sf ${BOOTBIN_BASE_NAME}.version.txt ${DEPLOYDIR}/${BOOTBIN_LINK_NAME}.version.txt
     ln -sf ${BOOTBIN_BASE_NAME}.version.txt ${DEPLOYDIR}/bootbin-version.txt
