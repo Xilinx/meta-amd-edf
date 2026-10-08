@@ -339,7 +339,7 @@ ROS_WORLD_SKIP_GROUPS:append = " fortran"
 include conf/distro/include/cve-extra-exclusions.inc
 
 # Capture CVE exclusion information
-INHERIT += "vex"
+INHERIT += "vex vex_sdk"
 
 # Using the SBOM and vex information a CVE scan can be run using:
 #   git clone https://github.com/bootlin/sbom-cve-check
