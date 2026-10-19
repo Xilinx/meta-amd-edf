@@ -91,4 +91,4 @@ formal BitBake term for this "augment-if-present, don't-recommend"
 relationship, so it is called out here to avoid confusion when auditing
 `LAYERDEPENDS`/`LAYERRECOMMENDS` completeness against `BBFILES_DYNAMIC`.
 
-Currently, every `BBFILES_DYNAMIC` hook in this layer's `conf/layer.conf` (`xilinx-mali400`, `xilinx-virtualization`, `kria-bsp`) is also covered by `LAYERDEPENDS` or `LAYERRECOMMENDS`.
+Currently, every `BBFILES_DYNAMIC` hook in this layer's `conf/layer.conf` (`xilinx-mali400`, `xilinx-multimedia`, `xilinx-virtualization`, `kria-bsp`) is also covered by `LAYERDEPENDS` or `LAYERRECOMMENDS`.
